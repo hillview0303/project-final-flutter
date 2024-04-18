@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class CustomBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
@@ -31,6 +33,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           backgroundColor: Colors.white,
           type: BottomNavigationBarType.fixed,
           currentIndex: selectedIndex,
+          selectedItemColor: kAccentColor1,
           onTap: onItemSelected,
           items: const [
             BottomNavigationBarItem(label: "오늘의나", icon: Icon(CupertinoIcons.home)),

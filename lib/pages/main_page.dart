@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../bottom_navigation_bar.dart';
+import '../common/bottom_navigation_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,7 +18,10 @@ class _MainPageState extends State<MainPage> {
       body: IndexedStack(
         index: _selectedIndex,
         children: const [
-
+          // TodayPage(),  // 오늘의 나
+          // MissionPage(), // 나의 활동
+          // ChallengePage(), // 챌린지
+          // MyPage // 마이페이지
         ],
       ),
       bottomNavigationBar: CustomBottomNavigationBar(

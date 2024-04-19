@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_app/pages/today/todat_page.dart';
+import 'package:project_app/pages/today/today_page.dart';
 import '../common/bottom_navigation_bar.dart';
 import 'activity/activity_page.dart';
 import 'challenge/challenge_page.dart';
@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildProfileAppBar(),
+      // appBar: _buildProfileAppBar(),
       body: IndexedStack(
         index: _selectedIndex,
         children: const [
@@ -38,22 +38,23 @@ class _MainPageState extends State<MainPage> {
         },
       ),
     );
-  }AppBar _buildProfileAppBar() {
-    return AppBar(
-
-      actions: <Widget>[
-        IconButton(
-          icon: Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Icon(Icons.notifications_outlined,size: 30),
-
-          ), // 종 모양 아이콘
-          onPressed: () {
-          },
-        ),
-      ],
-    );
   }
+  // AppBar _buildProfileAppBar() {
+  //   return AppBar(
+  //
+  //     actions: <Widget>[
+  //       IconButton(
+  //         icon: Padding(
+  //           padding: const EdgeInsets.only(right: 20),
+  //           child: Icon(Icons.notifications_outlined,size: 30),
+  //
+  //         ), // 종 모양 아이콘
+  //         onPressed: () {
+  //         },
+  //       ),
+  //     ],
+  //   );
+  // }
 
 }
 

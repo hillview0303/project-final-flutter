@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/welcome/join_page.dart';
 import 'package:project_app/theme.dart';
+import '../main_page.dart';
 import 'components/custom_scaffold.dart';
 
 class LoginPage extends StatefulWidget {
@@ -94,10 +95,21 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       const SizedBox(height: 25.0),
-                      SizedBox( // 로그인 버튼
+                      SizedBox(
+                        // 로그인 버튼
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: null,
+                          onPressed: () {
+                            // 로그인 기능 구현 전 임시로 버튼을 누르면 메인페이지로 이동하게 함
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const MainPage()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal,
+                            foregroundColor: Colors.white,
+                          ),
                           child: const Text('Log in'),
                         ),
                       ),
@@ -113,7 +125,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: Text('또는', style: TextStyle(color: Colors.black45)),
+                            child: Text('또는',
+                                style: TextStyle(color: Colors.black45)),
                           ),
                           const Expanded(
                             child: Divider(
@@ -128,7 +141,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const JoinPage()),
+                            MaterialPageRoute(
+                                builder: (context) => const JoinPage()),
                           );
                         },
                         child: Row(

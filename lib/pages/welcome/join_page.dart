@@ -248,7 +248,11 @@ class _JoinPageState extends State<JoinPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: null,
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal,
+                            foregroundColor: Colors.white,
+                          ),
                           child: const Text('회원가입하기'),
                         ),
                       ),

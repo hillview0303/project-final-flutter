@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/main_page.dart';
+import 'package:project_app/pages/welcome/welcome_page.dart';
 import 'package:project_app/theme.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: MainPage(),
+      home: const WelcomePage(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/style.dart';
 
-import '../../size.dart';
+import '../../../size.dart';
 
 class CompositionBox extends StatelessWidget {
   final name;

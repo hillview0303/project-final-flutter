@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/common/components/composition_box.dart';
 import 'package:project_app/constants.dart';
+import 'package:project_app/pages/today/components/composition_box.dart';
 import 'package:project_app/size.dart';
 import 'package:project_app/style.dart';
 

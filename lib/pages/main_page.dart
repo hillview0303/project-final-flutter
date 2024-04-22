@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
       // appBar: _buildProfileAppBar(),
       body: IndexedStack(
         index: _selectedIndex,
-        children: const [
+        children: [
           TodayPage(),  // 오늘의 나
           ActivityPage(), // 나의 활동
           ChallengePage(), // 챌린지

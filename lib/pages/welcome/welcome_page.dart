@@ -32,7 +32,7 @@ class WelcomePage extends StatelessWidget {
                     text: const TextSpan(
                       children: [
                         TextSpan(
-                            text: '돌아오신것을 환영합니다',
+                            text: 'Welcome back!',
                             style: TextStyle(
                               fontSize: 40.0,
                               fontWeight: FontWeight.w600,

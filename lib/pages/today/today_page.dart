@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/pages/today/today_header.dart';
+import 'package:project_app/pages/today/layout/today_header.dart';
 
-import 'today_body.dart';
+import 'layout/today_body.dart';
 
 class TodayPage extends StatelessWidget {
   const TodayPage({super.key});

@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
 import '../../../models/challenge.dart';
+import '../challenge_detail_page.dart';
+import 'challenge_image.dart';
+import 'challenge_name.dart';
 
 class ChallengeContainer extends StatelessWidget {
   final Challenge challenge;
 
-  const ChallengeContainer({Key? key, required this.challenge}) : super(key: key);
+  const ChallengeContainer({Key? key, required this.challenge})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 180,
-      height: 150,
-      color: Colors.white.withOpacity(0.3),
-      margin: EdgeInsets.all(8),
-      padding: EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              color: Colors.teal.withOpacity(0.5),
-              shape: BoxShape.circle,
-            ),
-            child: ClipOval(
-              child: Image.asset('assets/1.png', width: 50, height: 50, fit: BoxFit.cover),
-            ),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChallengeDetailPage(challenge: challenge),
           ),
-          SizedBox(height: 10),
-          Text(challenge.challengeName, textAlign: TextAlign.center),
-        ],
+        );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.2,
+        color: Colors.white.withOpacity(0.3),
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ChallengeImage(imagePath: 'assets/1.png'),
+            SizedBox(height: 10),
+            Expanded(
+              child: ChallengeName(name: challenge.challengeName),
+            ),
+          ],
+        ),
       ),
     );
   }

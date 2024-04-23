@@ -69,7 +69,8 @@ class _TodayBodyState extends State<TodayBody> {
                     children: [
                       CompositionBox2(
                         name: "체지방",
-                        color: Colors.red,
+                        textColor: Colors.red,
+                        borderColor: Colors.red,
                         value: "14.2",
                       ),
                       SizedBox(
@@ -77,7 +78,8 @@ class _TodayBodyState extends State<TodayBody> {
                       ),
                       CompositionBox2(
                         name: "골격근",
-                        color: Colors.blue,
+                        textColor: Colors.blue,
+                        borderColor: Colors.blue,
                         value: "35.6",
                       ),
                       SizedBox(
@@ -85,7 +87,8 @@ class _TodayBodyState extends State<TodayBody> {
                       ),
                       CompositionBox2(
                         name: "체중",
-                        color: Colors.green,
+                        textColor: Colors.green,
+                        borderColor: Colors.green,
                         value: "76.7",
                       ),
                     ],

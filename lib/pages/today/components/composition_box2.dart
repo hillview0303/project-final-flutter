@@ -3,12 +3,18 @@ import 'package:project_app/size.dart';
 import 'package:project_app/style.dart';
 
 class CompositionBox2 extends StatelessWidget {
-  final color;
+  final textColor;
+  final borderColor;
+  final backgroundColor;
   final name;
   final value;
 
   CompositionBox2(
-      {required this.color, required this.name, required this.value});
+      {this.textColor = Colors.black,
+      this.borderColor = Colors.black,
+      this.backgroundColor = Colors.white,
+      required this.name,
+      required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +22,9 @@ class CompositionBox2 extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(3.0),
         decoration: BoxDecoration(
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(gap_m),
-          border: Border.all(color: color),
+          border: Border.all(color: borderColor),
         ),
         child: Padding(
           padding: const EdgeInsets.all(gap_sm),
@@ -27,11 +34,11 @@ class CompositionBox2 extends StatelessWidget {
             children: [
               Text(
                 "${name}",
-                style: subtitle1(mColor: color),
+                style: subtitle1(mColor: textColor),
               ),
               Text(
                 "${value}kg",
-                style: h6(mColor: color),
+                style: h6(mColor: textColor),
               ),
             ],
           ),

@@ -40,6 +40,19 @@ BottomNavigationBarThemeData bottomNavigatorTheme() {
     showUnselectedLabels: true,
   );
 }
+ElevatedButtonThemeData elevatedButtonThemeData() {
+  return ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.teal,
+      foregroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8) // 버튼의 모서리를 둥글게 처리
+      ),
+      elevation: 10, // 버튼의 그림자 높이
+      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0), // 버튼 내부 패딩
+    ),
+  );
+}
 
 ThemeData theme() {
   return ThemeData(
@@ -48,5 +61,6 @@ ThemeData theme() {
     appBarTheme: appBarTheme(),
     bottomNavigationBarTheme: bottomNavigatorTheme(),
     primarySwatch: Colors.orange,
+    elevatedButtonTheme: elevatedButtonThemeData(),
   );
 }

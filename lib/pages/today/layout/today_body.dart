@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/today/components/changes_chart.dart';
+import 'package:project_app/pages/today/components/composition_box2.dart';
 import 'package:project_app/pages/today/components/mission_container_list.dart';
 import 'package:project_app/style.dart';
 
@@ -55,13 +56,40 @@ class _TodayBodyState extends State<TodayBody> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: gap_l,
-                ),
+                SizedBox(height: gap_l),
                 ChangesChart(
                   fatData: fatData,
                   muscleData: muscleData,
                   weightData: weightData,
+                ),
+                SizedBox(height: gap_l),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CompositionBox2(
+                        name: "체지방",
+                        color: Colors.red,
+                        value: "14.2",
+                      ),
+                      SizedBox(
+                        width: gap_s,
+                      ),
+                      CompositionBox2(
+                        name: "골격근",
+                        color: Colors.blue,
+                        value: "35.6",
+                      ),
+                      SizedBox(
+                        width: gap_s,
+                      ),
+                      CompositionBox2(
+                        name: "체중",
+                        color: Colors.green,
+                        value: "76.7",
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -9,6 +9,8 @@ class ChallengeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 180,
+      height: 150,
       color: Colors.white.withOpacity(0.3),
       margin: EdgeInsets.all(8),
       padding: EdgeInsets.all(8),
@@ -26,7 +28,7 @@ class ChallengeContainer extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          Text(challenge.name, textAlign: TextAlign.center),
+          Text(challenge.challengeName, textAlign: TextAlign.center),
         ],
       ),
     );

@@ -22,7 +22,7 @@ class CompletedChallenge extends StatelessWidget {
             child: Text(title, style: h6(mColor: Colors.grey)),
           ),
           Container(
-            height: 130,
+            height: 150,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: challenges.length,

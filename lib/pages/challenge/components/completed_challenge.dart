@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/common/design/line.dart';
+
+import '../../../common/design/size.dart';
+import '../../../common/design/style.dart';
 import '../../../models/challenge.dart';
-import '../../../size.dart';
-import '../../../style.dart';
 import '../components/challenge_container.dart';
 
 class CompletedChallenge extends StatelessWidget {
   final String title;
   final List<Challenge> challenges;
 
-  const CompletedChallenge({Key? key, required this.title, required this.challenges}) : super(key: key);
+  const CompletedChallenge(
+      {Key? key, required this.title, required this.challenges})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +25,7 @@ class CompletedChallenge extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(title, style: h6(mColor: Colors.grey)),
           ),
+          line1,
           Container(
             height: 130,
             child: ListView.separated(

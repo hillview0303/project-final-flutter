@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import 'design/constants.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -28,7 +28,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
           topLeft: Radius.circular(20), //
           topRight: Radius.circular(20), //
         ),
-
         child: BottomNavigationBar(
           backgroundColor: Colors.white,
           type: BottomNavigationBarType.fixed,
@@ -36,7 +35,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
           selectedItemColor: kAccentColor1,
           onTap: onItemSelected,
           items: const [
-            BottomNavigationBarItem(label: "오늘의나", icon: Icon(CupertinoIcons.home)),
+            BottomNavigationBarItem(
+                label: "오늘의나", icon: Icon(CupertinoIcons.home)),
             BottomNavigationBarItem(
                 label: "나의활동", icon: Icon(CupertinoIcons.square_on_square)),
             BottomNavigationBarItem(

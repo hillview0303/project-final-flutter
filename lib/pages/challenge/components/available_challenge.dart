@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/design/line.dart';
 import '../../../common/design/size.dart';
 import '../../../common/design/style.dart';
 import '../../../models/challenge.dart';
@@ -24,6 +25,7 @@ class AvailableChallenge extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(title, style: h6(mColor: Colors.grey)),
           ),
+          line1,
           Container(
             height: 130,
             child: ListView.separated(

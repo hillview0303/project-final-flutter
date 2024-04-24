@@ -10,7 +10,7 @@ class OngoingChallengeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(challenge.challengeName),
+        title: Text(challenge.name),
       ),
       body: SingleChildScrollView(  // Ensure the content is scrollable
         child: Padding(
@@ -25,9 +25,7 @@ class OngoingChallengeDetailPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               SizedBox(height: 20),
-              Text("${challenge.location}", style: TextStyle(fontSize: 20)),
-              Text("${challenge.distance} m", style: TextStyle(fontSize: 20)),
-              Text("${challenge.content}", style: TextStyle(fontSize: 16)),
+              Text("${challenge.subtitle}", style: TextStyle(fontSize: 20)),
               SizedBox(height: 20),
               LinearProgressIndicator(
                 value: 0.5,  // Example progress value
@@ -38,10 +36,10 @@ class OngoingChallengeDetailPage extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Text("Steps: 1500", style: TextStyle(fontSize: 18)),  // Example step count
+                    child: Text("50.2%/100%", style: TextStyle(fontSize: 15)),  // Example step count
                   ),
                   Expanded(
-                    child: Text("990 / ${challenge.distance * 0.5} km", style: TextStyle(fontSize: 18)),  // Example dynamic distance calculation
+                    child: Text("현재 5만걸음/총 10만걸음", style: TextStyle(fontSize: 15)),  // Example step count
                   ),
                 ],
               ),

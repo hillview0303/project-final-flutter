@@ -14,7 +14,7 @@ class ChallengeDetailPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(challenge.challengeName),
+        title: Text(challenge.name),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -31,18 +31,14 @@ class ChallengeDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    challenge.challengeName,
+                    challenge.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0,
                     ),
                   ),
                   Text(
-                    "${challenge.location} ",
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  Text(
-                    "${challenge.distance.toStringAsFixed(2)} m", // 거리 표시 수정
+                    "${challenge.subtitle} ",
                     style: TextStyle(fontSize: 12),
                   ),
                   SizedBox(height: 10),

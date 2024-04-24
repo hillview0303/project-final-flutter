@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+
+import '../../../common/design/size.dart';
+import '../../../common/design/style.dart';
 import '../../../models/challenge.dart';
-import '../../../size.dart';
-import '../../../style.dart';
 import '../components/challenge_container.dart';
 
 class AvailableChallenge extends StatelessWidget {
   final String title;
   final List<Challenge> challenges;
 
-  const AvailableChallenge({Key? key, required this.title, required this.challenges}) : super(key: key);
+  const AvailableChallenge(
+      {Key? key, required this.title, required this.challenges})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

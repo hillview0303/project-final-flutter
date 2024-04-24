@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/style.dart';
+import 'package:project_app/common/design/size.dart';
+import 'package:project_app/common/design/style.dart';
 
 class MissionContainer extends StatelessWidget {
   final title;
@@ -17,9 +18,9 @@ class MissionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Colors.white, borderRadius: BorderRadius.circular(gap_s)),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(gap_sm),
         child: Row(
           children: [
             Column(

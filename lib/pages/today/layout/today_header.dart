@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/constants.dart';
+import 'package:project_app/common/design/constants.dart';
+import 'package:project_app/common/design/size.dart';
+import 'package:project_app/common/design/style.dart';
 import 'package:project_app/pages/today/components/composition_box.dart';
-import 'package:project_app/size.dart';
-import 'package:project_app/style.dart';
 
 class TodayHeader extends StatelessWidget {
   const TodayHeader({
@@ -29,9 +29,7 @@ class TodayHeader extends StatelessWidget {
               "오늘의 미션을 수행해보세요!",
               style: subtitle1(mColor: Colors.white),
             ),
-            SizedBox(
-              height: gap_m,
-            ),
+            SizedBox(height: gap_m),
             Row(
               children: [
                 Expanded(child: CompositionBox(name: "체지방", weight: 14.2)),

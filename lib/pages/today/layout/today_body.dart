@@ -1,11 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app/common/components/composition_box2.dart';
+import 'package:project_app/common/design/style.dart';
 import 'package:project_app/pages/today/components/changes_chart.dart';
-import 'package:project_app/pages/today/components/composition_box2.dart';
 import 'package:project_app/pages/today/components/mission_container_list.dart';
-import 'package:project_app/style.dart';
 
-import '../../../size.dart';
+import '../../../common/design/size.dart';
 
 class TodayBody extends StatefulWidget {
   @override
@@ -69,7 +69,9 @@ class _TodayBodyState extends State<TodayBody> {
                     children: [
                       CompositionBox2(
                         name: "체지방",
-                        color: Colors.red,
+                        titleColor: Colors.red,
+                        valueColor: Colors.red,
+                        borderColor: Colors.red,
                         value: "14.2",
                       ),
                       SizedBox(
@@ -77,7 +79,9 @@ class _TodayBodyState extends State<TodayBody> {
                       ),
                       CompositionBox2(
                         name: "골격근",
-                        color: Colors.blue,
+                        titleColor: Colors.blue,
+                        valueColor: Colors.blue,
+                        borderColor: Colors.blue,
                         value: "35.6",
                       ),
                       SizedBox(
@@ -85,7 +89,9 @@ class _TodayBodyState extends State<TodayBody> {
                       ),
                       CompositionBox2(
                         name: "체중",
-                        color: Colors.green,
+                        titleColor: Colors.green,
+                        valueColor: Colors.green,
+                        borderColor: Colors.green,
                         value: "76.7",
                       ),
                     ],

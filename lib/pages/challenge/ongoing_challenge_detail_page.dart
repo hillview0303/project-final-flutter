@@ -12,16 +12,41 @@ class OngoingChallengeDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(challenge.challengeName),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Location: ${challenge.location}", style: TextStyle(fontSize: 20)),
-            Text("Distance: ${challenge.distance} km", style: TextStyle(fontSize: 20)),
-            Text("Description: ${challenge.content}", style: TextStyle(fontSize: 16)),
-            // 추가 정보 넣어야함
-          ],
+      body: SingleChildScrollView(  // Ensure the content is scrollable
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(
+                'assets/challengedetail.png',
+                height: 500.0,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(height: 20),
+              Text("${challenge.location}", style: TextStyle(fontSize: 20)),
+              Text("${challenge.distance} m", style: TextStyle(fontSize: 20)),
+              Text("${challenge.content}", style: TextStyle(fontSize: 16)),
+              SizedBox(height: 20),
+              LinearProgressIndicator(
+                value: 0.5,  // Example progress value
+                backgroundColor: Colors.grey[300],
+                color: Theme.of(context).primaryColor,
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text("Steps: 1500", style: TextStyle(fontSize: 18)),  // Example step count
+                  ),
+                  Expanded(
+                    child: Text("990 / ${challenge.distance * 0.5} km", style: TextStyle(fontSize: 18)),  // Example dynamic distance calculation
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

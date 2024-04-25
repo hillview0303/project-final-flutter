@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
 
+import '../diet_management_detail_page.dart';
+
 class DietManagement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This widget would allow users to manage their diet, such as adding meals or tracking calories
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Text(
-            '식단',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          // Add diet management features here
-        ],
+    return GestureDetector(
+        onTap: () {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => DietManagementDetailPage()),
+      );
+    },
+    child: Card(
+    elevation: 4.0,
+    margin: EdgeInsets.all(8.0),
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              '식단',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 4.0),
+          ],
+        ),
       ),
+    ),
     );
   }
 }

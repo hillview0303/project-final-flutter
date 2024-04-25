@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class DietManagementDetailPage extends StatelessWidget {
-  const DietManagementDetailPage({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("DietManagementDetailPage"));
+    return Scaffold(
+      appBar: AppBar(title: Text('식단')),
+      body: Center(
+        child: Text('식단'),
+      ),
+    );
   }
 }

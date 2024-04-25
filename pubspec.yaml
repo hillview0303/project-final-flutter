@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   google_fonts: ^6.1.0
   font_awesome_flutter: ^10.5.0
-  intl: ^0.18.1
+  intl: ^0.17.0
   image_picker: ^1.1.0
   calendar_agenda:
     path: dev_lib/calendar_agenda
@@ -46,6 +46,7 @@ dependencies:
   simple_circular_progress_bar: ^1.0.2
   animated_toggle_switch: ^0.6.2
   readmore: ^2.1.0
+  ionicons: ^0.2.2
 
 
 dev_dependencies:

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class StepCountDetailPage extends StatelessWidget {
-  const StepCountDetailPage({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("DrinkWaterDetailPage"));
+    return Scaffold(
+      appBar: AppBar(title: Text('걸음')),
+      body: Center(
+        child: Text('걸음'),
+      ),
+    );
   }
 }

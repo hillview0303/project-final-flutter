@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class DrinkWaterDetailPage extends StatelessWidget {
-  const DrinkWaterDetailPage({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("DrinkWaterDetailPage"));
+    return Scaffold(
+      appBar: AppBar(title: Text('물')),
+      body: Center(
+        child: Text('물'),
+      ),
+    );
   }
 }

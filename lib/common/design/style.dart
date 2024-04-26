@@ -24,6 +24,10 @@ TextStyle subtitle2({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 14, color: mColor);
 }
 
+TextStyle subtitle3({Color mColor = Colors.black}) {
+  return TextStyle(fontSize: 10, color: mColor);
+}
+
 TextStyle overLine({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: mColor);
 }

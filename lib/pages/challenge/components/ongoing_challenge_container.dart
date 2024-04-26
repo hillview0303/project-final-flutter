@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import '../../../models/challenge.dart';
+import '../../../data/models/challenges/ongoing_challenge_detail.dart';
 import '../ongoing_challenge_detail_page.dart';
 
 
@@ -38,7 +38,7 @@ class HexagonClipper extends CustomClipper<Path> {
 }
 
 class OngoingChallengeContainer extends StatelessWidget {
-  final Challenge challenge;
+  final OngoingChallengeDetail challenge;
 
   const OngoingChallengeContainer({Key? key, required this.challenge})
       : super(key: key);

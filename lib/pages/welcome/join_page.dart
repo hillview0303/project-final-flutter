@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/welcome/login_page.dart';
-import '../../theme.dart';
+import '../../common/design/theme.dart';
 import 'components/custom_scaffold.dart';
 
 class JoinPage extends StatefulWidget {

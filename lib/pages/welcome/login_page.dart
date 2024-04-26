@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/welcome/join_page.dart';
-import 'package:project_app/theme.dart';
+import 'package:project_app/common/design/theme.dart';
 import '../main_page.dart';
 import 'components/custom_scaffold.dart';
 

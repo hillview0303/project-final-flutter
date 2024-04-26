@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/models/chartDummy.dart';
 
+import '../../../data/models/chartDummy.dart';
 import 'pysical_chart_scroll_view.dart';
 
 class MyChanges extends StatefulWidget {

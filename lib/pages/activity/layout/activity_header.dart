@@ -41,7 +41,7 @@ class _ActivityHeaderState extends State<ActivityHeader> {
           leading: IconButton(
               onPressed: () {},
               icon: Image.asset(
-                "assets/arrowleft.png",
+                "assets/images/arrowleft.png",
                 width: 15,
                 height: 15,
               ),),
@@ -49,7 +49,7 @@ class _ActivityHeaderState extends State<ActivityHeader> {
           training: IconButton(
               onPressed: () {},
               icon: Image.asset(
-                "assets/arrowright.png",
+                "assets/images/arrowright.png",
                 width: 15,
                 height: 15,
               )),

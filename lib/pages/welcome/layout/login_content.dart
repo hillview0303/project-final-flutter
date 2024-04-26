@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../components/login_button.dart';
+import '../components/login_button_section.dart.dart';
 import '../components/login_divider_section.dart';
-import '../components/login_input_fields.dart';
+import '../components/login_password_section.dart';
 import '../components/login_remember_forgot_password_section.dart';
 import '../components/login_sign_up_section.dart';
 import '../components/login_title_section.dart';
+import '../components/login_username_section.dart';
 
 class LoginContent extends StatelessWidget {
   const LoginContent({Key? key}) : super(key: key);
@@ -25,17 +26,19 @@ class LoginContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            LoginTitleSection(),
+            LoginTitleSection(), // 로그인 타이틀
             const SizedBox(height: 40.0),
-            LoginInputFields(),
+            LoginUsernameSection(), // ID
             const SizedBox(height: 25.0),
-            LoginRememberForgotPasswordSection(),
+            LoginPasswordSection(), // 비밀번호
             const SizedBox(height: 25.0),
-            LoginButton(),
+            LoginRememberForgotPasswordSection(), // 비밀번호찾기
             const SizedBox(height: 25.0),
-            LoginDividerSection(),
+            LoginButtonSection(), // 로그인 버튼
             const SizedBox(height: 25.0),
-            LoginSignUpSection(),
+            LoginDividerSection(), // 또는
+            const SizedBox(height: 25.0),
+            LoginSignUpSection(), // 회원가입 페이지 가기
             const SizedBox(height: 20.0),
           ],
         ),

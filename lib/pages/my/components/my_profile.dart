@@ -20,7 +20,7 @@ class MyProfile extends StatelessWidget {
             width: 150,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                image: DecorationImage(image: AssetImage("assets/1.png"))),
+                image: DecorationImage(image: AssetImage("assets/saram1.png"))),
           ),
           Text(
             "류재성님",

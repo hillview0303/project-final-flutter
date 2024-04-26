@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/challenges/challenge_detail.dart';
-import 'components/challenge_action_button.dart';
+import 'layout/challenge_action_button.dart';
 import 'components/challenge_content.dart';
 
 class ChallengeDetailPage extends StatelessWidget {

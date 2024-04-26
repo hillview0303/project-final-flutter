@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/common/design/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:calendar_agenda/calendar_agenda.dart';
-import 'package:project_app/common/design/size.dart';
 
 class ActivityHeader extends StatefulWidget {
   const ActivityHeader({super.key});

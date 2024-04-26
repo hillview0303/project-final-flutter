@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/challenges/ongoing_challenge_detail.dart';
-import 'components/ongoing_challenge_img.dart';
-import 'components/ongoing_challenge_percent.dart';
+import 'layout/ongoing_challenge_img.dart';
+import 'layout/ongoing_challenge_percent.dart';
 
 class OngoingChallengeDetailPage extends StatelessWidget {
   final OngoingChallengeDetail challenge;

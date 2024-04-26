@@ -4,7 +4,7 @@ import 'package:project_app/common/design/size.dart';
 import '../../../common/design/constants.dart';
 import '../../../common/design/style.dart';
 import '../../../data/models/challenges/ongoing_challenge_detail.dart';
-import 'ongoing_challenge_container.dart';
+import '../components/ongoing_challenge_container.dart';
 
 class OngoingChallenge extends StatelessWidget {
   final String title;

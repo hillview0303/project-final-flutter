@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/common/design/size.dart';
 import 'package:project_app/common/design/style.dart';
-import 'package:project_app/models/challenge.dart';
+
 import 'package:project_app/pages/challenge/components/completed_challenge.dart';
+
+import '../../../data/models/challenges/challenge_detail.dart';
+
 
 class MyHistory extends StatelessWidget {
   const MyHistory({

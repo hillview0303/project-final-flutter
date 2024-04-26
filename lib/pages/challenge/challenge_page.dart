@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../models/challenge.dart';
+
+import '../../data/models/challenges/challenge_detail.dart';
+import '../../data/models/challenges/ongoing_challenge_detail.dart';
 import 'components/available_challenge.dart';
 import 'components/completed_challenge.dart';
 import 'components/ongoing_challenge.dart';

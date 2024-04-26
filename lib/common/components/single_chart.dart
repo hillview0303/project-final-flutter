@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:project_app/models/chartDummy.dart';
+
+import '../../data/models/chartDummy.dart';
 
 class SingleChart extends StatelessWidget {
   final List<FlSpot> chartData;

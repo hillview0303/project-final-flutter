@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
-import '../../../models/challenge.dart';
+
+import '../../../data/models/challenges/challenge_detail.dart';
 import '../challenge_detail_page.dart';
-import 'challenge_image.dart';
 import 'challenge_name.dart';
 import 'hexagon_clipper.dart';
 
 class ChallengeContainer extends StatelessWidget {
-  final Challenge challenge;
+  final ChallengeDetail challenge;
 
   const ChallengeContainer({Key? key, required this.challenge}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // 이미지의 너비와 높이 설정
     final double imageWidth = MediaQuery.of(context).size.width * 0.2;
-    final double imageHeight = imageWidth; // 너비에 맞춰 정사각형으로 설정
+    final double imageHeight = imageWidth;
 
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChallengeDetailPage(challenge: challenge)),
+          MaterialPageRoute(builder: (context) => ChallengeDetailPage(challenge: challenge)),  // 수정된 부분
         );
       },
       child: Container(
@@ -39,7 +38,7 @@ class ChallengeContainer extends StatelessWidget {
                   child: Image.asset(challenge.badgeImg, fit: BoxFit.cover, height: imageHeight, width: imageWidth),
                 ),
                 Positioned(
-                  bottom: 4, // 육각형의 아래쪽에 위치시키기 위해 조절
+                  bottom: 4,
                   child: Text(
                     challenge.distance,
                     style: TextStyle(

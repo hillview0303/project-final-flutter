@@ -3,12 +3,12 @@ import 'package:project_app/common/design/line.dart';
 
 import '../../../common/design/size.dart';
 import '../../../common/design/style.dart';
-import '../../../models/challenge.dart';
+import '../../../data/models/challenges/challenge_detail.dart';
 import '../components/challenge_container.dart';
 
 class CompletedChallenge extends StatelessWidget {
   final String title;
-  final List<Challenge> challenges;
+  final List<ChallengeDetail> challenges;
 
   const CompletedChallenge(
       {Key? key, required this.title, required this.challenges})

@@ -27,7 +27,7 @@ class CardBox extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              'assets/doctor_2.jpg',
+              'assets/images/1.jpg',
               width: 45,
               fit: BoxFit.cover,
             ),

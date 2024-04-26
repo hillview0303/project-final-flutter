@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/pages/main_page.dart';
 import 'package:project_app/pages/welcome/welcome_page.dart';
-import 'package:project_app/theme.dart';
+import 'package:project_app/common/design/theme.dart';
 
 void main() {
   runApp(const MyApp());

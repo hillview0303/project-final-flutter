@@ -13,7 +13,13 @@ class ProfileEditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildEditAppBar(),
+      appBar: AppBar(
+        title: Text("프로필 수정"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: ListView(
         children: [
           EditImageSection(),
@@ -25,14 +31,6 @@ class ProfileEditPage extends StatelessWidget {
           EditButtonSection(),
         ],
       ),
-    );
-  }
-
-  AppBar _buildEditAppBar() {
-    return AppBar(
-      leading: Icon(Icons.arrow_back_ios),
-      title: Text("프로필 수정", style: TextStyle(fontSize: 20)),
-      centerTitle: true,
     );
   }
 }

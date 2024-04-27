@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/common/components/composition_box2.dart';
 import 'package:project_app/common/design/style.dart';
-import 'package:project_app/pages/my/pages/my_changes.dart';
 import 'package:project_app/pages/today/components/changes_chart.dart';
 import 'package:project_app/pages/today/components/mission_container_list.dart';
 
 import '../../../common/design/size.dart';
 import '../../../data/models/chartDummy.dart';
+import '../../my/layout/my_changes.dart';
 
 class TodayBody extends StatefulWidget {
   @override

@@ -9,6 +9,7 @@ import '../components/join_height_section.dart';
 import '../components/join_info_check_box_section.dart';
 import '../components/join_name_section.dart';
 import '../components/join_password_section.dart';
+import '../components/join_phone_section.dart';
 import '../components/join_sign_in_section.dart';
 import '../components/join_username_section.dart';
 
@@ -37,6 +38,8 @@ class JoinContent extends StatelessWidget {
             const SizedBox(height: 25.0),
             JoinPasswordSection(), // 비밀번호
             const SizedBox(height: 25.0),
+            JoinPhoneSection(), // 휴대폰
+            const SizedBox(height: 25.0),
             JoinBirthSection(), // 생년월일 달력
             const SizedBox(height: 25.0),
             JoinGenderSection(), // 성별
@@ -49,7 +52,7 @@ class JoinContent extends StatelessWidget {
             const SizedBox(height: 30.0),
             JoinDividerSection(), // 또는
             const SizedBox(height: 25.0),
-            JoinSignInSection(),  // 로그인 페이지가기
+            JoinSignInSection(), // 로그인 페이지가기
             const SizedBox(height: 20.0),
           ],
         ),

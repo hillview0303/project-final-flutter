@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/activity/layout/activity_body.dart';
 
-import 'components/diet_management.dart';
-import 'components/drink_water.dart';
-import 'components/step_count.dart';
 import 'layout/activity_header.dart';
 
 class ActivityPage extends StatelessWidget {
@@ -14,7 +11,10 @@ class ActivityPage extends StatelessWidget {
     return ListView(
       children: <Widget>[
         ActivityHeader(),
-        ActivityBody(),
+        SizedBox(
+          height: 500,
+          child: ActivityBody(),
+        ),
       ],
     );
   }

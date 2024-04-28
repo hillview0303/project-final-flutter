@@ -8,12 +8,13 @@ class TodayPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Center(child: Text("TodayPage"));
-    return ListView(
-      children: [
-        TodayHeader(),
-        TodayBody(),
-      ],
+    return Scaffold(
+      body: ListView(
+        children: [
+          TodayHeader(),
+          TodayBody(),
+        ],
+      ),
     );
   }
 }

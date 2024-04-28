@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/welcome/components/welcome_button.dart';
 
-import '../pages/join_page.dart';
+import '../../../_core/constants/move.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({
@@ -13,7 +13,8 @@ class SignUp extends StatelessWidget {
     return Expanded( // 회원가입
       child: WelcomeButton(
         buttonText: 'Sign up',
-        onTap: const JoinPage(),
+        routeName: Move.joinPage,
+        // onTap: const JoinPage(),
         color: Colors.teal,
         textColor: Colors.white,
       ),

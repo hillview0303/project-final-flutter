@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/pages/welcome/pages/welcome_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/common/design/theme.dart';
 
+import '_core/constants/move.dart';
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,8 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey, // context가 없는 곳에서 context를 사용할 수 있는 방법
       debugShowCheckedModeBanner: false,
+      initialRoute: Move.welcomePage,
+      routes: getRouters(),
       theme: theme(),
-      home: const WelcomePage(),
+      // home: const WelcomePage(),  //
     );
   }
 }

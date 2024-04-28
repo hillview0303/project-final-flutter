@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../_core/constants/move.dart';
+
 class JoinButtonSection extends StatelessWidget {
   const JoinButtonSection({
     super.key,
@@ -10,8 +12,11 @@ class JoinButtonSection extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Move.loginPage);
+        },
         style: ElevatedButton.styleFrom(
+
           backgroundColor: Colors.teal,
           foregroundColor: Colors.white,
         ),

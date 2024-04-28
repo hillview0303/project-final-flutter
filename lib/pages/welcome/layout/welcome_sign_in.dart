@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/welcome/components/welcome_button.dart';
 
-import '../pages/login_page.dart';
+import '../../../_core/constants/move.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({
@@ -10,10 +10,12 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded( // 로그인
+    return Expanded(
+      // 로그인
       child: WelcomeButton(
         buttonText: 'Sign in',
-        onTap: LoginPage(),
+        routeName: Move.loginPage,
+        // onTap: LoginPage(),
         color: Colors.teal,
         textColor: Colors.white,
       ),

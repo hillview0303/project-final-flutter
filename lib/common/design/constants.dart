@@ -5,7 +5,7 @@ const kAccentColor1 = Color(0xFF009688);
 // 진한 녹색
 const kAccentColor2 = Color(0xff296e48);
 // 물 색
-const kAccentColor3 = Color(0xFFFFF59D);
+const kAccentColor3 = Color(0xFFFFFDE7);
 
 
 class TColor {

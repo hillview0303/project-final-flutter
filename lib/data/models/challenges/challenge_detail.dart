@@ -213,7 +213,7 @@ final List<ChallengeDetail> pastChallenges = [
       name: "코지어스코",
       distance: "2228m",
       subtitle: "스노이산맥-호주\n2,228.0m(약 675층 올라감)",
-      backgroundImg: "assets/images/1.png",
+      backgroundImg: "assets/images/koscius.png",
       badgeImg: "assets/images/1.png",
       content: "뉴사우스웨일스주의 스노이산맥에 위치한 코지어스코산은 호주 본토에서 가장 높은 산으로 해발 고도 2,228미터(7,310피트)에 달합니다. 클라이밍이 상대적으로 쉽게 여겨지는데, 표시가 잘 되어 있고 점진적으로 정상에 오르기 때문입니다. 이 산은 고산 지형, 멋진 경관, 다양한 동식물로 유명한 코지어스코 국립 공원의 일부입니다.",
       coin: 2,
@@ -291,7 +291,7 @@ final List<ChallengeDetail> pastChallenges = [
   ),
   ChallengeDetail(
       name: "파타고니아 서킷",
-      distance: "120Km",
+      distance: "120K",
       subtitle: "안데스-파타고니아, 아르헨티나, 칠레\n120.0km(약 17만개의 계단)",
       backgroundImg: "assets/images/patagonia.png",
       badgeImg: "assets/images/patagonia.png",

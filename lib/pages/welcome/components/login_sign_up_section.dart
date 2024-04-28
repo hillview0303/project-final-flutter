@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../join_page.dart';
+import '../pages/join_page.dart';
 
 class LoginSignUpSection extends StatelessWidget {
   const LoginSignUpSection({Key? key}) : super(key: key);

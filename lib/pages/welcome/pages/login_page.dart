@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'components/custom_scaffold.dart';
-import 'layout/login_content.dart';
+import '../components/custom_scaffold.dart';
+import '../layout/login_content.dart';
+
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

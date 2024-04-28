@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/pages/welcome/welcome_page.dart';
+import 'package:project_app/pages/welcome/pages/welcome_page.dart';
 import 'package:project_app/common/design/theme.dart';
 
 void main() {

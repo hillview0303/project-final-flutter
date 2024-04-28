@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/pages/welcome/components/welcome_button.dart';
 
-import '../join_page.dart';
+import '../pages/join_page.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({

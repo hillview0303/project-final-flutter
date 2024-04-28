@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_app/pages/activity/components/diet_management.dart';
 import 'package:project_app/pages/activity/components/drink_water.dart';
 import 'package:project_app/pages/activity/components/step_count.dart';
-import '../../../common/design/size.dart';
-import '../../../common/design/style.dart';
-import '../../my/pages/my_changes.dart';
+
 import '../components/activity_body_title.dart';
 
 class ActivityBody extends StatelessWidget {

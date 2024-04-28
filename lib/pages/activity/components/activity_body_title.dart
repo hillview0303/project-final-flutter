@@ -3,7 +3,6 @@ import 'package:project_app/pages/activity/pages/add_activity_page.dart';
 
 import '../../../common/design/size.dart';
 import '../../../common/design/style.dart';
-import '../../my/pages/my_changes.dart';
 
 class ActivityBodyTitle extends StatelessWidget {
   @override

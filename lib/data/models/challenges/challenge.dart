@@ -248,7 +248,7 @@ final List<Challenge> pastChallenges = [
   ),
   Challenge(
       name: "파타고니아 서킷",
-      distance: "120Km",
+      distance: "120K",
       subtitle: "안데스-파타고니아, 아르헨티나, 칠레\n120.0km(약 17만개의 계단)",
       badgeImg: "assets/images/patagonia.png",
       coin: 2,

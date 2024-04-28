@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'components/custom_scaffold.dart';
-import 'layout/join_content.dart';
+import '../components/custom_scaffold.dart';
+import '../layout/join_content.dart';
 
 class JoinPage extends StatefulWidget {
   const JoinPage({super.key});

@@ -30,6 +30,7 @@ class ChallengeDetailPage extends StatelessWidget {
               child: ChallengeContent(
                 name: challenge.name,
                 subtitle: challenge.subtitle,
+                walking: challenge.walking,
                 content: challenge.content,
               ),
             ),

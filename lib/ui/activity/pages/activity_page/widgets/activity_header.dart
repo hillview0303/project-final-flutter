@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:calendar_agenda/calendar_agenda.dart';
 
+import '../../../../../_core/constants/style.dart';
+
 class ActivityHeader extends StatefulWidget {
   const ActivityHeader({super.key});
 
@@ -28,8 +30,8 @@ class _ActivityHeaderState extends State<ActivityHeader> {
         Container(
           padding: EdgeInsets.all(16),
           child: Text(
-            '일일 통계',
-            style: Theme.of(context).textTheme.titleMedium,
+            '나의 활동',
+            style: h6(mColor: Colors.grey),
           ),
         ),
         CalendarAgenda(

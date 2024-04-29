@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/pages/welcome/pages/welcome_page.dart';
-
-import '../../pages/main_page.dart';
-import '../../pages/today/today_page.dart';
-import '../../pages/welcome/pages/join_page.dart';
-import '../../pages/welcome/pages/login_page.dart';
 
 class Move {
   static String welcomePage = "/welcome";

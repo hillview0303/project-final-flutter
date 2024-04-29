@@ -40,7 +40,7 @@ class MetricGrid extends StatelessWidget {
           subtitle: '500 cal',
           trailing: '최근 업데이트 3분전',
           color: Colors.white,
-          percentage: 40.0, // '식단 관리'에만 원형 차트 백분율을 넣습니다.
+          // percentage: 40.0, // '식단 관리'에만 원형 차트 백분율을 넣습니다.
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => DietManagementDetailPage()),

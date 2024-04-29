@@ -10,14 +10,15 @@ class MetricGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       crossAxisCount: 2,
-      padding: EdgeInsets.all(16.0),
-      crossAxisSpacing: 16.0,
-      mainAxisSpacing: 16.0,
+      childAspectRatio: (1 / 1.5), // 카드 비율 조정
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      padding: EdgeInsets.all(16),
       children: <Widget>[
         MetricCard(
-          title: '걸음수',
+          title: 'STEPS',
           subtitle: '7500',
-          trailing: '최근 업데이트 3m',
+          trailing: '최근 업데이트 3분전',
           color: Colors.white,
           onTap: () => Navigator.push(
             context,
@@ -25,9 +26,9 @@ class MetricGrid extends StatelessWidget {
           ),
         ),
         MetricCard(
-          title: '물 섭취',
+          title: 'WATER',
           subtitle: '8 cups',
-          trailing: '최근 업데이트 3m',
+          trailing: '최근 업데이트 3분전',
           color: Colors.white,
           onTap: () => Navigator.push(
             context,
@@ -35,19 +36,20 @@ class MetricGrid extends StatelessWidget {
           ),
         ),
         MetricCard(
-          title: '식단 관리',
+          title: 'CALORIES',
           subtitle: '500 cal',
-          trailing: '40%',
+          trailing: '최근 업데이트 3분전',
           color: Colors.white,
+          percentage: 40.0, // '식단 관리'에만 원형 차트 백분율을 넣습니다.
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => DietManagementDetailPage()),
           ),
         ),
         MetricCard(
-          title: '체중 변경',
+          title: 'WEIGHT',
           subtitle: '58 kg',
-          trailing: '최근 업데이트 3m',
+          trailing: '최근 업데이트 3분전',
           color: Colors.white,
           onTap: () => Navigator.push(
             context,

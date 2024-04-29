@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/style.dart';
 import 'package:project_app/ui/today/pages/my_changes_page/widgets/physical_chart_scroll_view.dart';
 
 import '../../../../data/models/chartDummy.dart';
@@ -17,6 +18,9 @@ class _MyChangesState extends State<MyChanges>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("나의 변화", style: h6(),),
+      ),
       body: Column(
         children: [
           _buildTabbar(),

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/ui/activity/pages/change_weight_detail_page/change_weight_detail_page.dart';
+import 'package:project_app/ui/activity/pages/diet_management_detail_page/diet_management_detail_page.dart';
+import 'package:project_app/ui/activity/pages/drink_water_detail_page/drink_water_detail_page.dart';
+import 'package:project_app/ui/activity/pages/step_count_detail_page/step_count_detail_page.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
@@ -33,6 +37,7 @@ class MissionContainerList extends StatelessWidget {
               title2: "기록해요",
               subtitle: "목표 1회",
               icons: Icons.add_chart,
+              page: ChangeWeightDetailPage(),
             ),
             SizedBox(height: gap_s),
             MissionContainer(
@@ -40,18 +45,21 @@ class MissionContainerList extends StatelessWidget {
               title2: "걸었어요",
               subtitle: "목표 10,000 걸음",
               icons: Icons.nordic_walking,
+              page: StepCountDetailPage(),
             ),
             SizedBox(height: gap_s),
             MissionContainer(
               title: "오늘 0잔 마셨어요",
               subtitle: "목표 8잔",
               icons: Icons.water_drop,
+              page: DrinkWaterDetailPage(),
             ),
             SizedBox(height: gap_s),
             MissionContainer(
               title: "식단 0개 기록했어요",
               subtitle: "목표 3개",
               icons: Icons.food_bank_outlined,
+              page: DietManagementDetailPage(),
             ),
           ],
         ),

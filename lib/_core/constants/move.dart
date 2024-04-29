@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../ui/main_page.dart';
+import '../../ui/today/pages/tody_page/today_page.dart';
+import '../../ui/welcome/pages/join_page/join_page.dart';
+import '../../ui/welcome/pages/login_page/login_page.dart';
+import '../../ui/welcome/pages/welcome_page/welcome_page.dart';
+
 class Move {
   static String welcomePage = "/welcome";
   static String loginPage = "/login";

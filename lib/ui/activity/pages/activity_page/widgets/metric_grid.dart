@@ -11,9 +11,9 @@ class MetricGrid extends StatelessWidget {
     return GridView.count(
       crossAxisCount: 2,
       childAspectRatio: (1 / 1.5), // 카드 비율 조정
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-      padding: EdgeInsets.all(16),
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      padding: EdgeInsets.all(10),
       children: <Widget>[
         MetricCard(
           title: 'STEPS',
@@ -40,7 +40,7 @@ class MetricGrid extends StatelessWidget {
           subtitle: '500 cal',
           trailing: '최근 업데이트 3분전',
           color: Colors.white,
-          // percentage: 40.0, // '식단 관리'에만 원형 차트 백분율을 넣습니다.
+          percentage: 40.0,
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => DietManagementDetailPage()),

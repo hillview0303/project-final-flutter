@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
-import '../../../../../_core/constants/move.dart';
+
+import '../../../../../_core/constants/style.dart';
+import 'goal_insert_section.dart';
 
 class GoalSection extends StatelessWidget {
   const GoalSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
-  //todo: composition_box 를 서로 공유하고 있어 목표 설정이 같이 됨. 확인 요망
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: TextFormField(
-            decoration: InputDecoration(
-              labelText: '목표량',
-              hintText: '목표량을 입력하세요',
-              hintStyle: TextStyle(color: Colors.black26),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("목표 설정"),
+              content: SingleChildScrollView(
+                child: Container(
+                  height: 130,
+                  // color: Colors.white,
+                  child: Center(
+                    child: GoalInsertSection(),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          height: 60,
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, Move.loginPage);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.teal,
-              foregroundColor: Colors.white,
-            ),
-            child: const Text('입력 완료',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-          ),
-        ),
-      ],
+            );
+          },
+        );
+      },
+      child: Text(
+        "목표 설정 >",
+        style: subtitle2(mColor: Colors.grey[400]!),
+      ),
     );
   }
 }

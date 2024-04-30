@@ -3,18 +3,28 @@ import 'package:project_app/ui/activity/pages/activity_page/widgets/activity_bod
 
 import 'widgets/activity_header.dart';
 
-class ActivityPage extends StatelessWidget {
-  const ActivityPage({super.key});
+class ActivityPage extends StatefulWidget {
+  @override
+  _ActivityPageState createState() => _ActivityPageState();
+}
+
+class _ActivityPageState extends State<ActivityPage> {
+  DateTime selectedDate = DateTime.now();
+
+  void handleDateChange(DateTime newDate) {
+    setState(() {
+      selectedDate = newDate;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        ActivityHeader(),
-        SizedBox(
-          height: 500,
-          child: ActivityBody(),
-        ),
+    return Column(
+      children: [
+        ActivityHeader(onDateSelected: handleDateChange),
+        Expanded(
+          child: ActivityBody(selectedDate: selectedDate),
+        )
       ],
     );
   }

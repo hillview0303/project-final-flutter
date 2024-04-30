@@ -11,7 +11,7 @@ class Logo extends StatelessWidget {
       flex: 6,
       child: Center(
         child: Image.asset(
-          'assets/images/11.png',
+          'assets/images/logo.png',
           fit: BoxFit.contain,  // 이미지를 비율에 맞춰 조절
         ),
       ),

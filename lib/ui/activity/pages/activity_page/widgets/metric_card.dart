@@ -6,17 +6,17 @@ class MetricCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String trailing;
-  final Color color;
   final VoidCallback onTap;
   final double? percentage;
+  final bool hasData;
 
   MetricCard({
     required this.title,
     required this.subtitle,
     required this.trailing,
-    required this.color,
     required this.onTap,
     this.percentage,
+    this.hasData = true,
   });
 
   @override
@@ -25,8 +25,7 @@ class MetricCard extends StatelessWidget {
     final bool isWeightCard = title == 'WEIGHT';
     final bool isWaterCard = title == 'WATER';
     final bool isStepsCard = title == 'STEPS';
-    final Color backgroundColor =
-    isCaloriesCard || isWeightCard || isWaterCard || isStepsCard ? TColor.primaryColor1 : Colors.white;
+    final Color backgroundColor = kAccentColor2;
 
     return InkWell(
       onTap: onTap,
@@ -50,6 +49,7 @@ class MetricCard extends StatelessWidget {
                     color: Colors.white),
               ),
               SizedBox(height: 10),
+              // 칼로리
               if (isCaloriesCard)
                 Flexible(
                   flex: 5,
@@ -76,6 +76,7 @@ class MetricCard extends StatelessWidget {
                     ],
                   ),
                 ),
+              // 몸무게
               if (isWeightCard) ...[
                 Flexible(
                   flex: 5,
@@ -113,6 +114,7 @@ class MetricCard extends StatelessWidget {
                   ),
                 ),
               ],
+              // 물
               if (isWaterCard) ...[
                 Flexible(
                   flex: 5,
@@ -121,6 +123,20 @@ class MetricCard extends StatelessWidget {
                         ColorFilter.mode(TColor.primaryColor2, BlendMode.srcIn),
                     child: Image.asset(
                       'assets/images/water.png',
+                      width: 160,
+                      height: 160,
+                    ),
+                  ),
+                ),
+              ],
+              // 걸음수
+              if (isStepsCard) ...[
+                Flexible(
+                  flex: 5,
+                  child: ColorFiltered(
+                    colorFilter: ColorFilter.mode(TColor.primaryColor2, BlendMode.srcIn),
+                    child: Image.asset(
+                      'assets/images/walkman.png', // 이 부분에 걸음수 이미지 경로를 지정합니다.
                       width: 160,
                       height: 160,
                     ),
@@ -137,7 +153,7 @@ class MetricCard extends StatelessWidget {
               ),
               Text(
                 trailing,
-                style: TextStyle(fontSize: 14, color: Colors.grey[200]),
+                style: TextStyle(fontSize: 12, color: Colors.grey[200]),
               ),
             ],
           ),

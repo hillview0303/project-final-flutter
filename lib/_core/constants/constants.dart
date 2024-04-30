@@ -9,7 +9,7 @@ const kAccentColor3 = Color(0xFFFFFDE7);
 
 
 class TColor {
-  static Color get primaryColor1 => const Color(0xff296e48);
+  static Color get primaryColor1 => const Color(0xFF69F0AE);
   static Color get primaryColor2 => const Color(0xFF1DE9B6);
 
   static Color get secondaryColor1 => const Color(0xFF33691E);

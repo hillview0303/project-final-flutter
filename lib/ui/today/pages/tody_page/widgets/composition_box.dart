@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:project_app/ui/welcome/pages/join_page/widgets/join_name_section.dart';
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
-
+import 'goal_section.dart';
 
 class CompositionBox extends StatelessWidget {
   final name;
@@ -28,11 +28,11 @@ class CompositionBox extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "${name}",
+                    "$name",
                     style: subtitle2(mColor: Colors.grey[400]!),
                   ),
                   Spacer(),
-                  Text("${weight}kg"),
+                  Text("$weight kg"),
                 ],
               ),
             ),
@@ -40,12 +40,31 @@ class CompositionBox extends StatelessWidget {
               alignment: Alignment.center,
               height: 130,
               child: Text(
-                "${goalWeight}kg",
+                "$goalWeight kg",
                 style: h4(),
               ),
             ),
             Expanded(
               child: InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("목표 설정"),
+                        content: SingleChildScrollView(
+                          child: Container(
+                            height: 130,
+                            // color: Colors.white,
+                            child: Center(
+                              child: GoalSection(),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
                 child: Text(
                   "목표 설정 >",
                   style: subtitle2(mColor: Colors.grey[400]!),

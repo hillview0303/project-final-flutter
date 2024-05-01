@@ -1,19 +1,16 @@
 class ResponseDTO {
-  final int? code;
+  final int? status;
   final String? msg;
-
-  String? token;
-  dynamic data;
+  dynamic body;
 
   ResponseDTO({
-    this.code,
+    this.status,
     this.msg,
-    this.token,
-    this.data,
+    this.body,
   });
 
   ResponseDTO.fromJson(Map<String, dynamic> json)
-      : code = json["code"],
+      : status = json["status"],
         msg = json["msg"],
-        data = json["data"];
+        body = json["body"];
 }

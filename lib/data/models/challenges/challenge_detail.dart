@@ -1,4 +1,5 @@
-enum ChallengeStatus { pending, inProgress, completed }
+import 'challenge.dart';
+
 class ChallengeDetail {
   final String name;
   final String backgroundImg;

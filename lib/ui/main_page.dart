@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/ui/today/pages/today_page/today_page.dart';
 
 import '_common/bottom_navigation_bar.dart';
-import 'activity/pages/activity_page/activity_page.dart';
-import 'challenge/pages/challenge_page/challenge_page.dart';
-import 'my/pages/my_page/my_page.dart';
+import 'main/activity/activity_page.dart';
+import 'main/challenge/challenge_page.dart';
+import 'main/my/my_page.dart';
+import 'main/today/today_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

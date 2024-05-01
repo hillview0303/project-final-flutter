@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../ui/main/today/today_page.dart';
 import '../../ui/main_page.dart';
-import '../../ui/today/pages/today_page/today_page.dart';
-import '../../ui/welcome/pages/join_page/join_page.dart';
-import '../../ui/welcome/pages/login_page/login_page.dart';
-import '../../ui/welcome/pages/welcome_page/welcome_page.dart';
+import '../../ui/welcome/join_page/join_page.dart';
+import '../../ui/welcome/login_page/login_page.dart';
+import '../../ui/welcome/welcome_page/welcome_page.dart';
 
 class Move {
   static String welcomePage = "/welcome";

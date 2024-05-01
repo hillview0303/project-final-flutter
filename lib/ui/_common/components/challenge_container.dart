@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/models/challenges/challenge_detail.dart';
-import '../../challenge/pages/challenge_detail_page/challenge_detail_page.dart';
+import '../../main/challenge/pages/challenge_detail_page.dart';
 import 'challenge_name.dart';
 import 'hexagon_clipper.dart';
 

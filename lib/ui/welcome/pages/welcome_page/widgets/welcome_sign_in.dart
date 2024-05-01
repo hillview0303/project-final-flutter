@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/ui/welcome/pages/welcome_page/widgets/welcome_button.dart';
+import 'package:project_app/ui/welcome/pages/welcome_page/widgets/welcome_navigator_button.dart';
 
 import '../../../../../_core/constants/move.dart';
 
@@ -12,7 +12,7 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       // 로그인
-      child: WelcomeButton(
+      child: WelcomeNavigatorButton(
         buttonText: 'Sign in',
         routeName: Move.loginPage,
         // onTap: LoginPage(),

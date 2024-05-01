@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/ui/my/pages/profile_edit_page/widgets/edit_name_section.dart';
-import 'package:project_app/ui/my/pages/profile_edit_page/widgets/edit_password_section.dart';
+import 'package:project_app/ui/my/pages/profile_edit_page/widgets/edit_name.dart';
+import 'package:project_app/ui/my/pages/profile_edit_page/widgets/edit_password.dart';
 
-import 'widgets/edit_button_section.dart';
-import 'widgets/edit_height_section.dart';
-import 'widgets/edit_image_section.dart';
-import 'widgets/edit_phone_section.dart';
+import 'widgets/edit_button.dart';
+import 'widgets/edit_height.dart';
+import 'widgets/edit_image.dart';
+import 'widgets/edit_phone.dart';
 
 class ProfileEditPage extends StatelessWidget {
   const ProfileEditPage({super.key});

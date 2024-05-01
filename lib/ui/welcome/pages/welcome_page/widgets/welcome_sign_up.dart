@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/ui/welcome/pages/welcome_page/widgets/welcome_button.dart';
+import 'package:project_app/ui/welcome/pages/welcome_page/widgets/welcome_navigator_button.dart';
 
 import '../../../../../_core/constants/move.dart';
 
@@ -10,8 +10,9 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded( // 회원가입
-      child: WelcomeButton(
+    return Expanded(
+      // 회원가입
+      child: WelcomeNavigatorButton(
         buttonText: 'Sign up',
         routeName: Move.joinPage,
         // onTap: const JoinPage(),

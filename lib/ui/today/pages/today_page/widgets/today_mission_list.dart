@@ -6,8 +6,7 @@ import 'package:project_app/ui/activity/pages/step_count_detail_page/step_count_
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
-import 'mission_container.dart';
-
+import 'today_mission.dart';
 
 class MissionContainerList extends StatelessWidget {
   const MissionContainerList({

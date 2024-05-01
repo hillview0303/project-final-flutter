@@ -5,7 +5,6 @@ import '../../../../../_core/constants/style.dart';
 import '../../../../../data/models/challenges/challenge_detail.dart';
 import '../../../../challenge/pages/challenge_page/widgets/completed_challenge.dart';
 
-
 class MyHistory extends StatelessWidget {
   const MyHistory({
     super.key,
@@ -21,7 +20,7 @@ class MyHistory extends StatelessWidget {
               color: Colors.white,
             ),
             child: CompletedChallenge(
-              title: "지난 챌린지 보기",
+              title: "정복한 챌린지 보기",
               challenges: pastChallenges,
             ),
           ),

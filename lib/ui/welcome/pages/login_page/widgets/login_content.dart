@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'login_button_section.dart.dart';
-import 'login_divider_section.dart';
-import 'login_password_section.dart';
-import 'login_remember_forgot_password_section.dart';
-import 'login_sign_up_section.dart';
-import 'login_title_section.dart';
-import 'login_username_section.dart';
+import 'login_button.dart';
+import 'login_line.dart';
+import 'login_password.dart';
+import 'login_remember_forgot.dart';
+import 'login_sign_up.dart';
+import 'login_title.dart';
+import 'login_username.dart';
 
 class LoginContent extends StatelessWidget {
   const LoginContent({Key? key}) : super(key: key);

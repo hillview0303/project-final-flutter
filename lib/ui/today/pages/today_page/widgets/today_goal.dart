@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../_core/constants/style.dart';
-import 'goal_insert_section.dart';
+import 'today_goal_insert.dart';
 
 class GoalSection extends StatelessWidget {
   const GoalSection({

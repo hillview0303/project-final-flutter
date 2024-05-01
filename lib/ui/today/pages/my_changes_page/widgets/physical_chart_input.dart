@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../_common/components/single_chart.dart';
-import 'input_physical_stats.dart';
+import 'physical_input_stats.dart';
 
 class PhysicalChartInput extends StatelessWidget {
   final chartData;

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../_core/constants/theme.dart';
-import 'join_button_section.dart';
-import 'join_birth_section.dart';
-import 'join_divider_section.dart';
-import 'join_gender_section.dart';
-import 'join_height_section.dart';
-import 'join_info_check_box_section.dart';
-import 'join_name_section.dart';
-import 'join_password_section.dart';
-import 'join_phone_section.dart';
-import 'join_sign_in_section.dart';
-import 'join_username_section.dart';
+import 'join_birth.dart';
+import 'join_button.dart';
+import 'join_checkbox.dart';
+import 'join_gender.dart';
+import 'join_height.dart';
+import 'join_line.dart';
+import 'join_name.dart';
+import 'join_password.dart';
+import 'join_phone.dart';
+import 'join_sign_in.dart';
+import 'join_username.dart';
 
 class JoinContent extends StatelessWidget {
   const JoinContent({

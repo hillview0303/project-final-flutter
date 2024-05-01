@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
-import 'goal_section.dart';
+import 'today_goal.dart';
 
 class CompositionBox extends StatelessWidget {
   final name;
@@ -52,4 +53,3 @@ class CompositionBox extends StatelessWidget {
     );
   }
 }
-

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/ui/today/pages/tody_page/widgets/today_header.dart';
+import 'package:project_app/ui/today/pages/today_page/widgets/today_header.dart';
 
 import 'widgets/today_body.dart';
 

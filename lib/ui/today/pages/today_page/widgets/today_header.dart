@@ -3,7 +3,7 @@ import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/style.dart';
 
 import '../../../../../_core/constants/size.dart';
-import 'composition_box.dart';
+import 'today_status.dart';
 
 class TodayHeader extends StatelessWidget {
   const TodayHeader({

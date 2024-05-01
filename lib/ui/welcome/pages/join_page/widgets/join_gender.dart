@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class JoinGenderSection extends StatefulWidget {
-  const JoinGenderSection({Key? key}) : super(key: key);
+class JoinGender extends StatefulWidget {
+  const JoinGender({Key? key}) : super(key: key);
 
   @override
-  _JoinGenderSectionState createState() => _JoinGenderSectionState();
+  _JoinGenderState createState() => _JoinGenderState();
 }
 
-class _JoinGenderSectionState extends State<JoinGenderSection> {
+class _JoinGenderState extends State<JoinGender> {
   String? selectedGender; // 선택된 성별을 저장할 변수
 
   @override

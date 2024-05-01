@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JoinNameSection extends StatelessWidget {
-  const JoinNameSection({
+class JoinName extends StatelessWidget {
+  const JoinName({
     super.key,
   });
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JoinPhoneSection extends StatelessWidget {
-  const JoinPhoneSection({
+class JoinPhone extends StatelessWidget {
+  const JoinPhone({
     super.key,
   });
 

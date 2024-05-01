@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EditNameSection extends StatelessWidget {
-  const EditNameSection({super.key});
+class EditName extends StatelessWidget {
+  const EditName({super.key});
 
   @override
   Widget build(BuildContext context) {

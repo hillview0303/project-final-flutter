@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../../_core/constants/move.dart';
 
-class GoalInsertSection extends StatelessWidget {
-  const GoalInsertSection({
+class TodayGoalInsert extends StatelessWidget {
+  const TodayGoalInsert({
     Key? key,
   }) : super(key: key);
 

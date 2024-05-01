@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../login_page/login_page.dart';
 
 
-class JoinSignInSection extends StatelessWidget {
-  const JoinSignInSection({
+class JoinSignIn extends StatelessWidget {
+  const JoinSignIn({
     super.key,
   });
 

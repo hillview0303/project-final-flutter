@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JoinUsernameSection extends StatelessWidget {
-  const JoinUsernameSection({
+class JoinUsername extends StatelessWidget {
+  const JoinUsername({
     super.key,
   });
 

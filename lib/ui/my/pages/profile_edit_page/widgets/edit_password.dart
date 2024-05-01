@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EditPasswordSection extends StatelessWidget {
-  const EditPasswordSection({
+class EditPassword extends StatelessWidget {
+  const EditPassword({
     super.key,
   });
 

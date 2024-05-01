@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../_core/constants/move.dart';
 
-class JoinButtonSection extends StatelessWidget {
-  const JoinButtonSection({
+class JoinButton extends StatelessWidget {
+  const JoinButton({
     super.key,
   });
 

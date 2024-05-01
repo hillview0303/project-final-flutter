@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class JoinBirthSection extends StatefulWidget {
-  const JoinBirthSection({Key? key}) : super(key: key);
+class JoinBirth extends StatefulWidget {
+  const JoinBirth({Key? key}) : super(key: key);
 
   @override
-  State<JoinBirthSection> createState() => _JoinBirthSectionState();
+  State<JoinBirth> createState() => _JoinBirthState();
 }
 
-class _JoinBirthSectionState extends State<JoinBirthSection> {
+class _JoinBirthState extends State<JoinBirth> {
   DateTime? selectedDate; // 날짜
 
   @override

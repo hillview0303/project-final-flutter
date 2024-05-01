@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginDividerSection extends StatelessWidget {
-  const LoginDividerSection({Key? key}) : super(key: key);
+class LoginLine extends StatelessWidget {
+  const LoginLine({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

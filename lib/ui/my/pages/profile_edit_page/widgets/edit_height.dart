@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EditHeighteSection extends StatelessWidget {
-  const EditHeighteSection({super.key});
+class EditHeighte extends StatelessWidget {
+  const EditHeighte({super.key});
 
   @override
   Widget build(BuildContext context) {

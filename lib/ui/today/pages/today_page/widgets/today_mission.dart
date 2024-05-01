@@ -4,14 +4,14 @@ import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
 
 
-class MissionContainer extends StatelessWidget {
+class TodayMission extends StatelessWidget {
   final title;
   final title2;
   final subtitle;
   final icons;
   final page;
 
-  MissionContainer(
+  TodayMission(
       {this.title = "",
       this.title2 = "",
       required this.subtitle,

@@ -32,7 +32,7 @@ class PhysicalChartInput extends StatelessWidget {
           ),
         ),
         SizedBox(height: gap_m),
-        InputPhysicalStat(dataName: dataName, value: dataValue),
+        PhysicalInputStat(dataName: dataName, value: dataValue),
       ],
     );
   }

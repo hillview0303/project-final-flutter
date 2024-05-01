@@ -33,9 +33,9 @@ class TodayHeader extends StatelessWidget {
             SizedBox(height: gap_m),
             Row(
               children: [
-                Expanded(child: CompositionBox(name: "체지방", weight: 14.2)),
+                Expanded(child: TodayStatus(name: "체지방", weight: 14.2)),
                 SizedBox(width: gap_s),
-                Expanded(child: CompositionBox(name: "골격근", weight: 35.6)),
+                Expanded(child: TodayStatus(name: "골격근", weight: 35.6)),
               ],
             ),
           ],

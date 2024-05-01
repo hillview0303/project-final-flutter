@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JoinInfoCheckBoxSection extends StatelessWidget {
-  const JoinInfoCheckBoxSection({
+class JoinCheckbox extends StatelessWidget {
+  const JoinCheckbox({
     super.key,
   });
 

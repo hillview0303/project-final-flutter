@@ -32,27 +32,27 @@ class JoinContent extends StatelessWidget {
               style: textTheme().titleLarge,
             ),
             const SizedBox(height: 40.0),
-            JoinNameSection(), // 이름
+            JoinName(), // 이름
             const SizedBox(height: 25.0),
-            JoinUsernameSection(), // ID
+            JoinUsername(), // ID
             const SizedBox(height: 25.0),
-            JoinPasswordSection(), // 비밀번호
+            JoinPassword(), // 비밀번호
             const SizedBox(height: 25.0),
-            JoinPhoneSection(), // 휴대폰
+            JoinPhone(), // 휴대폰
             const SizedBox(height: 25.0),
-            JoinBirthSection(), // 생년월일 달력
+            JoinBirth(), // 생년월일 달력
             const SizedBox(height: 25.0),
-            JoinGenderSection(), // 성별
+            JoinGender(), // 성별
             const SizedBox(height: 25.0),
-            JoinHeightSection(), // 키
+            JoinHeight(), // 키
             const SizedBox(height: 25.0),
-            JoinInfoCheckBoxSection(), // 개인정보처리방침
+            JoinCheckbox(), // 개인정보처리방침
             const SizedBox(height: 25.0),
-            JoinButtonSection(), // 회원가입버튼
+            JoinButton(), // 회원가입버튼
             const SizedBox(height: 30.0),
-            JoinDividerSection(), // 또는
+            JoinLine(), // 또는
             const SizedBox(height: 25.0),
-            JoinSignInSection(), // 로그인 페이지가기
+            JoinSignIn(), // 로그인 페이지가기
             const SizedBox(height: 20.0),
           ],
         ),

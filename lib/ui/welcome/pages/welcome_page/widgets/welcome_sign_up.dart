@@ -3,8 +3,8 @@ import 'package:project_app/ui/welcome/pages/welcome_page/widgets/welcome_naviga
 
 import '../../../../../_core/constants/move.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({
+class WelcomeSignUp extends StatelessWidget {
+  const WelcomeSignUp({
     super.key,
   });
 

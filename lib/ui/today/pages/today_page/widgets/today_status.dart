@@ -4,12 +4,12 @@ import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
 import 'today_goal.dart';
 
-class CompositionBox extends StatelessWidget {
+class TodayStatus extends StatelessWidget {
   final name;
   final weight;
   final goalWeight;
 
-  CompositionBox(
+  TodayStatus(
       {required this.name, required this.weight, this.goalWeight = "-"});
 
   @override
@@ -45,7 +45,7 @@ class CompositionBox extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: GoalSection(),
+              child: TodayGoal(),
             ),
           ],
         ),

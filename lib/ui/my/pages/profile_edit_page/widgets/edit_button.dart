@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EditButtonSection extends StatelessWidget {
-  const EditButtonSection({
+class EditButton extends StatelessWidget {
+  const EditButton({
     super.key,
   });
 

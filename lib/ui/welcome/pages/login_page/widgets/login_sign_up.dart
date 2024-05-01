@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../join_page/join_page.dart';
 
-class LoginSignUpSection extends StatelessWidget {
-  const LoginSignUpSection({Key? key}) : super(key: key);
+class LoginSignUp extends StatelessWidget {
+  const LoginSignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 // StatefulWidget으로 변환
-class JoinHeightSection extends StatefulWidget {
-  const JoinHeightSection({Key? key}) : super(key: key);
+class JoinHeight extends StatefulWidget {
+  const JoinHeight({Key? key}) : super(key: key);
 
   @override
-  _JoinHeightSectionState createState() => _JoinHeightSectionState();
+  _JoinHeightState createState() => _JoinHeightState();
 }
 
 // State 클래스 생성
-class _JoinHeightSectionState extends State<JoinHeightSection> {
+class _JoinHeightState extends State<JoinHeight> {
   // 선택된 키 값을 저장할 변수
   String? selectedHeight;
 

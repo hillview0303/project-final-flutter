@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../_core/constants/style.dart';
 import 'today_goal_insert.dart';
 
-class GoalSection extends StatelessWidget {
-  const GoalSection({
+class TodayGoal extends StatelessWidget {
+  const TodayGoal({
     super.key,
   });
 
@@ -22,7 +22,7 @@ class GoalSection extends StatelessWidget {
                   height: 130,
                   // color: Colors.white,
                   child: Center(
-                    child: GoalInsertSection(),
+                    child: TodayGoalInsert(),
                   ),
                 ),
               ),

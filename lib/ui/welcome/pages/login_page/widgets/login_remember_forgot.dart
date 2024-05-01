@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginRememberForgotPasswordSection extends StatelessWidget {
-  const LoginRememberForgotPasswordSection({Key? key}) : super(key: key);
+class LoginRememberForgot extends StatelessWidget {
+  const LoginRememberForgot({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -22,13 +22,13 @@ class ProfileEditPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          EditImageSection(),
-          EditNameSection(),
-          EditPasswordSection(),
-          EditPhoneSection(),
-          EditHeighteSection(),
+          EditImage(),
+          EditName(),
+          EditPassword(),
+          EditPhone(),
+          EditHeighte(),
           const SizedBox(height: 25.0),
-          EditButtonSection(),
+          EditButton(),
         ],
       ),
     );

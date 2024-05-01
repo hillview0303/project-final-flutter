@@ -15,15 +15,15 @@ class WelcomePage extends StatelessWidget {
     return CustomScaffold(
       child: Column(
         children: [
-          Logo(),
+          WelcomeLogo(),
           WelcomeText(),
           Expanded(
             child: Align(
               alignment: Alignment.bottomRight,
               child: Row(
                 children: [
-                  SignIn(), // 로그인
-                  SignUp(), //회원가입
+                  WelcomeSignIn(), // 로그인
+                  WelcomeSignUp(), //회원가입
                 ],
               ),
             ),

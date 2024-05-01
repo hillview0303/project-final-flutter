@@ -2,12 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class EditImageSection extends StatefulWidget {
+class EditImage extends StatefulWidget {
   @override
-  _EditImageSectionState createState() => _EditImageSectionState();
+  _EditImageState createState() => _EditImageState();
 }
 
-class _EditImageSectionState extends State<EditImageSection> {
+class _EditImageState extends State<EditImage> {
   File? _profileImage;
 
   Future<void> _pickImage() async {

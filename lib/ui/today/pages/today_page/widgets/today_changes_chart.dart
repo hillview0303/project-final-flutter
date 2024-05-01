@@ -1,8 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class ChangesChart extends StatelessWidget {
-  const ChangesChart({
+class TodayChangesChart extends StatelessWidget {
+  const TodayChangesChart({
     super.key,
     required this.fatData,
     required this.muscleData,

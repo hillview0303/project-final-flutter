@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JoinPasswordSection extends StatelessWidget {
-  const JoinPasswordSection({
+class JoinPassword extends StatelessWidget {
+  const JoinPassword({
     super.key,
   });
 

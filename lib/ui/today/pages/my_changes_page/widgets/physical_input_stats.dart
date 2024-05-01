@@ -4,11 +4,11 @@ import 'package:project_app/_core/constants/style.dart';
 
 import '../../../../../_core/constants/size.dart';
 
-class InputPhysicalStat extends StatelessWidget {
+class PhysicalInputStat extends StatelessWidget {
   final dataName;
   final value;
 
-  InputPhysicalStat({required this.dataName, required this.value});
+  PhysicalInputStat({required this.dataName, required this.value});
 
   @override
   Widget build(BuildContext context) {

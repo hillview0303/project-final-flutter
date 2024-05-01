@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/ui/today/pages/today_page/widgets/today_changes_chart.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
 import '../../../../../data/models/chartDummy.dart';
 import '../../../../_common/components/composition_box2.dart';
 import '../../my_changes_page/my_changes.dart';
-import 'today_changes_chart.dart';
 import 'today_mission_list.dart';
 
 class TodayBody extends StatefulWidget {
@@ -42,7 +42,7 @@ class _TodayBodyState extends State<TodayBody> {
                   ],
                 ),
                 SizedBox(height: gap_l),
-                ChangesChart(
+                TodayChangesChart(
                   fatData: fatData,
                   muscleData: muscleData,
                   weightData: weightData,
@@ -86,7 +86,7 @@ class _TodayBodyState extends State<TodayBody> {
             ),
           ),
         ),
-        MissionContainerList(),
+        TodayMissionList(),
       ],
     );
   }

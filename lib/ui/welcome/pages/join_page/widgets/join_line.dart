@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JoinDividerSection extends StatelessWidget {
-  const JoinDividerSection({super.key});
+class JoinLine extends StatelessWidget {
+  const JoinLine({super.key});
 
   @override
   Widget build(BuildContext context) {

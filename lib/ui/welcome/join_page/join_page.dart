@@ -202,7 +202,7 @@ class _JoinPageState extends State<JoinPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        items: <String>['남', '여', '기타']
+                        items: <String>['남', '여']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -263,7 +263,9 @@ class _JoinPageState extends State<JoinPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, Move.loginPage);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.teal,
                             foregroundColor: Colors.white,

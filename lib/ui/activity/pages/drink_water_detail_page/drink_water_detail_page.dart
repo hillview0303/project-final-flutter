@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
+import 'package:project_app/ui/activity/pages/drink_water_detail_page/widgets/WaterIntakeGraph.dart';
 
 class DrinkWaterDetailPage extends StatefulWidget {
   @override
@@ -9,12 +10,77 @@ class DrinkWaterDetailPage extends StatefulWidget {
 
 class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
   int currentIntake = 0; // 현재 섭취량
-  final int glassSize = 250; // 한 잔
+  final int glassSize = 250; // 한 잔의 크기
+  final int totalIntake = 2000; // 총 목표 섭취량
 
   void _addDrink() {
-    setState(() {
-      currentIntake += glassSize;
-    });
+    if (currentIntake < totalIntake) {
+      setState(() {
+        currentIntake += glassSize;
+      });
+    }
+  }
+
+  void _removeDrink() {
+    if (currentIntake > 0) {
+      setState(() {
+        currentIntake -= glassSize;
+      });
+    }
+  }
+
+  Widget _buildProgressIndicator() {
+    return Stack(
+      children: <Widget>[
+        Container(
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        FractionallySizedBox(
+          widthFactor: currentIntake >= totalIntake ? 1.0 : currentIntake / totalIntake,
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.lightBlueAccent, kAccentColor2!],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ),
+        Positioned.fill(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('0', style: TextStyle(color: Colors.white)),
+                Text('$currentIntake ml', style: TextStyle(color: Colors.white)),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCupIcons() {
+    List<Widget> cups = [];
+    for (int i = 0; i < totalIntake / glassSize; i++) {
+      String cupImagePath = (i * glassSize < currentIntake) ? 'assets/images/water2.png' : 'assets/images/greywater.png';
+      cups.add(
+        Image.asset(cupImagePath, width: 40),
+      );
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: cups,
+    );
   }
 
   @override
@@ -26,6 +92,7 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
       ),
       body: Column(
         children: <Widget>[
+          WaterIntakeGraph(),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
@@ -44,46 +111,12 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 30),
-                  Stack(
-                    children: <Widget>[
-                      Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      FractionallySizedBox(
-                        widthFactor: currentIntake >= 2000 ? 1.0 : currentIntake / 2000.0,
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Colors.lightBlueAccent, kAccentColor2!],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
-                      Positioned.fill(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text('0', style: TextStyle(color: Colors.white)),
-                              Text('$currentIntake ml', style: TextStyle(color: Colors.white)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  _buildProgressIndicator(), // 프로그레스바
+                  SizedBox(height: 20),
+                  _buildCupIcons(), // 컵 아이콘 표시
                   SizedBox(height: 20),
                   Text(
-                    '부족       좋아요       거의다왔어요       완벽해요',
+                    '부족        좋아요        거의다왔어요        완벽해요',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
@@ -104,41 +137,24 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
                   children: <Widget>[
                     Image.asset('assets/images/water2.png', width: 120),
                     Positioned(
-                      bottom: 0, // 그림 아래에 배치
+                      bottom: 0,
                       child: Text(
                         '250ml',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white, // 흰색 배경 적용
-                            borderRadius: BorderRadius.circular(10), // 둥근 모서리 설정
-                          ),
-                          child: IconButton(
-                            icon: Icon(Icons.remove, color: kAccentColor2),
-                            onPressed: () {
-                              if (currentIntake > 0) {
-                                setState(() {
-                                  currentIntake -= glassSize;
-                                });
-                              }
-                            },
-                          ),
+                        IconButton(
+                          icon: Icon(Icons.remove, color: kAccentColor2),
+                          onPressed: _removeDrink,
                         ),
                         SizedBox(width: 120),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white, // 흰색 배경 적용
-                            borderRadius: BorderRadius.circular(10), // 둥근 모서리 설정
-                          ),
-                          child: IconButton(
-                            icon: Icon(Icons.add, color: kAccentColor2),
-                            onPressed: _addDrink,
-                          ),
+                        IconButton(
+                          icon: Icon(Icons.add, color: kAccentColor2),
+                          onPressed: _addDrink,
                         ),
                       ],
                     ),

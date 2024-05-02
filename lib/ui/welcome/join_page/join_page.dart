@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/data/dtos/user/user_request.dart';
+import 'package:project_app/data/store/session_store.dart';
 
 import '../../../_core/constants/move.dart';
 import '../../../_core/constants/theme.dart';
 import '../../_common/components/custom_scaffold.dart';
 
-class JoinPage extends StatelessWidget {
+class JoinPage extends ConsumerWidget {
   const JoinPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final _formKey = GlobalKey<FormState>();
+    final _username = TextEditingController();
+    final _phone = TextEditingController();
+    final _password = TextEditingController();
+    final _checkPassword = TextEditingController();
+    final _name = TextEditingController();
+    var _birth;
+    var _gender;
+    var _height;
 
     DateTime? selectedDate; // 날짜
     String? selectedGender; // 성별
@@ -47,6 +58,7 @@ class JoinPage extends StatelessWidget {
                     const SizedBox(height: 40.0),
                     // 이름
                     TextFormField(
+                      controller: _name,
                       decoration: InputDecoration(
                         label: const Text('이름'),
                         hintText: '이름을 입력하세요',
@@ -63,6 +75,7 @@ class JoinPage extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: TextFormField(
+                            controller: _username,
                             obscureText: true,
                             decoration: InputDecoration(
                               label: const Text('ID'),
@@ -97,6 +110,7 @@ class JoinPage extends StatelessWidget {
                     const SizedBox(height: 25.0),
                     // 비밀번호
                     TextFormField(
+                      controller: _password,
                       obscureText: true,
                       decoration: InputDecoration(
                         label: const Text('비밀번호'),
@@ -110,6 +124,7 @@ class JoinPage extends StatelessWidget {
                     const SizedBox(height: 25.0),
                     // 비밀번호 확인
                     TextFormField(
+                      controller: _checkPassword,
                       decoration: InputDecoration(
                         label: const Text('비밀번호 확인'),
                         hintText: '비밀번호를 다시 입력하세요',
@@ -122,6 +137,7 @@ class JoinPage extends StatelessWidget {
                     const SizedBox(height: 25.0),
                     //전화번호
                     TextFormField(
+                      controller: _phone,
                       decoration: InputDecoration(
                         label: const Text('휴대폰번호'),
                         hintText: '휴대폰번호를 입력하세요',
@@ -159,6 +175,7 @@ class JoinPage extends StatelessWidget {
                             });
                         if (picked != null && picked != selectedDate) {
                           // 여기에 생년월일 선택시 로직 작성
+                          _birth = picked;
                         }
                       },
                       child: Container(
@@ -203,6 +220,7 @@ class JoinPage extends StatelessWidget {
                       }).toList(),
                       onChanged: (String? newValue) {
                         // 여기에 성별 선택시 로직 작성
+                        _gender = newValue;
                       },
                     ),
                     const SizedBox(height: 25.0),
@@ -225,6 +243,8 @@ class JoinPage extends StatelessWidget {
                       }).toList(),
                       onChanged: (String? newValue) {
                         // 여기에 키 선택시 로직 작성
+                        print("newValue : ${newValue}");
+                        _height = double.parse(newValue!);
                       },
                     ),
                     const SizedBox(height: 25.0),
@@ -251,7 +271,21 @@ class JoinPage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, Move.loginPage);
+                          print("selectedDate : ${_birth}");
+                          JoinRequestDTO joinrequestDTO = JoinRequestDTO(
+                              username: _username.text.trim(),
+                              phone: _phone.text.trim(),
+                              password: _password.text.trim(),
+                              name: _name.text.trim(),
+                              birth: _birth,
+                              gender: _gender,
+                              height: _height);
+
+                          SessionStore sessionstore = ref.read(sessionProvider);
+
+                          sessionstore.join(joinrequestDTO);
+
+                          // Navigator.pushNamed(context, Move.loginPage);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.teal,

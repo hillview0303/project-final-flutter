@@ -40,7 +40,8 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
           ),
         ),
         FractionallySizedBox(
-          widthFactor: currentIntake >= totalIntake ? 1.0 : currentIntake / totalIntake,
+          widthFactor: currentIntake >= totalIntake ? 1.0 : currentIntake /
+              totalIntake,
           child: Container(
             height: 40,
             decoration: BoxDecoration(
@@ -60,7 +61,8 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('0', style: TextStyle(color: Colors.white)),
-                Text('$currentIntake ml', style: TextStyle(color: Colors.white)),
+                Text(
+                    '$currentIntake ml', style: TextStyle(color: Colors.white)),
               ],
             ),
           ),
@@ -72,7 +74,9 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
   Widget _buildCupIcons() {
     List<Widget> cups = [];
     for (int i = 0; i < totalIntake / glassSize; i++) {
-      String cupImagePath = (i * glassSize < currentIntake) ? 'assets/images/water2.png' : 'assets/images/greywater.png';
+      String cupImagePath = (i * glassSize < currentIntake)
+          ? 'assets/images/water2.png'
+          : 'assets/images/greywater.png';
       cups.add(
         Image.asset(cupImagePath, width: 40),
       );
@@ -90,11 +94,11 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
         title: Text('물 마시기'),
         backgroundColor: TColor.white,
       ),
-      body: Column(
-        children: <Widget>[
-          WaterIntakeGraph(),
-          Expanded(
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            WaterIntakeGraph(),
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -123,47 +127,47 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
                 ],
               ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    Image.asset('assets/images/water2.png', width: 120),
-                    Positioned(
-                      bottom: 0,
-                      child: Text(
-                        '250ml',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+              child: Column(
+                children: <Widget>[
+                  Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Image.asset('assets/images/water2.png', width: 120),
+                      Positioned(
+                        bottom: 0,
+                        child: Text(
+                          '250ml',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.remove, color: kAccentColor2),
-                          onPressed: _removeDrink,
-                        ),
-                        SizedBox(width: 120),
-                        IconButton(
-                          icon: Icon(Icons.add, color: kAccentColor2),
-                          onPressed: _addDrink,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.remove, color: kAccentColor2),
+                            onPressed: _removeDrink,
+                          ),
+                          SizedBox(width: 120),
+                          IconButton(
+                            icon: Icon(Icons.add, color: kAccentColor2),
+                            onPressed: _addDrink,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

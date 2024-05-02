@@ -63,4 +63,5 @@ class User {
         goalFat = json["goalFat"] ?? 0,
         createdAt = json["createdAt"] ?? "",
         userImg = json["userImg"] ?? "";
+
 }

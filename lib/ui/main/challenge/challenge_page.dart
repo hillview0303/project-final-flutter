@@ -16,7 +16,7 @@ class ChallengePage extends StatelessWidget {
       children: <Widget>[
         AvailableChallenge(title: '탐험 시작하기', challenges: upcomingChallenges),
         OngoingChallenge(title: '내 챌린지', challenges: ongoingChallenges),
-        CompletedChallenge(title: '정복한 챌린지', challenges: pastChallenges),
+        CompletedChallenge(title: '지난 챌린지', challenges: pastChallenges),
       ],
     );
   }

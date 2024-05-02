@@ -21,7 +21,7 @@ class TodayMissionList extends StatelessWidget {
         padding: const EdgeInsets.all(gap_sm),
         child: Column(
           children: [
-            SizedBox(height: gap_l),
+            SizedBox(height: gap_sm),
             Row(
               children: [
                 Text("오늘의 미션이에요", style: subtitle1()),

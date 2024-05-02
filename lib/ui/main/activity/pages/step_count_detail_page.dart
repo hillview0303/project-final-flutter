@@ -1,37 +1,34 @@
 import 'package:flutter/material.dart';
 
-import '../../../_common/components/listbox.dart';
-import 'step_chart.dart';
+import '../../../../_core/constants/constants.dart';
+import '../widgets/step_count_body.dart';
 
-class StepCountDetailPage extends StatelessWidget {
-  const StepCountDetailPage({Key? key}) : super(key: key);
+class StepCountDetailPage extends StatefulWidget {
+  @override
+  _StepCountDetailPageState createState() => _StepCountDetailPageState();
+}
 
+class _StepCountDetailPageState extends State<StepCountDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("걸음"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('걸음 수', style: TextStyle(color: Colors.white)),
+          backgroundColor: kAccentColor2,
+          iconTheme: IconThemeData(color: Colors.white),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Day'),
+              Tab(text: 'Week'),
+              Tab(text: 'Month'),
+            ],
+            indicatorColor: Colors.white,
+            labelColor: Colors.white,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  StepChart(), // 차트
-                  SizedBox(height: 16), // 차트와 리스트박스 사이의 간격
-                  Listbox(), // 리스트박스
-                ],
-              ),
-            ),
-          ],
-        ),
+        body: StepCountBody(),
       ),
     );
   }

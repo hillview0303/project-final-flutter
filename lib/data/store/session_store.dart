@@ -32,7 +32,7 @@ class SessionStore extends SessionUser {
       this.accessToken = accessToken;
       this.isLogin = true;
 
-      Navigator.pushNamed(mContext!, Move.mainPage);
+      // Navigator.pushNamed(mContext!, Move.mainPage);
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}")));

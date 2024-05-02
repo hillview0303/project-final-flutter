@@ -5,6 +5,7 @@ import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/store/session_store.dart';
 
 import '../../../../_core/constants/theme.dart';
+import '../../../_core/constants/move.dart';
 import '../../_common/components/custom_scaffold.dart';
 import '../join_page/join_page.dart';
 
@@ -49,7 +50,8 @@ class LoginPage extends ConsumerWidget {
                       const SizedBox(height: 40.0),
                       // ID 입력
                       TextFormField(
-                        validator: validateUsername(),
+                        //todo : 주석 해제
+                        // validator: validateUsername(),
                         controller: _username,
                         decoration: InputDecoration(
                           label: const Text('ID'),
@@ -63,7 +65,8 @@ class LoginPage extends ConsumerWidget {
                       const SizedBox(height: 25.0),
                       // PW 입력
                       TextFormField(
-                        validator: validatePassword(),
+                        //todo : 주석 해제
+                        // validator: validatePassword(),
                         controller: _password,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -121,6 +124,9 @@ class LoginPage extends ConsumerWidget {
                               SessionStore store = ref.read(sessionProvider);
 
                               store.login(loginRequestDTO);
+
+                              //todo : 삭제 후 스토어 주석 해제
+                              Navigator.pushNamed(context, Move.mainPage);
                             }
                           },
                           style: ElevatedButton.styleFrom(

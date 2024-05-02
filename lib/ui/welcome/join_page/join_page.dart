@@ -175,7 +175,7 @@ class JoinPage extends ConsumerWidget {
                             });
                         if (picked != null && picked != selectedDate) {
                           // 여기에 생년월일 선택시 로직 작성
-                          _birth = picked;
+                          _birth = picked.toIso8601String();
                         }
                       },
                       child: Container(
@@ -271,7 +271,7 @@ class JoinPage extends ConsumerWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          print("selectedDate : ${_birth}");
+                          print("_birth : ${_birth}");
                           JoinRequestDTO joinrequestDTO = JoinRequestDTO(
                               username: _username.text.trim(),
                               phone: _phone.text.trim(),

@@ -3,7 +3,7 @@ class JoinRequestDTO {
   final String phone;
   final String password;
   final String name;
-  final DateTime birth;
+  final String birth;
   final String gender;
   final double height;
 

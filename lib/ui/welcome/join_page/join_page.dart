@@ -63,7 +63,6 @@ class JoinPage extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: TextFormField(
-                            obscureText: true,
                             decoration: InputDecoration(
                               label: const Text('ID'),
                               hintText: 'ID를 입력하세요',
@@ -110,6 +109,7 @@ class JoinPage extends StatelessWidget {
                     const SizedBox(height: 25.0),
                     // 비밀번호 확인
                     TextFormField(
+                      obscureText: true,
                       decoration: InputDecoration(
                         label: const Text('비밀번호 확인'),
                         hintText: '비밀번호를 다시 입력하세요',

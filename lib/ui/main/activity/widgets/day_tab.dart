@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/chart_background_widget.dart';
+import 'chart_background_widget.dart';
 
 class DayTab extends StatelessWidget {
   @override

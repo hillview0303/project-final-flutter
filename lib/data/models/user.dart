@@ -14,7 +14,7 @@ class User {
   final int? totalCoin;
   final double? goalMuscle;
   final double? goalFat;
-  final DateTime createdAt;
+  final DateTime? createdAt;
   final String? userImg;
 
   User(
@@ -53,16 +53,16 @@ class User {
   User.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         username = json["username"],
-        phone = json["phone"],
-        password = json["password"],
-        name = json["name"],
-        birth = json["birth"],
-        gender = json["gender"],
-        height = json["height"],
+        phone = json["phone"] ?? "",
+        password = json["password"] ?? "",
+        name = json["name"] ?? "",
+        birth = json["birth"] ?? null,
+        gender = json["gender"] ?? "",
+        height = json["height"] ?? null,
         weight = json["weight"] ?? null,
         totalCoin = json["totalCoin"] ?? null,
         goalMuscle = json["goalMuscle"] ?? null,
         goalFat = json["goalFat"] ?? null,
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]) ?? null,
         userImg = json["userImg"] ?? null;
 }

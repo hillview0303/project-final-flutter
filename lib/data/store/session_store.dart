@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/http.dart';
+import 'package:project_app/_core/constants/move.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/repository/user_repositiry.dart';
 import 'package:project_app/main.dart';
@@ -30,6 +31,8 @@ class SessionStore extends SessionUser {
       this.user = responseDTO.body;
       this.accessToken = accessToken;
       this.isLogin = true;
+
+      Navigator.pushNamed(mContext!, Move.mainPage);
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}")));

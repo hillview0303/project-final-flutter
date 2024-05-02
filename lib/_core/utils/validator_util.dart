@@ -1,6 +1,6 @@
 import 'package:validators/validators.dart';
 
-Function validateUsername() {
+String? Function(String?) validateUsername() {
   return (String? value) {
     if (value!.isEmpty) {
       return "유저네임에 들어갈 수 없습니다.";
@@ -16,7 +16,7 @@ Function validateUsername() {
   };
 }
 
-Function validatePassword() {
+String? Function(String?) validatePassword() {
   return (String? value) {
     if (value!.isEmpty) {
       return "패스워드 공백이 들어갈 수 없습니다.";

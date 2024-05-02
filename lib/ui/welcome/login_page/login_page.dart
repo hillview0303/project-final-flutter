@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/data/dtos/user/user_request.dart';
+import 'package:project_app/data/store/session_store.dart';
 
 import '../../../../_core/constants/move.dart';
 import '../../../../_core/constants/theme.dart';
 import '../../_common/components/custom_scaffold.dart';
 import '../join_page/join_page.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _formKey = GlobalKey<FormState>();
+    final _username = TextEditingController();
+    final _password = TextEditingController();
 
-class _LoginPageState extends State<LoginPage> {
-  @override
-  Widget build(BuildContext context) {
     return CustomScaffold(
       child: Column(
         children: [
@@ -35,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: SingleChildScrollView(
                 child: Form(
+                  key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -46,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 40.0),
                       // ID 입력
                       TextFormField(
+                        controller: _username,
                         decoration: InputDecoration(
                           label: const Text('ID'),
                           hintText: 'ID를 입력하세요',
@@ -58,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 25.0),
                       // PW 입력
                       TextFormField(
+                        controller: _password,
                         obscureText: true,
                         decoration: InputDecoration(
                           label: const Text('Password'),
@@ -102,6 +107,20 @@ class _LoginPageState extends State<LoginPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             // 로그인 기능 구현 전 임시로 버튼을 누르면 메인페이지로 이동하게 함
+                            bool isOk = _formKey.currentState!.validate();
+
+                            if (isOk) {
+                              String username = _username.text.trim();
+                              String password = _password.text.trim();
+
+                              LoginRequestDTO loginRequestDTO =
+                                  LoginRequestDTO(username, password);
+
+                              SessionStore store = ref.read(sessionProvider);
+
+                              store.login(loginRequestDTO);
+                            }
+
                             Navigator.pushNamed(context, Move.mainPage);
                           },
                           style: ElevatedButton.styleFrom(

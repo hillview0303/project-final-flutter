@@ -1,12 +1,10 @@
-import 'package:intl/intl.dart';
-
 class User {
   final int id;
   final String username;
   final String phone;
   final String password;
   final String name;
-  final DateTime birth;
+  final String birth;
   final String gender;
   final double height;
 
@@ -14,7 +12,7 @@ class User {
   final int? totalCoin;
   final double? goalMuscle;
   final double? goalFat;
-  final DateTime? createdAt;
+  final String? createdAt;
   final String? userImg;
 
   User(
@@ -56,13 +54,14 @@ class User {
         phone = json["phone"] ?? "",
         password = json["password"] ?? "",
         name = json["name"] ?? "",
-        birth = json["birth"] ?? null,
+        birth = json["birth"] ?? "",
         gender = json["gender"] ?? "",
-        height = json["height"] ?? null,
-        weight = json["weight"] ?? null,
-        totalCoin = json["totalCoin"] ?? null,
-        goalMuscle = json["goalMuscle"] ?? null,
-        goalFat = json["goalFat"] ?? null,
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]) ?? null,
-        userImg = json["userImg"] ?? null;
+        height = json["height"] ?? 0.0,
+        weight = json["weight"] ?? 0.0,
+        totalCoin = json["totalCoin"] ?? 0,
+        goalMuscle = json["goalMuscle"] ?? 0,
+        goalFat = json["goalFat"] ?? 0,
+        createdAt = json["createdAt"] ?? "",
+        userImg = json["userImg"] ?? "";
+
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/weekly_bar_chart.dart';
+import 'weekly_bar_chart.dart';
 
 class WeekTab extends StatelessWidget {
   @override

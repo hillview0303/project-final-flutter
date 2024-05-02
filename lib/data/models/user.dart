@@ -1,12 +1,10 @@
-import 'package:intl/intl.dart';
-
 class User {
   final int id;
   final String username;
   final String phone;
   final String password;
   final String name;
-  final DateTime birth;
+  final String birth;
   final String gender;
   final double height;
 
@@ -14,7 +12,7 @@ class User {
   final int? totalCoin;
   final double? goalMuscle;
   final double? goalFat;
-  final DateTime createdAt;
+  final String? createdAt;
   final String? userImg;
 
   User(
@@ -53,16 +51,16 @@ class User {
   User.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         username = json["username"],
-        phone = json["phone"],
-        password = json["password"],
-        name = json["name"],
-        birth = json["birth"],
-        gender = json["gender"],
-        height = json["height"],
-        weight = json["weight"] ?? null,
-        totalCoin = json["totalCoin"] ?? null,
-        goalMuscle = json["goalMuscle"] ?? null,
-        goalFat = json["goalFat"] ?? null,
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
-        userImg = json["userImg"] ?? null;
+        phone = json["phone"] ?? "",
+        password = json["password"] ?? "",
+        name = json["name"] ?? "",
+        birth = json["birth"] ?? "",
+        gender = json["gender"] ?? "",
+        height = json["height"] ?? 0.0,
+        weight = json["weight"] ?? 0.0,
+        totalCoin = json["totalCoin"] ?? 0,
+        goalMuscle = json["goalMuscle"] ?? 0,
+        goalFat = json["goalFat"] ?? 0,
+        createdAt = json["createdAt"] ?? "",
+        userImg = json["userImg"] ?? "";
 }

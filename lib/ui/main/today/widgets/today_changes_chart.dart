@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 
-
 class TodayChangesChart extends StatelessWidget {
   const TodayChangesChart({
     super.key,
@@ -19,7 +18,7 @@ class TodayChangesChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 400,
+      height: 230,
       child: LineChart(
         LineChartData(
           backgroundColor: Colors.white,
@@ -27,7 +26,8 @@ class TodayChangesChart extends StatelessWidget {
           borderData: FlBorderData(
             show: true,
             border: Border(
-              bottom: BorderSide(color: TColor.secondaryColor1.withOpacity(0.2), width: 4),
+              bottom: BorderSide(
+                  color: TColor.secondaryColor1.withOpacity(0.2), width: 4),
               left: const BorderSide(color: Colors.transparent),
               right: const BorderSide(color: Colors.transparent),
               top: const BorderSide(color: Colors.transparent),
@@ -37,8 +37,8 @@ class TodayChangesChart extends StatelessWidget {
             LineChartBarData(
               spots: fatData,
               isCurved: true,
-              color: Colors.redAccent,
-              barWidth: 8,
+              color: Colors.lightGreenAccent,
+              barWidth: 3,
               isStrokeCapRound: true,
               belowBarData: BarAreaData(
                 show: false,
@@ -49,7 +49,7 @@ class TodayChangesChart extends StatelessWidget {
               spots: muscleData,
               isCurved: true,
               color: Colors.cyanAccent,
-              barWidth: 8,
+              barWidth: 3,
               isStrokeCapRound: true,
               belowBarData: BarAreaData(show: false),
             ),
@@ -57,7 +57,7 @@ class TodayChangesChart extends StatelessWidget {
               spots: weightData,
               isCurved: true,
               color: Colors.deepPurpleAccent,
-              barWidth: 8,
+              barWidth: 3,
               isStrokeCapRound: true,
               belowBarData: BarAreaData(show: false),
             ),
@@ -68,29 +68,22 @@ class TodayChangesChart extends StatelessWidget {
                 showTitles: true,
                 reservedSize: 40,
                 getTitlesWidget: (value, meta) {
-                  return Text('${value.toInt()}kg', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14));
+                  return Text('${value.toInt()}kg',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 11));
                 },
               ),
             ),
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 32,
+                reservedSize: 40,
+                interval: 1,  // 강제로 1의 간격을 설정
                 getTitlesWidget: (value, meta) {
-                  switch (value.toInt()) {
-                    case 0:
-                      return const Text('Day 1');
-                    case 1:
-                      return const Text('Day 2');
-                    case 2:
-                      return const Text('Day 3');
-                    case 3:
-                      return const Text('Day 4');
-                    case 4:
-                      return const Text('Day 5');
-                    default:
-                      return const Text('');
-                  }
+                  // 0부터 시작하여 최대 값까지 1씩 증가
+                  return Text('Day ${value.toInt() + 1}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 11));
                 },
               ),
             ),

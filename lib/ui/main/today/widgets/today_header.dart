@@ -23,10 +23,13 @@ class TodayHeader extends StatelessWidget {
             children: [
               TodayChangesDetail(),
               SizedBox(height: gap_l),
-              TodayChangesChart(
-                fatData: fatData,
-                muscleData: muscleData,
-                weightData: weightData,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: gap_l),
+                child: TodayChangesChart(
+                  fatData: fatData,
+                  muscleData: muscleData,
+                  weightData: weightData,
+                ),
               ),
               SizedBox(height: gap_l),
               TodayBodydata(),
@@ -37,4 +40,3 @@ class TodayHeader extends StatelessWidget {
     );
   }
 }
-

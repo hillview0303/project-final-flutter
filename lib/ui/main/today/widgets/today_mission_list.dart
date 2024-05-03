@@ -32,14 +32,6 @@ class TodayMissionList extends StatelessWidget {
             ),
             SizedBox(height: gap_s),
             TodayMission(
-              title: "나의 변화 ",
-              title2: "기록해요",
-              subtitle: "목표 1회",
-              icons: Icons.add_chart,
-              page: ChangeWeightDetailPage(),
-            ),
-            SizedBox(height: gap_s),
-            TodayMission(
               title: "0 걸음 ",
               title2: "걸었어요",
               subtitle: "목표 10,000 걸음",

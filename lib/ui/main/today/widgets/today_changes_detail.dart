@@ -57,12 +57,12 @@ class TodayChangesDetail extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: kAccentColor2, // Button background color
-                    foregroundColor: Colors.white, // Button text color
+                    backgroundColor: kAccentColor2,
+                    foregroundColor: Colors.white,
                   ),
                   child: Text('저장'),
                   onPressed: () {
-                    Navigator.pop(context); // Close the modal after entry
+                    Navigator.pop(context);
                   },
                 ),
               ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_app/ui/main/today/widgets/today_bodydata.dart';
 import 'package:project_app/ui/main/today/widgets/today_changes_chart.dart';
 import 'package:project_app/ui/main/today/widgets/today_changes_detail.dart';
+import 'package:project_app/ui/main/today/widgets/today_target.dart';
 import 'package:project_app/ui/main/today/widgets/today_user_data.dart';
 import '../../../../../_core/constants/size.dart';
 import '../../../../data/models/chartDummy.dart';
@@ -52,6 +53,8 @@ class _TodayHeaderState extends State<TodayHeader> {
                 muscleVisible: muscleVisible,
                 weightVisible: weightVisible,
               ),
+              SizedBox(height: gap_l),
+              TodayTarget(),
             ],
           ),
         ),

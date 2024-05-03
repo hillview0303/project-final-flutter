@@ -19,6 +19,14 @@ class TodayStatus extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(gap_m),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 12,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -29,7 +37,7 @@ class TodayStatus extends StatelessWidget {
                 children: [
                   Text(
                     "${name}",
-                    style: subtitle2(mColor: Colors.grey[400]!),
+                    style: subtitle3(mColor: Colors.grey[400]!),
                   ),
                   Spacer(),
                   Text("${weight}kg"),
@@ -41,7 +49,7 @@ class TodayStatus extends StatelessWidget {
               height: 130,
               child: Text(
                 "${goalWeight}kg",
-                style: h4(),
+                style: h5(),
               ),
             ),
             Expanded(

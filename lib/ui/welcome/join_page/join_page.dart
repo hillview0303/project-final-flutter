@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
+import 'package:project_app/data/store/global_store.dart';
 import 'package:project_app/data/store/session_store.dart';
 
 import '../../../_core/constants/move.dart';
@@ -26,7 +27,10 @@ class JoinPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void _showPrivacyPolicyDialog() {
+    final selectedDate = ref.watch(selectedDateProvider); // 날짜 상태 관리
+    final checkedBox = ref.watch(CheckedBoxProvider);
+
+    void _showPrivacyPolicyDialog(context) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -192,7 +196,10 @@ class JoinPage extends ConsumerWidget {
                             });
                         if (picked != null && picked != selectedDate) {
                           // 여기에 생년월일 선택시 로직 작성
+                          ref.read(selectedDateProvider.notifier).state =
+                              picked;
                           _birth = picked.toIso8601String();
+
 //                           setState(() {
 //                             selectedDate = picked;
 //                           });
@@ -275,8 +282,9 @@ class JoinPage extends ConsumerWidget {
                     Row(
                       children: [
                         Checkbox(
-                          value: _privacyPolicyAgreed,
+                          value: ref.watch(CheckedBoxProvider),
                           onChanged: (bool? value) {
+                            ref.read(CheckedBoxProvider.notifier).state = value!;
                             // setState(() {
                             //   _privacyPolicyAgreed = value!;
                             // });
@@ -285,7 +293,7 @@ class JoinPage extends ConsumerWidget {
                           checkColor: Colors.white, // 체크 마크 색상을 흰색으로 설정
                         ),
                         GestureDetector(
-                          onTap: _showPrivacyPolicyDialog,
+                          onTap: ()=>_showPrivacyPolicyDialog(context),
                           child: const Text(
                             '개인정보 처리 방침',
                             style: TextStyle(
@@ -307,18 +315,23 @@ class JoinPage extends ConsumerWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           print("_birth : ${_birth}");
-                          JoinRequestDTO joinrequestDTO = JoinRequestDTO(
-                              username: _username.text.trim(),
-                              phone: _phone.text.trim(),
-                              password: _password.text.trim(),
-                              name: _name.text.trim(),
-                              birth: _birth,
-                              gender: _gender,
-                              height: _height);
 
-                          SessionStore sessionstore = ref.read(sessionProvider);
-
-                          sessionstore.join(joinrequestDTO);
+                          if (_password.text == _checkPassword.text) {
+                            JoinRequestDTO joinrequestDTO = JoinRequestDTO(
+                                username: _username.text.trim(),
+                                phone: _phone.text.trim(),
+                                password: _password.text.trim(),
+                                name: _name.text.trim(),
+                                birth: _birth,
+                                gender: _gender,
+                                height: _height);
+                            SessionStore sessionstore =
+                                ref.read(sessionProvider);
+                            sessionstore.join(joinrequestDTO);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("비밀번호가 일치하지 않습니다.")));
+                          }
 
                           // Navigator.pushNamed(context, Move.loginPage);
                         },

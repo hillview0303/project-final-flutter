@@ -39,6 +39,9 @@ class SessionStore extends SessionUser {
 
     if (responseDTO.status == 200) {
       Navigator.pushNamed(mContext!, Move.loginPage);
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("회원가입이 완료되었습니다.")));
+
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("회원가입 실패 : ${responseDTO.msg}")));
@@ -46,7 +49,6 @@ class SessionStore extends SessionUser {
   }
 
   Future<void> login(LoginRequestDTO requestDTO) async {
-    final mContext = navigatorKey.currentContext;
 
     var (responseDTO, accessToken) =
         await UserRepository().fetchLogin(requestDTO);
@@ -65,10 +67,9 @@ class SessionStore extends SessionUser {
           .showSnackBar(SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}")));
     }
   }
-
 }
 
 // 창고 관리자
-final sessionProvider = StateProvider<SessionStore>((ref) {
+final sessionProvider = StateProvider.autoDispose<SessionStore>((ref) {
   return SessionStore(ref);
 });

@@ -102,7 +102,6 @@ class JoinPage extends ConsumerWidget {
                           flex: 4,
                           child: TextFormField(
                             controller: _username,
-                            obscureText: true,
                             decoration: InputDecoration(
                               label: const Text('ID'),
                               hintText: 'ID를 입력하세요',

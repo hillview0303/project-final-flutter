@@ -165,7 +165,7 @@ class LoginPage extends ConsumerWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const JoinPage()),
+                                builder: (context) => JoinPage()),
                           );
                         },
                         child: Row(

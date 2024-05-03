@@ -12,15 +12,29 @@ import '../models/user.dart';
 class SessionUser {
   User? user;
   String? accessToken;
-  bool? isLogin = false;
+  bool isLogin = false;
 
   SessionUser();
 }
 
+
 // 창고
 class SessionStore extends SessionUser {
+  Ref ref;
+  final mContext = navigatorKey.currentContext;
+
+  SessionStore(this.ref);
+
+
+  void loginCheck(String path) {
+    if (isLogin) {
+      Navigator.pushNamed(mContext!, path);
+    } else {
+      Navigator.pushNamed(mContext!, Move.loginPage);
+    }
+  }
+
   Future<void> join(JoinRequestDTO joinRequestDTO) async {
-    final mContext = navigatorKey.currentContext;
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinRequestDTO);
 
     if (responseDTO.status == 200) {
@@ -52,10 +66,9 @@ class SessionStore extends SessionUser {
     }
   }
 
-  SessionStore();
 }
 
 // 창고 관리자
 final sessionProvider = StateProvider<SessionStore>((ref) {
-  return SessionStore();
+  return SessionStore(ref);
 });

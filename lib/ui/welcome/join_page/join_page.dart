@@ -1,72 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/data/dtos/user/user_request.dart';
+import 'package:project_app/data/store/session_store.dart';
 
 import '../../../_core/constants/move.dart';
 import '../../../_core/constants/theme.dart';
 import '../../_common/components/custom_scaffold.dart';
 
-class JoinPage extends StatefulWidget {
-  const JoinPage({Key? key}) : super(key: key);
-
-  @override
-  _JoinPageState createState() => _JoinPageState();
-}
-
-class _JoinPageState extends State<JoinPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class JoinPage extends ConsumerWidget {
+  final _formKey = GlobalKey<FormState>();
+  final _username = TextEditingController();
+  final _phone = TextEditingController();
+  final _password = TextEditingController();
+  final _checkPassword = TextEditingController();
+  final _name = TextEditingController();
+  var _birth;
+  var _gender;
+  var _height;
   DateTime? selectedDate; // 날짜
   String? selectedGender; // 성별
   String? selectedHeight; // 키
   bool _privacyPolicyAgreed = false;
 
-  void _showPrivacyPolicyDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("개인정보 처리방침"),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: const <Widget>[
-              Text("1. 개인정보의 수집 및 이용 목적"),
-              Text("본 앱은 서비스 제공을 위해 다음과 같은 개인정보를 수집하고 있습니다."),
-              Text(" - 이름, 연락처, 이메일, 생년월일 등"),
-              Text("2. 개인정보의 보유 및 이용 기간"),
-              Text("귀하의 개인정보는 서비스 이용기간 동안 보유하며, 목적 달성 후 즉시 파기합니다."),
-              Text("3. 개인정보의 파기 절차 및 방법"),
-              Text("사용자의 개인정보는 목적이 달성된 후 내부 방침 및 관련 법률에 따라 안전하게 파기됩니다."),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _privacyPolicyAgreed = false;
-              });
-              Navigator.pop(context);
-            },
-            child: const Text("취소", style: TextStyle(color: Colors.teal)),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _privacyPolicyAgreed = true;
-              });
-              Navigator.pop(context);
-            },
-            child: const Text("동의합니다", style: TextStyle(color: Colors.teal)),
-          ),
-        ],
-        backgroundColor: Colors.teal.shade50,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-
+  JoinPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    void _showPrivacyPolicyDialog() {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("개인정보 처리방침"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text("1. 개인정보의 수집 및 이용 목적"),
+                Text("본 앱은 서비스 제공을 위해 다음과 같은 개인정보를 수집하고 있습니다."),
+                Text(" - 이름, 연락처, 이메일, 생년월일 등"),
+                Text("2. 개인정보의 보유 및 이용 기간"),
+                Text("귀하의 개인정보는 서비스 이용기간 동안 보유하며, 목적 달성 후 즉시 파기합니다."),
+                Text("3. 개인정보의 파기 절차 및 방법"),
+                Text("사용자의 개인정보는 목적이 달성된 후 내부 방침 및 관련 법률에 따라 안전하게 파기됩니다."),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("닫기", style: TextStyle(color: Colors.teal)),
+            ),
+          ],
+          backgroundColor: Colors.teal.shade50,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      );
+    }
+
     return CustomScaffold(
       child: DraggableScrollableSheet(
         initialChildSize: 0.8,
@@ -92,6 +85,7 @@ class _JoinPageState extends State<JoinPage> {
                     Text('회원가입', style: textTheme().titleLarge),
                     const SizedBox(height: 40.0),
                     TextFormField(
+                      controller: _name,
                       decoration: InputDecoration(
                         label: const Text('이름'),
                         hintText: '이름을 입력하세요',
@@ -107,6 +101,8 @@ class _JoinPageState extends State<JoinPage> {
                         Expanded(
                           flex: 4,
                           child: TextFormField(
+                            controller: _username,
+                            obscureText: true,
                             decoration: InputDecoration(
                               label: const Text('ID'),
                               hintText: 'ID를 입력하세요',
@@ -125,7 +121,8 @@ class _JoinPageState extends State<JoinPage> {
                             style: TextButton.styleFrom(
                               backgroundColor: Colors.teal,
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 20.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -137,6 +134,7 @@ class _JoinPageState extends State<JoinPage> {
                     ),
                     const SizedBox(height: 25.0),
                     TextFormField(
+                      controller: _password,
                       obscureText: true,
                       decoration: InputDecoration(
                         label: const Text('비밀번호'),
@@ -149,6 +147,7 @@ class _JoinPageState extends State<JoinPage> {
                     ),
                     const SizedBox(height: 25.0),
                     TextFormField(
+                      controller: _checkPassword,
                       obscureText: true,
                       decoration: InputDecoration(
                         label: const Text('비밀번호 확인'),
@@ -161,6 +160,7 @@ class _JoinPageState extends State<JoinPage> {
                     ),
                     const SizedBox(height: 25.0),
                     TextFormField(
+                      controller: _phone,
                       decoration: InputDecoration(
                         label: const Text('휴대폰번호'),
                         hintText: '휴대폰번호를 입력하세요',
@@ -192,13 +192,16 @@ class _JoinPageState extends State<JoinPage> {
                               );
                             });
                         if (picked != null && picked != selectedDate) {
-                          setState(() {
-                            selectedDate = picked;
-                          });
+                          // 여기에 생년월일 선택시 로직 작성
+                          _birth = picked.toIso8601String();
+//                           setState(() {
+//                             selectedDate = picked;
+//                           });
                         }
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 20.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(color: Colors.grey),
@@ -210,9 +213,11 @@ class _JoinPageState extends State<JoinPage> {
                               selectedDate == null
                                   ? '생년월일을 입력하세요'
                                   : '${selectedDate!.toLocal()}'.split(' ')[0],
-                              style: const TextStyle(color: Colors.black54, fontSize: 16),
+                              style: const TextStyle(
+                                  color: Colors.black54, fontSize: 16),
                             ),
-                            const Icon(Icons.calendar_today, color: Colors.teal),
+                            const Icon(Icons.calendar_today,
+                                color: Colors.teal),
                           ],
                         ),
                       ),
@@ -234,9 +239,11 @@ class _JoinPageState extends State<JoinPage> {
                         );
                       }).toList(),
                       onChanged: (String? newValue) {
-                        setState(() {
-                          selectedGender = newValue;
-                        });
+                        // 여기에 성별 선택시 로직 작성
+                        _gender = newValue;
+//                         setState(() {
+//                           selectedGender = newValue;
+//                         });
                       },
                     ),
                     const SizedBox(height: 25.0),
@@ -249,7 +256,7 @@ class _JoinPageState extends State<JoinPage> {
                         ),
                       ),
                       items: List<String>.generate(
-                          201, (index) => (50 + index).toString())
+                              201, (index) => (50 + index).toString())
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -257,9 +264,12 @@ class _JoinPageState extends State<JoinPage> {
                         );
                       }).toList(),
                       onChanged: (String? newValue) {
-                        setState(() {
-                          selectedHeight = newValue;
-                        });
+                        // 여기에 키 선택시 로직 작성
+                        print("newValue : ${newValue}");
+                        _height = double.parse(newValue!);
+//                         setState(() {
+//                           selectedHeight = newValue;
+//                         });
                       },
                     ),
                     const SizedBox(height: 25.0),
@@ -268,9 +278,9 @@ class _JoinPageState extends State<JoinPage> {
                         Checkbox(
                           value: _privacyPolicyAgreed,
                           onChanged: (bool? value) {
-                            setState(() {
-                              _privacyPolicyAgreed = value!;
-                            });
+                            // setState(() {
+                            //   _privacyPolicyAgreed = value!;
+                            // });
                           },
                           activeColor: Colors.teal, // 체크박스 배경색을 Teal로 설정
                           checkColor: Colors.white, // 체크 마크 색상을 흰색으로 설정
@@ -280,7 +290,8 @@ class _JoinPageState extends State<JoinPage> {
                           child: const Text(
                             '개인정보 처리 방침',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, color: Colors.teal),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal),
                           ),
                         ),
                         Text(
@@ -296,7 +307,21 @@ class _JoinPageState extends State<JoinPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, Move.loginPage);
+                          print("_birth : ${_birth}");
+                          JoinRequestDTO joinrequestDTO = JoinRequestDTO(
+                              username: _username.text.trim(),
+                              phone: _phone.text.trim(),
+                              password: _password.text.trim(),
+                              name: _name.text.trim(),
+                              birth: _birth,
+                              gender: _gender,
+                              height: _height);
+
+                          SessionStore sessionstore = ref.read(sessionProvider);
+
+                          sessionstore.join(joinrequestDTO);
+
+                          // Navigator.pushNamed(context, Move.loginPage);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.teal,

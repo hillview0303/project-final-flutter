@@ -13,11 +13,11 @@ class CompositionBox2 extends StatelessWidget {
 
   CompositionBox2(
       {this.titleColor = Colors.black,
-      this.valueColor = Colors.black,
-      this.borderColor = Colors.black,
-      this.backgroundColor = Colors.white,
-      required this.name,
-      this.value = "-"});
+        this.valueColor = Colors.black,
+        this.borderColor = Colors.black,
+        this.backgroundColor = Colors.white,
+        required this.name,
+        this.value = "-"});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class CompositionBox2 extends StatelessWidget {
           border: Border.all(color: borderColor),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.7), // 그림자 색상 및 투명도
-              blurRadius: 0, // 그림자 흐림 정도
+              color: Colors.transparent.withOpacity(0.2), // 그림자 색상 및 투명도
+              blurRadius: 5, // 그림자 흐림 정도
               offset: Offset(3, 3), // 그림자 위치 (수평, 수직)
             ),
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/constants.dart';
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
 import '../../activity/pages/change_weight_detail_page.dart';
@@ -16,7 +17,7 @@ class TodayMissionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: Colors.grey[300]),
+      decoration: BoxDecoration(color: TColor.secondaryColor4),
       child: Padding(
         padding: const EdgeInsets.all(gap_sm),
         child: Column(
@@ -47,14 +48,16 @@ class TodayMissionList extends StatelessWidget {
             ),
             SizedBox(height: gap_s),
             TodayMission(
-              title: "오늘 0잔 마셨어요",
+              title: "오늘 0잔 ",
+              title2: "마셨어요",
               subtitle: "목표 8잔",
               icons: Icons.water_drop,
               page: DrinkWaterDetailPage(),
             ),
             SizedBox(height: gap_s),
             TodayMission(
-              title: "식단 0개 기록했어요",
+              title: "식단 0개 ",
+              title2: "기록했어요",
               subtitle: "목표 3개",
               icons: Icons.food_bank_outlined,
               page: DietManagementDetailPage(),

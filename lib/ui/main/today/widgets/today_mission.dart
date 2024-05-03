@@ -29,7 +29,7 @@ class TodayMission extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(gap_s)),
+            color: Colors.white, borderRadius: BorderRadius.circular(gap_m)),
         child: Padding(
           padding: const EdgeInsets.all(gap_sm),
           child: Row(

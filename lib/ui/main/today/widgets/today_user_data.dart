@@ -19,9 +19,9 @@ class TodayUserData extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/green.png'),
-          fit: BoxFit.cover,  // 이미지를 컨테이너 크기에 맞추어 전체를 채웁니다.
+          fit: BoxFit.cover,
         ),
-        color: kAccentColor2,  // 이미지 로드 실패 시 대체 색상으로 사용
+        color: kAccentColor2,  // 이미지 로드 실패 시 대체 색상
       ),
       child: Padding(
         padding: EdgeInsets.all(gap_m),

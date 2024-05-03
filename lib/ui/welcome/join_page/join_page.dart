@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
-import 'package:project_app/data/store/date_store.dart';
+import 'package:project_app/data/store/global_store.dart';
 import 'package:project_app/data/store/session_store.dart';
 
 import '../../../_core/constants/move.dart';
@@ -27,9 +27,10 @@ class JoinPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedDate = ref.watch(selectedDateProvider);
+    final selectedDate = ref.watch(selectedDateProvider); // 날짜 상태 관리
+    final checkedBox = ref.watch(CheckedBoxProvider);
 
-    void _showPrivacyPolicyDialog() {
+    void _showPrivacyPolicyDialog(context) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -281,8 +282,9 @@ class JoinPage extends ConsumerWidget {
                     Row(
                       children: [
                         Checkbox(
-                          value: _privacyPolicyAgreed,
+                          value: ref.watch(CheckedBoxProvider),
                           onChanged: (bool? value) {
+                            ref.read(CheckedBoxProvider.notifier).state = value!;
                             // setState(() {
                             //   _privacyPolicyAgreed = value!;
                             // });
@@ -291,7 +293,7 @@ class JoinPage extends ConsumerWidget {
                           checkColor: Colors.white, // 체크 마크 색상을 흰색으로 설정
                         ),
                         GestureDetector(
-                          onTap: _showPrivacyPolicyDialog,
+                          onTap: ()=>_showPrivacyPolicyDialog(context),
                           child: const Text(
                             '개인정보 처리 방침',
                             style: TextStyle(

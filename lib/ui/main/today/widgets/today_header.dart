@@ -31,7 +31,7 @@ class TodayHeader extends StatelessWidget {
                   weightData: weightData,
                 ),
               ),
-              SizedBox(height: gap_l),
+              SizedBox(height: gap_m),
               TodayBodydata(),
             ],
           ),

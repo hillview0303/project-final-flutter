@@ -16,9 +16,9 @@ class TodayBodydata extends StatelessWidget {
         children: [
           CompositionBox2(
             name: "체지방",
-            titleColor: Colors.red,
-            valueColor: Colors.red,
-            borderColor: Colors.red,
+            titleColor: Colors.blueGrey,
+            valueColor: Colors.lightGreenAccent,
+            borderColor: Colors.lightGreenAccent,
             value: "14.2",
           ),
           SizedBox(
@@ -26,9 +26,9 @@ class TodayBodydata extends StatelessWidget {
           ),
           CompositionBox2(
             name: "골격근",
-            titleColor: Colors.blue,
-            valueColor: Colors.blue,
-            borderColor: Colors.blue,
+            titleColor: Colors.blueGrey,
+            valueColor: Colors.tealAccent,
+            borderColor: Colors.tealAccent,
             value: "35.6",
           ),
           SizedBox(
@@ -36,9 +36,9 @@ class TodayBodydata extends StatelessWidget {
           ),
           CompositionBox2(
             name: "체중",
-            titleColor: Colors.green,
-            valueColor: Colors.green,
-            borderColor: Colors.green,
+            titleColor: Colors.blueGrey,
+            valueColor: Colors.deepPurpleAccent,
+            borderColor: Colors.deepPurpleAccent,
             value: "76.7",
           ),
         ],

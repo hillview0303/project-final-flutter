@@ -22,7 +22,7 @@ class TodayChangesDetail extends StatelessWidget {
             );
           },
           child: Text(
-            "자세히 보기",
+            "직접 입력",
             style: subtitle2(),
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
+import 'package:project_app/data/store/date_store.dart';
 import 'package:project_app/data/store/session_store.dart';
 
 import '../../../_core/constants/move.dart';
@@ -26,6 +27,8 @@ class JoinPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedDate = ref.watch(selectedDateProvider);
+
     void _showPrivacyPolicyDialog() {
       showDialog(
         context: context,
@@ -192,7 +195,9 @@ class JoinPage extends ConsumerWidget {
                             });
                         if (picked != null && picked != selectedDate) {
                           // 여기에 생년월일 선택시 로직 작성
+                          ref.read(selectedDateProvider.notifier).state =picked;
                           _birth = picked.toIso8601String();
+
 //                           setState(() {
 //                             selectedDate = picked;
 //                           });

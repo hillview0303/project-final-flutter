@@ -321,8 +321,10 @@ class JoinPage extends ConsumerWidget {
                               gender: _gender,
                               height: _height);
 
+                          print("!111111111111");
                           SessionStore sessionstore = ref.read(sessionProvider);
 
+                          print("22222222222");
                           sessionstore.join(joinrequestDTO);
 
                           // Navigator.pushNamed(context, Move.loginPage);

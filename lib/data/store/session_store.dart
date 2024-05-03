@@ -35,6 +35,7 @@ class SessionStore extends SessionUser {
   }
 
   Future<void> join(JoinRequestDTO joinRequestDTO) async {
+    print("333333333333333");
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinRequestDTO);
 
     if (responseDTO.status == 200) {
@@ -46,7 +47,6 @@ class SessionStore extends SessionUser {
   }
 
   Future<void> login(LoginRequestDTO requestDTO) async {
-    final mContext = navigatorKey.currentContext;
 
     var (responseDTO, accessToken) =
         await UserRepository().fetchLogin(requestDTO);
@@ -65,10 +65,9 @@ class SessionStore extends SessionUser {
           .showSnackBar(SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}")));
     }
   }
-
 }
 
 // 창고 관리자
-final sessionProvider = StateProvider<SessionStore>((ref) {
+final sessionProvider = StateProvider.autoDispose<SessionStore>((ref) {
   return SessionStore(ref);
 });

@@ -5,6 +5,7 @@ import 'package:project_app/data/models/user.dart';
 
 class UserRepository {
   Future<ResponseDTO> fetchJoin(JoinRequestDTO joinRequestDTO) async {
+    print("555555555555");
     final response = await dio.post("/join", data: joinRequestDTO.toJson());
     print("joinRequestDTO : ${joinRequestDTO.birth}");
 

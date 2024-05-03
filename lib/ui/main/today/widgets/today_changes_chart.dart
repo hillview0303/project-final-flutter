@@ -26,8 +26,7 @@ class TodayChangesChart extends StatelessWidget {
           borderData: FlBorderData(
             show: true,
             border: Border(
-              bottom: BorderSide(
-                  color: TColor.secondaryColor1.withOpacity(0.2), width: 4),
+              bottom: BorderSide(color: TColor.secondaryColor1.withOpacity(0.2), width: 4),
               left: BorderSide(color: TColor.secondaryColor1.withOpacity(0.2), width: 4),
               right: const BorderSide(color: Colors.transparent),
               top: const BorderSide(color: Colors.transparent),
@@ -78,9 +77,8 @@ class TodayChangesChart extends StatelessWidget {
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: 40,
-                interval: 1,  // 1의 간격 설정
+                interval: 1,
                 getTitlesWidget: (value, meta) {
-                  // 0부터 시작하여 최대 값까지 1씩 증가
                   return Text('Day ${value.toInt() + 1}',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 11));

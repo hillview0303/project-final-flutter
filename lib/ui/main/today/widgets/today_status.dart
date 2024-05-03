@@ -29,7 +29,7 @@ class TodayStatus extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(13.0),
         child: Column(
           children: [
             Expanded(
@@ -46,10 +46,10 @@ class TodayStatus extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.center,
-              height: 130,
+              height: 100,
               child: Text(
                 "${goalWeight}kg",
-                style: h5(),
+                style: h6(),
               ),
             ),
             Expanded(

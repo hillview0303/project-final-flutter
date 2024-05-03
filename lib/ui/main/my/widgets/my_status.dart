@@ -33,20 +33,20 @@ class MyStatus extends StatelessWidget {
               children: [
                 CompositionBox2(
                   name: "체지방",
-                  titleColor: Colors.grey[500],
-                  borderColor: Colors.white,
+                  titleColor: kAccentColor2,
+                  borderColor: Colors.white, onTap: () {  },
                 ),
                 SizedBox(width: gap_s),
                 CompositionBox2(
                   name: "골격근",
-                  titleColor: Colors.grey[500],
-                  borderColor: Colors.white,
+                  titleColor: kAccentColor2,
+                  borderColor: Colors.white, onTap: () {  },
                 ),
                 SizedBox(width: gap_s),
                 CompositionBox2(
                   name: "체중",
-                  titleColor: Colors.grey[500],
-                  borderColor: Colors.white,
+                  titleColor: kAccentColor2,
+                  borderColor: Colors.white, onTap: () {  },
                 ),
               ],
             ),

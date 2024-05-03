@@ -195,7 +195,8 @@ class JoinPage extends ConsumerWidget {
                             });
                         if (picked != null && picked != selectedDate) {
                           // 여기에 생년월일 선택시 로직 작성
-                          ref.read(selectedDateProvider.notifier).state =picked;
+                          ref.read(selectedDateProvider.notifier).state =
+                              picked;
                           _birth = picked.toIso8601String();
 
 //                           setState(() {
@@ -312,20 +313,23 @@ class JoinPage extends ConsumerWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           print("_birth : ${_birth}");
-                          JoinRequestDTO joinrequestDTO = JoinRequestDTO(
-                              username: _username.text.trim(),
-                              phone: _phone.text.trim(),
-                              password: _password.text.trim(),
-                              name: _name.text.trim(),
-                              birth: _birth,
-                              gender: _gender,
-                              height: _height);
 
-                          print("!111111111111");
-                          SessionStore sessionstore = ref.read(sessionProvider);
-
-                          print("22222222222");
-                          sessionstore.join(joinrequestDTO);
+                          if (_password.text == _checkPassword.text) {
+                            JoinRequestDTO joinrequestDTO = JoinRequestDTO(
+                                username: _username.text.trim(),
+                                phone: _phone.text.trim(),
+                                password: _password.text.trim(),
+                                name: _name.text.trim(),
+                                birth: _birth,
+                                gender: _gender,
+                                height: _height);
+                            SessionStore sessionstore =
+                                ref.read(sessionProvider);
+                            sessionstore.join(joinrequestDTO);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("비밀번호가 일치하지 않습니다.")));
+                          }
 
                           // Navigator.pushNamed(context, Move.loginPage);
                         },

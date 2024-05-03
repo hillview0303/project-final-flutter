@@ -35,11 +35,13 @@ class SessionStore extends SessionUser {
   }
 
   Future<void> join(JoinRequestDTO joinRequestDTO) async {
-    print("333333333333333");
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinRequestDTO);
 
     if (responseDTO.status == 200) {
       Navigator.pushNamed(mContext!, Move.loginPage);
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("회원가입이 완료되었습니다.")));
+
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("회원가입 실패 : ${responseDTO.msg}")));

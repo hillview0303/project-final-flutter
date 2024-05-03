@@ -28,7 +28,7 @@ class CompletedChallenge extends StatelessWidget {
           ),
           line1,
           Container(
-            height: 150,
+            height: 180,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: challenges.length,

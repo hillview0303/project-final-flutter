@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/constants.dart';
+
 
 class TodayChangesChart extends StatelessWidget {
   const TodayChangesChart({
@@ -21,66 +23,84 @@ class TodayChangesChart extends StatelessWidget {
       child: LineChart(
         LineChartData(
           backgroundColor: Colors.white,
-          gridData: FlGridData(show: false),
-          // 그래프 설정
+          gridData: const FlGridData(show: false),
+          borderData: FlBorderData(
+            show: true,
+            border: Border(
+              bottom: BorderSide(color: TColor.secondaryColor1.withOpacity(0.2), width: 4),
+              left: const BorderSide(color: Colors.transparent),
+              right: const BorderSide(color: Colors.transparent),
+              top: const BorderSide(color: Colors.transparent),
+            ),
+          ),
           lineBarsData: [
             LineChartBarData(
               spots: fatData,
               isCurved: true,
-              color: Colors.red,
-              barWidth: 4,
+              color: Colors.redAccent,
+              barWidth: 8,
               isStrokeCapRound: true,
-              belowBarData: BarAreaData(show: false),
+              belowBarData: BarAreaData(
+                show: false,
+                color: Colors.amberAccent.withOpacity(0),
+              ),
             ),
             LineChartBarData(
               spots: muscleData,
               isCurved: true,
-              color: Colors.blue,
-              barWidth: 4,
+              color: Colors.cyanAccent,
+              barWidth: 8,
               isStrokeCapRound: true,
               belowBarData: BarAreaData(show: false),
             ),
             LineChartBarData(
               spots: weightData,
               isCurved: true,
-              color: Colors.green,
-              barWidth: 4,
+              color: Colors.deepPurpleAccent,
+              barWidth: 8,
               isStrokeCapRound: true,
               belowBarData: BarAreaData(show: false),
             ),
           ],
           titlesData: FlTitlesData(
-            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             leftTitles: AxisTitles(
-                sideTitles: SideTitles(showTitles: true, reservedSize: 28)),
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 40,
+                getTitlesWidget: (value, meta) {
+                  return Text('${value.toInt()}kg', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14));
+                },
+              ),
+            ),
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 30,
-                // getTitlesWidget: (values, meta) {
-                //   switch (values.toInt()) {
-                //     case 0:
-                //       return Text("day 1");
-                //     case 1:
-                //       return Text("day 2");
-                //     case 2:
-                //       return Text("day 3");
-                //     case 3:
-                //       return Text("day 4");
-                //     case 4:
-                //       return Text("day 5");
-                //   }
-                //   return Text("");
-                // },
+                reservedSize: 32,
+                getTitlesWidget: (value, meta) {
+                  switch (value.toInt()) {
+                    case 0:
+                      return const Text('Day 1');
+                    case 1:
+                      return const Text('Day 2');
+                    case 2:
+                      return const Text('Day 3');
+                    case 3:
+                      return const Text('Day 4');
+                    case 4:
+                      return const Text('Day 5');
+                    default:
+                      return const Text('');
+                  }
+                },
               ),
             ),
+            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           ),
-          borderData: FlBorderData(show: true),
           minX: 0,
           maxX: 4,
-          maxY: 200,
           minY: 0,
+          maxY: 150,
         ),
       ),
     );

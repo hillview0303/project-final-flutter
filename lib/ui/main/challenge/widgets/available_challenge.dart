@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 
 import '../../../../_core/constants/line.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
-import '../../../../data/models/challenges/challenge_detail.dart';
 import '../../../_common/components/challenge_container.dart';
-
 
 class AvailableChallenge extends StatelessWidget {
   final String title;
-  final List<ChallengeDetail> challenges;
+  final List<ChallengeListDTO> challenges;
 
   const AvailableChallenge(
       {Key? key, required this.title, required this.challenges})

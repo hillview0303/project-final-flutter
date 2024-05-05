@@ -53,15 +53,13 @@ class SessionStore extends SessionUser {
     var (responseDTO, accessToken) =
         await UserRepository().fetchLogin(requestDTO);
 
-    print("requestDTO : ${responseDTO.body}");
-
     if (responseDTO.status == 200) {
       await secureStorage.write(key: "accessToken", value: accessToken);
       this.user = responseDTO.body;
       this.accessToken = accessToken;
       this.isLogin = true;
 
-      // Navigator.pushNamed(mContext!, Move.mainPage);
+      Navigator.pushNamed(mContext!, Move.mainPage);
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}")));

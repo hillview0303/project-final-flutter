@@ -7,12 +7,9 @@ class UserRepository {
   Future<ResponseDTO> fetchJoin(JoinRequestDTO joinRequestDTO) async {
     print("555555555555");
     final response = await dio.post("/join", data: joinRequestDTO.toJson());
-    print("joinRequestDTO : ${joinRequestDTO.birth}");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    print("responseDTO : ${responseDTO.status}");
-    print("errorMessage : ${responseDTO.msg}");
     return responseDTO;
   }
 
@@ -20,7 +17,6 @@ class UserRepository {
     final response = await dio.post("/login", data: loginReqDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
     if (responseDTO.status == 200) {
       responseDTO.body = User.fromJson(responseDTO.body);
       final accessToken = response.headers["Authorization"]!.first;

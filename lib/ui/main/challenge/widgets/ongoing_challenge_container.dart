@@ -1,23 +1,25 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'dart:math' as math;
 
-import '../../../../../data/models/challenges/ongoing_challenge_detail.dart';
+import 'package:flutter/material.dart';
+import 'package:project_app/data/dtos/challenge/challenge_response.dart';
+
 import '../pages/ongoing_challenge_detail_page.dart';
 
-
 class HexagonClipper extends CustomClipper<Path> {
-  final double radius;  // 반지름을 직접 제어
+  final double radius; // 반지름을 직접 제어
 
   HexagonClipper({this.radius = 50.0});
 
   @override
   Path getClip(Size size) {
     final path = Path();
-    double angle = math.pi / 3;  // 육각형 한 꼭지점의 각도
+    double angle = math.pi / 3; // 육각형 한 꼭지점의 각도
     Offset center = Offset(size.width / 2, size.height / 2);
 
     // 육각형의 첫 번째 꼭지점을 시작점으로 설정
-    Offset startPoint = Offset(center.dx + radius * math.cos(0), center.dy + radius * math.sin(0));
+    Offset startPoint = Offset(
+        center.dx + radius * math.cos(0), center.dy + radius * math.sin(0));
     path.moveTo(startPoint.dx, startPoint.dy);
 
     // 6개의 꼭지점 생성
@@ -38,7 +40,7 @@ class HexagonClipper extends CustomClipper<Path> {
 }
 
 class OngoingChallengeContainer extends StatelessWidget {
-  final OngoingChallengeDetail challenge;
+  final AttendChallenge challenge;
 
   const OngoingChallengeContainer({Key? key, required this.challenge})
       : super(key: key);
@@ -53,7 +55,8 @@ class OngoingChallengeContainer extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OngoingChallengeDetailPage(challenge: challenge),
+            builder: (context) =>
+                OngoingChallengeDetailPage(challenge: challenge),
           ),
         );
       },
@@ -75,7 +78,8 @@ class OngoingChallengeContainer extends StatelessWidget {
               ),
               child: ClipPath(
                 clipper: HexagonClipper(radius: 40),
-                child: Image.asset(challenge.badgeImg, fit: BoxFit.cover),
+                child: Image.memory(base64Decode(challenge.backImg),
+                    fit: BoxFit.cover),
               ),
             ),
             SizedBox(width: 16),
@@ -83,11 +87,16 @@ class OngoingChallengeContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(challenge.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Text('${challenge.subtitle} ', style: TextStyle(color: Colors.grey)),
+                  Text(challenge.challengeName,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text('${challenge.subtitle} ',
+                      style: TextStyle(color: Colors.grey)),
                   if (challenge.closingTime != null)
-                    Text('마감까지 $daysLeft일 남음', style: TextStyle(color: Colors.red)),
-                  Text('이번 도전으로 ${challenge.coin} 코인 획득가능', style: TextStyle(color: Colors.green)),
+                    Text('마감까지 $daysLeft일 남음',
+                        style: TextStyle(color: Colors.red)),
+                  Text('이번 도전으로 ${challenge.coin} 코인 획득가능',
+                      style: TextStyle(color: Colors.green)),
                 ],
               ),
             ),

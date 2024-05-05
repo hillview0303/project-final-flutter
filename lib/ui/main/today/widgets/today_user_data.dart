@@ -13,22 +13,30 @@ class TodayUserData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kAccentColor1,
+      // color: kAccentColor1,
       width: double.infinity,
       height: 350,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/green.png'),
+          fit: BoxFit.cover,
+        ),
+        color: kAccentColor2,  // 이미지 로드 실패 시 대체 색상
+      ),
       child: Padding(
         padding: EdgeInsets.all(gap_m),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: gap_s),
             Text(
-              "류재성님",
-              style: h5(mColor: Colors.white),
+              "류재성님,",
+              style: h5(mColor: Colors.blueGrey),
             ),
             const SizedBox(height: gap_s),
             Text(
-              "오늘의 미션을 수행해보세요!",
-              style: subtitle1(mColor: Colors.white),
+              "반갑습니다!",
+              style: subtitle1(mColor: Colors.blueGrey),
             ),
             SizedBox(height: gap_m),
             Row(
@@ -36,6 +44,8 @@ class TodayUserData extends StatelessWidget {
                 Expanded(child: TodayStatus(name: "체지방", weight: 14.2)),
                 SizedBox(width: gap_s),
                 Expanded(child: TodayStatus(name: "골격근", weight: 35.6)),
+                SizedBox(width: gap_s),
+                Expanded(child: TodayStatus(name: "체중", weight: 70.5)),
               ],
             ),
           ],

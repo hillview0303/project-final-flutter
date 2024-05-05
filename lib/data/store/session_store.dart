@@ -12,19 +12,36 @@ import '../models/user.dart';
 class SessionUser {
   User? user;
   String? accessToken;
-  bool? isLogin = false;
+  bool isLogin = false;
 
   SessionUser();
 }
 
+
 // 창고
 class SessionStore extends SessionUser {
+  Ref ref;
+  final mContext = navigatorKey.currentContext;
+
+  SessionStore(this.ref);
+
+
+  void loginCheck(String path) {
+    if (isLogin) {
+      Navigator.pushNamed(mContext!, path);
+    } else {
+      Navigator.pushNamed(mContext!, Move.loginPage);
+    }
+  }
+
   Future<void> join(JoinRequestDTO joinRequestDTO) async {
-    final mContext = navigatorKey.currentContext;
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinRequestDTO);
 
     if (responseDTO.status == 200) {
       Navigator.pushNamed(mContext!, Move.loginPage);
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("회원가입이 완료되었습니다.")));
+
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("회원가입 실패 : ${responseDTO.msg}")));
@@ -32,7 +49,6 @@ class SessionStore extends SessionUser {
   }
 
   Future<void> login(LoginRequestDTO requestDTO) async {
-    final mContext = navigatorKey.currentContext;
 
     var (responseDTO, accessToken) =
         await UserRepository().fetchLogin(requestDTO);
@@ -49,11 +65,9 @@ class SessionStore extends SessionUser {
           .showSnackBar(SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}")));
     }
   }
-
-  SessionStore();
 }
 
 // 창고 관리자
-final sessionProvider = StateProvider<SessionStore>((ref) {
-  return SessionStore();
+final sessionProvider = StateProvider.autoDispose<SessionStore>((ref) {
+  return SessionStore(ref);
 });

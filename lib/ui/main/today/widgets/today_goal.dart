@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/constants.dart';
 
 import '../../../../../_core/constants/style.dart';
 import 'today_goal_insert.dart';
@@ -16,7 +17,11 @@ class TodayGoal extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("목표 설정"),
+              title: Text("목표 설정", style: TextStyle(
+                fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                color: TColor.grey,
+              ),),
               content: SingleChildScrollView(
                 child: Container(
                   height: 130,

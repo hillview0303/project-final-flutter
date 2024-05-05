@@ -88,7 +88,7 @@ class LoginPage extends ConsumerWidget {
                                 onChanged: null,
                               ),
                               const Text(
-                                '기억하기',
+                                '자동로그인',
                                 style: TextStyle(color: Colors.black45),
                               ),
                             ],

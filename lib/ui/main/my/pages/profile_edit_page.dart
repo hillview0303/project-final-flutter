@@ -6,6 +6,7 @@ import '../widgets/edit_image.dart';
 import '../widgets/edit_name.dart';
 import '../widgets/edit_password.dart';
 import '../widgets/edit_phone.dart';
+import '../widgets/edit_profile_form.dart';
 
 class ProfileEditPage extends StatelessWidget {
   const ProfileEditPage({super.key});
@@ -23,12 +24,7 @@ class ProfileEditPage extends StatelessWidget {
       body: ListView(
         children: [
           EditImage(),
-          EditName(),
-          EditPassword(),
-          EditPhone(),
-          EditHeighte(),
-          const SizedBox(height: 25.0),
-          EditButton(),
+          EditProfileForm(),
         ],
       ),
     );

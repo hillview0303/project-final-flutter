@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/ui/main/today/widgets/today_changes_chart.dart';
-import 'package:project_app/ui/main/today/widgets/today_target.dart';
+import 'package:project_app/ui/main/today/widgets/my_changes.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';

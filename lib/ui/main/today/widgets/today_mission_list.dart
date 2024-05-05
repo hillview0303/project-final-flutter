@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/_core/constants/constants.dart';
+
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
+import '../../../../_core/constants/constants.dart';
 import '../../activity/pages/change_weight_detail_page.dart';
 import '../../activity/pages/diet_management_detail_page.dart';
 import '../../activity/pages/drink_water_detail_page.dart';
@@ -17,25 +18,23 @@ class TodayMissionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: TColor.secondaryColor4),
+      decoration: BoxDecoration(color: TColor.white),
       child: Padding(
-        padding: const EdgeInsets.all(gap_sm),
+        padding: const EdgeInsets.all(gap_m),
         child: Column(
           children: [
             SizedBox(height: gap_sm),
             Row(
               children: [
-                Text("오늘의 미션이에요", style: subtitle1()),
-                Spacer(),
-                Text("나의 활동", style: subtitle2())
+                Text("오늘의 미션", style: subtitle1()),
               ],
             ),
-            SizedBox(height: gap_s),
+            SizedBox(height: gap_l),
             TodayMission(
               title: "0 걸음 ",
               title2: "걸었어요",
               subtitle: "목표 10,000 걸음",
-              icons: Icons.nordic_walking,
+              icons: Icons.directions_walk,
               page: StepCountDetailPage(),
             ),
             SizedBox(height: gap_s),
@@ -43,7 +42,7 @@ class TodayMissionList extends StatelessWidget {
               title: "오늘 0잔 ",
               title2: "마셨어요",
               subtitle: "목표 8잔",
-              icons: Icons.water_drop,
+              icons: Icons.local_drink,
               page: DrinkWaterDetailPage(),
             ),
             SizedBox(height: gap_s),
@@ -51,7 +50,7 @@ class TodayMissionList extends StatelessWidget {
               title: "식단 0개 ",
               title2: "기록했어요",
               subtitle: "목표 3개",
-              icons: Icons.food_bank_outlined,
+              icons: Icons.restaurant,
               page: DietManagementDetailPage(),
             ),
           ],

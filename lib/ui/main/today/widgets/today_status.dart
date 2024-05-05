@@ -15,7 +15,7 @@ class TodayStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 170,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(gap_m),
         color: Colors.white,

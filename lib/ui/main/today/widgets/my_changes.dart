@@ -3,17 +3,21 @@ import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
 import '../../activity/pages/change_weight_detail_page.dart';
 
-class TodayTarget extends StatelessWidget {
-  const TodayTarget({Key? key}) : super(key: key);
+class MyChanges extends StatelessWidget {
+  const MyChanges({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 5),
+      padding: const EdgeInsets.all(gap_m),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/1.png'),
+          image: AssetImage('assets/images/3.png'),
           fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.5),
+            BlendMode.dstATop,
+          ),
         ),
         borderRadius: BorderRadius.circular(15),
       ),
@@ -29,10 +33,10 @@ class TodayTarget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Today Target",
+                  "나의 변화 알아보기",
                   style: TextStyle(
-                    color: TColor.white,
-                    fontSize: 14,
+                    color: TColor.black,
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -48,7 +52,7 @@ class TodayTarget extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kAccentColor2,
-                    foregroundColor: Colors.white,
+                    foregroundColor: TColor.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),

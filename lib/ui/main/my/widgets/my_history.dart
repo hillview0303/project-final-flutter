@@ -17,6 +17,7 @@ class MyHistory extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
             ),
+            // todo: 마이페이지 통신 구현 때 주석 해제
             // child: CompletedChallenge(
             //   title: "정복한 챌린지 보기",
             //   challenges: pastChallenges,

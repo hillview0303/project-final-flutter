@@ -4,6 +4,7 @@ import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/store/session_store.dart';
 
 import '../../../../_core/constants/theme.dart';
+import '../../../_core/constants/move.dart';
 import '../../_common/components/custom_scaffold.dart';
 import '../join_page/join_page.dart';
 
@@ -125,7 +126,7 @@ class LoginPage extends ConsumerWidget {
                               // store.login(loginRequestDTO);
 
                               //todo : 삭제 후 스토어 주석 해제
-                              // Navigator.pushNamed(context, Move.mainPage);
+                              Navigator.pushNamed(context, Move.mainPage);
                             }
                           },
                           style: ElevatedButton.styleFrom(

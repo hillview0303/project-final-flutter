@@ -31,7 +31,7 @@ class TodayUserData extends StatelessWidget {
             SizedBox(height: gap_s),
             Text(
               "류재성님,",
-              style: h5(mColor: Colors.blueGrey),
+              style: h4(mColor: kAccentColor2),
             ),
             const SizedBox(height: gap_s),
             Text(

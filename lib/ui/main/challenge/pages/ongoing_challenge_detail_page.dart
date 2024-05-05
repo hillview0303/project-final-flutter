@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 
-import '../../../../data/models/challenges/ongoing_challenge_detail.dart';
 import '../widgets/ongoing_challenge_img.dart';
 import '../widgets/ongoing_challenge_percent.dart';
+
 class OngoingChallengeDetailPage extends StatelessWidget {
-  final OngoingChallengeDetail challenge;
+  final AttendChallenge challenge;
 
   const OngoingChallengeDetailPage({Key? key, required this.challenge})
       : super(key: key);
@@ -13,7 +14,7 @@ class OngoingChallengeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(challenge.name),
+        title: Text(challenge.challengeName),
       ),
       body: SingleChildScrollView(
         // Ensure the content is scrollable
@@ -40,5 +41,3 @@ class OngoingChallengeDetailPage extends StatelessWidget {
     );
   }
 }
-
-

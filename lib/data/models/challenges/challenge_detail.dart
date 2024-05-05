@@ -13,6 +13,14 @@ class ChallengeDetail {
 
   final ChallengeStatus status;
 
+  // final String name;
+  // final String badgeImg;
+  // final String subtitle;
+  // final int coin;
+  // final DateTime? closingTime;
+  // final DateTime? createdAt;
+  // final ChallengeStatus status;
+  //
   ChallengeDetail({
     required this.name,
     required this.backgroundImg,
@@ -25,6 +33,22 @@ class ChallengeDetail {
     this.createdAt,
     this.status = ChallengeStatus.pending, // 기본값은 pending
   });
+
+  factory ChallengeDetail.fromJson(Map<String, dynamic> json) {
+    return ChallengeDetail(
+      name: json["name"],
+      backgroundImg: json["backgroundImg"],
+      badgeImg: json["badgeImg"],
+      subtitle: json["subtitle"],
+      content: json["content"],
+      distance: json["distance"],
+      coin: int.parse(json["coin"]),
+      createdAt: DateTime.parse(json["createdAt"]),
+      walking: int.parse(json["walking"]),
+      status: json["status"],
+    );
+  }
+//
 }
 
 final List<ChallengeDetail> upcomingChallenges = [

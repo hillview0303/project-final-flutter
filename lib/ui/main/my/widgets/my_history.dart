@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
-import '../../../../../data/models/challenges/challenge_detail.dart';
-import '../../challenge/widgets/completed_challenge.dart';
 
 class MyHistory extends StatelessWidget {
   const MyHistory({
@@ -19,10 +17,10 @@ class MyHistory extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
             ),
-            child: CompletedChallenge(
-              title: "정복한 챌린지 보기",
-              challenges: pastChallenges,
-            ),
+            // child: CompletedChallenge(
+            //   title: "정복한 챌린지 보기",
+            //   challenges: pastChallenges,
+            // ),
           ),
           SizedBox(height: gap_s),
           Padding(

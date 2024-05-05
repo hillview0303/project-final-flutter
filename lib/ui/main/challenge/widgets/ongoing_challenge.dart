@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 
 import '../../../../../_core/constants/constants.dart';
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
-import '../../../../../data/models/challenges/ongoing_challenge_detail.dart';
 import 'ongoing_challenge_container.dart';
 
 class OngoingChallenge extends StatelessWidget {
   final String title;
-  final List<OngoingChallengeDetail> challenges;
+  final AttendChallenge challenge;
 
   const OngoingChallenge(
-      {Key? key, required this.title, required this.challenges})
+      {Key? key, required this.title, required this.challenge})
       : super(key: key);
 
   @override
@@ -27,12 +27,7 @@ class OngoingChallenge extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(title, style: h6(mColor: Colors.white)),
           ),
-          Column(
-            children: challenges
-                .map((challenge) =>
-                    OngoingChallengeContainer(challenge: challenge))
-                .toList(),
-          ),
+          OngoingChallengeContainer(challenge: challenge),
         ],
       ),
     );

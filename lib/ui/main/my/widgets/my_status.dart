@@ -13,21 +13,12 @@ class MyStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kAccentColor1,
+      color: kAccentColor2,
       width: double.infinity,
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(gap_sm),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              child: Text("현재 상태",
-                  style: subtitle1(
-                      mColor: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(gap_sm),
+            padding: const EdgeInsets.only(bottom: gap_sm, left: gap_sm, right: gap_sm),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

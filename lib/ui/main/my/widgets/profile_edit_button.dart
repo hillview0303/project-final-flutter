@@ -8,7 +8,7 @@ class ProfileEditButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(1),
+      borderRadius: BorderRadius.circular(gap_s),
       onTap: () {
         // 프로필 수정 기능 구현
         Navigator.push(
@@ -17,12 +17,13 @@ class ProfileEditButton extends StatelessWidget {
         );
       },
       child: Container(
-        padding: EdgeInsets.only(bottom: 1, top: 1, left: gap_s, right: gap_s),
+        padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: 1),
         decoration: BoxDecoration(
+          color: Colors.grey[200],
           border: Border.all(color: Colors.grey[300]!),
-          borderRadius: BorderRadius.all(Radius.circular(gap_s)),
+          borderRadius: BorderRadius.circular(gap_s),
         ),
-        child: Text("프로필 수정", style: subtitle2()),
+        child: Text("편집하기", style: subtitle2()),
       ),
     );
   }

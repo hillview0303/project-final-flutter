@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+
+const double gap_xxxl = 70;
 const double gap_xxl = 40;
 const double gap_xl = 35;
 const double gap_l = 30;

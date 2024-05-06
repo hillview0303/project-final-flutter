@@ -12,6 +12,6 @@ final line2 = Container(
   width: double.infinity,
   height: 5,
   decoration: BoxDecoration(
-    color: Colors.grey,
+    color: Colors.grey[400],
   ),
 );

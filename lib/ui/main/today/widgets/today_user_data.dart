@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 import 'package:project_app/ui/main/today/widgets/today_status.dart';
 
 import '../../../../_core/constants/constants.dart';
@@ -6,12 +7,13 @@ import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
 
 class TodayUserData extends StatelessWidget {
-  const TodayUserData({
-    super.key,
-  });
+  TodayPageModel model;
+
+  TodayUserData(this.model);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       // color: kAccentColor1,
       width: double.infinity,
@@ -21,7 +23,7 @@ class TodayUserData extends StatelessWidget {
           image: AssetImage('assets/images/green.png'),
           fit: BoxFit.cover,
         ),
-        color: kAccentColor2,  // 이미지 로드 실패 시 대체 색상
+        color: kAccentColor2, // 이미지 로드 실패 시 대체 색상
       ),
       child: Padding(
         padding: EdgeInsets.all(gap_m),
@@ -30,7 +32,7 @@ class TodayUserData extends StatelessWidget {
           children: [
             SizedBox(height: gap_s),
             Text(
-              "류재성님,",
+              "${model.mainDTO.name}님",
               style: h4(mColor: kAccentColor2),
             ),
             const SizedBox(height: gap_s),
@@ -41,11 +43,11 @@ class TodayUserData extends StatelessWidget {
             SizedBox(height: gap_m),
             Row(
               children: [
-                Expanded(child: TodayStatus(name: "체지방", weight: 14.2)),
+                Expanded(child: TodayStatus(name: "체지방", weight: model.mainDTO.fat)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "골격근", weight: 35.6)),
+                Expanded(child: TodayStatus(name: "골격근", weight: model.mainDTO.muscle)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "체중", weight: 70.5)),
+                Expanded(child: TodayStatus(name: "체중", weight: model.mainDTO.weight)),
               ],
             ),
           ],

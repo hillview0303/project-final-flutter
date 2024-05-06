@@ -1,38 +1,39 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_app/ui/main/today/widgets/last_update.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/ui/main/today/widgets/today_bodydata.dart';
 import 'package:project_app/ui/main/today/widgets/today_changes_chart.dart';
 import 'package:project_app/ui/main/today/widgets/today_changes_detail.dart';
-import 'package:project_app/ui/main/today/widgets/my_changes.dart';
 import 'package:project_app/ui/main/today/widgets/today_user_data.dart';
-import '../../../../../_core/constants/size.dart';
+
+import '../../../../_core/constants/size.dart';
 import '../../../../data/models/chartDummy.dart';
+import '../viewmodel/visibility_state_viewmodel.dart';
+import '../viewmodel/today_page_viewmodel.dart';
+import 'last_update.dart';
+import 'my_changes.dart';
 
-class TodayHeader extends StatefulWidget {
-  const TodayHeader({super.key});
+class TodayHeader extends ConsumerWidget {
+  final visibilityState;
+  TodayPageModel? model;
 
-  @override
-  _TodayHeaderState createState() => _TodayHeaderState();
-}
-
-class _TodayHeaderState extends State<TodayHeader> {
-  bool fatVisible = true;
-  bool muscleVisible = true;
-  bool weightVisible = true;
-
-  void toggleVisibility(String type) {
-    setState(() {
-      if (type == 'fat') fatVisible = !fatVisible;
-      if (type == 'muscle') muscleVisible = !muscleVisible;
-      if (type == 'weight') weightVisible = !weightVisible;
-    });
-  }
+  TodayHeader(this.visibilityState, this.model);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // 상태 변경 함수
+    void toggleVisibility(String type) {
+      if (type == 'fat')
+        ref.read(visibilityProvider.notifier).toggleFatVisibility();
+      if (type == 'muscle')
+        ref.read(visibilityProvider.notifier).toggleMuscleVisibility();
+      if (type == 'weight')
+        ref.read(visibilityProvider.notifier).toggleWeightVisibility();
+    }
+
     return Column(
       children: [
-        TodayUserData(),
+        TodayUserData(model!),
         Padding(
           padding: const EdgeInsets.all(gap_m),
           child: Column(
@@ -42,17 +43,17 @@ class _TodayHeaderState extends State<TodayHeader> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: gap_l),
                 child: TodayChangesChart(
-                  fatData: fatVisible ? fatData : [],
-                  muscleData: muscleVisible ? muscleData : [],
-                  weightData: weightVisible ? weightData : [],
+                  fatData: visibilityState.fatVisible ? fatData : [],
+                  muscleData: visibilityState.muscleVisible ? muscleData : [],
+                  weightData: visibilityState.weightVisible ? weightData : [],
                 ),
               ),
               SizedBox(height: gap_m),
               TodayBodydata(
                 toggleVisibility: toggleVisibility,
-                fatVisible: fatVisible,
-                muscleVisible: muscleVisible,
-                weightVisible: weightVisible,
+                fatVisible: visibilityState.fatVisible,
+                muscleVisible: visibilityState.muscleVisible,
+                weightVisible: visibilityState.weightVisible,
               ),
               SizedBox(height: gap_s),
               LastUpdate(lastUpdated: '2024년 4월 29일'),

@@ -122,11 +122,12 @@ class LoginPage extends ConsumerWidget {
 
                               SessionStore store = ref.read(sessionProvider);
 
+                              // todo : 추후 삭제
                               store.login(new LoginRequestDTO("ssar", "1234"));
                               // store.login(loginRequestDTO);
 
                               //todo : 삭제 후 스토어 주석 해제
-                              Navigator.pushNamed(context, Move.mainPage);
+                              // Navigator.pushNamed(context, Move.mainPage);
                             }
                           },
                           style: ElevatedButton.styleFrom(

@@ -4,6 +4,7 @@ import '../../../../_core/constants/constants.dart';
 void showInputModal(BuildContext context) {
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true, // 키보드가 모달을 가리지 않도록 설정
     builder: (BuildContext context) {
       return Theme(
         data: Theme.of(context).copyWith(
@@ -22,7 +23,12 @@ void showInputModal(BuildContext context) {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom, // 키보드로 인한 여백 조정
+            left: 30,
+            right: 30,
+            top: 30,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -31,6 +37,7 @@ void showInputModal(BuildContext context) {
                   labelText: '체지방 (%)',
                 ),
                 keyboardType: TextInputType.number,
+                style: TextStyle(color: TColor.grey),
               ),
               SizedBox(height: 10),
               TextFormField(
@@ -38,6 +45,7 @@ void showInputModal(BuildContext context) {
                   labelText: '골격근 (%)',
                 ),
                 keyboardType: TextInputType.number,
+                style: TextStyle(color: TColor.grey),
               ),
               SizedBox(height: 10),
               TextFormField(
@@ -45,6 +53,7 @@ void showInputModal(BuildContext context) {
                   labelText: '체중 (kg)',
                 ),
                 keyboardType: TextInputType.number,
+                style: TextStyle(color: TColor.grey),
               ),
               SizedBox(height: 20),
               ElevatedButton(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 
+import '../../main/challenge/pages/challenge_detail_page.dart';
 import 'challenge_name.dart';
 import 'hexagon_clipper.dart';
 
@@ -20,10 +21,12 @@ class ChallengeContainer extends StatelessWidget {
     return InkWell(
       onTap: () {
         // todo : 디테일 viewmodel 구현 후 주석 해제
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => ChallengeDetailPage(challenge: challenge)),  // 수정된 부분
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  ChallengeDetailPage(challengeId: challenge.id)), // 수정된 부분
+        );
       },
       // todo : 챌린지 성공 여부 값(status)에 따라 다르게 화면 보여지기
       child: Container(

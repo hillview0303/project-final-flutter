@@ -73,3 +73,35 @@ class ChallengeListDTO {
     );
   }
 }
+
+class ChallengeDetailDTO {
+  int id;
+  String challengeName; // 챌린지명
+  String subTitle; // 부 제목
+  int walking; // 걸어야할 걸음수
+  String content; // 챌린지 내용
+  bool? state;
+  String backgroundImg;
+
+  ChallengeDetailDTO(
+      {required this.id,
+      required this.challengeName,
+      required this.subTitle,
+      required this.walking,
+      required this.content,
+      this.state,
+      required this.backgroundImg});
+
+  factory ChallengeDetailDTO.fromJson(Map<String, dynamic> json) {
+    return ChallengeDetailDTO(
+      id: json["id"],
+      challengeName: json["challengeName"],
+      subTitle: json["subTitle"],
+      walking: json["walking"],
+      content: json["content"],
+      state: json["state"] ?? null,
+      backgroundImg: json["backgroundImg"],
+    );
+  }
+// 챌린지 내용
+}

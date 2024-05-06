@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../../../../_core/constants/size.dart';
 import '../../../_common/components/composition_box2.dart';
+import '../viewmodel/today_page_viewmodel.dart';
 
 class TodayBodydata extends StatelessWidget {
   const TodayBodydata({
     super.key,
+    required this.model,
     required this.toggleVisibility,
     required this.fatVisible,
     required this.muscleVisible,
     required this.weightVisible,
   });
 
+  final TodayPageModel? model;
   final Function(String) toggleVisibility;
   final bool fatVisible;
   final bool muscleVisible;
@@ -28,7 +31,7 @@ class TodayBodydata extends StatelessWidget {
             titleColor: Colors.blueGrey,
             valueColor: fatVisible ? Colors.lightGreenAccent : Colors.grey,
             borderColor: fatVisible ? Colors.lightGreenAccent : Colors.grey,
-            value: "14.2",
+            value: "${model?.bodyData.last.fat}",
             onTap: () => toggleVisibility('fat'),
           ),
           SizedBox(width: gap_s),
@@ -37,7 +40,7 @@ class TodayBodydata extends StatelessWidget {
             titleColor: Colors.blueGrey,
             valueColor: muscleVisible ? Colors.tealAccent : Colors.grey,
             borderColor: muscleVisible ? Colors.tealAccent : Colors.grey,
-            value: "35.6",
+            value: "${model?.bodyData.last.muscle}",
             onTap: () => toggleVisibility('muscle'),
           ),
           SizedBox(width: gap_s),
@@ -46,7 +49,7 @@ class TodayBodydata extends StatelessWidget {
             titleColor: Colors.blueGrey,
             valueColor: weightVisible ? Colors.deepPurpleAccent : Colors.grey,
             borderColor: weightVisible ? Colors.deepPurpleAccent : Colors.grey,
-            value: "76.7",
+            value: "${model?.bodyData.last.weight}",
             onTap: () => toggleVisibility('weight'),
           ),
         ],

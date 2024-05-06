@@ -1,4 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:project_app/data/dtos/user/user_response.dart';
+
+
 
 const List<FlSpot> fatData = [
   FlSpot(0, 20),

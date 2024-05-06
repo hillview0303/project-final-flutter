@@ -12,4 +12,17 @@ class ChallengeRepository {
 
     return responseDTO;
   }
+
+  Future<ResponseDTO> getChallengeDetail(
+      int challengeId, String accessToken) async {
+    final response = await dio.get("/api/challenges/${challengeId}",
+        options: Options(headers: {"Authorization": "${accessToken}"}));
+
+    print("challengeId : ${challengeId}");
+    print("accessToken : ${accessToken}");
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    return responseDTO;
+  }
 }

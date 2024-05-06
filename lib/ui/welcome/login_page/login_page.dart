@@ -121,6 +121,7 @@ class LoginPage extends ConsumerWidget {
 
                               SessionStore store = ref.read(sessionProvider);
 
+                              // todo : 추후 삭제
                               store.login(new LoginRequestDTO("ssar", "1234"));
                               // store.login(loginRequestDTO);
 

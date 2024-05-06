@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:project_app/_core/constants/size.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'fullcalendar.dart';
@@ -98,6 +99,8 @@ class CalendarAgenda extends StatefulWidget implements PreferredSizeWidget {
 
 class CalendarAgendaState extends State<CalendarAgenda>
     with TickerProviderStateMixin {
+
+  DateTime? get selectedDate => _selectedDate;
   ItemScrollController _scrollController = new ItemScrollController();
 
   late Color backgroundColor;
@@ -166,38 +169,37 @@ class CalendarAgendaState extends State<CalendarAgenda>
               parent: AlwaysScrollableScrollPhysics(),
             ),
             itemCount: _dates.length,
-            itemBuilder: (context, index) {
-              DateTime date = _dates[index];
-              bool isSelected = _daySelectedIndex == index;
+          itemBuilder: (context, index) {
+            DateTime date = _dates[index];
+            bool isSelected = _daySelectedIndex == index;
 
-              return Container(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 5.0, horizontal: 5.0),
-                    child: GestureDetector(
-                      onTap: () => _goToActualDay(index),
-                      child: Container(
-                        height: 100.0,
-                        width: MediaQuery.of(context).size.width / 5 - 10,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: isSelected ? Colors.white : widget.dayBGColor,
-                          boxShadow: [
+            return Container(
+              child: Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: GestureDetector(
+                    onTap: () => _goToActualDay(index),
+                    child: Container(
+                      height: 100.0,
+                      width: MediaQuery.of(context).size.width / 6 - 9, // 너비 조정
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: isSelected ? Colors.white : widget.dayBGColor,
+                        boxShadow: [
                             isSelected
                                 ? BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    spreadRadius: 1,
-                                    blurRadius: 4,
-                                    offset: Offset(0, 1),
-                                  )
+                              color: Colors.black.withOpacity(isSelected ? 0.2 : 0.0),
+                              spreadRadius: 0,
+                              blurRadius: isSelected ? 4 : 0,
+                              offset: Offset(0, 1),
+                            )
                                 : BoxShadow(
-                                    color: Colors.grey.withOpacity(0.0),
-                                    spreadRadius: 5,
-                                    blurRadius: 20,
-                                    offset: Offset(0, 3),
-                                  )
+                              color: Colors.grey.withOpacity(0.0),
+                              spreadRadius: 5,
+                              blurRadius: 20,
+                              offset: Offset(0, 3),
+                            )
                           ],
                         ),
                         child: Stack(
@@ -209,37 +211,37 @@ class CalendarAgendaState extends State<CalendarAgenda>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 _eventDates.contains(
-                                        date.toString().split(" ").first)
+                                    date.toString().split(" ").first)
                                     ? isSelected
-                                        ? Icon(
-                                            Icons.bookmark,
-                                            size: 16,
-                                            color: isSelected
-                                                ? widget.selectedDateColor
-                                                : widget.dateColor!
-                                                    .withOpacity(0.5),
-                                          )
-                                        : Icon(
-                                            Icons.bookmark,
-                                            size: 8,
-                                            color: isSelected
-                                                ? widget.calendarEventColor
-                                                : widget.dateColor!
-                                                    .withOpacity(0.5),
-                                          )
+                                    ? Icon(
+                                  Icons.bookmark,
+                                  size: 16,
+                                  color: isSelected
+                                      ? widget.selectedDateColor
+                                      : widget.dateColor!
+                                      .withOpacity(0.5),
+                                )
+                                    : Icon(
+                                  Icons.bookmark,
+                                  size: 8,
+                                  color: isSelected
+                                      ? widget.calendarEventColor
+                                      : widget.dateColor!
+                                      .withOpacity(0.5),
+                                )
                                     : SizedBox(
-                                        height: 5.0,
-                                      ),
+                                  height: 5.0,
+                                ),
                                 SizedBox(
                                   height: 2.0,
                                 ),
                                 Text(
                                   widget.weekDay == WeekDay.long
                                       ? DateFormat.EEEE(
-                                              Locale(_locale).toString())
-                                          .format(date)
+                                      Locale(_locale).toString())
+                                      .format(date)
                                       : DateFormat.E(Locale(_locale).toString())
-                                          .format(date),
+                                      .format(date),
                                   style: TextStyle(
                                     fontSize: widget.dayNameFontSize,
                                     color: isSelected
@@ -271,13 +273,15 @@ class CalendarAgendaState extends State<CalendarAgenda>
                   ),
                 ),
               );
-            }),
+            },
+        ),
       );
     }
 
+    // 달력 위치 조정
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: widget.appbar ? 210 : 140.0,
+      height: widget.appbar ? 210 : 180.0,
       child: Stack(
         children: [
           Positioned(
@@ -289,7 +293,7 @@ class CalendarAgendaState extends State<CalendarAgenda>
             ),
           ),
           Positioned(
-            top: widget.appbar ? 50.0 : 0.0,
+            top: widget.appbar ? 50.0 : 20.0,
             child:  Container(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
@@ -313,6 +317,7 @@ class CalendarAgendaState extends State<CalendarAgenda>
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
+                                SizedBox(height: 50),
                               ],
                             ),
                           )
@@ -323,6 +328,7 @@ class CalendarAgendaState extends State<CalendarAgenda>
               ),
             
           ),
+          SizedBox(height: gap_l),
           Positioned(
             bottom: 0.0,
             child: dayList(),
@@ -366,55 +372,53 @@ class CalendarAgendaState extends State<CalendarAgenda>
             topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
       ),
       builder: (BuildContext context) {
-        double height;
-        DateTime? endDate = widget.lastDate;
+        double screenHeight = MediaQuery.of(context).size.height;
+        double modalHeight = screenHeight * 0.9;
+        double screenWidth = MediaQuery.of(context).size.width;
 
-        if (widget.firstDate.year == endDate.year &&
-            widget.firstDate.month == endDate.month) {
-          height = ((MediaQuery.of(context).size.width - 2 * padding) / 7) * 5 +
-              150.0;
-        } else {
-          height = (MediaQuery.of(context).size.height - 100.0);
-        }
         return Container(
-          height: widget.fullCalendarScroll == FullCalendarScroll.vertical
-              ? height
-              : (MediaQuery.of(context).size.height / 7) * 4.3,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 20),
-              Container(
-                width: 60,
-                height: 6,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3.0),
-                    color: Color(0xFFE0E0E0)),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                child: FullCalendar(
-                  startDate: widget.firstDate,
-                  endDate: endDate,
-                  padding: padding,
-                  dateColor: widget.dateColor,
-                  dateSelectedBg: widget.calendarEventColor,
-                  dateSelectedColor: widget.calendarEventSelectedColor,
-                  events: _eventDates,
-                  selectedDate: _selectedDate,
-                  fullCalendarDay: widget.fullCalendarDay,
-                  calendarScroll: widget.fullCalendarScroll,
-                  calendarBackground: widget.calendarLogo,
-                  locale: locale,
-                  onDateChange: (value) {
-                    getDate(value);
-                    Navigator.pop(context);
-                  },
+          height: modalHeight,
+          width: screenWidth,
+          margin: EdgeInsets.zero,
+          child: SingleChildScrollView(  // 스크롤 가능한 컨테이너 추가
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 20),
+                Container(
+                  width: 60,
+                  height: 6,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3.0),
+                      color: Color(0xFFE0E0E0)),
                 ),
-              ),
-            ],
+                SizedBox(height: 20.0),
+                ConstrainedBox(  // FullCalendar를 포함한 제약 박스
+                  constraints: BoxConstraints(
+                    minHeight: modalHeight - 60,  // 최소 높이 설정
+                    maxHeight: modalHeight - 60,  // 최대 높이 설정
+                  ),
+                  child: FullCalendar(
+                    startDate: widget.firstDate,
+                    endDate: widget.lastDate,
+                    padding: padding,
+                    dateColor: widget.dateColor,
+                    dateSelectedBg: widget.calendarEventColor,
+                    dateSelectedColor: widget.calendarEventSelectedColor,
+                    events: _eventDates,
+                    selectedDate: _selectedDate,
+                    fullCalendarDay: widget.fullCalendarDay,
+                    calendarScroll: widget.fullCalendarScroll,
+                    calendarBackground: widget.calendarLogo,
+                    locale: locale,
+                    onDateChange: (value) {
+                      getDate(value);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

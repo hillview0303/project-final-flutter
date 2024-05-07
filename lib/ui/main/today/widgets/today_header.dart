@@ -31,6 +31,7 @@ class TodayHeader extends ConsumerWidget {
         ref.read(visibilityProvider.notifier).toggleWeightVisibility();
     }
 
+
     return Column(
       children: [
         TodayUserData(model!),
@@ -43,9 +44,9 @@ class TodayHeader extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: gap_l),
                 child: TodayChangesChart(
-                  fatData: visibilityState.fatVisible ? fatData : [],
-                  muscleData: visibilityState.muscleVisible ? muscleData : [],
-                  weightData: visibilityState.weightVisible ? weightData : [],
+                  fatData: visibilityState.fatVisible ? FatDataFromModel(model) : [],
+                  muscleData: visibilityState.muscleVisible ? MuscleDataFromModel(model) : [],
+                  weightData: visibilityState.weightVisible ? WeightDataFromModel(model) : [],
                 ),
               ),
               SizedBox(height: gap_m),

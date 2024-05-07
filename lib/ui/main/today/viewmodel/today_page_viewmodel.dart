@@ -13,8 +13,11 @@ import '../../../../data/repository/today_repository.dart';
 class TodayPageModel {
   MainDTO mainDTO;
   List<BodyDataDTO> bodyData;
+  GoalFatDTO? goalFatDTO ;
+  GoalMuscleDTO? goalMuscleDTO ;
+  GoalWeightDTO? goalWeightDTO;
 
-  TodayPageModel({required this.mainDTO, required this.bodyData});
+  TodayPageModel({required this.mainDTO, required this.bodyData,this.goalWeightDTO,this.goalMuscleDTO,this.goalFatDTO});
 }
 
 // 창고 창고
@@ -63,11 +66,23 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
     }
   }
 
-  Future<void> resetPage(body) async {
-    TodayPageModel model = state!;
-    MainDTO prevMain = model.mainDTO;
-    List<BodyDataDTO> prevBodyData = model.bodyData;
+
+  Future<void> notifyAddFat(AddGoalDataRequestDTO requestDTO) async {
+    SessionStore sessionStore = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await TodayRepository()
+        .fetchAddGoalFat(requestDTO, sessionStore.accessToken!);
+
+    if(responseDTO.status == 200){
+      GoalFatDTO goalFatDTO = GoalFatDTO(responseDTO.body.fat);
+      TodayPageModel model =TodayPageModel(mainDTO: , bodyData: [])
+
+    }
+
   }
+
+  void notifyAddMuscle(AddGoalDataRequestDTO addGoalDataRequestDTO) {}
+
+  void notifyAddWeight(AddGoalDataRequestDTO addGoalDataRequestDTO) {}
 }
 
 // 창고 관리자

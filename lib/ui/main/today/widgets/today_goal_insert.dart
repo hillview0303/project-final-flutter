@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
+import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 import '../../../../../_core/constants/move.dart';
+import '../../../../data/dtos/today/today_request.dart';
 
-class TodayGoalInsert extends StatelessWidget {
-  const TodayGoalInsert({
-    Key? key,
-  }) : super(key: key);
+class TodayGoalInsert extends ConsumerWidget {
+  final name;
+  TodayPageModel model;
 
-  //todo: composition_box 를 서로 공유하고 있어 목표 설정이 같이 됨. 확인 필요
+  TodayGoalInsert(this.name,this.model);
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final _bodydata = TextEditingController();
+
     return Theme(
       data: Theme.of(context).copyWith(
         colorScheme: Theme.of(context).colorScheme.copyWith(
@@ -20,6 +25,7 @@ class TodayGoalInsert extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
+              controller: _bodydata,
               decoration: InputDecoration(
                   labelText: '목표량',
                   labelStyle: TextStyle(fontSize: 15, color: TColor.darkGrey),
@@ -39,7 +45,20 @@ class TodayGoalInsert extends StatelessWidget {
             height: 60,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, Move.loginPage);
+
+                double? formatData = double.tryParse(_bodydata.text) ?? model?.bodyData.last.fat;
+
+                if(name=="체지방"){
+                  ref.watch(TodayPageProvider.notifier).notifyAddFat(AddGoalDataRequestDTO(goalFat: formatData));
+                }else if(name=="골격근"){
+                  ref.watch(TodayPageProvider.notifier).notifyAddMuscle(AddGoalDataRequestDTO(goalMuscle: formatData));
+                }else if(name=="체중"){
+                  ref.watch(TodayPageProvider.notifier).notifyAddWeight(AddGoalDataRequestDTO(goalWeight: formatData));
+                }
+
+
+
+                Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: kAccentColor2,

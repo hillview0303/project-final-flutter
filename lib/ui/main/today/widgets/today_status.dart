@@ -15,7 +15,7 @@ class TodayStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(gap_m),
         color: Colors.white,
@@ -40,8 +40,17 @@ class TodayStatus extends StatelessWidget {
                     style: subtitle3(mColor: Colors.grey[400]!),
                   ),
                   Spacer(),
-                  Text("${weight}kg"),
+                  Text("현재 : ${weight}kg"),
                 ],
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              alignment: Alignment.topLeft,
+              height: 25,
+              child: Text(
+                "목표(kg)",
+                style: subtitle2(),
               ),
             ),
             Container(

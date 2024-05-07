@@ -61,8 +61,6 @@ class TodayStatus extends StatelessWidget {
               height: 100,
               child: Text(
                 "${goalData}kg",
-                style: h6(),
-                "${goalData}kg",
                 style: h7(),
               ),
             ),

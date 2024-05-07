@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
+import 'package:project_app/data/dtos/user/user_response.dart';
 
 class EditProfileForm extends StatefulWidget {
+  final ProfileUpdateFormDTO reqDTO;
+
+
+  EditProfileForm(this.reqDTO);
+
   @override
-  _EditProfileFormState createState() => _EditProfileFormState();
+  _EditProfileFormState createState() => _EditProfileFormState(reqDTO);
 }
 
 class _EditProfileFormState extends State<EditProfileForm> {
+  final ProfileUpdateFormDTO reqDTO;
+
+  _EditProfileFormState(this.reqDTO) {
+    _nameController.text = reqDTO.name ?? '';
+    _phoneController.text = reqDTO.phone ?? '';
+    _heightController.text = "${reqDTO.height}" ?? '';
+  }
+
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();

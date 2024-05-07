@@ -36,4 +36,13 @@ class UserRepository {
 
     return responseDTO;
   }
+
+  Future<ResponseDTO> profileUpdateForm(String accessToken) async {
+    final response = await dio.get("/api/users/update-form",
+        options: Options(headers: {"Authorization": "${accessToken}"}));
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    return responseDTO;
+  }
 }

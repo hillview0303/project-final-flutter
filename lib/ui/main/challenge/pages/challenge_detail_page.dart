@@ -45,7 +45,9 @@ class ChallengeDetailPage extends ConsumerWidget {
                 ),
               ),
               ChallengeActionButton(
-                  status: challenge!.challengeDetailDTO.state),
+                status: challenge!.challengeDetailDTO.state,
+                challengeId: challenge!.challengeDetailDTO.id,
+              ),
             ],
           ),
         ),

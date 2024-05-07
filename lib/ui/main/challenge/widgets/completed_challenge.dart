@@ -5,10 +5,11 @@ import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
 import '../../../_common/components/challenge_container.dart';
+import 'no_challenge_text.dart';
 
 class CompletedChallenge extends StatelessWidget {
   final String title;
-  final List<ChallengeListDTO> challenges;
+  final List<ChallengeListDTO>? challenges;
 
   const CompletedChallenge(
       {Key? key, required this.title, required this.challenges})
@@ -16,29 +17,33 @@ class CompletedChallenge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(gap_m),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: Text(title, style: h6(mColor: Colors.grey)),
-          ),
-          line1,
-          Container(
-            height: 180,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: challenges.length,
-              separatorBuilder: (context, index) => SizedBox(width: 10),
-              itemBuilder: (context, index) {
-                return ChallengeContainer(challenge: challenges[index]);
-              },
+    if (challenges!.length < 1) {
+      return NoChallengeText("지난 챌린지가 없습니다.");
+    } else {
+      return Padding(
+        padding: EdgeInsets.all(gap_m),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(title, style: h6(mColor: Colors.grey)),
             ),
-          ),
-        ],
-      ),
-    );
+            line1,
+            Container(
+              height: 180,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: challenges!.length,
+                separatorBuilder: (context, index) => SizedBox(width: 10),
+                itemBuilder: (context, index) {
+                  return ChallengeContainer(challenge: challenges![index]);
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

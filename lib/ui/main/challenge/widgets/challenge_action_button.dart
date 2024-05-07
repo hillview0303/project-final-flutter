@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/size.dart';
+import 'package:project_app/ui/main/challenge/viewmodel/challenge_detail_view_model.dart';
 
-class ChallengeActionButton extends StatelessWidget {
+class ChallengeActionButton extends ConsumerWidget {
   final bool? status;
+  final int challengeId;
 
-  const ChallengeActionButton({Key? key, required this.status})
-      : super(key: key);
+  ChallengeActionButton({this.status, required this.challengeId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ChallengeDetailViewModel? challengeDetailViewModel =
+        ref.read(challengeDetailProvider(challengeId).notifier);
+
     if (status == null) {
       return SizedBox(
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {
-            // 참가 시작 기능 구현
+            challengeDetailViewModel!.startChallenge(challengeId);
           },
           child: Text('탐험 시작하기'),
           style: ElevatedButton.styleFrom(
@@ -62,7 +67,7 @@ class ChallengeActionButton extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                // 참가 시작 기능 구현
+                challengeDetailViewModel!.startChallenge(challengeId);
               },
               child: Text('다시 도전하기'),
               style: ElevatedButton.styleFrom(

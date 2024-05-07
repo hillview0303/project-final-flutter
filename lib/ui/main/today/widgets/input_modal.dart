@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 import '../../../../_core/constants/constants.dart';
+import '../../../../data/dtos/user/user_request.dart';
 
-void showInputModal(BuildContext context) {
+void showInputModal(BuildContext context,WidgetRef ref) {
+
   showModalBottomSheet(
+
     context: context,
     isScrollControlled: true, // 키보드가 모달을 가리지 않도록 설정
+
     builder: (BuildContext context) {
+      final _formKey = GlobalKey<FormState>();
+      final _fat = TextEditingController();
+      final _muscle = TextEditingController();
+      final _weight = TextEditingController();
+
       return Theme(
         data: Theme.of(context).copyWith(
           inputDecorationTheme: InputDecorationTheme(
@@ -33,6 +44,7 @@ void showInputModal(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextFormField(
+                controller: _fat,
                 decoration: InputDecoration(
                   labelText: '체지방 (%)',
                 ),
@@ -41,6 +53,7 @@ void showInputModal(BuildContext context) {
               ),
               SizedBox(height: 10),
               TextFormField(
+                controller: _muscle,
                 decoration: InputDecoration(
                   labelText: '골격근 (%)',
                 ),
@@ -49,6 +62,7 @@ void showInputModal(BuildContext context) {
               ),
               SizedBox(height: 10),
               TextFormField(
+                controller: _weight,
                 decoration: InputDecoration(
                   labelText: '체중 (kg)',
                 ),
@@ -63,6 +77,24 @@ void showInputModal(BuildContext context) {
                 ),
                 child: Text('저장'),
                 onPressed: () {
+                  bool isOk = _formKey.currentState!.validate();
+
+                  if (isOk) {
+                    double fat = double.tryParse(_fat.text) ?? 0.0;
+                    double muscle = double.tryParse(_muscle.text) ?? 0.0;
+                    double weight = double.tryParse(_weight.text) ?? 0.0;
+
+                    UpdateBodyDataRequestDTO requestDTO =
+                    UpdateBodyDataRequestDTO(fat, muscle, weight);
+
+                    // ref.read(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
+
+
+
+
+                  }
+
+
                   Navigator.pop(context);
                 },
               ),

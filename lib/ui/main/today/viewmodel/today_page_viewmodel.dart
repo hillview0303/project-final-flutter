@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
+import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
 import '../../../../data/dtos/user/user_response.dart';
@@ -38,6 +39,17 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
           SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
     }
   }
+
+  // Future<void> notifyAddGoalData(UpdateBodyDataRequestDTO requestDTO) async {
+  //   SessionStore sessionStore = ref.read(sessionProvider);
+  //
+  //   ResponseDTO responseDTO = await TodayRepository().fetchUpdateBodyData(requestDTO,sessionStore.accessToken!);
+  //
+  // }
+
+
+
+
 }
 
 // 창고 관리자

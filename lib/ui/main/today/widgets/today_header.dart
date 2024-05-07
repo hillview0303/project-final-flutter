@@ -40,7 +40,7 @@ class TodayHeader extends ConsumerWidget {
           padding: const EdgeInsets.all(gap_m),
           child: Column(
             children: [
-              TodayChangesDetail(),
+              TodayChangesDetail(ref),
               SizedBox(height: gap_l),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: gap_l),

@@ -5,10 +5,11 @@ import '../../../../_core/constants/line.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
 import '../../../_common/components/challenge_container.dart';
+import 'no_challenge_text.dart';
 
 class AvailableChallenge extends StatelessWidget {
   final String title;
-  final List<ChallengeListDTO> challenges;
+  final List<ChallengeListDTO>? challenges;
 
   const AvailableChallenge(
       {Key? key, required this.title, required this.challenges})
@@ -16,29 +17,33 @@ class AvailableChallenge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(gap_m),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: Text(title, style: h6(mColor: Colors.grey)),
-          ),
-          line1,
-          Container(
-            height: 170,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: challenges.length,
-              separatorBuilder: (context, index) => SizedBox(width: 10),
-              itemBuilder: (context, index) {
-                return ChallengeContainer(challenge: challenges[index]);
-              },
+    if (challenges == null) {
+      return NoChallengeText("모든 챌린지를 끝냈습니다.");
+    } else {
+      return Padding(
+        padding: EdgeInsets.all(gap_m),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(title, style: h6(mColor: Colors.grey)),
             ),
-          ),
-        ],
-      ),
-    );
+            line1,
+            Container(
+              height: 170,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: challenges!.length,
+                separatorBuilder: (context, index) => SizedBox(width: 10),
+                itemBuilder: (context, index) {
+                  return ChallengeContainer(challenge: challenges![index]);
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

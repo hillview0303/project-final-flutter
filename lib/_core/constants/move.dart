@@ -12,6 +12,7 @@ class Move {
   static String joinPage = "/join";
   static String mainPage = "/main";
   static String todayPage = "/today"; // 주소는 아직 미확정
+  static String challengePage = "/challenge";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -19,7 +20,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.welcomePage: (context) => const WelcomePage(),
     Move.loginPage: (context) => const LoginPage(),
     Move.joinPage: (context) => JoinPage(),
-    Move.mainPage: (context) => const MainPage(),
+    Move.mainPage: (context) => MainPage(0),
     Move.todayPage: (context) => const TodayPage(),
+    Move.challengePage: (context) => MainPage(2),
   };
 }

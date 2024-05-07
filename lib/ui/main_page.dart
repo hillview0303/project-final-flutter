@@ -7,14 +7,18 @@ import 'main/my/my_page.dart';
 import 'main/today/today_page.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final int index;
+
+  MainPage(this.index);
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState(index);
 }
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+
+  _MainPageState(this._selectedIndex);
 
   @override
   Widget build(BuildContext context) {

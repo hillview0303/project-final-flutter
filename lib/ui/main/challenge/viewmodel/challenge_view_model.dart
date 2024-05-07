@@ -7,9 +7,9 @@ import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
 
 class ChallengeListModel {
-  AttendChallenge attendChallenge;
-  List<ChallengeListDTO> upcomingChallengeDTOList;
-  List<ChallengeListDTO> pastChallengesDTOList;
+  AttendChallenge? attendChallenge;
+  List<ChallengeListDTO>? upcomingChallengeDTOList;
+  List<ChallengeListDTO>? pastChallengesDTOList;
 
   ChallengeListModel(this.attendChallenge, this.upcomingChallengeDTOList,
       this.pastChallengesDTOList);
@@ -25,26 +25,37 @@ class ChallengeListViewModel extends StateNotifier<ChallengeListModel?> {
     SessionStore sessionStore = ref.read(sessionProvider);
     ResponseDTO responseDTO =
         await ChallengeRepository().getChallengeList(sessionStore.accessToken!);
+
     ChallengeResponseDTO challengeResponseDTO =
         ChallengeResponseDTO.fromJson(responseDTO.body);
-    List<ChallengeListDTO> upcomingChallengeList = challengeResponseDTO
-        .upcomingChallenges
-        .map((e) => ChallengeListDTO.fromJson(e))
-        .toList();
-    List<ChallengeListDTO> pastChallengeList = challengeResponseDTO
-        .pastchallenges
-        .map((e) => ChallengeListDTO.fromJson(e))
-        .toList();
-    AttendChallenge challenge = AttendChallenge(
-        id: challengeResponseDTO.id,
-        challengeName: challengeResponseDTO.challengeName,
-        subtitle: challengeResponseDTO.subtitle,
-        closingTime: challengeResponseDTO.closingTime,
-        coin: challengeResponseDTO.coin,
-        backImg: challengeResponseDTO.backImg);
+    List<ChallengeListDTO> upcomingChallengeList = [];
+    List<ChallengeListDTO> pastChallengeList = [];
 
-    ChallengeListModel challengeListModel = ChallengeListModel(
-        challenge, upcomingChallengeList!, pastChallengeList!);
+    if (challengeResponseDTO.upcomingChallenges != null) {
+      upcomingChallengeList = challengeResponseDTO.upcomingChallenges!
+          .map((e) => ChallengeListDTO.fromJson(e))
+          .toList();
+    }
+    if (challengeResponseDTO.pastchallenges != null) {
+      pastChallengeList = challengeResponseDTO.pastchallenges!
+          .map((e) => ChallengeListDTO.fromJson(e))
+          .toList();
+    }
+
+    AttendChallenge? challenge;
+
+    if (challengeResponseDTO.id != null) {
+      challenge = AttendChallenge(
+          id: challengeResponseDTO.id,
+          challengeName: challengeResponseDTO.challengeName,
+          subtitle: challengeResponseDTO.subtitle,
+          closingTime: challengeResponseDTO.closingTime,
+          coin: challengeResponseDTO.coin,
+          backImg: challengeResponseDTO.backImg);
+    }
+
+    ChallengeListModel challengeListModel =
+        ChallengeListModel(challenge, upcomingChallengeList, pastChallengeList);
 
     if (responseDTO.status == 200) {
       state = challengeListModel;

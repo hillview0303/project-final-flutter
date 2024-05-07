@@ -8,7 +8,7 @@ import 'ongoing_challenge_container.dart';
 
 class OngoingChallenge extends StatelessWidget {
   final String title;
-  final AttendChallenge challenge;
+  final AttendChallenge? challenge;
 
   const OngoingChallenge(
       {Key? key, required this.title, required this.challenge})

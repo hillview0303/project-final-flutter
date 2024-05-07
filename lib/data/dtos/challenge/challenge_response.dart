@@ -1,29 +1,33 @@
+
+
 class ChallengeResponseDTO {
-  final int id;
-  final String challengeName; // 챌린지명
-  final String subtitle;
-  final DateTime closingTime;
-  final int coin;
-  final String backImg;
-  final List<dynamic> upcomingChallenges;
-  final List<dynamic> pastchallenges;
+  final int? id;
+  final String? challengeName; // 챌린지명
+  final String? subtitle;
+  final DateTime? closingTime;
+  final int? coin;
+  final String? backImg;
+  final List<dynamic>? upcomingChallenges;
+  final List<dynamic>? pastchallenges;
 
   ChallengeResponseDTO(
-      {required this.id,
-      required this.challengeName,
-      required this.subtitle,
-      required this.closingTime,
-      required this.coin,
-      required this.backImg,
-      required this.upcomingChallenges,
-      required this.pastchallenges});
+      {this.id,
+      this.challengeName,
+      this.subtitle,
+      this.closingTime,
+      this.coin,
+      this.backImg,
+      this.upcomingChallenges,
+      this.pastchallenges});
 
   factory ChallengeResponseDTO.fromJson(Map<String, dynamic> json) {
     return ChallengeResponseDTO(
       id: json["id"],
       challengeName: json["challengeName"],
       subtitle: json["subtitle"],
-      closingTime: DateTime.parse(json["closingTime"]),
+      closingTime: json["closingTime"] != null
+          ? DateTime.parse(json["closingTime"])
+          : null,
       coin: json["coin"],
       backImg: json["backImg"],
       upcomingChallenges: json["upcomingChallenges"],
@@ -33,20 +37,20 @@ class ChallengeResponseDTO {
 }
 
 class AttendChallenge {
-  int id;
-  String challengeName; // 챌린지명
-  String subtitle;
-  DateTime closingTime;
-  int coin;
-  String backImg;
+  int? id;
+  String? challengeName; // 챌린지명
+  String? subtitle;
+  DateTime? closingTime;
+  int? coin;
+  String? backImg;
 
   AttendChallenge(
-      {required this.id,
-      required this.challengeName,
-      required this.subtitle,
-      required this.closingTime,
-      required this.coin,
-      required this.backImg});
+      {this.id,
+      this.challengeName,
+      this.subtitle,
+      this.closingTime,
+      this.coin,
+      this.backImg});
 }
 
 class ChallengeListDTO {

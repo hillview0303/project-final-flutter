@@ -1,6 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class ProfileImage extends StatelessWidget {
+
+  final String userImage;
+
+  ProfileImage(this.userImage);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,7 +16,7 @@ class ProfileImage extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
-          image: AssetImage("assets/images/saram1.png"),
+          image: MemoryImage(base64Decode(userImage)),
           fit: BoxFit.cover,
         ),
         border: Border.all(color: Colors.white, width: 4),

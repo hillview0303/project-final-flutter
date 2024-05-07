@@ -5,6 +5,7 @@ import 'package:project_app/ui/main/challenge/widgets/completed_challenge.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
+import '../../../../data/dtos/my/my_response.dart';
 
 class MyHistory extends StatelessWidget {
   final MyPageDTO myPageDTO;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
-import 'package:project_app/data/dtos/user/user_response.dart';
 import 'package:project_app/data/repository/user_repositiry.dart';
 import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
+
+import '../../../../data/dtos/my/my_response.dart';
 
 
 class ProfileEditModel {

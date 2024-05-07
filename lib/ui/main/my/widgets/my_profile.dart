@@ -5,6 +5,7 @@ import 'package:project_app/_core/constants/style.dart';
 import 'package:project_app/data/dtos/user/user_response.dart';
 import 'package:project_app/ui/main/my/widgets/profile_edit_button.dart';
 import 'package:project_app/ui/main/my/widgets/profile_image.dart';
+import '../../../../data/dtos/my/my_response.dart';
 import '../pages/profile_edit_page.dart';
 import '../pages/survey_page.dart';
 import 'contact_modal.dart';

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 import '../../../../_core/constants/constants.dart';
-import '../../../../data/dtos/user/user_request.dart';
+import '../../../../data/dtos/today/today_request.dart';
 
 void showInputModal(BuildContext context,WidgetRef ref) {
 

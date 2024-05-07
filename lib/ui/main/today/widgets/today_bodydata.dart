@@ -29,8 +29,8 @@ class TodayBodydata extends StatelessWidget {
           CompositionBox2(
             name: "체지방",
             titleColor: Colors.blueGrey,
-            valueColor: fatVisible ? Colors.lightGreenAccent : Colors.grey,
-            borderColor: fatVisible ? Colors.lightGreenAccent : Colors.grey,
+            valueColor: fatVisible ? Colors.greenAccent : Colors.grey,
+            borderColor: fatVisible ? Colors.greenAccent : Colors.grey,
             value: "${model?.bodyData.last.fat}",
             onTap: () => toggleVisibility('fat'),
           ),
@@ -38,8 +38,8 @@ class TodayBodydata extends StatelessWidget {
           CompositionBox2(
             name: "골격근",
             titleColor: Colors.blueGrey,
-            valueColor: muscleVisible ? Colors.tealAccent : Colors.grey,
-            borderColor: muscleVisible ? Colors.tealAccent : Colors.grey,
+            valueColor: muscleVisible ? Colors.cyanAccent : Colors.grey,
+            borderColor: muscleVisible ? Colors.cyanAccent : Colors.grey,
             value: "${model?.bodyData.last.muscle}",
             onTap: () => toggleVisibility('muscle'),
           ),
@@ -47,8 +47,8 @@ class TodayBodydata extends StatelessWidget {
           CompositionBox2(
             name: "체중",
             titleColor: Colors.blueGrey,
-            valueColor: weightVisible ? Colors.deepPurpleAccent : Colors.grey,
-            borderColor: weightVisible ? Colors.deepPurpleAccent : Colors.grey,
+            valueColor: weightVisible ? (Colors.deepOrange[200] ?? Colors.deepOrange) : Colors.grey,
+            borderColor: weightVisible ? (Colors.deepOrange[200] ?? Colors.deepOrange) : Colors.grey,
             value: "${model?.bodyData.last.weight}",
             onTap: () => toggleVisibility('weight'),
           ),

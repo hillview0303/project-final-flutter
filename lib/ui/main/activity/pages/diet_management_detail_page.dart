@@ -159,13 +159,13 @@ class DietManagementDetailPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Row(
                 children: [
-                  Icon(Icons.square, color: Colors.blue, size: 20),
+                  Icon(Icons.square, color: Colors.deepOrange[200], size: 20),
                   Text(" 탄수화물 75%", style: TextStyle(fontSize: 14)),
                   SizedBox(width: 10),
-                  Icon(Icons.square, color: Colors.red, size: 20),
+                  Icon(Icons.square, color: Colors.cyanAccent, size: 20),
                   Text(" 단백질 12%", style: TextStyle(fontSize: 14)),
                   SizedBox(width: 10),
-                  Icon(Icons.square, color: Colors.green, size: 20),
+                  Icon(Icons.square, color: Colors.greenAccent, size: 20),
                   Text(" 지방 13%", style: TextStyle(fontSize: 14)),
                 ],
               ),
@@ -193,7 +193,7 @@ class DietManagementDetailPage extends StatelessWidget {
                     flex: (carbs * 100).toInt(),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Colors.deepOrange[200],
                         borderRadius: BorderRadius.horizontal(left: Radius.circular(5)),
                       ),
                     ),
@@ -201,14 +201,14 @@ class DietManagementDetailPage extends StatelessWidget {
                   Expanded(
                     flex: (protein * 100).toInt(),
                     child: Container(
-                      color: Colors.red,
+                      color: Colors.cyanAccent,
                     ),
                   ),
                   Expanded(
                     flex: (fats * 100).toInt(),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: Colors.greenAccent,
                         borderRadius: BorderRadius.horizontal(right: Radius.circular(5)),
                       ),
                     ),

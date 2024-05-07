@@ -36,7 +36,7 @@ class TodayChangesChart extends StatelessWidget {
             LineChartBarData(
               spots: fatData,
               isCurved: true,
-              color: Colors.lightGreenAccent,
+              color: Colors.greenAccent,
               barWidth: 3,
               isStrokeCapRound: true,
               belowBarData: BarAreaData(
@@ -55,7 +55,7 @@ class TodayChangesChart extends StatelessWidget {
             LineChartBarData(
               spots: weightData,
               isCurved: true,
-              color: Colors.deepPurpleAccent,
+              color: Colors.deepOrange[200],
               barWidth: 3,
               isStrokeCapRound: true,
               belowBarData: BarAreaData(show: false),

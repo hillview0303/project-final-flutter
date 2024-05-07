@@ -118,13 +118,15 @@ class MetricCard extends StatelessWidget {
               if (isWaterCard) ...[
                 Flexible(
                   flex: 5,
-                  child: ColorFiltered(
-                    colorFilter:
-                        ColorFilter.mode(TColor.primaryColor2, BlendMode.srcIn),
-                    child: Image.asset(
-                      'assets/images/water.png',
-                      width: 160,
-                      height: 160,
+                  child: Center(
+                    child: ColorFiltered(
+                      colorFilter:
+                      ColorFilter.mode(TColor.primaryColor2, BlendMode.srcIn),
+                      child: Image.asset(
+                        'assets/images/water.png',
+                        width: 160,
+                        height: 160,
+                      ),
                     ),
                   ),
                 ),
@@ -133,12 +135,14 @@ class MetricCard extends StatelessWidget {
               if (isStepsCard) ...[
                 Flexible(
                   flex: 5,
-                  child: ColorFiltered(
-                    colorFilter: ColorFilter.mode(TColor.primaryColor2, BlendMode.srcIn),
-                    child: Image.asset(
-                      'assets/images/walkman.png', // 이 부분에 걸음수 이미지 경로를 지정합니다.
-                      width: 160,
-                      height: 160,
+                  child: Center(
+                    child: ColorFiltered(
+                      colorFilter: ColorFilter.mode(TColor.primaryColor2, BlendMode.srcIn),
+                      child: Image.asset(
+                        'assets/images/walkman.png',
+                        width: 160,
+                        height: 160,
+                      ),
                     ),
                   ),
                 ),

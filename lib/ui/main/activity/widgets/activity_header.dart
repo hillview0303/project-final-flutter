@@ -33,11 +33,6 @@ class _ActivityHeaderState extends State<ActivityHeader> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text("나의 활동", style: h6(mColor: Colors.grey)),
-          ),
-          line1,
           // ActivityHeader.dart
           CustomCalendarAgenda(
             controller: _calendarAgendaControllerAppBar,

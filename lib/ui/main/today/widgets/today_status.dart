@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/constants.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
@@ -40,7 +41,9 @@ class TodayStatus extends StatelessWidget {
                     style: subtitle3(mColor: Colors.grey[400]!),
                   ),
                   Spacer(),
-                  Text("현재 : ${weight}kg"),
+                  Text("현재:${weight}kg",
+                    style: subtitle3(mColor: TColor.grey),
+                  ),
                 ],
               ),
             ),
@@ -50,7 +53,7 @@ class TodayStatus extends StatelessWidget {
               height: 25,
               child: Text(
                 "목표(kg)",
-                style: subtitle2(),
+                style: subtitle3(),
               ),
             ),
             Container(
@@ -58,7 +61,7 @@ class TodayStatus extends StatelessWidget {
               height: 100,
               child: Text(
                 "${goalWeight}kg",
-                style: h6(),
+                style: h7(),
               ),
             ),
             Expanded(

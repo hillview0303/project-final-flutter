@@ -82,9 +82,11 @@ void showInputModal(
 
                   UpdateBodyDataRequestDTO requestDTO =
                       UpdateBodyDataRequestDTO(fat!, muscle!, weight!);
-                  ref.read(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
-                   ref.read(TodayPageProvider.notifier).notifyInit();
+                  ref.watch(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
+                  ref.watch(TodayPageProvider.notifier).notifyInit();
+
                   Navigator.pop(context);
+
                 },
               ),
             ],

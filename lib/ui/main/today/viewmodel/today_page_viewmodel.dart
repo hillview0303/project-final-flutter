@@ -28,12 +28,14 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
   Future<void> notifyInit() async {
     SessionStore sessionStore = ref.read(sessionProvider);
 
-    ResponseDTO responseDTO = await TodayRepository().fetchMainPage(sessionStore.accessToken!);
+    ResponseDTO responseDTO =
+        await TodayRepository().fetchMainPage(sessionStore.accessToken!);
 
     if (responseDTO.status == 200) {
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.body);
       List<BodyDataDTO> bodyData = mainDTO.bodyData;
-      TodayPageModel model = TodayPageModel(mainDTO: mainDTO, bodyData: bodyData);
+      TodayPageModel model =
+          TodayPageModel(mainDTO: mainDTO, bodyData: bodyData);
       state = model;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -46,13 +48,15 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
     ResponseDTO responseDTO = await TodayRepository()
         .fetchUpdateBodyData(requestDTO, sessionStore.accessToken!);
 
-
     if (responseDTO.status == 200) {
-      MainDTO mainDTO = MainDTO(fat: responseDTO.body.fat,muscle: responseDTO.body.muscle,weight: responseDTO.body.weight, bodyData: []);
+      MainDTO mainDTO = MainDTO(
+          fat: responseDTO.body.fat,
+          muscle: responseDTO.body.muscle,
+          weight: responseDTO.body.weight,
+          bodyData: []);
       TodayPageModel model = TodayPageModel(mainDTO: mainDTO, bodyData: []);
-      state = model;
-      
 
+      state = model;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("데이터 입력 실패 : ${responseDTO.msg}")));
@@ -63,13 +67,8 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
     TodayPageModel model = state!;
     MainDTO prevMain = model.mainDTO;
     List<BodyDataDTO> prevBodyData = model.bodyData;
-
-
   }
 }
-
-
-
 
 // 창고 관리자
 final TodayPageProvider =

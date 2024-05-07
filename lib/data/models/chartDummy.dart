@@ -4,12 +4,12 @@ import '../../ui/main/today/viewmodel/today_page_viewmodel.dart';
 
 
 List<FlSpot> FatDataFromModel(TodayPageModel? model) {
-  if (model == null || model.bodyData.isEmpty) {
+  if (model == null || model.bodyData!.isEmpty) {
     return [];
   }
-  final points = model.bodyData.takeLast(5).toList();
+  final points = model?.bodyData?.takeLast(5).toList();
   // FlSpot 리스트를 생성합니다.
-  List<FlSpot> fatData = List.generate(points.length, (index) {
+  List<FlSpot> fatData = List.generate(points!.length, (index) {
     final bodyDataPoint = points[index];
     return FlSpot(index.toDouble(), bodyDataPoint.fat);
   });
@@ -19,12 +19,12 @@ List<FlSpot> FatDataFromModel(TodayPageModel? model) {
 
 
 List<FlSpot> MuscleDataFromModel(TodayPageModel? model) {
-  if (model == null || model.bodyData.isEmpty) {
+  if (model == null || model.bodyData!.isEmpty) {
     return [];
   }
-  final points = model.bodyData.takeLast(5).toList();
+  final points = model.bodyData?.takeLast(5).toList();
 
-  List<FlSpot> muscleData = List.generate(points.length, (index) {
+  List<FlSpot> muscleData = List.generate(points!.length, (index) {
     final bodyDataPoint = points[index];
     return FlSpot(index.toDouble(), bodyDataPoint.muscle);
   });
@@ -32,12 +32,12 @@ List<FlSpot> MuscleDataFromModel(TodayPageModel? model) {
 }
 
 List<FlSpot> WeightDataFromModel(TodayPageModel? model) {
-  if (model == null || model.bodyData.isEmpty) {
+  if (model == null || model.bodyData!.isEmpty) {
     return [];
   }
-  final points = model.bodyData.takeLast(5).toList();
+  final points = model.bodyData?.takeLast(5).toList();
 
-  List<FlSpot> weightDataData = List.generate(points.length, (index) {
+  List<FlSpot> weightDataData = List.generate(points!.length, (index) {
     final bodyDataPoint = points[index];
     return FlSpot(index.toDouble(), bodyDataPoint.weight);
   });
@@ -45,8 +45,6 @@ List<FlSpot> WeightDataFromModel(TodayPageModel? model) {
 }
 
 
-// 이 메서드는 List<T>.takeLast(int n)에 의존합니다.
-// Dart의 기본 List API에는 이 메서드가 없으므로, 다음 확장 메서드를 정의해야 합니다.
 extension ListExtension<T> on List<T> {
   List<T> takeLast(int n) {
     if (n >= length) return List<T>.from(this);

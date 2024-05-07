@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/user/user_response.dart';
 
+import '../../../../data/dtos/my/my_response.dart';
+
 class EditProfileForm extends StatefulWidget {
   final ProfileUpdateFormDTO reqDTO;
 

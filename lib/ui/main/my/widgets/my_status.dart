@@ -4,6 +4,7 @@ import 'package:project_app/_core/constants/style.dart';
 import 'package:project_app/data/dtos/user/user_response.dart';
 
 import '../../../../../_core/constants/size.dart';
+import '../../../../data/dtos/my/my_response.dart';
 import '../../../_common/components/composition_box2.dart';
 
 class MyStatus extends StatelessWidget {

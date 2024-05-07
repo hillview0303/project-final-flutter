@@ -3,14 +3,17 @@ import 'package:project_app/_core/constants/constants.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
+import '../viewmodel/today_page_viewmodel.dart';
 import 'today_goal.dart';
 
 class TodayStatus extends StatelessWidget {
   final name;
   final bodydata;
   final goalData;
+  TodayPageModel model;
 
-  TodayStatus({required this.name, required this.bodydata, this.goalData ="-"});
+
+  TodayStatus({required this.name, required this.bodydata, this.goalData ="-",required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +68,7 @@ class TodayStatus extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: TodayGoal(),
+              child: TodayGoal(name,model),
             ),
           ],
         ),

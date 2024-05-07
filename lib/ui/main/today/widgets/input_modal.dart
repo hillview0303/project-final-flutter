@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 import '../../../../_core/constants/constants.dart';
-import '../../../../data/dtos/user/user_request.dart';
+import '../../../../data/dtos/today/today_request.dart';
+import '../viewmodel/today_page_viewmodel.dart';
 
-void showInputModal(BuildContext context,WidgetRef ref) {
-
+void showInputModal(
+    BuildContext context, WidgetRef ref, TodayPageModel? model) {
   showModalBottomSheet(
-
     context: context,
     isScrollControlled: true, // 키보드가 모달을 가리지 않도록 설정
 
@@ -76,26 +75,18 @@ void showInputModal(BuildContext context,WidgetRef ref) {
                   foregroundColor: Colors.white,
                 ),
                 child: Text('저장'),
-                onPressed: () {
-                  bool isOk = _formKey.currentState!.validate();
+                onPressed: ()  {
+                  double? fat = double.tryParse(_fat.text) ?? model?.bodyData?.last.fat;
+                  double? muscle = double.tryParse(_muscle.text) ?? model?.bodyData?.last.muscle;
+                  double? weight = double.tryParse(_weight.text) ?? model?.bodyData?.last.weight;
 
-                  if (isOk) {
-                    double fat = double.tryParse(_fat.text) ?? 0.0;
-                    double muscle = double.tryParse(_muscle.text) ?? 0.0;
-                    double weight = double.tryParse(_weight.text) ?? 0.0;
-
-                    UpdateBodyDataRequestDTO requestDTO =
-                    UpdateBodyDataRequestDTO(fat, muscle, weight);
-
-                    // ref.read(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
-
-
-
-
-                  }
-
+                  UpdateBodyDataRequestDTO requestDTO =
+                      UpdateBodyDataRequestDTO(fat!, muscle!, weight!);
+                  ref.watch(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
+                  ref.watch(TodayPageProvider.notifier).notifyInit();
 
                   Navigator.pop(context);
+
                 },
               ),
             ],

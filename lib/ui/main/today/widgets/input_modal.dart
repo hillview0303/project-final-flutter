@@ -76,9 +76,9 @@ void showInputModal(
                 ),
                 child: Text('저장'),
                 onPressed: ()  {
-                  double? fat = double.tryParse(_fat.text) ?? model?.bodyData.last.fat;
-                  double? muscle = double.tryParse(_muscle.text) ?? model?.bodyData.last.muscle;
-                  double? weight = double.tryParse(_weight.text) ?? model?.bodyData.last.weight;
+                  double? fat = double.tryParse(_fat.text) ?? model?.bodyData?.last.fat;
+                  double? muscle = double.tryParse(_muscle.text) ?? model?.bodyData?.last.muscle;
+                  double? weight = double.tryParse(_weight.text) ?? model?.bodyData?.last.weight;
 
                   UpdateBodyDataRequestDTO requestDTO =
                       UpdateBodyDataRequestDTO(fat!, muscle!, weight!);

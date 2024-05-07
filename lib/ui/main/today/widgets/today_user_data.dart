@@ -32,7 +32,7 @@ class TodayUserData extends StatelessWidget {
           children: [
             SizedBox(height: gap_s),
             Text(
-              "${model.mainDTO.name}님",
+              "${model.mainDTO?.name}님",
               style: h4(mColor: kAccentColor2),
             ),
             const SizedBox(height: gap_s),
@@ -43,11 +43,11 @@ class TodayUserData extends StatelessWidget {
             SizedBox(height: gap_m),
             Row(
               children: [
-                Expanded(child: TodayStatus(name: "체지방", bodydata: model.mainDTO.fat,goalData : model.mainDTO.goalFat,model:model)),
+                Expanded(child: TodayStatus(name: "체지방", bodydata: model.mainDTO?.fat,goalData : model.mainDTO?.goalFat,model:model)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "골격근", bodydata: model.mainDTO.muscle,goalData: model.mainDTO.goalMuscle,model:model)),
+                Expanded(child: TodayStatus(name: "골격근", bodydata: model.mainDTO?.muscle,goalData: model.mainDTO?.goalMuscle,model:model)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "체중", bodydata: model.mainDTO.weight,model: model,)),
+                Expanded(child: TodayStatus(name: "체중", bodydata: model.mainDTO?.weight,model: model)),
               ],
             ),
           ],

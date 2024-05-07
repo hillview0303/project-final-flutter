@@ -46,7 +46,7 @@ class TodayGoalInsert extends ConsumerWidget {
             child: ElevatedButton(
               onPressed: () {
 
-                double? formatData = double.tryParse(_bodydata.text) ?? model?.bodyData.last.fat;
+                double? formatData = double.tryParse(_bodydata.text) ?? model?.bodyData?.last.fat;
 
                 if(name=="체지방"){
                   ref.watch(TodayPageProvider.notifier).notifyAddFat(AddGoalDataRequestDTO(goalFat: formatData));
@@ -56,8 +56,7 @@ class TodayGoalInsert extends ConsumerWidget {
                   ref.watch(TodayPageProvider.notifier).notifyAddWeight(AddGoalDataRequestDTO(goalWeight: formatData));
                 }
 
-
-
+                ref.watch(TodayPageProvider.notifier).notifyInit();
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(

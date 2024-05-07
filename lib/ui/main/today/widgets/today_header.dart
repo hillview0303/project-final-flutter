@@ -60,7 +60,7 @@ class TodayHeader extends ConsumerWidget {
                 weightVisible: visibilityState.weightVisible,
               ),
               SizedBox(height: gap_s),
-              LastUpdate(lastUpdated: '${model?.bodyData.last.date}'),
+              LastUpdate(lastUpdated: '${model?.bodyData?.last.date}'),
               SizedBox(height: gap_l),
               MyChanges(),
             ],

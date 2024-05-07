@@ -11,13 +11,13 @@ import '../../../../data/dtos/user/user_response.dart';
 import '../../../../data/repository/today_repository.dart';
 
 class TodayPageModel {
-  MainDTO mainDTO;
-  List<BodyDataDTO> bodyData;
+  MainDTO? mainDTO;
+  List<BodyDataDTO>? bodyData;
   GoalFatDTO? goalFatDTO ;
   GoalMuscleDTO? goalMuscleDTO ;
   GoalWeightDTO? goalWeightDTO;
 
-  TodayPageModel({required this.mainDTO, required this.bodyData,this.goalWeightDTO,this.goalMuscleDTO,this.goalFatDTO});
+  TodayPageModel({ this.mainDTO,  this.bodyData,this.goalWeightDTO,this.goalMuscleDTO,this.goalFatDTO});
 }
 
 // 창고 창고
@@ -74,15 +74,34 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
 
     if(responseDTO.status == 200){
       GoalFatDTO goalFatDTO = GoalFatDTO(responseDTO.body.fat);
-      TodayPageModel model =TodayPageModel(mainDTO: , bodyData: [])
-
+      TodayPageModel model =TodayPageModel(goalFatDTO: goalFatDTO);
+      state = model;
     }
-
   }
 
-  void notifyAddMuscle(AddGoalDataRequestDTO addGoalDataRequestDTO) {}
+  Future<void> notifyAddMuscle(AddGoalDataRequestDTO requestDTO) async {
+    SessionStore sessionStore = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await TodayRepository()
+        .fetchAddGoalMuscle(requestDTO, sessionStore.accessToken!);
 
-  void notifyAddWeight(AddGoalDataRequestDTO addGoalDataRequestDTO) {}
+    if(responseDTO.status == 200){
+      GoalMuscleDTO goalMuscleDTO = GoalMuscleDTO(responseDTO.body.muscle);
+      TodayPageModel model =TodayPageModel(goalMuscleDTO: goalMuscleDTO);
+      state = model;
+    }
+  }
+
+  Future<void> notifyAddWeight(AddGoalDataRequestDTO requestDTO) async {
+    SessionStore sessionStore = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await TodayRepository()
+        .fetchAddGoalWeight(requestDTO, sessionStore.accessToken!);
+
+    if(responseDTO.status == 200){
+      GoalWeightDTO goalWeightDTO = GoalWeightDTO(responseDTO.body.weight);
+      TodayPageModel model =TodayPageModel(goalWeightDTO: goalWeightDTO);
+      state = model;
+    }
+  }
 }
 
 // 창고 관리자

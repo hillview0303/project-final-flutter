@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/data/dtos/user/user_response.dart';
+import 'package:project_app/data/models/challenges/challenge.dart';
+import 'package:project_app/ui/main/challenge/widgets/completed_challenge.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
 
 class MyHistory extends StatelessWidget {
-  const MyHistory({
-    super.key,
-  });
+  final MyPageDTO myPageDTO;
+
+  MyHistory(this.myPageDTO);
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +21,10 @@ class MyHistory extends StatelessWidget {
               color: Colors.white,
             ),
             // todo: 마이페이지 통신 구현 때 주석 해제
-            // child: CompletedChallenge(
-            //   title: "정복한 챌린지 보기",
-            //   challenges: pastChallenges,
-            // ),
+            child: CompletedChallenge(
+              title: "정복한 챌린지 보기",
+              challenges: myPageDTO.conqueredChallenge,
+            ),
           ),
           SizedBox(height: gap_s),
           Padding(

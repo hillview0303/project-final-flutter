@@ -15,7 +15,7 @@ class TodayPage extends ConsumerWidget {
     TodayPageModel? model = ref.watch(TodayPageProvider);
 
     if (model == null) {
-      return Center(child: CircularProgressIndicator()); // 또는 적절한 위젯으로 대체
+      return Center(child: CircularProgressIndicator());
     } else {
       return Scaffold(
         body: ListView(

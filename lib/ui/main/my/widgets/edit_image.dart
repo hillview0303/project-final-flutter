@@ -1,14 +1,23 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_app/_core/constants/size.dart';
 
 class EditImage extends StatefulWidget {
+  final String userImage;
+
+  EditImage(this.userImage);
+
   @override
-  _EditImageState createState() => _EditImageState();
+  _EditImageState createState() => _EditImageState(userImage);
 }
 
 class _EditImageState extends State<EditImage> {
+
+  final String userImage;
+  _EditImageState(this.userImage);
+
   ImageProvider<Object>? _profileImage;
   List<String> avatars = [
     "assets/images/avatar1.png",
@@ -97,7 +106,7 @@ class _EditImageState extends State<EditImage> {
           CircleAvatar(
             radius: 75,
             backgroundColor: Colors.grey[300],
-            backgroundImage: _profileImage ?? AssetImage("assets/images/avatar1.png"),
+            backgroundImage: _profileImage ?? MemoryImage(base64Decode(userImage)),
           ),
           Positioned(
             bottom: 10,

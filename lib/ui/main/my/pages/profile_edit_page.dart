@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/ui/main/my/viewmodel/profile_edit_view_model.dart';
 
-import '../widgets/edit_button.dart';
-import '../widgets/edit_height.dart';
 import '../widgets/edit_image.dart';
-import '../widgets/edit_name.dart';
-import '../widgets/edit_password.dart';
-import '../widgets/edit_phone.dart';
 import '../widgets/edit_profile_form.dart';
 
-class ProfileEditPage extends StatelessWidget {
-  const ProfileEditPage({super.key});
+class ProfileEditPage extends ConsumerWidget {
 
+  const ProfileEditPage({super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ProfileEditModel? model = ref.watch(profileEditProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text("프로필 수정"),
@@ -23,8 +21,8 @@ class ProfileEditPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          EditImage(),
-          EditProfileForm(),
+          EditImage(model!.profileUpdateFormDTO.userImg),
+          EditProfileForm(model!.profileUpdateFormDTO),
         ],
       ),
     );

@@ -24,7 +24,7 @@ class MyPage extends ConsumerWidget {
           MyProfile(myPageModel.myPageDTO),
           MyStatus(myPageModel.myPageDTO),
           line2,
-          MyHistory(),
+          MyHistory(myPageModel.myPageDTO),
           SizedBox(height: gap_l),
           line2,
           CompanyInfo(),

@@ -7,11 +7,10 @@ import 'today_goal.dart';
 
 class TodayStatus extends StatelessWidget {
   final name;
-  final weight;
-  final goalWeight;
+  final bodydata;
+  final goalData;
 
-  TodayStatus(
-      {required this.name, required this.weight, this.goalWeight = "-"});
+  TodayStatus({required this.name, required this.bodydata, this.goalData ="-"});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,8 @@ class TodayStatus extends StatelessWidget {
                     style: subtitle3(mColor: Colors.grey[400]!),
                   ),
                   Spacer(),
-                  Text("현재:${weight}kg",
+
+                  Text("현재:${bodydata}kg",
                     style: subtitle3(mColor: TColor.grey),
                   ),
                 ],
@@ -60,7 +60,9 @@ class TodayStatus extends StatelessWidget {
               alignment: Alignment.center,
               height: 100,
               child: Text(
-                "${goalWeight}kg",
+                "${goalData}kg",
+                style: h6(),
+                "${goalData}kg",
                 style: h7(),
               ),
             ),

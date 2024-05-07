@@ -19,6 +19,8 @@ class TodayHeader extends ConsumerWidget {
 
   TodayHeader(this.visibilityState, this.model);
 
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 상태 변경 함수
@@ -39,7 +41,7 @@ class TodayHeader extends ConsumerWidget {
           padding: const EdgeInsets.all(gap_m),
           child: Column(
             children: [
-              TodayChangesDetail(),
+              TodayChangesDetail(ref),
               SizedBox(height: gap_l),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: gap_l),

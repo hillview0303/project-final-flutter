@@ -43,11 +43,11 @@ class TodayUserData extends StatelessWidget {
             SizedBox(height: gap_m),
             Row(
               children: [
-                Expanded(child: TodayStatus(name: "체지방", weight: model.mainDTO.fat)),
+                Expanded(child: TodayStatus(name: "체지방", bodydata: model.mainDTO.fat,goalData : model.mainDTO.goalFat)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "골격근", weight: model.mainDTO.muscle)),
+                Expanded(child: TodayStatus(name: "골격근", bodydata: model.mainDTO.muscle,goalData: model.mainDTO.goalMuscle)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "체중", weight: model.mainDTO.weight)),
+                Expanded(child: TodayStatus(name: "체중", bodydata: model.mainDTO.weight)),
               ],
             ),
           ],

@@ -19,6 +19,8 @@ class TodayHeader extends ConsumerWidget {
 
   TodayHeader(this.visibilityState, this.model);
 
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 상태 변경 함수
@@ -31,6 +33,7 @@ class TodayHeader extends ConsumerWidget {
         ref.read(visibilityProvider.notifier).toggleWeightVisibility();
     }
 
+
     return Column(
       children: [
         TodayUserData(model!),
@@ -38,14 +41,14 @@ class TodayHeader extends ConsumerWidget {
           padding: const EdgeInsets.all(gap_m),
           child: Column(
             children: [
-              TodayChangesDetail(),
+              TodayChangesDetail(ref,model),
               SizedBox(height: gap_l),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: gap_l),
                 child: TodayChangesChart(
-                  fatData: visibilityState.fatVisible ? fatData : [],
-                  muscleData: visibilityState.muscleVisible ? muscleData : [],
-                  weightData: visibilityState.weightVisible ? weightData : [],
+                  fatData: visibilityState.fatVisible ? FatDataFromModel(model) : [],
+                  muscleData: visibilityState.muscleVisible ? MuscleDataFromModel(model) : [],
+                  weightData: visibilityState.weightVisible ? WeightDataFromModel(model) : [],
                 ),
               ),
               SizedBox(height: gap_m),
@@ -57,7 +60,7 @@ class TodayHeader extends ConsumerWidget {
                 weightVisible: visibilityState.weightVisible,
               ),
               SizedBox(height: gap_s),
-              LastUpdate(lastUpdated: '${model?.bodyData.last.date}'),
+              LastUpdate(lastUpdated: '${model?.bodyData?.last.date}'),
               SizedBox(height: gap_l),
               MyChanges(),
             ],

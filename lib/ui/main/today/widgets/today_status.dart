@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/constants.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
+import '../viewmodel/today_page_viewmodel.dart';
 import 'today_goal.dart';
 
 class TodayStatus extends StatelessWidget {
   final name;
-  final weight;
-  final goalWeight;
+  final bodydata;
+  final goalData;
+  TodayPageModel model;
 
-  TodayStatus(
-      {required this.name, required this.weight, this.goalWeight = "-"});
+
+  TodayStatus({required this.name, required this.bodydata, this.goalData ="-",required this.model});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(gap_m),
         color: Colors.white,
@@ -40,20 +43,32 @@ class TodayStatus extends StatelessWidget {
                     style: subtitle3(mColor: Colors.grey[400]!),
                   ),
                   Spacer(),
-                  Text("${weight}kg"),
+
+                  Text("현재:${bodydata}kg",
+                    style: subtitle3(mColor: TColor.grey),
+                  ),
                 ],
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              alignment: Alignment.topLeft,
+              height: 25,
+              child: Text(
+                "목표(kg)",
+                style: subtitle3(),
               ),
             ),
             Container(
               alignment: Alignment.center,
               height: 100,
               child: Text(
-                "${goalWeight}kg",
-                style: h6(),
+                "${goalData}kg",
+                style: h7(),
               ),
             ),
             Expanded(
-              child: TodayGoal(),
+              child: TodayGoal(name,model),
             ),
           ],
         ),

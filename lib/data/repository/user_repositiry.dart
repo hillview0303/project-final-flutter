@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:project_app/_core/constants/http.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
@@ -25,5 +26,23 @@ class UserRepository {
     } else {
       return (responseDTO, "");
     }
+  }
+
+  Future<ResponseDTO> fetchMyPage(String accessToken) async {
+    final response = await dio.get("/api/users/myPage",
+        options: Options(headers: {"Authorization": "${accessToken}"}));
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    return responseDTO;
+  }
+
+  Future<ResponseDTO> profileUpdateForm(String accessToken) async {
+    final response = await dio.get("/api/users/update-form",
+        options: Options(headers: {"Authorization": "${accessToken}"}));
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    return responseDTO;
   }
 }

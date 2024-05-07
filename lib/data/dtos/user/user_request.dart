@@ -27,6 +27,7 @@ class JoinRequestDTO {
       };
 }
 
+
 class LoginRequestDTO {
   final String username;
   final String password;
@@ -38,3 +39,4 @@ class LoginRequestDTO {
         "password": password,
       };
 }
+

@@ -17,7 +17,7 @@ class TodayUserData extends StatelessWidget {
     return Container(
       // color: kAccentColor1,
       width: double.infinity,
-      height: 350,
+      height: 380,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/green.png'),
@@ -32,22 +32,22 @@ class TodayUserData extends StatelessWidget {
           children: [
             SizedBox(height: gap_s),
             Text(
-              "${model.mainDTO.name}님",
+              "${model.mainDTO?.name}님",
               style: h4(mColor: kAccentColor2),
             ),
             const SizedBox(height: gap_s),
             Text(
-              "반갑습니다!",
+              " 반갑습니다!",
               style: subtitle1(mColor: Colors.blueGrey),
             ),
             SizedBox(height: gap_m),
             Row(
               children: [
-                Expanded(child: TodayStatus(name: "체지방", weight: model.mainDTO.fat)),
+                Expanded(child: TodayStatus(name: "체지방", bodydata: model.mainDTO?.fat,goalData : model.mainDTO?.goalFat,model:model)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "골격근", weight: model.mainDTO.muscle)),
+                Expanded(child: TodayStatus(name: "골격근", bodydata: model.mainDTO?.muscle,goalData: model.mainDTO?.goalMuscle,model:model)),
                 SizedBox(width: gap_s),
-                Expanded(child: TodayStatus(name: "체중", weight: model.mainDTO.weight)),
+                Expanded(child: TodayStatus(name: "체중", bodydata: model.mainDTO?.weight,model: model)),
               ],
             ),
           ],

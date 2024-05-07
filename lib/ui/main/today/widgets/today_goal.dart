@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 
 import '../../../../../_core/constants/style.dart';
+import '../viewmodel/today_page_viewmodel.dart';
 import 'today_goal_insert.dart';
 
 class TodayGoal extends StatelessWidget {
-  const TodayGoal({
-    super.key,
-  });
+  final name;
+  TodayPageModel model;
+
+  TodayGoal(this.name,this.model);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class TodayGoal extends StatelessWidget {
                   height: 130,
                   // color: Colors.white,
                   child: Center(
-                    child: TodayGoalInsert(),
+                    child: TodayGoalInsert(name,model),
                   ),
                 ),
               ),

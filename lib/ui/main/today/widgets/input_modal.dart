@@ -75,17 +75,15 @@ void showInputModal(
                   foregroundColor: Colors.white,
                 ),
                 child: Text('저장'),
-                onPressed: () {
+                onPressed: ()  {
                   double? fat = double.tryParse(_fat.text) ?? model?.bodyData.last.fat;
                   double? muscle = double.tryParse(_muscle.text) ?? model?.bodyData.last.muscle;
                   double? weight = double.tryParse(_weight.text) ?? model?.bodyData.last.weight;
 
                   UpdateBodyDataRequestDTO requestDTO =
                       UpdateBodyDataRequestDTO(fat!, muscle!, weight!);
-                  ref
-                      .read(TodayPageProvider.notifier)
-                      .notifyAddBodyData(requestDTO);
-
+                  ref.read(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
+                   ref.read(TodayPageProvider.notifier).notifyInit();
                   Navigator.pop(context);
                 },
               ),

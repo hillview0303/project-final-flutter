@@ -51,11 +51,20 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
       MainDTO mainDTO = MainDTO(fat: responseDTO.body.fat,muscle: responseDTO.body.muscle,weight: responseDTO.body.weight, bodyData: []);
       TodayPageModel model = TodayPageModel(mainDTO: mainDTO, bodyData: []);
       state = model;
+      
 
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("데이터 입력 실패 : ${responseDTO.msg}")));
     }
+  }
+
+  Future<void> resetPage(body) async {
+    TodayPageModel model = state!;
+    MainDTO prevMain = model.mainDTO;
+    List<BodyDataDTO> prevBodyData = model.bodyData;
+
+
   }
 }
 

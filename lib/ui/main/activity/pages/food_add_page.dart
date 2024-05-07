@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_app/_core/constants/constants.dart';
+import '../../../../data/models/activities/food_detail.dart';
 import '../widgets/dashed_border_painter.dart';
 import '../widgets/date_selector.dart';
 import '../widgets/food_info_card.dart';
@@ -17,13 +18,11 @@ class _FoodAddPageState extends State<FoodAddPage> {
   String formattedDate = DateSelector.formatDate(DateTime.now());
   File? _selectedImage;
   String? _selectedMealType = '아침';
-  List<String> foods = ["사과", "바나나", "포도", "오렌지", "치킨 샐러드"];
-  List<String> filteredFoods = [];
+  List<FoodDetail> foodDetails = foodList;
 
   @override
   void initState() {
     super.initState();
-    filteredFoods = foods;
   }
 
   @override
@@ -134,7 +133,7 @@ class _FoodAddPageState extends State<FoodAddPage> {
   }
 
   void _showFoodSearchModal() {
-    FoodSearchModal.show(context, foods, kAccentColor2);
+    FoodSearchModal.show(context, foodList, kAccentColor2);
   }
 
   void _showImageSourceSelection() {

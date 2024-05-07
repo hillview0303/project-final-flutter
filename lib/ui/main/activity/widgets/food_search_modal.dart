@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/ui/main/activity/widgets/search_tab.dart';
-
+import '../../../../data/models/activities/food_detail.dart';
 import 'manual_entry_tab.dart';
 
 class FoodSearchModal {
-  static void show(BuildContext context, List<String> foods, Color accentColor) {
+  static void show(BuildContext context, List<FoodDetail> foods, Color accentColor) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,  // This ensures the modal adapts to the keyboard
@@ -38,8 +38,8 @@ class FoodSearchModal {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            SearchTab(foods: foods, scrollController: scrollController),
-                            ManualEntryTab(accentColor: accentColor, scrollController: scrollController),
+                            SearchTab(foods: foods, scrollController: scrollController), // Updated to pass FoodDetail list
+                            ManualEntryTab(accentColor: accentColor, scrollController: scrollController), // Assumes ManualEntryTab accepts color and controller
                           ],
                         ),
                       ),

@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 
 import '../../../../_core/constants/constants.dart';
+import '../../../../data/models/activities/food_detail.dart';
 
 class SearchTab extends StatefulWidget {
-  final List<String> foods;
+  final List<FoodDetail> foods;
   final ScrollController scrollController;
 
-  const SearchTab({Key? key, required this.foods, required this.scrollController}) : super(key: key);
+  const SearchTab({
+    Key? key,
+    required this.foods,
+    required this.scrollController,
+  }) : super(key: key);
 
   @override
   _SearchTabState createState() => _SearchTabState();
 }
 
 class _SearchTabState extends State<SearchTab> {
-  String selectedFood = "";
+  FoodDetail? selectedFood;
   int portion = 1;
-  List<String> filteredFoods = [];
+  List<FoodDetail> filteredFoods = [];
 
   @override
   void initState() {
@@ -29,7 +34,7 @@ class _SearchTabState extends State<SearchTab> {
       controller: widget.scrollController,
       child: Column(
         children: [
-          if (selectedFood.isNotEmpty)
+          if (selectedFood != null)
             Container(
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.only(bottom: 16.0),
@@ -40,8 +45,11 @@ class _SearchTabState extends State<SearchTab> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('선택한 음식: $selectedFood', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text('칼로리, 탄수화물, 단백질, 지방 정보'),
+                  Text('선택한 음식: ${selectedFood!.title}', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('칼로리: ${selectedFood!.calories} kcal'),
+                  Text('탄수화물: ${selectedFood!.carbs} g'),
+                  Text('단백질: ${selectedFood!.protein} g'),
+                  Text('지방: ${selectedFood!.fats} g'),
                 ],
               ),
             ),
@@ -69,20 +77,22 @@ class _SearchTabState extends State<SearchTab> {
             ),
             onChanged: (String query) {
               setState(() {
-                filteredFoods = widget.foods.where((food) => food.contains(query)).toList();
+                filteredFoods = widget.foods
+                    .where((food) => food.title.contains(query))
+                    .toList();
               });
             },
           ),
           const SizedBox(height: 16.0),
           ...filteredFoods.map((food) => ListTile(
-            title: Text(food),
+            title: Text(food.title),
             onTap: () => setState(() => selectedFood = food),
           )).toList(),
           const SizedBox(height: 16.0),
           ElevatedButton(
-            onPressed: selectedFood.isNotEmpty ? () {
+            onPressed: selectedFood != null ? () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('$selectedFood 등록 완료')),
+                SnackBar(content: Text('${selectedFood!.title} 등록 완료')),
               );
             } : null,
             style: ElevatedButton.styleFrom(

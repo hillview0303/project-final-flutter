@@ -19,6 +19,8 @@ class TodayHeader extends ConsumerWidget {
 
   TodayHeader(this.visibilityState, this.model);
 
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 상태 변경 함수

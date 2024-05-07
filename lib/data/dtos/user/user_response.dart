@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 
 class MainDTO {
   final int id;
@@ -51,7 +52,7 @@ class MyPageDTO {
   final double fat;
   final double muscle;
   final double weight;
-  final List<ConqueredChallengeDTO> conqueredChallenge;
+  final List<ChallengeListDTO> conqueredChallenge;
   final String userImg;
 
   MyPageDTO(
@@ -70,29 +71,7 @@ class MyPageDTO {
         muscle = json["muscle"].toDouble(),
         weight = json["weight"].toDouble(),
         conqueredChallenge = (json["conqueredChallenge"] as List)
-            .map((e) => ConqueredChallengeDTO.fromJson(e))
+            .map((e) => ChallengeListDTO.fromJson(e))
             .toList(),
         userImg = json["userImg"];
-}
-
-class ConqueredChallengeDTO {
-  final int id;
-  final String challengeName; // 챌린지명
-  final String distance; // 거리
-  final bool status;
-  final String badgeImg;
-
-  ConqueredChallengeDTO(
-      {required this.id,
-      required this.challengeName,
-      required this.distance,
-      required this.status,
-      required this.badgeImg});
-
-  ConqueredChallengeDTO.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        challengeName = json["challengeName"],
-        distance = json["distance"],
-        status = json["status"],
-        badgeImg = json["badgeImg"]; // ISO 8601 포맷을 파싱
 }

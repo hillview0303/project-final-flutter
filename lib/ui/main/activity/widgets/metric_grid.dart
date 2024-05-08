@@ -13,7 +13,7 @@ class MetricGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> titles = ['STEPS', 'WATER', 'CALORIES', 'WEIGHT'];
+    List<String> titles = ['STEPS', 'WATER', 'CALORIES', 'BODYDATA'];
     List<Widget> cards = buildActivityCards(context, titles);
 
     return GridView.count(
@@ -61,7 +61,7 @@ class MetricGrid extends StatelessWidget {
     if (activity.walking != null) return 'STEPS';
     if (activity.drinkWater != null) return 'WATER';
     if (activity.kcal != null) return 'CALORIES';
-    if (activity.weight != null) return 'WEIGHT';
+    if (activity.weight != null) return 'BODYDATA';
     return 'DATA MISSING';
   }
 
@@ -96,7 +96,7 @@ class MetricGrid extends StatelessWidget {
       case 'CALORIES':
         Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
         break;
-      case 'WEIGHT':
+      case 'BODYDATA':
         Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
         break;
     }

@@ -22,7 +22,7 @@ class MetricCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isCaloriesCard = title == 'CALORIES' && percentage != null;
-    final bool isWeightCard = title == 'WEIGHT';
+    final bool isWeightCard = title == 'BODYDATA';
     final bool isWaterCard = title == 'WATER';
     final bool isStepsCard = title == 'STEPS';
     final Color backgroundColor = kAccentColor2;

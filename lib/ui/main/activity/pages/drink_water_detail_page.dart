@@ -91,15 +91,16 @@ class _DrinkWaterDetailPageState extends State<DrinkWaterDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('물 마시기'),
-        backgroundColor: TColor.white,
+        title: Text('물 마시기' , style: TextStyle(color: TColor.white)),
+        backgroundColor: kAccentColor2,
+        iconTheme: IconThemeData(color: TColor.white),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             WaterIntakeGraph(),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 26.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

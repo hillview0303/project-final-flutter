@@ -19,11 +19,11 @@ class OngoingChallengePercent extends StatelessWidget {
       children: [
         Expanded(
           child: Text("$progressText/100%",
-              style: const TextStyle(fontSize: 15)),
+              style: const TextStyle(fontSize: 13)),
         ),
         Expanded(
           child: Text("현재 $currentSteps걸음/총 $totalSteps걸음",
-              style: const TextStyle(fontSize: 15)),
+              style: const TextStyle(fontSize: 13)),
         ),
       ],
     );

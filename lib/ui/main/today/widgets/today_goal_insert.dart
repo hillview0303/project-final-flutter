@@ -46,18 +46,18 @@ class TodayGoalInsert extends ConsumerWidget {
             child: ElevatedButton(
               onPressed: () {
 
-                double? formatData = double.tryParse(_bodydata.text) ?? model?.bodyData?.last.fat;
-
-                if(name=="체지방"){
-                  ref.watch(TodayPageProvider.notifier).notifyAddFat(AddGoalDataRequestDTO(goalFat: formatData));
-                }else if(name=="골격근"){
-                  ref.watch(TodayPageProvider.notifier).notifyAddMuscle(AddGoalDataRequestDTO(goalMuscle: formatData));
-                }else if(name=="체중"){
-                  ref.watch(TodayPageProvider.notifier).notifyAddWeight(AddGoalDataRequestDTO(goalWeight: formatData));
-                }
-
-                ref.watch(TodayPageProvider.notifier).notifyInit();
-                Navigator.pop(context);
+                // double? formatData = double.tryParse(_bodydata.text) ?? model?.bodyData?.last.fat;
+                //
+                // if(name=="체지방"){
+                //   ref.watch(TodayPageProvider.notifier).notifyAddFat(AddGoalDataRequestDTO(goalFat: formatData));
+                // }else if(name=="골격근"){
+                //   ref.watch(TodayPageProvider.notifier).notifyAddMuscle(AddGoalDataRequestDTO(goalMuscle: formatData));
+                // }else if(name=="체중"){
+                //   ref.watch(TodayPageProvider.notifier).notifyAddWeight(AddGoalDataRequestDTO(goalWeight: formatData));
+                // }
+                //
+                // ref.watch(TodayPageProvider.notifier).notifyInit();
+                // Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: kAccentColor2,

@@ -39,7 +39,7 @@ class BodyDataDTO {
         weight = json["weight"].toDouble(),
         date = DateFormat("yyyy-MM-dd")
             .parse(json["date"], true)
-            .toLocal(); // ISO 8601 포맷을 파싱
+            .toLocal();
 }
 
 class AddBodyDTO{

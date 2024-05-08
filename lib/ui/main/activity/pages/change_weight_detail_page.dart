@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import '../widgets/fat_tab.dart';
 import '../widgets/muscle_mass_tab.dart';
 import '../widgets/weight_tab.dart';
 
-class ChangeWeightDetailPage extends StatelessWidget {
+class ChangeWeightDetailPage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(

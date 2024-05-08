@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
-import 'package:project_app/data/dtos/user/user_response.dart';
 import 'package:project_app/ui/main/my/viewmodel/profile_edit_view_model.dart';
 
 import '../../../../data/dtos/my/my_response.dart';
@@ -14,11 +13,10 @@ class EditProfileForm extends ConsumerWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ProfileEditViewModel? profileEditViewModel = ref.read(
-        profileEditProvider.notifier);
+    ProfileEditViewModel? profileEditViewModel =
+        ref.read(profileEditProvider.notifier);
 
     final _nameController = TextEditingController(text: reqDTO.name);
     final _passwordController = TextEditingController();
@@ -90,11 +88,17 @@ class EditProfileForm extends ConsumerWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    if(_passwordController.text.trim() == _confirmPasswordController.text.trim()){
-                      UserUpdateDTO updateDTO = UserUpdateDTO(id: reqDTO.id, name: _nameController.text.trim(), phone: _phoneController.text.trim(), height: double.parse(_heightController.text.trim()), userImg: userImg)
-                    }else{
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("비밀번호가 다릅니다.")));
+                    if (_passwordController.text.trim() ==
+                        _confirmPasswordController.text.trim()) {
+                      UserUpdateDTO updateDTO = UserUpdateDTO(
+                          id: reqDTO.id,
+                          name: _nameController.text.trim(),
+                          phone: _phoneController.text.trim(),
+                          height: double.parse(_heightController.text.trim()));
+                      profileEditViewModel!.updateProfile(updateDTO);
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text("비밀번호가 다릅니다.")));
                     }
                   }
                 },

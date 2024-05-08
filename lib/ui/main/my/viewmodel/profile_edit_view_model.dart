@@ -28,7 +28,7 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
         .fetchUpdate(updateDTO, sessionStore.accessToken!);
 
     if (responseDTO.status == 200) {
-      ref
+      await ref
           .read(myPageProvider.notifier)
           .updatedUser(ProfileUpdateFormDTO.fromJson(responseDTO.body));
 

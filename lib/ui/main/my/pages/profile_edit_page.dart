@@ -30,7 +30,7 @@ class ProfileEditPage extends ConsumerWidget {
         ),
         body: ListView(
           children: [
-            EditImage(model.profileUpdateFormDTO.userImg),
+            EditImage(model.profileUpdateFormDTO.userImg!),
             EditProfileForm(model.profileUpdateFormDTO),
           ],
         ),

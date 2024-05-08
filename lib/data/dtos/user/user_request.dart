@@ -44,14 +44,13 @@ class UserUpdateDTO {
   final String name;
   final String phone;
   final double height;
-  final String userImg;
 
-  UserUpdateDTO(
-      {required this.id,
-      required this.name,
-      required this.phone,
-      required this.height,
-      required this.userImg});
+  UserUpdateDTO({
+    required this.id,
+    required this.name,
+    required this.phone,
+    required this.height,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -59,7 +58,6 @@ class UserUpdateDTO {
       "name": this.name,
       "phone": this.phone,
       "height": this.height,
-      "userImg": this.userImg,
     };
   }
 }

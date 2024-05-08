@@ -28,7 +28,7 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
         muscle: prevModel.myPageDTO.muscle,
         weight: prevModel.myPageDTO.weight,
         conqueredChallenge: prevModel.myPageDTO.conqueredChallenge,
-        userImg: updateDTO.userImg);
+        userImg: prevModel.myPageDTO.userImg);
 
     state = MyPageModel(myPageDTO);
   }

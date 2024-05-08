@@ -11,12 +11,12 @@ class MyPageDTO {
 
   MyPageDTO(
       {required this.id,
-        required this.name,
-        required this.fat,
-        required this.muscle,
-        required this.weight,
-        required this.conqueredChallenge,
-        required this.userImg});
+      required this.name,
+      required this.fat,
+      required this.muscle,
+      required this.weight,
+      required this.conqueredChallenge,
+      required this.userImg});
 
   MyPageDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -30,25 +30,24 @@ class MyPageDTO {
         userImg = json["userImg"];
 }
 
-
 class ProfileUpdateFormDTO {
   final int id;
   final String name;
   final String phone;
   final double height;
-  final String userImg;
+  final String? userImg;
 
   ProfileUpdateFormDTO(
       {required this.id,
-        required this.name,
-        required this.phone,
-        required this.height,
-        required this.userImg});
+      required this.name,
+      required this.phone,
+      required this.height,
+      this.userImg});
 
   ProfileUpdateFormDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         name = json["name"],
         phone = json["phone"],
         height = json["height"],
-        userImg = json["userImg"];
+        userImg = json["userImg"] ?? "";
 }

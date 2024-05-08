@@ -27,10 +27,6 @@ class TodayRepository {
     final response = await dio.post("/api/body-date/save",
         options: Options(headers: {"Authorization": "${accessToken}"}),data: requestDTO.toJson());
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
-    print("test: ${responseDTO.status}");
-
-
     return responseDTO ;
   }
 

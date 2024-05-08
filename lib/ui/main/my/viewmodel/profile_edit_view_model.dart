@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
+import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/repository/user_repositiry.dart';
 import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
 
 import '../../../../data/dtos/my/my_response.dart';
-
+import 'my_page_view_model.dart';
 
 class ProfileEditModel {
   ProfileUpdateFormDTO profileUpdateFormDTO;
@@ -20,13 +21,32 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
 
   ProfileEditViewModel(super._state, this.ref);
 
+  Future<void> updateProfile(UserUpdateDTO updateDTO) async {
+    SessionStore sessionStore = ref.read(sessionProvider);
+
+    ResponseDTO responseDTO = await UserRepository()
+        .fetchUpdate(updateDTO, sessionStore.accessToken!);
+
+    if (responseDTO.status == 200) {
+      ref
+          .read(myPageProvider.notifier)
+          .updatedUser(ProfileUpdateFormDTO.fromJson(responseDTO.body));
+
+      Navigator.pop(mContext!);
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("프로필 수정 실패 : ${responseDTO.msg}")));
+    }
+  }
+
   Future<void> notifyInit() async {
     SessionStore sessionStore = ref.read(sessionProvider);
 
     ResponseDTO responseDTO =
-    await UserRepository().profileUpdateForm(sessionStore.accessToken!);
+        await UserRepository().profileUpdateForm(sessionStore.accessToken!);
 
-    ProfileEditModel myPageModel = ProfileEditModel(ProfileUpdateFormDTO.fromJson(responseDTO.body));
+    ProfileEditModel myPageModel =
+        ProfileEditModel(ProfileUpdateFormDTO.fromJson(responseDTO.body));
     if (responseDTO.status == 200) {
       state = myPageModel;
     } else {
@@ -36,8 +56,9 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
   }
 }
 
-final profileEditProvider = StateNotifierProvider<ProfileEditViewModel, ProfileEditModel?>(
-      (ref) {
+final profileEditProvider =
+    StateNotifierProvider<ProfileEditViewModel, ProfileEditModel?>(
+  (ref) {
     return ProfileEditViewModel(null, ref)..notifyInit();
   },
 );

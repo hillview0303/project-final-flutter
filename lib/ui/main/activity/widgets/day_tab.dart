@@ -5,7 +5,7 @@ class DayTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Example data and layout for Day Tab
-    int currentSteps = 15000;  // Example step count for the day
+    int currentSteps = 15000;
 
     return Column(
       children: <Widget>[

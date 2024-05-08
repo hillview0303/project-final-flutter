@@ -13,46 +13,51 @@ class MetricGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (activities.isEmpty) {
-      return Center(
-        child: Text(
-          "데이터가 없습니다",
-          style: TextStyle(fontSize: 24, color: Colors.grey[800]),
-        ),
-      );
-    } else {
-      List<Widget> cards = buildActivityCards(context);
-      return GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: (1 / 1.5),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        padding: EdgeInsets.all(10),
-        children: cards,
-      );
-    }
+    List<String> titles = ['STEPS', 'WATER', 'CALORIES', 'WEIGHT'];
+    List<Widget> cards = buildActivityCards(context, titles);
+
+    return GridView.count(
+      crossAxisCount: 2,
+      childAspectRatio: (1 / 1.5),
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      padding: EdgeInsets.all(10),
+      children: cards,
+    );
   }
 
-  List<Widget> buildActivityCards(BuildContext context) {
-    return activities.map((activity) {
+  List<Widget> buildActivityCards(BuildContext context, List<String> titles) {
+    List<Widget> cards = [];
+    List<String> missingTitles = List.from(titles);
+
+    cards = activities.map((activity) {
+      String title = getTitleForActivity(activity);
+      missingTitles.remove(title);
+
       return MetricCard(
-        title: getTitleForActivity(activity),
+        title: title,
         subtitle: getSubtitleForActivity(activity),
         trailing: formatTimeAgo(activity.createdAt),
         percentage: 40,
         onTap: () => navigateToDetailPage(context, activity),
-        hasData: checkDataPresence(activity),
+        hasData: true,
       );
     }).toList();
-  }
 
+    for (var title in missingTitles) {
+      cards.add(MetricCard(
+        title: title,
+        subtitle: '데이터가 없습니다',
+        trailing: '',
+        onTap: () => navigateToDetailPageForMissingData(context, title),  // 변경된 부분
+        hasData: false,
+      ));
+    }
 
-  bool checkDataPresence(Activity activity) {
-    return activity.walking != null || activity.drinkWater != null || activity.kcal != null || activity.weight != null;
+    return cards;
   }
 
   String getTitleForActivity(Activity activity) {
-    // Example logic, needs to be customized based on actual data
     if (activity.walking != null) return 'STEPS';
     if (activity.drinkWater != null) return 'WATER';
     if (activity.kcal != null) return 'CALORIES';
@@ -61,7 +66,6 @@ class MetricGrid extends StatelessWidget {
   }
 
   String getSubtitleForActivity(Activity activity) {
-    // Example logic, you should adjust it according to your data structure
     if (activity.walking != null) return '${activity.walking} steps';
     if (activity.drinkWater != null) return '${activity.drinkWater} cups';
     if (activity.kcal != null) return '${activity.kcal} kcal';
@@ -70,7 +74,6 @@ class MetricGrid extends StatelessWidget {
   }
 
   void navigateToDetailPage(BuildContext context, Activity activity) {
-    // Navigate to the appropriate detail page based on activity data
     if (activity.walking != null) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
     } else if (activity.drinkWater != null) {
@@ -79,6 +82,23 @@ class MetricGrid extends StatelessWidget {
       Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
     } else if (activity.weight != null) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
+    }
+  }
+
+  void navigateToDetailPageForMissingData(BuildContext context, String title) {
+    switch (title) {
+      case 'STEPS':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
+        break;
+      case 'WATER':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
+        break;
+      case 'CALORIES':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
+        break;
+      case 'WEIGHT':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
+        break;
     }
   }
 

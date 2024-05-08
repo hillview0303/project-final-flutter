@@ -51,9 +51,6 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
 
     if (responseDTO.status == 200) {
       AddBodyDTO addBodyDTO = AddBodyDTO.fromJson(responseDTO.body);
-      print("111 : ${addBodyDTO.runtimeType}");
-      print("222 : ${addBodyDTO.fat}");
-      print("333 : ${addBodyDTO.muscle}");
       TodayPageModel model = TodayPageModel(
           mainDTO: state!.mainDTO,
           bodyData: state!.bodyData,
@@ -62,46 +59,66 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
       state = model;
       Navigator.pop(mContext!);
 
+    }else{
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
     }
   }
 
+  Future<void> notifyAddFat(AddGoalFatRequestDTO requestDTO) async {
+    SessionStore sessionStore = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await TodayRepository()
+        .fetchAddGoalFat(requestDTO, sessionStore.accessToken!);
 
+    print("1111 : ${responseDTO.status}");
+    print("2222 : ${responseDTO.body}");
+    if(responseDTO.status == 200){
+      GoalFatDTO goalFatDTO = GoalFatDTO.fromJson(responseDTO.body);
+      print("44444 : ${goalFatDTO.goalFat}");
+      print("44444 : ${goalFatDTO.runtimeType}");
+      TodayPageModel model =TodayPageModel(goalFatDTO: goalFatDTO, mainDTO: state!.mainDTO, bodyData:state!.bodyData);
+      state = model;
+      Navigator.pop(mContext!);
 
-  // Future<void> notifyAddFat(AddGoalDataRequestDTO requestDTO) async {
-  //   SessionStore sessionStore = ref.read(sessionProvider);
-  //   ResponseDTO responseDTO = await TodayRepository()
-  //       .fetchAddGoalFat(requestDTO, sessionStore.accessToken!);
-  //
-  //   if(responseDTO.status == 200){
-  //     GoalFatDTO goalFatDTO = GoalFatDTO(responseDTO.body.fat);
-  //     TodayPageModel model =TodayPageModel(goalFatDTO: goalFatDTO);
-  //     state = model;
-  //   }
-  // }
-  //
-  // Future<void> notifyAddMuscle(AddGoalDataRequestDTO requestDTO) async {
-  //   SessionStore sessionStore = ref.read(sessionProvider);
-  //   ResponseDTO responseDTO = await TodayRepository()
-  //       .fetchAddGoalMuscle(requestDTO, sessionStore.accessToken!);
-  //
-  //   if(responseDTO.status == 200){
-  //     GoalMuscleDTO goalMuscleDTO = GoalMuscleDTO(responseDTO.body.muscle);
-  //     TodayPageModel model =TodayPageModel(goalMuscleDTO: goalMuscleDTO);
-  //     state = model;
-  //   }
-  // }
-  //
-  // Future<void> notifyAddWeight(AddGoalDataRequestDTO requestDTO) async {
-  //   SessionStore sessionStore = ref.read(sessionProvider);
-  //   ResponseDTO responseDTO = await TodayRepository()
-  //       .fetchAddGoalWeight(requestDTO, sessionStore.accessToken!);
-  //
-  //   if(responseDTO.status == 200){
-  //     GoalWeightDTO goalWeightDTO = GoalWeightDTO(responseDTO.body.weight);
-  //     TodayPageModel model =TodayPageModel(goalWeightDTO: goalWeightDTO);
-  //     state = model;
-  //   }
-  // }
+    }else{
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
+    }
+  }
+
+  Future<void> notifyAddMuscle(AddGoalMuscleRequestDTO requestDTO) async {
+    SessionStore sessionStore = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await TodayRepository()
+        .fetchAddGoalMuscle(requestDTO, sessionStore.accessToken!);
+
+    if(responseDTO.status == 200){
+      GoalMuscleDTO goalMuscleDTO = GoalMuscleDTO.fromJson(responseDTO.body);
+      TodayPageModel model =TodayPageModel(goalMuscleDTO: goalMuscleDTO, mainDTO: state!.mainDTO, bodyData:state!.bodyData);
+      state = model;
+      Navigator.pop(mContext!);
+
+    }else{
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
+    }
+  }
+
+  Future<void> notifyAddWeight(AddGoalWeightRequestDTO requestDTO) async {
+    SessionStore sessionStore = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await TodayRepository()
+        .fetchAddGoalWeight(requestDTO, sessionStore.accessToken!);
+
+    if(responseDTO.status == 200){
+      GoalWeightDTO goalWeightDTO = GoalWeightDTO.fromJson(responseDTO.body);
+      TodayPageModel model =TodayPageModel(goalWeightDTO: goalWeightDTO, mainDTO: state!.mainDTO, bodyData:state!.bodyData);
+      state = model;
+      Navigator.pop(mContext!);
+
+    }else{
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
+    }
+  }
 }
 
 // 창고 관리자

@@ -9,14 +9,26 @@ class AddBodyDataRequestDTO {
       {"fat": fat, "muscle": muscle, "weight": weight};
 }
 
-class AddGoalDataRequestDTO{
 
+class AddGoalFatRequestDTO {
   final double? goalFat;
+
+  AddGoalFatRequestDTO(this.goalFat);
+
+  Map<String, dynamic> toJson() => {"goalFat": goalFat};
+}
+
+class AddGoalMuscleRequestDTO {
   final double? goalMuscle;
+
+  AddGoalMuscleRequestDTO(this.goalMuscle);
+
+  Map<String, dynamic> toJson() => {"goalMuscle": goalMuscle};
+}
+class AddGoalWeightRequestDTO {
   final double? goalWeight;
 
-  AddGoalDataRequestDTO({this.goalFat, this.goalMuscle, this.goalWeight});
+  AddGoalWeightRequestDTO(this.goalWeight);
 
-  Map<String, dynamic> toJson() =>
-      {"goalFat": goalFat, "goalMuscle": goalMuscle, "goalWeight": goalWeight};
+  Map<String, dynamic> toJson() => {"goalWeight": goalWeight};
 }

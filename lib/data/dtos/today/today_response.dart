@@ -5,11 +5,12 @@ class MainDTO {
   final String name;
   final double goalFat;
   final double goalMuscle;
+  final double goalWeight;
   final double fat;
   final double muscle;
   final double weight;
 
-  MainDTO(this.id, this.name, this.goalFat, this.goalMuscle, this.fat,
+  MainDTO(this.id, this.name, this.goalFat, this.goalMuscle,this.goalWeight, this.fat,
       this.muscle, this.weight);
 
   MainDTO.fromJson(Map<String, dynamic> json)
@@ -18,6 +19,7 @@ class MainDTO {
         fat = json["fat"].toDouble(),
         muscle = json["muscle"].toDouble(),
         weight = json["weight"].toDouble(),
+        goalWeight = json["goalWeight"].toDouble(),
         goalMuscle = json["goalMuscle"].toDouble(),
         goalFat = json["goalFat"].toDouble();
 }

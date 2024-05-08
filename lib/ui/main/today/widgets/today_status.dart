@@ -13,7 +13,7 @@ class TodayStatus extends StatelessWidget {
   TodayPageModel model;
 
 
-  TodayStatus({required this.name, required this.bodydata, this.goalData ="-",required this.model});
+  TodayStatus({required this.name,  this.bodydata="-", this.goalData ="-",required this.model});
 
   @override
   Widget build(BuildContext context) {

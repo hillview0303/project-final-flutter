@@ -10,30 +10,42 @@ class OngoingChallengeDetailPage extends StatelessWidget {
   const OngoingChallengeDetailPage({Key? key, required this.challenge})
       : super(key: key);
 
+  double _calculateProgress(int currentSteps, int totalSteps) {
+    return currentSteps / totalSteps;
+  }
+
   @override
   Widget build(BuildContext context) {
+    int currentSteps = 10000; // 임의의 값으로 테스트
+    int totalSteps = 10000;
+    // int currentSteps = challenge!.currentSteps!; 수정 필요
+    // int totalSteps = challenge!.totalSteps!;
+    double progress = _calculateProgress(currentSteps, totalSteps);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(challenge!.challengeName!),
       ),
       body: SingleChildScrollView(
-        // Ensure the content is scrollable
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              OngoingChallengeImg(),
-              SizedBox(height: 20),
-              Text("${challenge!.subtitle}", style: TextStyle(fontSize: 20)),
-              SizedBox(height: 20),
+              OngoingChallengeImg(progress: progress), // 진행 상황에 따른 이미지 표시
+              const SizedBox(height: 20),
+              Text("${challenge!.subtitle}", style: const TextStyle(fontSize: 20)),
+              const SizedBox(height: 20),
               LinearProgressIndicator(
-                value: 0.5, // Example progress value
+                value: progress, // 진행 상황을 백분율로 표현
                 backgroundColor: Colors.grey[300],
                 color: Theme.of(context).primaryColor,
               ),
-              SizedBox(height: 20),
-              OngoingChallengePercent(),
+              const SizedBox(height: 20),
+              OngoingChallengePercent(
+                currentSteps: currentSteps,
+                totalSteps: totalSteps,
+              ),
             ],
           ),
         ),

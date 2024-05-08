@@ -1,47 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
-import 'package:project_app/data/dtos/user/user_response.dart';
+import 'package:project_app/data/dtos/user/user_request.dart';
+import 'package:project_app/ui/main/my/viewmodel/profile_edit_view_model.dart';
 
 import '../../../../data/dtos/my/my_response.dart';
 
-class EditProfileForm extends StatefulWidget {
+class EditProfileForm extends ConsumerWidget {
   final ProfileUpdateFormDTO reqDTO;
-
 
   EditProfileForm(this.reqDTO);
 
-  @override
-  _EditProfileFormState createState() => _EditProfileFormState(reqDTO);
-}
-
-class _EditProfileFormState extends State<EditProfileForm> {
-  final ProfileUpdateFormDTO reqDTO;
-
-  _EditProfileFormState(this.reqDTO) {
-    _nameController.text = reqDTO.name ?? '';
-    _phoneController.text = reqDTO.phone ?? '';
-    _heightController.text = "${reqDTO.height}" ?? '';
-  }
-
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _heightController = TextEditingController();
 
   @override
-  void dispose() {
-    _nameController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    _phoneController.dispose();
-    _heightController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    ProfileEditViewModel? profileEditViewModel =
+        ref.read(profileEditProvider.notifier);
 
-  @override
-  Widget build(BuildContext context) {
+    final _nameController = TextEditingController(text: reqDTO.name);
+    final _passwordController = TextEditingController();
+    final _confirmPasswordController = TextEditingController();
+    final _phoneController = TextEditingController(text: reqDTO.phone);
+    final _heightController = TextEditingController(text: "${reqDTO.height}");
+
     return Form(
       key: _formKey,
       child: Column(
@@ -101,11 +83,23 @@ class _EditProfileFormState extends State<EditProfileForm> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: SizedBox(
-              width: double.infinity,  // Set the button width to full width of the container
+              width: double.infinity,
+              // Set the button width to full width of the container
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Handle the form submission
+                    if (_passwordController.text.trim() ==
+                        _confirmPasswordController.text.trim()) {
+                      UserUpdateDTO updateDTO = UserUpdateDTO(
+                          id: reqDTO.id,
+                          name: _nameController.text.trim(),
+                          phone: _phoneController.text.trim(),
+                          height: double.parse(_heightController.text.trim()));
+                      profileEditViewModel!.updateProfile(updateDTO);
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text("비밀번호가 다릅니다.")));
+                    }
                   }
                 },
                 child: Text('저장'),

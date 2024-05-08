@@ -7,7 +7,6 @@ import 'package:project_app/main.dart';
 
 import '../../../../data/dtos/my/my_response.dart';
 
-
 class MyPageModel {
   MyPageDTO myPageDTO;
 
@@ -19,6 +18,20 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
   Ref ref;
 
   MyPageViewModel(super._state, this.ref);
+
+  Future<void> updatedUser(ProfileUpdateFormDTO updateDTO) async {
+    MyPageModel prevModel = state!;
+    MyPageDTO myPageDTO = MyPageDTO(
+        id: updateDTO.id,
+        name: updateDTO.name,
+        fat: prevModel.myPageDTO.fat,
+        muscle: prevModel.myPageDTO.muscle,
+        weight: prevModel.myPageDTO.weight,
+        conqueredChallenge: prevModel.myPageDTO.conqueredChallenge,
+        userImg: prevModel.myPageDTO.userImg);
+
+    state = MyPageModel(myPageDTO);
+  }
 
   Future<void> notifyInit() async {
     SessionStore sessionStore = ref.read(sessionProvider);

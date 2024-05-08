@@ -10,7 +10,7 @@ class ChallengeImage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Colors.teal.withOpacity(0.5),  // 아이콘 배경도 반투명하게
+        color: Colors.teal.withOpacity(0.5),
         shape: BoxShape.circle,
       ),
       child: ClipOval(

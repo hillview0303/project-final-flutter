@@ -23,11 +23,12 @@ class OngoingChallengeImg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      _getGifPath(progress), // 진행 상황에 따라 이미지를 동적으로 선택
-      height: 500.0,
+    return SizedBox(
       width: double.infinity,
-      fit: BoxFit.cover,
+      child: Image.asset(
+        _getGifPath(progress), // 진행 상황에 따라 이미지를 동적으로 선택
+        fit: BoxFit.contain,
+      ),
     );
   }
 }

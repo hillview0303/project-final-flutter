@@ -60,28 +60,28 @@ Widget buildWeightIndicator(String label, String value) {
 }
 
 Widget buildWeightGraph(Color lineColor, List<Color> gradientColors, ChangeWeightModel model, String type) {
-  List<FlSpot> spots = [];
+  List<FlSpot> bodyChart = [];
 
   if (type == "fat") {
     int dataLength = model.fatTimeLineDTO!.length;
     int startIndex = max(0, dataLength - 10); // 마지막 10개 데이터의 시작 인덱스
     for (int i = dataLength - 1; i >= startIndex; i--) {
       var item = model.fatTimeLineDTO![i];
-      spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.fat));
+      bodyChart.add(FlSpot((dataLength - 1 - i).toDouble(), item.fat));
     }
   } else if (type == "muscle") {
     int dataLength = model.muscleTimeLineDTO!.length;
     int startIndex = max(0, dataLength - 10); // 마지막 10개 데이터의 시작 인덱스
     for (int i = dataLength - 1; i >= startIndex; i--) {
       var item = model.muscleTimeLineDTO![i];
-      spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.muscle));
+      bodyChart.add(FlSpot((dataLength - 1 - i).toDouble(), item.muscle));
     }
   } else if (type == "weight") {
     int dataLength = model.weightTimeLineDTO!.length;
     int startIndex = max(0, dataLength - 10); // 마지막 10개 데이터의 시작 인덱스
     for (int i = dataLength - 1; i >= startIndex; i--) {
       var item = model.weightTimeLineDTO![i];
-      spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.weight));
+      bodyChart.add(FlSpot((dataLength - 1 - i).toDouble(), item.weight));
     }
   }
 
@@ -99,7 +99,7 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors, ChangeWeigh
         maxY: 100,
         lineBarsData: [
           LineChartBarData(
-            spots: spots,
+            spots: bodyChart,
             isCurved: true,
             color: lineColor,
             barWidth: 4,

@@ -24,7 +24,7 @@ class ChallengeListViewModel extends StateNotifier<ChallengeListModel?> {
   Future<void> notifyInit() async {
     SessionStore sessionStore = ref.read(sessionProvider);
     ResponseDTO responseDTO =
-        await ChallengeRepository().getChallengeList(sessionStore.accessToken!);
+        await ChallengeRepository().getChallengeList();
 
     ChallengeResponseDTO challengeResponseDTO =
         ChallengeResponseDTO.fromJson(responseDTO.body);

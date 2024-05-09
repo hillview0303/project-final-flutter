@@ -24,10 +24,8 @@ class ChangeWeightViewModel extends StateNotifier<ChangeWeightModel?> {
   ChangeWeightViewModel(super.state, this.ref);
 
   Future<void> notifyInit() async {
-    SessionStore sessionStore = ref.read(sessionProvider);
-
     ResponseDTO responseDTO =
-        await ActivityRepository().fetchChangeWeight(sessionStore.accessToken!);
+        await ActivityRepository().fetchChangeWeight();
     if(responseDTO.status == 200){
       state = responseDTO.body;
     }else{

@@ -21,7 +21,7 @@ Future<void> fetchMyPage() async {
   await UserRepository().fetchLogin(loginRequestDTO);
 
   var a =
-  await UserRepository().fetchMyPage(accessToken);
+  await UserRepository().fetchMyPage();
 
   print(a.msg);
 }

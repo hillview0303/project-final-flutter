@@ -30,10 +30,9 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
   TodayPageViewModel(super.state, this.ref);
 
   Future<void> notifyInit() async {
-    SessionStore sessionStore = ref.read(sessionProvider);
 
     ResponseDTO responseDTO =
-    await TodayRepository().fetchMainPage(sessionStore.accessToken!);
+    await TodayRepository().fetchMainPage();
 
     if (responseDTO.status == 200) {
       state = responseDTO.body;
@@ -44,9 +43,7 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
   }
 
   Future<void> notifyAddBodyData(AddBodyDataRequestDTO requestDTO) async {
-    SessionStore sessionStore = ref.read(sessionProvider);
-    ResponseDTO responseDTO = await TodayRepository()
-        .fetchUpdateBodyData(requestDTO, sessionStore.accessToken!);
+    ResponseDTO responseDTO = await TodayRepository().fetchUpdateBodyData(requestDTO);
 
 
     if (responseDTO.status == 200) {
@@ -66,16 +63,10 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
   }
 
   Future<void> notifyAddFat(AddGoalFatRequestDTO requestDTO) async {
-    SessionStore sessionStore = ref.read(sessionProvider);
-    ResponseDTO responseDTO = await TodayRepository()
-        .fetchAddGoalFat(requestDTO, sessionStore.accessToken!);
+    ResponseDTO responseDTO = await TodayRepository().fetchAddGoalFat(requestDTO);
 
-    print("1111 : ${responseDTO.status}");
-    print("2222 : ${responseDTO.body}");
     if(responseDTO.status == 200){
       GoalFatDTO goalFatDTO = GoalFatDTO.fromJson(responseDTO.body);
-      print("44444 : ${goalFatDTO.goalFat}");
-      print("44444 : ${goalFatDTO.runtimeType}");
       TodayPageModel model =TodayPageModel(goalFatDTO: goalFatDTO, mainDTO: state!.mainDTO, bodyData:state!.bodyData);
       state = model;
       Navigator.pop(mContext!);
@@ -89,7 +80,7 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
   Future<void> notifyAddMuscle(AddGoalMuscleRequestDTO requestDTO) async {
     SessionStore sessionStore = ref.read(sessionProvider);
     ResponseDTO responseDTO = await TodayRepository()
-        .fetchAddGoalMuscle(requestDTO, sessionStore.accessToken!);
+        .fetchAddGoalMuscle(requestDTO);
 
     if(responseDTO.status == 200){
       GoalMuscleDTO goalMuscleDTO = GoalMuscleDTO.fromJson(responseDTO.body);
@@ -104,9 +95,7 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
   }
 
   Future<void> notifyAddWeight(AddGoalWeightRequestDTO requestDTO) async {
-    SessionStore sessionStore = ref.read(sessionProvider);
-    ResponseDTO responseDTO = await TodayRepository()
-        .fetchAddGoalWeight(requestDTO, sessionStore.accessToken!);
+    ResponseDTO responseDTO = await TodayRepository().fetchAddGoalWeight(requestDTO);
 
     if(responseDTO.status == 200){
       GoalWeightDTO goalWeightDTO = GoalWeightDTO.fromJson(responseDTO.body);

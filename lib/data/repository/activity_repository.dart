@@ -8,7 +8,7 @@ import '../dtos/response_dto.dart';
 
 class ActivityRepository{
 
-  Future<ResponseDTO> fetchChangeWeight(String accessToken) async {
+  Future<ResponseDTO> fetchChangeWeight() async {
     final response = await dio.get("/api/activities/body-date");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

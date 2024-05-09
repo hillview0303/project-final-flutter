@@ -53,10 +53,9 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
   }
 
   Future<void> updateProfile(UserUpdateDTO updateDTO) async {
-    SessionStore sessionStore = ref.read(sessionProvider);
 
     ResponseDTO responseDTO = await UserRepository()
-        .fetchUpdate(updateDTO, sessionStore.accessToken!);
+        .fetchUpdate(updateDTO);
 
     if (responseDTO.status == 200) {
       await ref
@@ -71,10 +70,9 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
   }
 
   Future<void> notifyInit() async {
-    SessionStore sessionStore = ref.read(sessionProvider);
 
     ResponseDTO responseDTO =
-        await UserRepository().profileUpdateForm(sessionStore.accessToken!);
+        await UserRepository().profileUpdateForm();
 
     ProfileEditModel myPageModel =
         ProfileEditModel(ProfileUpdateFormDTO.fromJson(responseDTO.body));

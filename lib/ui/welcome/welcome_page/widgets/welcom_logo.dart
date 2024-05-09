@@ -12,7 +12,7 @@ class WelcomeLogo extends StatelessWidget {
       child: Center(
         child: Image.asset(
           'assets/images/logo.png',
-          fit: BoxFit.contain,  // 이미지를 비율에 맞춰 조절
+          fit: BoxFit.contain,
         ),
       ),
     );

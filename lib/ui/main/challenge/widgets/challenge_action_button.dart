@@ -41,12 +41,12 @@ class ChallengeActionButton extends ConsumerWidget {
     } else if (status == true) {
       return Row(
         children: <Widget>[
-          Icon(Icons.check_circle, color: Colors.green, size: 30),
-          SizedBox(width: 8),
+          Icon(Icons.check_circle, color: Colors.green.withOpacity(0.7), size: 30),
+          SizedBox(width: gap_s),
           Text(
             '정복한 챌린지입니다',
             style: TextStyle(
-              color: Colors.green,
+              color: Colors.green.withOpacity(0.7),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -58,12 +58,12 @@ class ChallengeActionButton extends ConsumerWidget {
         children: [
           Row(
             children: <Widget>[
-              Icon(Icons.dangerous_outlined, color: Colors.red, size: 30),
-              SizedBox(width: 8),
+              Icon(Icons.dangerous_outlined, color: Colors.red.withOpacity(0.7), size: 30),
+              SizedBox(width: gap_s),
               Text(
                 '실패한 챌린지입니다',
                 style: TextStyle(
-                  color: Colors.red,
+                  color: Colors.red.withOpacity(0.7),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),

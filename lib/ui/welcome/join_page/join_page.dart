@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/store/global_store.dart';
 import 'package:project_app/data/store/session_store.dart';
@@ -53,7 +54,7 @@ class JoinPage extends ConsumerWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("닫기", style: TextStyle(color: Colors.teal)),
+              child: const Text("닫기", style: TextStyle(color: kAccentColor2)),
             ),
           ],
           backgroundColor: Colors.teal.shade50,

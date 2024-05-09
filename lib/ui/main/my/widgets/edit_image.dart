@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
 
 class EditImage extends StatefulWidget {
@@ -109,15 +110,16 @@ class _EditImageState extends State<EditImage> {
             backgroundImage: _profileImage ?? MemoryImage(base64Decode(userImage)),
           ),
           Positioned(
-            bottom: 10,
-            right: 10,
+            top: 105,
+            bottom: 0,
+            right: 0,
             child: FloatingActionButton(
               onPressed: _showAvatarChooser,
               mini: true,
-              backgroundColor: Colors.white,
+              backgroundColor: TColor.darkGrey,
               child: Icon(
-                Icons.edit,
-                color: Colors.black,
+                Icons.camera_alt,
+                color: TColor.white,
               ),
             ),
           ),

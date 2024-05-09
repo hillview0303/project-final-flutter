@@ -1,10 +1,22 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 
+import '../../../../data/dtos/activity/activity_response.dart';
+import '../../../../data/dtos/activity/activity_response.dart';
 
-Widget buildMetricView(String currentLabel, String currentValue, String goalLabel, String goalValue, Color lineColor, List<Color> gradientColors,ChangeWeightModel model,String type) {
+Widget buildMetricView(
+    String currentLabel,
+    String currentValue,
+    String goalLabel,
+    String goalValue,
+    Color lineColor,
+    List<Color> gradientColors,
+    ChangeWeightModel model,
+    String type) {
   return CustomScrollView(
     slivers: <Widget>[
       SliverToBoxAdapter(
@@ -15,17 +27,21 @@ Widget buildMetricView(String currentLabel, String currentValue, String goalLabe
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildWeightIndicator(currentLabel, currentValue),
-              Container(height: 50, width: 2, color: Colors.white, margin: EdgeInsets.symmetric(horizontal: 55)),
+              Container(
+                  height: 50,
+                  width: 2,
+                  color: Colors.white,
+                  margin: EdgeInsets.symmetric(horizontal: 55)),
               buildWeightIndicator(goalLabel, goalValue),
             ],
           ),
         ),
       ),
       SliverToBoxAdapter(
-        child: buildWeightGraph(lineColor, gradientColors,model),
+        child: buildWeightGraph(lineColor, gradientColors, model, type),
       ),
       SliverList(
-        delegate: SliverChildListDelegate([buildTimeline(model,type)]),
+        delegate: SliverChildListDelegate([buildTimeline(model, type)]),
       ),
     ],
   );
@@ -35,19 +51,38 @@ Widget buildWeightIndicator(String label, String value) {
   return Column(
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+      Text(value,
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
       Text(label, style: TextStyle(fontSize: 16, color: Colors.white70)),
     ],
   );
 }
 
-Widget buildWeightGraph(Color lineColor, List<Color> gradientColors,ChangeWeightModel model) {
-
+Widget buildWeightGraph(Color lineColor, List<Color> gradientColors, ChangeWeightModel model, String type) {
   List<FlSpot> spots = [];
-  int dataLength = model.fatTimeLineDTO!.length;
-  for (int i = dataLength - 1; i >= 0; i--) {
-    var item = model.fatTimeLineDTO![i];
-    spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.fat));
+
+  if (type == "fat") {
+    int dataLength = model.fatTimeLineDTO!.length;
+    int startIndex = max(0, dataLength - 10); // 마지막 10개 데이터의 시작 인덱스
+    for (int i = dataLength - 1; i >= startIndex; i--) {
+      var item = model.fatTimeLineDTO![i];
+      spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.fat));
+    }
+  } else if (type == "muscle") {
+    int dataLength = model.muscleTimeLineDTO!.length;
+    int startIndex = max(0, dataLength - 10); // 마지막 10개 데이터의 시작 인덱스
+    for (int i = dataLength - 1; i >= startIndex; i--) {
+      var item = model.muscleTimeLineDTO![i];
+      spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.muscle));
+    }
+  } else if (type == "weight") {
+    int dataLength = model.weightTimeLineDTO!.length;
+    int startIndex = max(0, dataLength - 10); // 마지막 10개 데이터의 시작 인덱스
+    for (int i = dataLength - 1; i >= startIndex; i--) {
+      var item = model.weightTimeLineDTO![i];
+      spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.weight));
+    }
   }
 
   return Container(
@@ -59,7 +94,7 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors,ChangeWeight
         titlesData: FlTitlesData(show: false),
         borderData: FlBorderData(show: false),
         minX: 0,
-        maxX: 6,
+        maxX: 9,
         minY: 0,
         maxY: 100,
         lineBarsData: [
@@ -86,48 +121,46 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors,ChangeWeight
 }
 
 
-
-Widget buildTimeline(ChangeWeightModel model,String type) {
-
+Widget buildTimeline(ChangeWeightModel model, String type) {
   List<Map<String, dynamic>> data = [];
 
-
-  if(type == "fat"){
+  if (type == "fat") {
     model.fatTimeLineDTO?.forEach((item) {
       data.add({
         "fat": "${item.fat} kg",
         "date": "${item.fatTimeLine}",
       });
     });
-  }else if(type == "muscle") {
+  } else if (type == "muscle") {
     model.muscleTimeLineDTO?.forEach((item) {
       data.add({
         "muscle": "${item.muscle} kg",
         "date": "${item.muscleTimeLine}",
       });
     });
-  }else if(type == "weight"){
+  } else if (type == "weight") {
     model.weightTimeLineDTO?.forEach((item) {
       data.add({
         "weight": "${item.weight} kg",
         "date": "${item.weightTimeLine}",
       });
     });
-  };
-
+  }
+  ;
 
   return Column(
-
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
         padding: const EdgeInsets.all(20),
-        child: Text("타임라인", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        child: Text("타임라인",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
       ),
       Stack(
         children: [
           CustomPaint(
-            painter: TimelinePainter(data.map((entry) => 60.0 + data.indexOf(entry) * 120).toList()),
+            painter: TimelinePainter(
+                data.map((entry) => 60.0 + data.indexOf(entry) * 120).toList()),
             size: Size(40, 400),
           ),
           Padding(
@@ -160,10 +193,15 @@ Widget buildTimeline(ChangeWeightModel model,String type) {
                             children: [
                               Text(
                                 data[index]["${type}"],
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
                               ),
                               SizedBox(height: 4),
-                              Text(data[index]["date"], style: TextStyle(fontSize: 16, color: Colors.grey)),
+                              Text(data[index]["date"],
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.grey)),
                             ],
                           ),
                         ),

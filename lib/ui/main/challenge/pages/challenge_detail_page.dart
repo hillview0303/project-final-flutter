@@ -35,6 +35,7 @@ class ChallengeDetailPage extends ConsumerWidget {
               Image.memory(
                   base64Decode(challenge!.challengeDetailDTO.backgroundImg),
                   fit: BoxFit.cover),
+
               Padding(
                 padding: EdgeInsets.all(16.0),
                 child: ChallengeContent(

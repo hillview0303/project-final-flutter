@@ -19,6 +19,21 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
 
   MyPageViewModel(super._state, this.ref);
 
+  Future<void> updateUserImg(String userImg) async {
+    MyPageModel prevModel = state!;
+
+    MyPageModel newModel = MyPageModel(MyPageDTO(
+        id: prevModel.myPageDTO.id,
+        name: prevModel.myPageDTO.name,
+        fat: prevModel.myPageDTO.fat,
+        muscle: prevModel.myPageDTO.muscle,
+        weight: prevModel.myPageDTO.weight,
+        conqueredChallenge: prevModel.myPageDTO.conqueredChallenge,
+        userImg: userImg));
+
+    state = newModel;
+  }
+
   Future<void> updatedUser(ProfileUpdateFormDTO updateDTO) async {
     MyPageModel prevModel = state!;
     MyPageDTO myPageDTO = MyPageDTO(

@@ -263,7 +263,7 @@ class JoinPage extends ConsumerWidget {
                         ),
                       ),
                       items: List<String>.generate(
-                              201, (index) => (50 + index).toString())
+                              61, (index) => (140 + index).toString())
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,

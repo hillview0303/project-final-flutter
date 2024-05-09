@@ -47,7 +47,7 @@ void showInputModal(
               TextFormField(
                 controller: _fat,
                 decoration: InputDecoration(
-                  labelText: '체지방 (%)',
+                  labelText: '체지방 (kg)',
                 ),
                 keyboardType: TextInputType.number,
                 style: TextStyle(color: TColor.grey),
@@ -56,7 +56,7 @@ void showInputModal(
               TextFormField(
                 controller: _muscle,
                 decoration: InputDecoration(
-                  labelText: '골격근 (%)',
+                  labelText: '골격근 (kg)',
                 ),
                 keyboardType: TextInputType.number,
                 style: TextStyle(color: TColor.grey),

@@ -14,7 +14,7 @@ class FatTab extends StatelessWidget {
       '현재 체지방',
       '${model.changeBodyData?.fat} kg',
       '목표 체지방',
-      '${model.changeBodyData?.goalWeight} kg',
+      '${model.changeBodyData?.goalFat} kg',
       Colors.blueAccent,
       [Color(0xFF1E88E5), Color(0xffF7F8F8)],
       model,

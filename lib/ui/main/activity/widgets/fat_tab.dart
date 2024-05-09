@@ -5,8 +5,9 @@ import 'metric_view.dart';
 
 class FatTab extends StatelessWidget {
   ChangeWeightModel model ;
+  final String type;
 
-  FatTab(this.model);
+  FatTab(this.model,this.type);
   @override
   Widget build(BuildContext context) {
     return buildMetricView(
@@ -16,6 +17,8 @@ class FatTab extends StatelessWidget {
       '${model.changeBodyData?.goalWeight} kg',
       Colors.blueAccent,
       [Color(0xFF1E88E5), Color(0xffF7F8F8)],
+      model,
+      type,
     );
   }
 }

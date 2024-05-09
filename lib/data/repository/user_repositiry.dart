@@ -16,7 +16,7 @@ class UserRepository {
   }
 
   Future<ResponseDTO> fetchUpdate(
-      UserUpdateDTO updateDTO, String accessToken) async {
+      UserUpdateDTO updateDTO) async {
     final response =
         await dio.put("/api/users/update", data: updateDTO.toJson());
 

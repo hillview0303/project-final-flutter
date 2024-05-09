@@ -5,8 +5,9 @@ import 'metric_view.dart';
 
 class MuscleMassTab extends StatelessWidget {
   ChangeWeightModel model ;
+  final String type;
 
-  MuscleMassTab(this.model);
+  MuscleMassTab(this.model,this.type);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,8 @@ class MuscleMassTab extends StatelessWidget {
       '${model.changeBodyData?.goalMuscle} kg',
       Colors.greenAccent,
       [Color(0xFF11998E), Color(0xffF7F8F8)],
+      model,
+      type
     );
   }
 }

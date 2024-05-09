@@ -34,9 +34,9 @@ class ChangeWeightDetailPage extends ConsumerWidget {
           ),
           body: TabBarView(
             children: [
-              WeightTab(model),
-              FatTab(model),
-              MuscleMassTab(model),
+              WeightTab(model,"weight"),
+              FatTab(model,"fat"),
+              MuscleMassTab(model,"muscle"),
             ],
           ),
         ),

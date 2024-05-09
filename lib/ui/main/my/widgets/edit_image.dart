@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/ui/main/my/viewmodel/profile_edit_view_model.dart';
@@ -52,8 +53,9 @@ class EditImage extends ConsumerWidget {
                 _profileImage ?? MemoryImage(base64Decode(userImage)),
           ),
           Positioned(
-            bottom: 10,
-            right: 10,
+            top: 105,
+            bottom: 0,
+            right: 0,
             child: FloatingActionButton(
               onPressed: () {
                 showModalBottomSheet(
@@ -116,10 +118,10 @@ class EditImage extends ConsumerWidget {
                 );
               },
               mini: true,
-              backgroundColor: Colors.white,
+              backgroundColor: TColor.darkGrey,
               child: Icon(
-                Icons.edit,
-                color: Colors.black,
+                Icons.camera_alt,
+                color: TColor.white,
               ),
             ),
           ),

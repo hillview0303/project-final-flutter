@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/store/session_store.dart';
 
@@ -40,10 +41,12 @@ class LoginPage extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // 제목
+                      // 로그인 제목
                       Text(
                         '로그인',
-                        style: textTheme().titleLarge,
+                        style: textTheme().titleLarge?.copyWith(
+                          color: kAccentColor2, // kAccentColor2로 지정
+                        ),
                       ),
                       const SizedBox(height: 40.0),
                       // ID 입력
@@ -82,12 +85,12 @@ class LoginPage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: [
-                              const Checkbox(
+                            children: const [
+                              Checkbox(
                                 value: false,
                                 onChanged: null,
                               ),
-                              const Text(
+                              Text(
                                 '자동로그인',
                                 style: TextStyle(color: Colors.black45),
                               ),
@@ -98,7 +101,7 @@ class LoginPage extends ConsumerWidget {
                             '비밀번호 찾기',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.teal,
+                              color: kAccentColor2,
                             ),
                           ),
                         ],
@@ -117,12 +120,12 @@ class LoginPage extends ConsumerWidget {
                               String password = _password.text.trim();
 
                               LoginRequestDTO loginRequestDTO =
-                                  LoginRequestDTO(username, password);
+                              LoginRequestDTO(username, password);
 
                               SessionStore store = ref.read(sessionProvider);
 
                               // todo : 추후 삭제
-                              store.login(new LoginRequestDTO("ssar", "1234"));
+                              store.login(LoginRequestDTO("ssar", "1234"));
                               // store.login(loginRequestDTO);
 
                               //todo : 삭제 후 스토어 주석 해제
@@ -130,8 +133,8 @@ class LoginPage extends ConsumerWidget {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
-                            foregroundColor: Colors.white,
+                            backgroundColor: kAccentColor2,
+                            foregroundColor: TColor.white,
                           ),
                           child: const Text('Log in'),
                         ),
@@ -139,19 +142,19 @@ class LoginPage extends ConsumerWidget {
                       const SizedBox(height: 25.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Expanded(
+                        children: const [
+                          Expanded(
                             child: Divider(
                               thickness: 0.7,
                               color: Colors.grey,
                             ),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: Text('또는',
                                 style: TextStyle(color: Colors.black45)),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: Divider(
                               thickness: 0.7,
                               color: Colors.grey,
@@ -169,13 +172,13 @@ class LoginPage extends ConsumerWidget {
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text('계정이 없으신가요? ',
+                          children: const [
+                            Text('계정이 없으신가요? ',
                                 style: TextStyle(color: Colors.black45)),
                             Text('회원가입하기',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.teal)),
+                                    color: kAccentColor2)),
                           ],
                         ),
                       ),

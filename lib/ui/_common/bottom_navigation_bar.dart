@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../_core/constants/constants.dart';
 
@@ -37,13 +38,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
           onTap: onItemSelected,
           items: const [
             BottomNavigationBarItem(
-                label: "오늘의나", icon: Icon(CupertinoIcons.home)),
+                label: "오늘의나", icon: Icon(FontAwesomeIcons.house)),
             BottomNavigationBarItem(
-                label: "나의활동", icon: Icon(CupertinoIcons.square_on_square)),
+                label: "나의활동", icon: Icon(FontAwesomeIcons.chartLine)),
             BottomNavigationBarItem(
-                label: "챌린지", icon: Icon(Icons.people_alt_outlined)),
+                label: "챌린지", icon: Icon(FontAwesomeIcons.trophy)),
             BottomNavigationBarItem(
-                label: "마이페이지", icon: Icon(CupertinoIcons.person)),
+                label: "마이페이지", icon: Icon(FontAwesomeIcons.solidCircleUser)),
           ],
         ),
       ),

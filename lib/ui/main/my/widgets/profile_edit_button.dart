@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
@@ -19,12 +20,10 @@ class ProfileEditButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: 1),
         decoration: BoxDecoration(
-          color: Colors.grey[200],
-          border: Border.all(color: Colors.grey[300]!),
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(gap_s),
         ),
-        child: Text("편집하기", style: subtitle2()),
-      ),
+        child: Icon(FontAwesomeIcons.penToSquare)),
     );
   }
 }

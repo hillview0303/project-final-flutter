@@ -1,19 +1,19 @@
 import 'package:intl/intl.dart';
 
 class ChangeBodyDataDTO {
-  int id;
-  double fat;
-  double muscle;
-  double weight;
-  double goalFat;
-  double goalMuscle;
-  double goalWeight;
+  final int userId;
+  final double fat;
+  final double muscle;
+  final double weight;
+  final double goalFat;
+  final double goalMuscle;
+  final double goalWeight;
 
-  ChangeBodyDataDTO(this.id, this.fat, this.muscle, this.weight, this.goalFat,
+  ChangeBodyDataDTO(this.userId, this.fat, this.muscle, this.weight, this.goalFat,
       this.goalMuscle, this.goalWeight);
 
   ChangeBodyDataDTO.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
+      : userId = json["userId"],
         fat = json["fat"].toDouble(),
         muscle = json["muscle"].toDouble(),
         weight = json["weight"].toDouble(),
@@ -22,43 +22,46 @@ class ChangeBodyDataDTO {
         goalFat = json["goalFat"].toDouble();
 }
 
-class FatTimeLineDTO{
-  int id ;
-  double fat ;
-  DateTime fatTimeLine;
+class FatTimeLineDTO {
+  final int bodyDateId;
+  final double fat;
+  final DateTime fatTimeLine;
 
-  FatTimeLineDTO(this.id, this.fat, this.fatTimeLine);
+  FatTimeLineDTO(this.bodyDateId, this.fat, this.fatTimeLine);
+
   FatTimeLineDTO.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
+      : bodyDateId = json["bodyDateId"],
         fat = json["fat"].toDouble(),
-        fatTimeLine = DateFormat("yyyy-MM-dd")
-            .parse(json["fatTimeLine"], true)
-            .toLocal();
-
+        fatTimeLine =
+            DateFormat("yyyy-MM-dd").parse(json["fatTimeLine"], true).toLocal();
 }
 
-class MuscleTimeLineDTO{
-  int id ;
-  double muscle ;
-  DateTime muscleTimeLine;
+class MuscleTimeLineDTO {
+  final int bodyDateId;
+  final double muscle;
+  final DateTime muscleTimeLine;
 
-  MuscleTimeLineDTO(this.id, this.muscle, this.muscleTimeLine);
+  MuscleTimeLineDTO(this.bodyDateId, this.muscle, this.muscleTimeLine);
+
   MuscleTimeLineDTO.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
+      : bodyDateId = json["bodyDateId"],
         muscle = json["muscle"].toDouble(),
         muscleTimeLine = DateFormat("yyyy-MM-dd")
             .parse(json["muscleTimeLine"], true)
             .toLocal();
 }
 
-class WeightTimeLineDTO{
-  int id ;
-  double weight ;
+class WeightTimeLineDTO {
+  int bodyDateId;
+
+  double weight;
+
   DateTime weightTimeLine;
 
-  WeightTimeLineDTO(this.id, this.weight, this.weightTimeLine);
+  WeightTimeLineDTO(this.bodyDateId, this.weight, this.weightTimeLine);
+
   WeightTimeLineDTO.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
+      : bodyDateId = json["bodyDateId"],
         weight = json["weight"].toDouble(),
         weightTimeLine = DateFormat("yyyy-MM-dd")
             .parse(json["weightTimeLine"], true)

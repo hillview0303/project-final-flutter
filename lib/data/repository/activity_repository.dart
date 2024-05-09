@@ -9,8 +9,7 @@ import '../dtos/response_dto.dart';
 class ActivityRepository{
 
   Future<ResponseDTO> fetchChangeWeight(String accessToken) async {
-    final response = await dio.get("/api/activities/body-date",
-        options: Options(headers: {"Authorization": "${accessToken}"}));
+    final response = await dio.get("/api/activities/body-date");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 

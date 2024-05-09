@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/repository/user_repositiry.dart';
-import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
 
 import '../../../../data/dtos/my/my_response.dart';
@@ -34,10 +33,9 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
   }
 
   Future<void> notifyInit() async {
-    SessionStore sessionStore = ref.read(sessionProvider);
 
     ResponseDTO responseDTO =
-        await UserRepository().fetchMyPage(sessionStore.accessToken!);
+        await UserRepository().fetchMyPage();
 
     MyPageModel myPageModel = MyPageModel(MyPageDTO.fromJson(responseDTO.body));
     if (responseDTO.status == 200) {

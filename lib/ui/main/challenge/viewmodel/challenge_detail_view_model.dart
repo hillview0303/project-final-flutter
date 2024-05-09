@@ -25,7 +25,6 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
 
   // 챌린지 시작하기
   Future<void> startChallenge(int challengeId) async {
-    SessionStore sessionStore = ref.read(sessionProvider);
     ChallengeListViewModel challengeListViewModel =
         ref.read(challengeListProvider.notifier);
 
@@ -40,7 +39,7 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
     ChallengeSaveDTO saveDTO = ChallengeSaveDTO(null, challenge);
 
     ResponseDTO responseDTO = await ChallengeRepository()
-        .insertAttendChallenge(saveDTO, sessionStore.accessToken!);
+        .insertAttendChallenge(saveDTO);
 
     if (responseDTO.status == 200) {
       await challengeListViewModel.notifyInit();
@@ -54,10 +53,9 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
 
   // 챌린지 디테일(기본 상태)
   Future<void> notifyInit(int challengeId) async {
-    SessionStore sessionStore = ref.read(sessionProvider);
 
     ResponseDTO responseDTO = await ChallengeRepository()
-        .getChallengeDetail(challengeId, sessionStore.accessToken!);
+        .getChallengeDetail(challengeId);
 
     ChallengeDetailModel challengeDetailModel =
         ChallengeDetailModel(ChallengeDetailDTO.fromJson(responseDTO.body));

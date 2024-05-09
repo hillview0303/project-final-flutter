@@ -5,8 +5,7 @@ import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/models/user.dart';
 
 class UserRepository {
-  Future<ResponseDTO> fetchUpdate(
-      UserUpdateDTO updateDTO, String accessToken) async {
+  Future<ResponseDTO> fetchUpdate(UserUpdateDTO updateDTO) async {
     final response = await dio.put("/api/users/update", data: updateDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -36,7 +35,7 @@ class UserRepository {
     }
   }
 
-  Future<ResponseDTO> fetchMyPage(String accessToken) async {
+  Future<ResponseDTO> fetchMyPage() async {
     final response = await dio.get("/api/users/myPage");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -44,7 +43,7 @@ class UserRepository {
     return responseDTO;
   }
 
-  Future<ResponseDTO> profileUpdateForm(String accessToken) async {
+  Future<ResponseDTO> profileUpdateForm() async {
     final response = await dio.get("/api/users/update-form");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

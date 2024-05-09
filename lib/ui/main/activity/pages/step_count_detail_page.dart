@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:pedometer/pedometer.dart';
 
 import '../../../../_core/constants/constants.dart';
 import '../widgets/step_count_body.dart';
@@ -9,6 +12,38 @@ class StepCountDetailPage extends StatefulWidget {
 }
 
 class _StepCountDetailPageState extends State<StepCountDetailPage> {
+  int _currentSteps = 0;
+  late StreamSubscription<StepCount> _stepCountStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializePedometer();
+  }
+
+  void _initializePedometer() {
+    _stepCountStream = Pedometer.stepCountStream.listen(
+      _onStepCount,
+      onError: _onStepCountError,
+    );
+  }
+
+  void _onStepCount(StepCount event) {
+    setState(() {
+      _currentSteps = event.steps;
+    });
+  }
+
+  void _onStepCountError(dynamic error) {
+    print("Step Count Error: $error");
+  }
+
+  @override
+  void dispose() {
+    _stepCountStream.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -28,7 +63,7 @@ class _StepCountDetailPageState extends State<StepCountDetailPage> {
             labelColor: Colors.white,
           ),
         ),
-        body: StepCountBody(),
+        body: StepCountBody(currentSteps: _currentSteps),
       ),
     );
   }

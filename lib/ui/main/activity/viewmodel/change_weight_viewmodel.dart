@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 
@@ -25,5 +26,15 @@ class ChangeWeightViewModel extends StateNotifier<ChangeWeightModel?> {
   Future<void> notifyInit() async {
     ResponseDTO responseDTO =
         await ActivityRepository().fetchChangeWeight();
+    if(responseDTO.status == 200){
+      state = responseDTO.body;
+    }else{
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
+    }
   }
 }
+
+final ChangeWeightProvider = StateNotifierProvider<ChangeWeightViewModel,ChangeWeightModel?>((ref) {
+  return ChangeWeightViewModel(null, ref)..notifyInit();
+},);

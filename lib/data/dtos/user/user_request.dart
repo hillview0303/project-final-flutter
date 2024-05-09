@@ -61,3 +61,15 @@ class UserUpdateDTO {
     };
   }
 }
+
+class UserImgUpdateDTO {
+  final String userImg;
+
+  UserImgUpdateDTO(this.userImg);
+
+  Map<String, dynamic> toJson() {
+    return {
+      "userImg": this.userImg,
+    };
+  }
+}

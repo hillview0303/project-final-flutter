@@ -22,7 +22,7 @@ Widget buildMetricView(String currentLabel, String currentValue, String goalLabe
         ),
       ),
       SliverToBoxAdapter(
-        child: buildWeightGraph(lineColor, gradientColors),
+        child: buildWeightGraph(lineColor, gradientColors,model),
       ),
       SliverList(
         delegate: SliverChildListDelegate([buildTimeline(model,type)]),
@@ -41,7 +41,15 @@ Widget buildWeightIndicator(String label, String value) {
   );
 }
 
-Widget buildWeightGraph(Color lineColor, List<Color> gradientColors) {
+Widget buildWeightGraph(Color lineColor, List<Color> gradientColors,ChangeWeightModel model) {
+
+  List<FlSpot> spots = [];
+  int dataLength = model.fatTimeLineDTO!.length;
+  for (int i = dataLength - 1; i >= 0; i--) {
+    var item = model.fatTimeLineDTO![i];
+    spots.add(FlSpot((dataLength - 1 - i).toDouble(), item.fat));
+  }
+
   return Container(
     height: 200,
     decoration: BoxDecoration(color: kAccentColor2),
@@ -53,18 +61,10 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors) {
         minX: 0,
         maxX: 6,
         minY: 0,
-        maxY: 6,
+        maxY: 100,
         lineBarsData: [
           LineChartBarData(
-            spots: [
-              FlSpot(0, 2),
-              FlSpot(1, 5),
-              FlSpot(2, 3.5),
-              FlSpot(3, 4),
-              FlSpot(4, 3),
-              FlSpot(5, 4),
-              FlSpot(6, 4),
-            ],
+            spots: spots,
             isCurved: true,
             color: lineColor,
             barWidth: 4,
@@ -84,6 +84,8 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors) {
     ),
   );
 }
+
+
 
 Widget buildTimeline(ChangeWeightModel model,String type) {
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:project_app/_core/constants/constants.dart';
+import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 
-Widget buildMetricView(String currentLabel, String currentValue, String goalLabel, String goalValue, Color lineColor, List<Color> gradientColors) {
+
+Widget buildMetricView(String currentLabel, String currentValue, String goalLabel, String goalValue, Color lineColor, List<Color> gradientColors,ChangeWeightModel model,String type) {
   return CustomScrollView(
     slivers: <Widget>[
       SliverToBoxAdapter(
@@ -23,7 +25,7 @@ Widget buildMetricView(String currentLabel, String currentValue, String goalLabe
         child: buildWeightGraph(lineColor, gradientColors),
       ),
       SliverList(
-        delegate: SliverChildListDelegate([buildTimeline()]),
+        delegate: SliverChildListDelegate([buildTimeline(model,type)]),
       ),
     ],
   );
@@ -83,15 +85,37 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors) {
   );
 }
 
-Widget buildTimeline() {
-  List<Map<String, dynamic>> data = [
-    {"weight": "58.7 kg", "date": "2024년 5월 1일"},
-    {"weight": "60.2 kg", "date": "2024년 5월 2일"},
-    {"weight": "56.4 kg", "date": "2024년 5월 3일"},
-    {"weight": "56.4 kg", "date": "2024년 5월 4일"},
-  ];
+Widget buildTimeline(ChangeWeightModel model,String type) {
+
+  List<Map<String, dynamic>> data = [];
+
+
+  if(type == "fat"){
+    model.fatTimeLineDTO?.forEach((item) {
+      data.add({
+        "fat": "${item.fat} kg",
+        "date": "${item.fatTimeLine}",
+      });
+    });
+  }else if(type == "muscle") {
+    model.muscleTimeLineDTO?.forEach((item) {
+      data.add({
+        "muscle": "${item.muscle} kg",
+        "date": "${item.muscleTimeLine}",
+      });
+    });
+  }else if(type == "weight"){
+    model.weightTimeLineDTO?.forEach((item) {
+      data.add({
+        "weight": "${item.weight} kg",
+        "date": "${item.weightTimeLine}",
+      });
+    });
+  };
+
 
   return Column(
+
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
@@ -133,7 +157,7 @@ Widget buildTimeline() {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                data[index]["weight"],
+                                data[index]["${type}"],
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                               ),
                               SizedBox(height: 4),

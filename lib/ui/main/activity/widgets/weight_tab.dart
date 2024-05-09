@@ -4,9 +4,10 @@ import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.d
 import 'metric_view.dart';
 
 class WeightTab extends StatelessWidget {
-  ChangeWeightModel model ;
+  ChangeWeightModel model;
+  final String type;
 
-  WeightTab(this.model);
+  WeightTab(this.model,this.type);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,8 @@ class WeightTab extends StatelessWidget {
       '${model.changeBodyData?.goalWeight} kg',
       Colors.redAccent,
       [Color(0xFFFF512F), Color(0xffF7F8F8)],
+      model,
+      type,
     );
   }
 }

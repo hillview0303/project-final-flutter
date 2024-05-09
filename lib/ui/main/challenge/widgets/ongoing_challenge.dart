@@ -17,7 +17,7 @@ class OngoingChallenge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kAccentColor1,
+      color: kAccentColor2,
       width: double.infinity,
       padding: EdgeInsets.all(gap_m),
       child: Column(

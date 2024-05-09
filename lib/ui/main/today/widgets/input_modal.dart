@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../_core/constants/constants.dart';
 import '../../../../data/dtos/today/today_request.dart';
+import '../../activity/viewmodel/change_weight_viewmodel.dart';
 import '../../my/viewmodel/my_page_view_model.dart';
 import '../viewmodel/today_page_viewmodel.dart';
 
@@ -86,7 +87,7 @@ void showInputModal(
                 await ref.watch(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
                   ref.watch(TodayPageProvider.notifier).notifyInit();
                   ref.watch(myPageProvider.notifier).notifyInit();
-
+                  ref.watch(ChangeWeightProvider.notifier).notifyInit();
 
                 },
               ),

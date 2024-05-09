@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
+import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 import '../../../../../_core/constants/move.dart';
 import '../../../../data/dtos/today/today_request.dart';
@@ -54,6 +55,7 @@ class TodayGoalInsert extends ConsumerWidget {
                   await  ref.watch(TodayPageProvider.notifier).notifyAddWeight(AddGoalWeightRequestDTO(formatData));
                 }
                 ref.watch(TodayPageProvider.notifier).notifyInit();
+                ref.watch(ChangeWeightProvider.notifier).notifyInit();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: kAccentColor2,

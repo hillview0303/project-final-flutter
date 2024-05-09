@@ -1,11 +1,11 @@
-
-
 class ChallengeResponseDTO {
   final int? id;
   final String? challengeName; // 챌린지명
   final String? subtitle;
   final DateTime? closingTime;
   final int? coin;
+  final int? walking;
+  final int? totalWalking;
   final String? backImg;
   final List<dynamic>? upcomingChallenges;
   final List<dynamic>? pastchallenges;
@@ -17,6 +17,8 @@ class ChallengeResponseDTO {
       this.closingTime,
       this.coin,
       this.backImg,
+      this.walking,
+      this.totalWalking,
       this.upcomingChallenges,
       this.pastchallenges});
 
@@ -30,6 +32,8 @@ class ChallengeResponseDTO {
           : null,
       coin: json["coin"],
       backImg: json["backImg"],
+      totalWalking: json["totalWalking"],
+      walking: json["walking"],
       upcomingChallenges: json["upcomingChallenges"],
       pastchallenges: json["pastChallenges"],
     );
@@ -42,6 +46,8 @@ class AttendChallenge {
   String? subtitle;
   DateTime? closingTime;
   int? coin;
+  int? totalWalking;
+  int? walking;
   String? backImg;
 
   AttendChallenge(
@@ -49,6 +55,8 @@ class AttendChallenge {
       this.challengeName,
       this.subtitle,
       this.closingTime,
+      this.totalWalking,
+      this.walking,
       this.coin,
       this.backImg});
 }

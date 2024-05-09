@@ -1,13 +1,22 @@
-import 'package:dio/dio.dart';
 import 'package:project_app/_core/constants/http.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/models/user.dart';
 
 class UserRepository {
+  Future<ResponseDTO> fetchImageUpdate(UserImgUpdateDTO updateDTO) async {
+    final response =
+        await dio.put("/api/users/img-update", data: updateDTO.toJson());
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    return responseDTO;
+  }
+
   Future<ResponseDTO> fetchUpdate(
       UserUpdateDTO updateDTO, String accessToken) async {
-    final response = await dio.put("/api/users/update", data: updateDTO.toJson());
+    final response =
+        await dio.put("/api/users/update", data: updateDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 

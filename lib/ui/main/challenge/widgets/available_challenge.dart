@@ -30,8 +30,9 @@ class AvailableChallenge extends StatelessWidget {
               child: Text(title, style: h6(mColor: Colors.grey)),
             ),
             line1,
+            SizedBox(height: 10),
             Container(
-              height: 200,
+              height: 180,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: challenges!.length,

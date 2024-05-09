@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:project_app/_core/constants/constants.dart';
 
 class ChallengeContent extends StatelessWidget {
   final String name;
@@ -31,6 +32,7 @@ class ChallengeContent extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24.0,
+                  color: kAccentColor2,
                 ),
                 overflow: TextOverflow.ellipsis, // 글자가 넘치면 ...으로 표시
               ),
@@ -40,7 +42,7 @@ class ChallengeContent extends StatelessWidget {
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue),
+                  color: kAccentColor2),
             ),
           ],
         ),

@@ -17,6 +17,10 @@ class OngoingChallengeContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateTime now = DateTime.now();
     final int daysLeft = challenge?.closingTime?.difference(now).inDays ?? 0;
+    final double imageWidth = MediaQuery.of(context).size.width * 0.2;
+    final double imageHeight = imageWidth;
+    final double customPaintWidth = imageWidth + 30.0;
+    final double customPaintHeight = imageHeight + 30.0;
 
     if (challenge == null) {
       return NoChallengeText("진행중인 챌린지가 없습니다.");
@@ -37,7 +41,7 @@ class OngoingChallengeContainer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.8),
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black26,
                   blurRadius: 8,
@@ -45,47 +49,89 @@ class OngoingChallengeContainer extends StatelessWidget {
                 )
               ],
             ),
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Row(
               children: [
                 Container(
-                  width: 100,
-                  height: 100,
-                  padding: EdgeInsets.all(5),
-                  child: Transform.rotate(
-                    angle: math.pi / 2, // 90도 회전
-                    child: ClipPath(
-                      clipper: HexagonClipper(radius: 40),
-                      child: Transform.rotate(
-                        angle: -math.pi / 2, // 이미지를 반대 방향으로 90도 회전하여 원래 상태 유지
-                        child: Image.memory(
-                            base64Decode(challenge!.backImg!),
-                            fit: BoxFit.cover),
+                  width: customPaintWidth,
+                  height: customPaintHeight,
+                  padding: const EdgeInsets.all(5),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // 바깥쪽 육각형
+                      Transform.rotate(
+                        angle: math.pi / 2,
+                        child: ClipPath(
+                          clipper: HexagonClipper(radius: imageWidth / 2 + 10),
+                          child: Transform.rotate(
+                            angle: -math.pi / 2,
+                            child: Container(
+                              color: Colors.yellow.withOpacity(0.5),
+                              height: customPaintHeight,
+                              width: customPaintWidth,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      // 검은색 육각형 배경
+                      Transform.rotate(
+                        angle: math.pi / 2,
+                        child: ClipPath(
+                          clipper: HexagonClipper(radius: imageWidth / 2 + 5),
+                          child: Transform.rotate(
+                            angle: -math.pi / 2,
+                            child: Container(
+                              color: Colors.black54,
+                              height: customPaintHeight,
+                              width: customPaintWidth,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // 이미지 육각형
+                      Transform.rotate(
+                        angle: math.pi / 2,
+                        child: ClipPath(
+                          clipper: HexagonClipper(radius: imageWidth / 2),
+                          child: Transform.rotate(
+                            angle: -math.pi / 2,
+                            child: Image.memory(
+                              base64Decode(challenge!.backImg!),
+                              fit: BoxFit.cover,
+                              height: imageHeight,
+                              width: imageWidth,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         challenge!.challengeName!,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold, color: kAccentColor2),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: kAccentColor2,
+                        ),
                       ),
                       Text(
                         '${challenge!.subtitle}',
-                        style: TextStyle(color: Colors.grey),
+                        style: const TextStyle(color: Colors.grey),
                       ),
                       if (challenge!.closingTime != null)
                         Text(
                           '마감까지 $daysLeft일 남음',
-                          style: TextStyle(color: Colors.red),
+                          style: const TextStyle(color: Colors.red),
                         ),
-                      Text(
-                        '이번 도전으로 ${challenge!.coin} 코인 획득가능',
+                      const Text(
+                        '이번 도전으로 코인 획득 가능',
                         style: TextStyle(color: Colors.green),
                       ),
                     ],

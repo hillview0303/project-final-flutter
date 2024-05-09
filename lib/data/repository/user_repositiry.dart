@@ -7,9 +7,7 @@ import 'package:project_app/data/models/user.dart';
 class UserRepository {
   Future<ResponseDTO> fetchUpdate(
       UserUpdateDTO updateDTO, String accessToken) async {
-    final response = await dio.put("/api/users/update",
-        data: updateDTO.toJson(),
-        options: Options(headers: {"Authorization": "${accessToken}"}));
+    final response = await dio.put("/api/users/update", data: updateDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
@@ -39,8 +37,7 @@ class UserRepository {
   }
 
   Future<ResponseDTO> fetchMyPage(String accessToken) async {
-    final response = await dio.get("/api/users/myPage",
-        options: Options(headers: {"Authorization": "${accessToken}"}));
+    final response = await dio.get("/api/users/myPage");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
@@ -48,8 +45,7 @@ class UserRepository {
   }
 
   Future<ResponseDTO> profileUpdateForm(String accessToken) async {
-    final response = await dio.get("/api/users/update-form",
-        options: Options(headers: {"Authorization": "${accessToken}"}));
+    final response = await dio.get("/api/users/update-form");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 

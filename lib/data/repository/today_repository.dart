@@ -7,8 +7,7 @@ import '../dtos/today/today_response.dart';
 
 class TodayRepository {
   Future<ResponseDTO> fetchMainPage(String accessToken) async {
-    final response = await dio.get("/api/users",
-        options: Options(headers: {"Authorization": "${accessToken}"}));
+    final response = await dio.get("/api/users");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
@@ -24,8 +23,7 @@ class TodayRepository {
   }
 
   Future<ResponseDTO> fetchUpdateBodyData(AddBodyDataRequestDTO requestDTO, String accessToken) async {
-    final response = await dio.post("/api/body-date/save",
-        options: Options(headers: {"Authorization": "${accessToken}"}),data: requestDTO.toJson());
+    final response = await dio.post("/api/body-date/save",data: requestDTO.toJson());
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
     return responseDTO ;
   }
@@ -33,9 +31,7 @@ class TodayRepository {
 
   Future<ResponseDTO> fetchAddGoalFat(
       AddGoalFatRequestDTO requestDTO, String accessToken) async {
-    final response = await dio.put("/api/users/goalFat-update",
-        options: Options(headers: {"Authorization": "${accessToken}"}),
-        data: requestDTO.toJson());
+    final response = await dio.put("/api/users/goalFat-update",data: requestDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
@@ -43,9 +39,7 @@ class TodayRepository {
   }
 
   Future<ResponseDTO> fetchAddGoalMuscle(AddGoalMuscleRequestDTO requestDTO, String accessToken) async {
-    final response = await dio.put("/api/users/goalMuscle-update",
-        options: Options(headers: {"Authorization": "${accessToken}"}),
-        data: requestDTO.toJson());
+    final response = await dio.put("/api/users/goalMuscle-update", data: requestDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
@@ -53,9 +47,7 @@ class TodayRepository {
   }
 
   Future<ResponseDTO>  fetchAddGoalWeight(AddGoalWeightRequestDTO requestDTO, String accessToken) async {
-    final response = await dio.put("/api/users/goalWeight-update",
-        options: Options(headers: {"Authorization": "${accessToken}"}),
-        data: requestDTO.toJson());
+    final response = await dio.put("/api/users/goalWeight-update", data: requestDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 

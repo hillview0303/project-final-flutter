@@ -16,9 +16,9 @@ class OngoingChallengeDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int currentSteps = 5000; // 테스트용 값
-    int totalSteps = 10000;
-    double progress = _calculateProgress(currentSteps, totalSteps) * 100;
+    int? currentSteps = challenge!.totalWalking; // 테스트용 값
+    int? totalSteps = challenge!.walking;
+    double progress = _calculateProgress(currentSteps!, totalSteps!) * 100;
 
     return Scaffold(
       appBar: AppBar(

@@ -51,6 +51,8 @@ class ChallengeListViewModel extends StateNotifier<ChallengeListModel?> {
           subtitle: challengeResponseDTO.subtitle,
           closingTime: challengeResponseDTO.closingTime,
           coin: challengeResponseDTO.coin,
+          walking: challengeResponseDTO.walking,
+          totalWalking: challengeResponseDTO.totalWalking,
           backImg: challengeResponseDTO.backImg);
     }
 

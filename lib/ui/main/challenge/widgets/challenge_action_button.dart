@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/ui/main/challenge/viewmodel/challenge_detail_view_model.dart';
 
@@ -15,16 +16,25 @@ class ChallengeActionButton extends ConsumerWidget {
         ref.read(challengeDetailProvider(challengeId).notifier);
 
     if (status == null) {
-      return SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: () {
-            challengeDetailViewModel!.startChallenge(challengeId);
-          },
-          child: Text('탐험 시작하기'),
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-            textStyle: TextStyle(fontSize: 18),
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              challengeDetailViewModel!.startChallenge(challengeId);
+            },
+            child: Text('탐험 시작하기'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: kAccentColor2,
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+              textStyle: TextStyle(fontSize: 18),
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
           ),
         ),
       );
@@ -61,18 +71,27 @@ class ChallengeActionButton extends ConsumerWidget {
             ],
           ),
           SizedBox(
-            height: gap_s,
+            height: gap_m,
           ),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                challengeDetailViewModel!.startChallenge(challengeId);
-              },
-              child: Text('다시 도전하기'),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                textStyle: TextStyle(fontSize: 18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  challengeDetailViewModel!.startChallenge(challengeId);
+                },
+                child: Text('다시 도전하기'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kAccentColor2,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  textStyle: TextStyle(fontSize: 18),
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
             ),
           ),

@@ -18,7 +18,7 @@ class ChangeWeightDetailPage extends ConsumerWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('체중 관리', style: TextStyle(color: TColor.white)),
+            title: Text('내 변화', style: TextStyle(color: TColor.white)),
             backgroundColor: kAccentColor2,
             iconTheme: IconThemeData(color: TColor.white),
             bottom: TabBar(

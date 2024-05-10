@@ -17,7 +17,7 @@ class CompletedChallenge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (challenges!.length < 1) {
+    if (challenges == null || challenges!.length < 1) {
       return NoChallengeText("지난 챌린지가 없습니다.");
     } else {
       return Padding(

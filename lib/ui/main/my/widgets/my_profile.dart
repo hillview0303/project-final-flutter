@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/_core/constants/style.dart';
-import 'package:project_app/data/dtos/user/user_response.dart';
 import 'package:project_app/ui/main/my/widgets/profile_edit_button.dart';
 import 'package:project_app/ui/main/my/widgets/profile_image.dart';
+
 import '../../../../data/dtos/my/my_response.dart';
-import '../pages/profile_edit_page.dart';
 import '../pages/survey_page.dart';
 import 'contact_modal.dart';
 
@@ -20,7 +19,8 @@ class MyProfile extends StatelessWidget {
     return Container(
       color: kAccentColor2,
       child: Container(
-        margin: EdgeInsets.only(top: gap_xxxl, left: gap_m, right: gap_m, bottom: gap_m),
+        margin: EdgeInsets.only(
+            top: gap_xxxl, left: gap_m, right: gap_m, bottom: gap_m),
         decoration: BoxDecoration(
           color: TColor.white,
           boxShadow: [
@@ -39,7 +39,7 @@ class MyProfile extends StatelessWidget {
           children: [
             Positioned(
               top: -40,
-              child: ProfileImage(myPageDTO.userImg),
+              child: ProfileImage(userImage: myPageDTO.userImg),
             ),
             Padding(
               padding: EdgeInsets.only(top: 90),
@@ -73,7 +73,9 @@ class MyProfile extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text("|", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+                      Text("|",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.grey)),
                       InkWell(
                         onTap: () => Navigator.push(
                           context,

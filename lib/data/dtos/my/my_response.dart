@@ -6,8 +6,8 @@ class MyPageDTO {
   final double fat;
   final double muscle;
   final double weight;
-  final List<ChallengeListDTO> conqueredChallenge;
-  final String userImg;
+  final List<ChallengeListDTO>? conqueredChallenge;
+  final String? userImg;
 
   MyPageDTO(
       {required this.id,
@@ -15,7 +15,7 @@ class MyPageDTO {
       required this.fat,
       required this.muscle,
       required this.weight,
-      required this.conqueredChallenge,
+      this.conqueredChallenge,
       required this.userImg});
 
   MyPageDTO.fromJson(Map<String, dynamic> json)
@@ -24,10 +24,12 @@ class MyPageDTO {
         fat = json["fat"].toDouble(),
         muscle = json["muscle"].toDouble(),
         weight = json["weight"].toDouble(),
-        conqueredChallenge = (json["conqueredChallenge"] as List)
-            .map((e) => ChallengeListDTO.fromJson(e))
-            .toList(),
-        userImg = json["userImg"];
+        conqueredChallenge = json["conqueredChallenge"] != null
+            ? (json["conqueredChallenge"] as List)
+                .map((e) => ChallengeListDTO.fromJson(e))
+                .toList()
+            : null,
+        userImg = json["userImg"] ?? null;
 }
 
 class ProfileUpdateFormDTO {

@@ -38,7 +38,7 @@ class MetricGrid extends StatelessWidget {
 
       return MetricCard(
         title: title,
-        subtitle: getSubtitleForActivity(activity),
+        subtitle: getSubtitleForActivity(model!,activity),
         trailing: formatTimeAgo(activity.createdAt),
         percentage: 40,
         onTap: () => navigateToDetailPage(context, activity),
@@ -67,7 +67,7 @@ class MetricGrid extends StatelessWidget {
     return 'DATA MISSING';
   }
 
-  String getSubtitleForActivity(Activity activity) {
+  String getSubtitleForActivity(ActivityMainModel model,Activity activity) {
     if (model?.activitiesDateDTO.walking != null) return '${model?.activitiesDateDTO.walking} steps';
     if (model?.activitiesDateDTO.drinkWater != null) return '${model?.activitiesDateDTO.drinkWater} cups';
     if (activity.kcal != null) return '${activity.kcal} kcal';

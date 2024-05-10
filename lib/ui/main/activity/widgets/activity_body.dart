@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import '../../../../../data/models/activities/activity.dart';
 import 'activity_body_title.dart';
 import 'metric_grid.dart';
 
-class ActivityBody extends StatelessWidget {
+class ActivityBody extends ConsumerWidget {
   final DateTime selectedDate;
 
   const ActivityBody({Key? key, required this.selectedDate}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    ref.watch(ActivityMainProvider.notifier).notifyInit(selectedDate);
+
     List<Activity> filteredActivities = activities.where((activity) {
       return activity.createdAt.year == selectedDate.year &&
           activity.createdAt.month == selectedDate.month &&

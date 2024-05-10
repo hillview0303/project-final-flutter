@@ -62,4 +62,12 @@ class UserRepository {
 
     return responseDTO;
   }
+
+  Future<ResponseDTO> fetchUsernameCheck(UsernameCheckDTO requestDTO) async {
+    final response = await dio.get("/users/username-check",data: requestDTO);
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    return responseDTO;
+  }
 }

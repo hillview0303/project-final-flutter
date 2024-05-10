@@ -121,7 +121,16 @@ class JoinPage extends ConsumerWidget {
                         Expanded(
                           flex: 1,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+
+                              UsernameCheckDTO usernameCheckDTO = UsernameCheckDTO(
+                                   _username.text.trim());
+                              SessionStore sessionstore =
+                              ref.read(sessionProvider);
+                              sessionstore.usernameCheck(usernameCheckDTO);
+
+
+                            },
                             style: TextButton.styleFrom(
                               backgroundColor: Colors.teal,
                               foregroundColor: Colors.white,

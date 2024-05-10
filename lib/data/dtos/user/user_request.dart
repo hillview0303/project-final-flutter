@@ -73,3 +73,14 @@ class UserImgUpdateDTO {
     };
   }
 }
+
+class UsernameCheckDTO{
+  final String username;
+
+  UsernameCheckDTO(this.username);
+
+  Map<String, dynamic> toJson() => {
+    "username": username,
+  };
+
+}

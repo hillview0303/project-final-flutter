@@ -63,6 +63,12 @@ class SessionStore extends SessionUser {
           .showSnackBar(SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}")));
     }
   }
+
+  Future<void>  usernameCheck(UsernameCheckDTO requestDTO) async {
+    ResponseDTO responseDTO = await UserRepository().fetchUsernameCheck(requestDTO);
+    ScaffoldMessenger.of(mContext!)
+        .showSnackBar(SnackBar(content: Text("${responseDTO.msg}")));
+  }
 }
 
 // 창고 관리자

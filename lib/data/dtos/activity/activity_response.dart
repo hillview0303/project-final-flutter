@@ -72,15 +72,15 @@ class WeightTimeLineDTO {
 class ActivitiesDateDTO{
   final int walking;
   final int drinkWater;
-  final int kcal ;
+  // final int kcal ;
   final double weight;
 
   ActivitiesDateDTO(
-     this.walking, this.drinkWater, this.kcal, this.weight);
+     this.walking, this.drinkWater,  this.weight);
 
   ActivitiesDateDTO.fromJson(Map<String, dynamic> json)
       :walking = json["walking"],
         drinkWater = json["drinkWater"],
-        kcal = json["kcal"],
+        // kcal = json["kcal"],
         weight = json["weight"].toDouble();
 }

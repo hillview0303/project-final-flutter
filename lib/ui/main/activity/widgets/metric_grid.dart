@@ -4,12 +4,14 @@ import '../pages/change_weight_detail_page.dart';
 import '../pages/diet_management_detail_page.dart';
 import '../pages/drink_water_detail_page.dart';
 import '../pages/step_count_detail_page.dart';
+import '../viewmodel/activity_main_viewmodel.dart';
 import 'metric_card.dart';
 
 class MetricGrid extends StatelessWidget {
   final List<Activity> activities;
+  ActivityMainModel? model;
 
-  MetricGrid({required this.activities});
+  MetricGrid({required this.activities,this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +68,10 @@ class MetricGrid extends StatelessWidget {
   }
 
   String getSubtitleForActivity(Activity activity) {
-    if (activity.walking != null) return '${activity.walking} steps';
-    if (activity.drinkWater != null) return '${activity.drinkWater} cups';
+    if (model?.activitiesDateDTO.walking != null) return '${model?.activitiesDateDTO.walking} steps';
+    if (model?.activitiesDateDTO.drinkWater != null) return '${model?.activitiesDateDTO.drinkWater} cups';
     if (activity.kcal != null) return '${activity.kcal} kcal';
-    if (activity.weight != null) return '${activity.weight} kg';
+    if (model?.activitiesDateDTO.drinkWater  != null) return '${model?.activitiesDateDTO.drinkWater } kg';
     return '측정된 데이터가 없습니다';
   }
 

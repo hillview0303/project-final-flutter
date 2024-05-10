@@ -12,9 +12,11 @@ class ActivityBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    ref.watch(ActivityMainProvider.notifier).notifyInit(selectedDate);
+   ref.read(ActivityMainProvider.notifier).notifyInit(selectedDate);
+   ActivityMainModel? model = ref.read(ActivityMainProvider);
 
-    List<Activity> filteredActivities = activities.where((activity) {
+
+   List<Activity> filteredActivities = activities.where((activity) {
       return activity.createdAt.year == selectedDate.year &&
           activity.createdAt.month == selectedDate.month &&
           activity.createdAt.day == selectedDate.day;
@@ -24,7 +26,7 @@ class ActivityBody extends ConsumerWidget {
       children: [
         ActivityBodyTitle(),
         Expanded(
-          child: MetricGrid(activities: filteredActivities), // 필터링된 데이터 전달
+          child: MetricGrid(activities: filteredActivities,model: model), // 필터링된 데이터 전달
         ),
       ],
     );

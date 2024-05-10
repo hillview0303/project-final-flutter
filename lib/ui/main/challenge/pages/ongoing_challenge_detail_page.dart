@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/challenge/challenge_response.dart';
+
 import '../widgets/ongoing_challenge_img.dart';
 import '../widgets/ongoing_challenge_percent.dart';
 import '../widgets/ongoing_challenge_progress_bar.dart';
@@ -17,8 +18,7 @@ class OngoingChallengeDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    int? currentSteps = challenge!.totalWalking; // 테스트용 값
+    int? currentSteps = challenge!.totalWalking;
     int? totalSteps = challenge!.walking;
     double progress = _calculateProgress(currentSteps!, totalSteps!) * 100;
 
@@ -34,10 +34,15 @@ class OngoingChallengeDetailPage extends StatelessWidget {
             children: [
               OngoingChallengeImg(progress: progress / 100),
               const SizedBox(height: 20),
-              Text("${challenge?.challengeName}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: kAccentColor2)),
+              Text("${challenge?.challengeName}",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: kAccentColor2)),
               SizedBox(height: 10),
               Text("${challenge?.subtitle ?? 'No subtitle provided'}",
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.w600)),
               const SizedBox(height: 20),
               OngoingChallengeProgressBar(progress: progress),
               const SizedBox(height: 20),

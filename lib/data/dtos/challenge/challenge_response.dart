@@ -92,6 +92,7 @@ class ChallengeDetailDTO {
   String subTitle; // 부 제목
   int walking; // 걸어야할 걸음수
   String content; // 챌린지 내용
+  int coin;
   bool? state;
   String backgroundImg;
 
@@ -102,6 +103,7 @@ class ChallengeDetailDTO {
       required this.walking,
       required this.content,
       this.state,
+      required this.coin,
       required this.backgroundImg});
 
   factory ChallengeDetailDTO.fromJson(Map<String, dynamic> json) {
@@ -111,9 +113,36 @@ class ChallengeDetailDTO {
       subTitle: json["subTitle"],
       walking: json["walking"],
       content: json["content"],
+      coin: json["coin"],
       state: json["state"] ?? null,
       backgroundImg: json["backgroundImg"],
     );
   }
 // 챌린지 내용
+}
+
+class ChallengeStartDTO {
+  final int userId;
+  final int challengeId;
+  final DateTime openingTime;
+  final DateTime closingTime;
+  final bool? status;
+
+  ChallengeStartDTO(
+      {required this.userId,
+      required this.challengeId,
+      required this.openingTime,
+      required this.closingTime,
+      this.status});
+
+  factory ChallengeStartDTO.fromJson(Map<String, dynamic> json) {
+    return ChallengeStartDTO(
+      userId: json["userId"],
+      challengeId: json["challengeId"],
+      openingTime: DateTime.parse(json["openingTime"]),
+      closingTime: DateTime.parse(json["closingTime"]),
+      status: json["status"],
+    );
+  }
+//
 }

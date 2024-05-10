@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/repository/challenge_respository.dart';
-import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
 
 class ChallengeListModel {
@@ -21,10 +20,22 @@ class ChallengeListViewModel extends StateNotifier<ChallengeListModel?> {
 
   ChallengeListViewModel(super._state, this.ref);
 
+  Future<void> startChallenge(AttendChallenge attendChallenge) async {
+    ChallengeListModel prevModel = state!;
+    List<ChallengeListDTO> upcomingChallenge =
+        prevModel.upcomingChallengeDTOList!;
+
+    upcomingChallenge
+        .removeWhere((challenge) => challenge.id == attendChallenge.id);
+
+    ChallengeListModel newModel = ChallengeListModel(
+        attendChallenge, upcomingChallenge, prevModel.pastChallengesDTOList);
+
+    state = newModel;
+  }
+
   Future<void> notifyInit() async {
-    SessionStore sessionStore = ref.read(sessionProvider);
-    ResponseDTO responseDTO =
-        await ChallengeRepository().getChallengeList();
+    ResponseDTO responseDTO = await ChallengeRepository().getChallengeList();
 
     ChallengeResponseDTO challengeResponseDTO =
         ChallengeResponseDTO.fromJson(responseDTO.body);

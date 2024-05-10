@@ -101,7 +101,7 @@ class MetricGrid extends StatelessWidget {
       subtitle: 'No data',
       trailing: '',
       percentage: 0, // 데이터가 없으므로 진행률 0으로 설정
-      onTap: () {},
+      onTap: () => navigateToDetailPageForMissingData(context, title),
       hasData: false, // 데이터가 없음을 나타냄
     );
   }
@@ -112,23 +112,43 @@ class MetricGrid extends StatelessWidget {
       subtitle: subtitle,
       trailing: formatTimeAgo(activity.createdAt),
       percentage: 40, // 예시로 40%를 넣었지만, 실제로는 활동에 따라 다른 비율을 계산하여 설정해야 합니다.
-      onTap: () => navigateToDetailPage(context, activity),
+      onTap: () => navigateToDetailPageForMissingData(context, title),
       hasData: true,
     );
   }
 
-  void navigateToDetailPage(BuildContext context, ActivitiesDateDTO activity) {
-    // ActivitiesDateDTO 객체를 이용하여 상세 페이지로 네비게이션, 액티비티 타입에 따라 분기 처리
-    if (activity.walking != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
-    } else if (activity.drinkWater != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
-    } else if (activity.kcal != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
-    } else if (activity.weight != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
+  // void navigateToDetailPage(BuildContext context, ActivitiesDateDTO activity) {
+  //   // ActivitiesDateDTO 객체를 이용하여 상세 페이지로 네비게이션, 액티비티 타입에 따라 분기 처리
+  //   if (activity.walking != null) {
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
+  //   } else if (activity.drinkWater != null) {
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
+  //   } else if (activity.kcal != null) {
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
+  //   } else if (activity.weight != null) {
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
+  //   }
+  // }
+
+
+  void navigateToDetailPageForMissingData(BuildContext context, String title) {
+    switch (title) {
+      case 'STEPS':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
+        break;
+      case 'WATER':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
+        break;
+      case 'CALORIES':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
+        break;
+      case 'BODYDATA':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
+        break;
     }
   }
+
+
 
   String formatTimeAgo(DateTime time) {
     final DateTime now = DateTime.now();

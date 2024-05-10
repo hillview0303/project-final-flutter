@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_app/_core/constants/move.dart';
 import 'package:project_app/data/dtos/challenge/challenge_request.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/models/challenges/challenge.dart';
 import 'package:project_app/data/repository/challenge_respository.dart';
-import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
 import 'package:project_app/ui/main/challenge/viewmodel/challenge_view_model.dart';
 
@@ -38,13 +36,30 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
 
     ChallengeSaveDTO saveDTO = ChallengeSaveDTO(null, challenge);
 
-    ResponseDTO responseDTO = await ChallengeRepository()
-        .insertAttendChallenge(saveDTO);
+    ResponseDTO responseDTO =
+        await ChallengeRepository().insertAttendChallenge(saveDTO);
+
+    ChallengeStartDTO challengeStartDTO =
+        ChallengeStartDTO.fromJson(responseDTO.body);
 
     if (responseDTO.status == 200) {
-      await challengeListViewModel.notifyInit();
-      Navigator.pushNamedAndRemoveUntil(
-          mContext!, Move.challengePage, (route) => false);
+      ChallengeDetailModel challengeDetailModel = state!;
+      ChallengeDetailDTO challengeDetailDTO =
+          challengeDetailModel.challengeDetailDTO;
+      AttendChallenge attendChallenge = AttendChallenge(
+        id: challengeId,
+        backImg: challengeDetailDTO.backgroundImg,
+        challengeName: challengeDetailDTO.challengeName,
+        closingTime: challengeStartDTO.closingTime,
+        totalWalking: 0,
+        coin: challengeDetailDTO.coin,
+        subtitle: challengeDetailDTO.subTitle,
+        walking: challengeDetailDTO.walking,
+      );
+
+      await challengeListViewModel.startChallenge(attendChallenge);
+
+      Navigator.pop(mContext!);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("챌린지 시작하기 실패 : ${responseDTO.msg}")));
@@ -53,9 +68,8 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
 
   // 챌린지 디테일(기본 상태)
   Future<void> notifyInit(int challengeId) async {
-
-    ResponseDTO responseDTO = await ChallengeRepository()
-        .getChallengeDetail(challengeId);
+    ResponseDTO responseDTO =
+        await ChallengeRepository().getChallengeDetail(challengeId);
 
     ChallengeDetailModel challengeDetailModel =
         ChallengeDetailModel(ChallengeDetailDTO.fromJson(responseDTO.body));

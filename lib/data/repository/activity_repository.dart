@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
+import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
 
 import '../../_core/constants/http.dart';
 import '../dtos/activity/activity_response.dart';
@@ -45,11 +46,11 @@ class ActivityRepository {
 
       ActivitiesDateDTO activitiesDateDTO =
           ActivitiesDateDTO.fromJson(responseDTO.body);
-      print("날짜 : ${activitiesDateDTO.createdAt}");
-      print("걸음수 : ${activitiesDateDTO.walking}");
-      print("몸무게 : ${activitiesDateDTO.weight}");
-      print("물  : ${activitiesDateDTO.weight}");
-      print("칼로리  : ${activitiesDateDTO.kcal}");
+      // print("날짜 : ${activitiesDateDTO.createdAt}");
+      // print("걸음수 : ${activitiesDateDTO.walking}");
+      // print("몸무게 : ${activitiesDateDTO.weight}");
+      // print("물  : ${activitiesDateDTO.weight}");
+      // print("칼로리  : ${activitiesDateDTO.kcal}");
 
       ActivityMainModel model = ActivityMainModel(activitiesDateDTO);
 
@@ -57,5 +58,26 @@ class ActivityRepository {
     }
 
     return responseDTO;
+  }
+
+  Future<ResponseDTO> fetchDrinkWater() async {
+    final response = await dio.get("/api/activities/water/detail");
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+
+    if(responseDTO.status == 200){
+      List<dynamic> tempWater = responseDTO.body["weakWater"];
+      List<WeakWaterDTO> weakWaterDTO = tempWater.map((e) => WeakWaterDTO.fromJson(e)).toList();
+      DrinkWaterDTO drinkWaterDTO = DrinkWaterDTO.fromJson(responseDTO.body);
+      DrinkWaterModel model = DrinkWaterModel(drinkWaterDTO, weakWaterDTO);
+      print("물 : ${drinkWaterDTO.dayWater}");
+      print("날짜 : ${weakWaterDTO.last.date}");
+      responseDTO.body = model ;
+    }
+
+
+    return responseDTO ;
+
+
   }
 }

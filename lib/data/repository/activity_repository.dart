@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
+import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
 
 import '../../_core/constants/http.dart';
 import '../dtos/activity/activity_response.dart';
@@ -57,5 +58,23 @@ class ActivityRepository {
     }
 
     return responseDTO;
+  }
+
+  Future<ResponseDTO> fetchDrinkWater() async {
+    final response = await dio.get("/api/activities/water/detail");
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+
+    if(responseDTO.status == 200){
+      List<dynamic> tempWater = responseDTO.body["weakWater"];
+      List<WeakWaterDTO> weakWaterDTO = tempWater.map((e) => WeakWaterDTO.fromJson(e)).toList();
+      DrinkWaterDTO drinkWaterDTO = DrinkWaterDTO.fromJson(responseDTO.body);
+      DrinkWaterModel model = DrinkWaterModel(drinkWaterDTO, weakWaterDTO);
+      responseDTO.body = model ;
+    }
+
+    return responseDTO ;
+
+
   }
 }

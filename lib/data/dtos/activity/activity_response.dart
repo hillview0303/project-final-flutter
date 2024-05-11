@@ -67,3 +67,24 @@ class WeightTimeLineDTO {
             .parse(json["weightTimeLine"], true)
             .toLocal();
 }
+
+
+class   ActivitiesDateDTO{
+  final DateTime createdAt;
+  final int? walking;
+  final int? drinkWater;
+  final int? kcal ;
+  final double? weight;
+
+  ActivitiesDateDTO(
+  {required this.createdAt,this.walking, this.drinkWater, this.kcal, this.weight});
+
+  ActivitiesDateDTO.fromJson(Map<String, dynamic> json)
+      : createdAt = DateFormat("yyyy-MM-dd")
+      .parse(json["createdAt"], true)
+      .toLocal(),
+        walking = json["walking"],
+        drinkWater = json["drinkWater"],
+        kcal = json["kcal"],
+        weight = json["weight"].toDouble();
+}

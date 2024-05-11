@@ -152,17 +152,17 @@ class MetricCard extends StatelessWidget {
           ),
         ],
         Text(
-          subtitle,
+          "${subtitle}",
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
-        Text(
-          trailing,
-          style: TextStyle(fontSize: 12, color: Colors.grey[200]),
-        ),
+        // Text(
+        //   trailing,
+        //   style: TextStyle(fontSize: 12, color: Colors.grey[200]),
+        // ),
       ],
     );
   }

@@ -70,9 +70,12 @@ class MetricGrid extends StatelessWidget {
           hasData: true,
         ));
       } else {
-        cards.add(buildEmptyCard(
-          context: context,
-          title: 'CALORIES',
+        cards.add(buildCard(
+            context: context,
+            title: 'CALORIES',
+            subtitle: '0 kcal',
+            activity: data,
+            hasData: true,
         ));
       }
       // 체중

@@ -46,11 +46,11 @@ class ActivityRepository {
 
       ActivitiesDateDTO activitiesDateDTO =
           ActivitiesDateDTO.fromJson(responseDTO.body);
-      print("날짜 : ${activitiesDateDTO.createdAt}");
-      print("걸음수 : ${activitiesDateDTO.walking}");
-      print("몸무게 : ${activitiesDateDTO.weight}");
-      print("물  : ${activitiesDateDTO.weight}");
-      print("칼로리  : ${activitiesDateDTO.kcal}");
+      // print("날짜 : ${activitiesDateDTO.createdAt}");
+      // print("걸음수 : ${activitiesDateDTO.walking}");
+      // print("몸무게 : ${activitiesDateDTO.weight}");
+      // print("물  : ${activitiesDateDTO.weight}");
+      // print("칼로리  : ${activitiesDateDTO.kcal}");
 
       ActivityMainModel model = ActivityMainModel(activitiesDateDTO);
 
@@ -70,8 +70,11 @@ class ActivityRepository {
       List<WeakWaterDTO> weakWaterDTO = tempWater.map((e) => WeakWaterDTO.fromJson(e)).toList();
       DrinkWaterDTO drinkWaterDTO = DrinkWaterDTO.fromJson(responseDTO.body);
       DrinkWaterModel model = DrinkWaterModel(drinkWaterDTO, weakWaterDTO);
+      print("물 : ${drinkWaterDTO.dayWater}");
+      print("날짜 : ${weakWaterDTO.last.date}");
       responseDTO.body = model ;
     }
+
 
     return responseDTO ;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
+import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
 import '../widgets/WaterIntakeGraph.dart';
 
 // 상태 관리를 위한 Provider 선언
@@ -9,6 +10,9 @@ final waterIntakeProvider = StateProvider<int>((ref) => 0);
 class DrinkWaterDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(DrinkWaterProvider.notifier)..notifyInit();
+
+
     final int glassSize = 250; // 한 잔의 크기
     final int totalIntake = 2000; // 총 목표 섭취량
 

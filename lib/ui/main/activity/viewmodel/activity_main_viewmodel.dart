@@ -24,7 +24,6 @@ class ActivityMainViewModel extends StateNotifier<ActivityMainModel?> {
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
 
     print("날짜 : ${formattedDate}");
-    print("11111111111");
     ResponseDTO responseDTO =
     await ActivityRepository().fetchActivityMain(formattedDate);
     print("222222");

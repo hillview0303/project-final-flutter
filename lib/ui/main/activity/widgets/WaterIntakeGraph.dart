@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:intl/intl.dart';
 
-class WaterIntakeGraph extends StatelessWidget {
+import '../viewmodel/drink_water_viewmoddel..dart';
+
+
+class WaterIntakeGraph extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    List<DateTime> dates = [
-      DateTime(2024, 4, 25),
-      DateTime(2024, 4, 26),
-      DateTime(2024, 4, 27),
-      DateTime(2024, 4, 28),
-      DateTime(2024, 4, 29),
-      DateTime(2024, 4, 30),
-      DateTime(2024, 5, 1),
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
+    DrinkWaterModel? model = ref.watch(DrinkWaterProvider);
+
+    // model에서 날짜 데이터 추출
+    List<DateTime>? dates = model?.weakWaterDTO?.map((e) => e.date).toList();
+
     // 중앙 날짜 계산
-    DateTime centralDate = dates[dates.length ~/ 2];
+    DateTime? centralDate;
+    if (dates != null && dates.isNotEmpty) {
+      centralDate = dates[dates.length ~/ 2];
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -26,7 +29,7 @@ class WaterIntakeGraph extends StatelessWidget {
           color: kAccentColor2,
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            DateFormat('yyyy년 MM월').format(centralDate),
+            centralDate != null ? DateFormat('yyyy년 MM월').format(centralDate) : '날짜 없음',
             style: TextStyle(
               color: TColor.white,
               fontWeight: FontWeight.bold,
@@ -34,6 +37,7 @@ class WaterIntakeGraph extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
+
         ),
         AspectRatio(
           aspectRatio: 1.6,
@@ -44,7 +48,7 @@ class WaterIntakeGraph extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 18.0),
               child: LineChart(
-                mainData(),
+                mainData(model),
               ),
             ),
           ),
@@ -52,21 +56,26 @@ class WaterIntakeGraph extends StatelessWidget {
       ],
     );
   }
-  LineChartData mainData() {
+
+  LineChartData mainData(DrinkWaterModel? model) {
+    List<FlSpot> spots = model?.weakWaterDTO?.asMap().entries.map((e) {
+      int index = e.key; // 인덱스 번호
+      double yValue = e.value.water.toDouble(); // y값을 double로 변환
+      return FlSpot(index.toDouble(), yValue); // FlSpot 객체 생성
+    })?.toList() ??
+        [];
     return LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
-        getDrawingHorizontalLine: (value) =>
-            FlLine(
-              color: Colors.blueGrey[100],
-              strokeWidth: 1,
-            ),
-        getDrawingVerticalLine: (value) =>
-            FlLine(
-              color: Colors.blueGrey[100],
-              strokeWidth: 1,
-            ),
+        getDrawingHorizontalLine: (value) => FlLine(
+          color: Colors.blueGrey[100],
+          strokeWidth: 1,
+        ),
+        getDrawingVerticalLine: (value) => FlLine(
+          color: Colors.blueGrey[100],
+          strokeWidth: 1,
+        ),
       ),
       titlesData: FlTitlesData(
         bottomTitles: AxisTitles(
@@ -75,19 +84,20 @@ class WaterIntakeGraph extends StatelessWidget {
             reservedSize: 35,
             getTitlesWidget: (value, meta) {
               List<DateTime> dates = [
-                DateTime(2021, 4, 25),
-                DateTime(2021, 4, 26),
-                DateTime(2021, 4, 27),
-                DateTime(2021, 4, 28),
-                DateTime(2021, 4, 29),
-                DateTime(2021, 4, 30),
-                DateTime(2021, 5, 1),
+                DateTime(2024, 5, 5),
+                DateTime(2024, 5, 6),
+                DateTime(2024, 5, 7),
+                DateTime(2024, 5, 8),
+                DateTime(2024, 5, 9),
+                DateTime(2024, 5, 10),
+                DateTime(2024, 5, 11),
               ];
               return Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   DateFormat('dd').format(dates[value.toInt()]),
-                  style: TextStyle(color: TColor.white,
+                  style: TextStyle(
+                      color: TColor.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 16),
                 ),
@@ -102,13 +112,13 @@ class WaterIntakeGraph extends StatelessWidget {
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            getTitlesWidget: (value, meta) =>
-                Text(
-                  '${value.toInt()}',
-                  style: TextStyle(color: TColor.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15),
-                ),
+            getTitlesWidget: (value, meta) => Text(
+              '${value.toInt()}',
+              style: TextStyle(
+                  color: TColor.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
+            ),
             reservedSize: 40,
           ),
         ),
@@ -117,18 +127,10 @@ class WaterIntakeGraph extends StatelessWidget {
       minX: 0,
       maxX: 6,
       minY: 0,
-      maxY: 10,
+      maxY: 500,
       lineBarsData: [
         LineChartBarData(
-          spots: [
-            FlSpot(0, 3),
-            FlSpot(1, 2),
-            FlSpot(2, 5),
-            FlSpot(3, 3.5),
-            FlSpot(4, 4),
-            FlSpot(5, 6),
-            FlSpot(6, 3),
-          ],
+          spots: spots,
           isCurved: true,
           color: TColor.secondaryColor2,
           barWidth: 5,

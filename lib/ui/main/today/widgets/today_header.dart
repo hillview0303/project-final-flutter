@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:project_app/ui/main/today/widgets/today_bodydata.dart';
 import 'package:project_app/ui/main/today/widgets/today_changes_chart.dart';
 import 'package:project_app/ui/main/today/widgets/today_changes_detail.dart';
@@ -20,8 +21,6 @@ class TodayHeader extends ConsumerWidget {
 
   TodayHeader(this.visibilityState, this.model);
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 상태 변경 함수
@@ -35,6 +34,11 @@ class TodayHeader extends ConsumerWidget {
     }
     String formattedDate = DateFormatter.format(model?.bodyData?.last.date);
 
+    // 날짜 포맷팅 함수
+    String formatDateTime(DateTime? date) {
+      if (date == null) return '날짜 정보 없음';
+      return DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(date);
+    }
 
     return Column(
       children: [
@@ -43,7 +47,7 @@ class TodayHeader extends ConsumerWidget {
           padding: const EdgeInsets.all(gap_m),
           child: Column(
             children: [
-              TodayChangesDetail(ref,model),
+              TodayChangesDetail(ref, model),
               SizedBox(height: gap_l),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: gap_l),

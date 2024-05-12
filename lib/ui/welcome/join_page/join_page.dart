@@ -28,7 +28,7 @@ class JoinPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedDate = ref.watch(selectedDateProvider); // 날짜 상태 관리
+    final selectedDate = ref.watch(selectedDateProvider);
     final checkedBox = ref.watch(CheckedBoxProvider);
 
     void _showPrivacyPolicyDialog(context) {
@@ -57,7 +57,7 @@ class JoinPage extends ConsumerWidget {
               child: const Text("닫기", style: TextStyle(color: kAccentColor2)),
             ),
           ],
-          backgroundColor: Colors.teal.shade50,
+          backgroundColor: kAccentColor2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -91,12 +91,18 @@ class JoinPage extends ConsumerWidget {
                     const SizedBox(height: 40.0),
                     TextFormField(
                       controller: _name,
+                      cursorColor: TColor.grey,
                       decoration: InputDecoration(
-                        label: const Text('이름'),
+                        label: const Text('이름', style: TextStyle(color: Colors.grey)),
                         hintText: '이름을 입력하세요',
                         hintStyle: const TextStyle(color: Colors.black26),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: TColor.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                     ),
@@ -106,13 +112,18 @@ class JoinPage extends ConsumerWidget {
                         Expanded(
                           flex: 4,
                           child: TextFormField(
+                            cursorColor: TColor.grey,
                             controller: _username,
                             decoration: InputDecoration(
-                              label: const Text('ID'),
+                              label: const Text('ID', style: TextStyle(color: Colors.grey)),
                               hintText: 'ID를 입력하세요',
-                              hintStyle: const TextStyle(color: Colors.black26),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: TColor.grey),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(color: Colors.grey),
                               ),
                             ),
                           ),
@@ -122,20 +133,17 @@ class JoinPage extends ConsumerWidget {
                           flex: 1,
                           child: TextButton(
                             onPressed: () {
-
                               UsernameCheckDTO usernameCheckDTO = UsernameCheckDTO(
-                                   _username.text.trim());
+                                  _username.text.trim());
                               SessionStore sessionstore =
                               ref.read(sessionProvider);
                               sessionstore.usernameCheck(usernameCheckDTO);
-
-
                             },
                             style: TextButton.styleFrom(
-                              backgroundColor: Colors.teal,
+                              backgroundColor: kAccentColor2,
                               foregroundColor: Colors.white,
                               padding:
-                                  const EdgeInsets.symmetric(vertical: 20.0),
+                              const EdgeInsets.symmetric(vertical: 20.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -147,39 +155,57 @@ class JoinPage extends ConsumerWidget {
                     ),
                     const SizedBox(height: 25.0),
                     TextFormField(
+                      cursorColor: TColor.grey,
                       controller: _password,
                       obscureText: true,
                       decoration: InputDecoration(
-                        label: const Text('비밀번호'),
+                        label: const Text('비밀번호', style: TextStyle(color: Colors.grey)),
                         hintText: '비밀번호를 입력하세요',
                         hintStyle: const TextStyle(color: Colors.black26),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: TColor.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                     ),
                     const SizedBox(height: 25.0),
                     TextFormField(
+                      cursorColor: TColor.grey,
                       controller: _checkPassword,
                       obscureText: true,
                       decoration: InputDecoration(
-                        label: const Text('비밀번호 확인'),
+                        label: const Text('비밀번호 확인', style: TextStyle(color: Colors.grey)),
                         hintText: '비밀번호를 다시 입력하세요',
                         hintStyle: const TextStyle(color: Colors.black26),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: TColor.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                     ),
                     const SizedBox(height: 25.0),
                     TextFormField(
+                      cursorColor: TColor.grey,
                       controller: _phone,
                       decoration: InputDecoration(
-                        label: const Text('휴대폰번호'),
+                        label: const Text('휴대폰번호', style: TextStyle(color: Colors.grey)), // 라벨 텍스트 색상 변경
                         hintText: '휴대폰번호를 입력하세요',
                         hintStyle: const TextStyle(color: Colors.black26),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: TColor.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                     ),
@@ -195,17 +221,16 @@ class JoinPage extends ConsumerWidget {
                               return Theme(
                                 data: ThemeData.light().copyWith(
                                   colorScheme: ColorScheme.light(
-                                    primary: Colors.teal,
-                                    onPrimary: Colors.white,
-                                    onSurface: Colors.black,
+                                    primary: kAccentColor2,
+                                    onPrimary: TColor.white,
+                                    onSurface: TColor.black,
                                   ),
-                                  dialogBackgroundColor: Colors.white,
+                                  dialogBackgroundColor: TColor.white,
                                 ),
                                 child: child!,
                               );
                             });
                         if (picked != null && picked != selectedDate) {
-                          // 여기에 생년월일 선택시 로직 작성
                           ref.read(selectedDateProvider.notifier).state =
                               picked;
                           _birth = picked.toIso8601String();
@@ -233,7 +258,7 @@ class JoinPage extends ConsumerWidget {
                                   color: Colors.black54, fontSize: 16),
                             ),
                             const Icon(Icons.calendar_today,
-                                color: Colors.teal),
+                                color: kAccentColor2),
                           ],
                         ),
                       ),
@@ -243,8 +268,14 @@ class JoinPage extends ConsumerWidget {
                       value: selectedGender,
                       decoration: InputDecoration(
                         labelText: '성별',
+                        labelStyle: TextStyle(color: TColor.grey),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: TColor.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                       items: <String>['남', '여']
@@ -255,11 +286,7 @@ class JoinPage extends ConsumerWidget {
                         );
                       }).toList(),
                       onChanged: (String? newValue) {
-                        // 여기에 성별 선택시 로직 작성
                         _gender = newValue;
-//                         setState(() {
-//                           selectedGender = newValue;
-//                         });
                       },
                     ),
                     const SizedBox(height: 25.0),
@@ -267,12 +294,18 @@ class JoinPage extends ConsumerWidget {
                       value: selectedHeight,
                       decoration: InputDecoration(
                         labelText: '키 (cm)',
+                        labelStyle: TextStyle(color: TColor.grey),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: TColor.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                       items: List<String>.generate(
-                              61, (index) => (140 + index).toString())
+                          61, (index) => (140 + index).toString())
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -280,12 +313,7 @@ class JoinPage extends ConsumerWidget {
                         );
                       }).toList(),
                       onChanged: (String? newValue) {
-                        // 여기에 키 선택시 로직 작성
-                        print("newValue : ${newValue}");
                         _height = double.parse(newValue!);
-//                         setState(() {
-//                           selectedHeight = newValue;
-//                         });
                       },
                     ),
                     const SizedBox(height: 25.0),
@@ -299,8 +327,8 @@ class JoinPage extends ConsumerWidget {
                             //   _privacyPolicyAgreed = value!;
                             // });
                           },
-                          activeColor: Colors.teal, // 체크박스 배경색을 Teal로 설정
-                          checkColor: Colors.white, // 체크 마크 색상을 흰색으로 설정
+                          activeColor: kAccentColor2,
+                          checkColor: TColor.white,
                         ),
                         GestureDetector(
                           onTap: ()=>_showPrivacyPolicyDialog(context),
@@ -308,7 +336,7 @@ class JoinPage extends ConsumerWidget {
                             '개인정보 처리 방침',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.teal),
+                                color: kAccentColor2),
                           ),
                         ),
                         Text(
@@ -336,7 +364,7 @@ class JoinPage extends ConsumerWidget {
                                 gender: _gender,
                                 height: _height);
                             SessionStore sessionstore =
-                                ref.read(sessionProvider);
+                            ref.read(sessionProvider);
                             sessionstore.join(joinrequestDTO);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -346,8 +374,8 @@ class JoinPage extends ConsumerWidget {
                           // Navigator.pushNamed(context, Move.loginPage);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.teal,
-                          foregroundColor: Colors.white,
+                          backgroundColor: kAccentColor2,
+                          foregroundColor: TColor.white,
                         ),
                         child: const Text('회원가입하기'),
                       ),
@@ -359,7 +387,7 @@ class JoinPage extends ConsumerWidget {
                         Expanded(
                           child: Divider(
                             thickness: 0.7,
-                            color: Colors.grey.withOpacity(0.5),
+                            color: TColor.grey.withOpacity(0.5),
                           ),
                         ),
                         const Padding(
@@ -372,7 +400,7 @@ class JoinPage extends ConsumerWidget {
                         Expanded(
                           child: Divider(
                             thickness: 0.7,
-                            color: Colors.grey.withOpacity(0.5),
+                            color: TColor.grey.withOpacity(0.5),
                           ),
                         ),
                       ],
@@ -393,7 +421,7 @@ class JoinPage extends ConsumerWidget {
                             '로그인하기',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.teal,
+                              color: kAccentColor2,
                             ),
                           ),
                         ),

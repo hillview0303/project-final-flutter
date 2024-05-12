@@ -28,7 +28,7 @@ class CompositionBox2 extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.all(3.0),
+          padding: EdgeInsets.all(gap_xxs),
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(gap_m),
@@ -53,7 +53,7 @@ class CompositionBox2 extends StatelessWidget {
                 ),
                 Text(
                   value + "kg",
-                  style: h6(mColor: valueColor),
+                  style: h8(mColor: valueColor),
                 ),
               ],
             ),

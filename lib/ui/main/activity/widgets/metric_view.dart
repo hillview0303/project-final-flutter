@@ -5,11 +5,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 
+import '../../../../_core/utils/date_format.dart';
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../../../../data/dtos/activity/activity_response.dart';
 
-Widget buildMetricView(
-    String currentLabel,
+Widget buildMetricView(String currentLabel,
     String currentValue,
     String goalLabel,
     String goalValue,
@@ -59,7 +59,8 @@ Widget buildWeightIndicator(String label, String value) {
   );
 }
 
-Widget buildWeightGraph(Color lineColor, List<Color> gradientColors, ChangeWeightModel model, String type) {
+Widget buildWeightGraph(Color lineColor, List<Color> gradientColors,
+    ChangeWeightModel model, String type) {
   List<FlSpot> bodyChart = [];
 
   if (type == "fat") {
@@ -124,6 +125,7 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors, ChangeWeigh
 Widget buildTimeline(ChangeWeightModel model, String type) {
   List<Map<String, String>> data = [];
 
+
   if (type == "fat") {
     model.fatTimeLineDTO?.forEach((item) {
       data.add({
@@ -146,7 +148,7 @@ Widget buildTimeline(ChangeWeightModel model, String type) {
       });
     });
   }
-
+  
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

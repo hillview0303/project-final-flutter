@@ -1,6 +1,7 @@
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
+import 'package:project_app/ui/main/activity/viewmodel/walking_detail.viewmodel.dart';
 
 import '../../_core/constants/http.dart';
 import '../dtos/activity/activity_response.dart';
@@ -91,6 +92,32 @@ class ActivityRepository {
       responseDTO.body = model;
     }
 
+    return responseDTO;
+  }
+
+  Future<ResponseDTO> fetchWalkingDetail() async {
+    print("555555555");
+    final response = await dio.get("/api/activities/walking/detail");
+    print("6666666");
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+    print("77777");
+
+    if (responseDTO.status == 200) {
+      print("88888");
+      List<dynamic> tempWalking = responseDTO.body["weakWalkings"];
+      print("999999");
+      List<WeakWalkingDTO> weakWalkings =
+          tempWalking.map((e) => WeakWalkingDTO.fromJson(e)).toList();
+      print("101010");
+      print("테스트 : ${weakWalkings}");
+      WalkingDetailDTO walkingDetailDTO =
+          WalkingDetailDTO.fromJson(responseDTO.body);
+      print("12121212");
+      WalkingDetailModel model = WalkingDetailModel(walkingDetailDTO, weakWalkings);
+      print("13131313");
+      responseDTO.body = model;
+    }
+    print("14141414");
     return responseDTO;
   }
 }

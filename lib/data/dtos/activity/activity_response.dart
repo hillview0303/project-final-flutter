@@ -97,7 +97,6 @@ class ActivitiesDateDTO {
 
 class DrinkWaterDTO {
   final int dayWater;
-
   DrinkWaterDTO(this.dayWater);
 
   DrinkWaterDTO.fromJson(Map<String, dynamic> json)
@@ -116,6 +115,43 @@ class WeakWaterDTO {
 
   // 날짜 포맷 메서드
   String get formattedDate => DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(date);
+}
+
+class WalkingDetailDTO{
+  final int? dayWalking ;
+  final int? totalMonthWalking;
+  final double? avgMonthWalking;
+  final double? rateAvgWalking;
+  final int? maxWalking;
+  final DateTime? maxWalkingDay;
+
+  WalkingDetailDTO(
+      {this.dayWalking,
+        this.totalMonthWalking,
+        this.avgMonthWalking,
+        this.rateAvgWalking,
+        this.maxWalking,
+        this.maxWalkingDay
+      });
+
+  WalkingDetailDTO.fromJson(Map<String, dynamic> json)
+      : dayWalking = json["dayWalking"],
+        totalMonthWalking = json["totalMonthWalking"],
+        avgMonthWalking = json["avgMonthWalking"].toDouble(),
+        rateAvgWalking = json["rateAvgWalking"].toDouble(),
+        maxWalking = json["maxWalking"],
+        maxWalkingDay = DateFormat("yyyy-MM-dd").parse(json["maxWalkingDay"], true).toLocal();
+}
+
+class WeakWalkingDTO {
+  final DateTime date ;
+  final int walking ;
+
+  WeakWalkingDTO(this.date, this.walking);
+
+  WeakWalkingDTO.fromJson(Map<String, dynamic> json)
+      : date = DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal(),
+        walking = json["walking"];
 }
 
 class FoodContentListDTO {
@@ -147,4 +183,5 @@ class FoodContentListDTO {
       gram: json["gram"],
     );
   }
+// 먹은 그램양
 }

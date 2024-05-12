@@ -122,31 +122,30 @@ Widget buildWeightGraph(Color lineColor, List<Color> gradientColors, ChangeWeigh
 
 
 Widget buildTimeline(ChangeWeightModel model, String type) {
-  List<Map<String, dynamic>> data = [];
+  List<Map<String, String>> data = [];
 
   if (type == "fat") {
     model.fatTimeLineDTO?.forEach((item) {
       data.add({
         "fat": "${item.fat} kg",
-        "date": "${item.fatTimeLine}",
+        "date": item.formattedDate,
       });
     });
   } else if (type == "muscle") {
     model.muscleTimeLineDTO?.forEach((item) {
       data.add({
         "muscle": "${item.muscle} kg",
-        "date": "${item.muscleTimeLine}",
+        "date": item.formattedDate,
       });
     });
   } else if (type == "weight") {
     model.weightTimeLineDTO?.forEach((item) {
       data.add({
         "weight": "${item.weight} kg",
-        "date": "${item.weightTimeLine}",
+        "date": item.formattedDate,
       });
     });
   }
-  ;
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,14 +191,14 @@ Widget buildTimeline(ChangeWeightModel model, String type) {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                data[index]["${type}"],
+                                data[index][type]!,
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black),
                               ),
                               SizedBox(height: 4),
-                              Text(data[index]["date"],
+                              Text(data[index]["date"]!,
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.grey)),
                             ],
@@ -217,6 +216,7 @@ Widget buildTimeline(ChangeWeightModel model, String type) {
     ],
   );
 }
+
 
 class TimelinePainter extends CustomPainter {
   final List<double> yPositions;

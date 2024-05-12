@@ -12,14 +12,14 @@ class WaterIntakeGraph extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     DrinkWaterModel? model = ref.watch(DrinkWaterProvider);
 
-    // model에서 날짜 데이터 추출
+    // 날짜 데이터 추출 및 정렬
     List<DateTime>? dates = model?.weakWaterDTO?.map((e) => e.date).toList();
+    dates?.sort((a, b) => a.compareTo(b));
 
-    // 중앙 날짜 계산
-    DateTime? centralDate;
-    if (dates != null && dates.isNotEmpty) {
-      centralDate = dates[dates.length ~/ 2];
-    }
+    // 최근 날짜 문자열 생성
+    String recentDateString = dates != null && dates.isNotEmpty
+        ? DateFormat('yyyy년 MM월').format(dates.last)
+        : '날짜 없음';
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ class WaterIntakeGraph extends ConsumerWidget {
           color: kAccentColor2,
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            centralDate != null ? DateFormat('yyyy년 MM월').format(centralDate) : '날짜 없음',
+            recentDateString,
             style: TextStyle(
               color: TColor.white,
               fontWeight: FontWeight.bold,
@@ -37,18 +37,16 @@ class WaterIntakeGraph extends ConsumerWidget {
             ),
             textAlign: TextAlign.center,
           ),
-
         ),
         AspectRatio(
           aspectRatio: 1.6,
           child: Container(
-            decoration: BoxDecoration(
-              color: kAccentColor2,
-            ),
+            decoration: BoxDecoration(color: kAccentColor2),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 18.0),
+              padding: const EdgeInsets.symmetric(
+                  vertical: 24.0, horizontal: 18.0),
               child: LineChart(
-                mainData(model),
+                mainData(model, dates ?? []), // null-aware 연산자로 빈 리스트 전달
               ),
             ),
           ),
@@ -57,25 +55,31 @@ class WaterIntakeGraph extends ConsumerWidget {
     );
   }
 
-  LineChartData mainData(DrinkWaterModel? model) {
-    List<FlSpot> spots = model?.weakWaterDTO?.asMap().entries.map((e) {
-      int index = e.key; // 인덱스 번호
-      double yValue = e.value.water.toDouble(); // y값을 double로 변환
-      return FlSpot(index.toDouble(), yValue); // FlSpot 객체 생성
-    })?.toList() ??
-        [];
+  LineChartData mainData(DrinkWaterModel? model, List<DateTime> dates) {
+    // FlSpot 데이터 생성
+    List<FlSpot> spots = model?.weakWaterDTO
+        ?.where((dto) => dates.contains(dto.date))
+        ?.map((dto) {
+      int index = dates.indexOf(dto.date);
+      double yValue = dto.water.toDouble();
+      return FlSpot(index.toDouble(), yValue);
+    })?.toList() ?? [];
+
+
     return LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
-        getDrawingHorizontalLine: (value) => FlLine(
-          color: Colors.blueGrey[100],
-          strokeWidth: 1,
-        ),
-        getDrawingVerticalLine: (value) => FlLine(
-          color: Colors.blueGrey[100],
-          strokeWidth: 1,
-        ),
+        getDrawingHorizontalLine: (value) =>
+            FlLine(
+              color: Colors.blueGrey[100],
+              strokeWidth: 1,
+            ),
+        getDrawingVerticalLine: (value) =>
+            FlLine(
+              color: Colors.blueGrey[100],
+              strokeWidth: 1,
+            ),
       ),
       titlesData: FlTitlesData(
         bottomTitles: AxisTitles(
@@ -83,61 +87,52 @@ class WaterIntakeGraph extends ConsumerWidget {
             showTitles: true,
             reservedSize: 35,
             getTitlesWidget: (value, meta) {
-              List<DateTime> dates = [
-                DateTime(2024, 5, 5),
-                DateTime(2024, 5, 6),
-                DateTime(2024, 5, 7),
-                DateTime(2024, 5, 8),
-                DateTime(2024, 5, 9),
-                DateTime(2024, 5, 10),
-                DateTime(2024, 5, 11),
-              ];
-              return Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  DateFormat('dd').format(dates[value.toInt()]),
-                  style: TextStyle(
-                      color: TColor.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-              );
+              if (dates.isNotEmpty && value.toInt() < dates.length) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    DateFormat('dd').format(dates[value.toInt()]),
+                    style: TextStyle(color: TColor.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                );
+              }
+              return Text('');
             },
           ),
         ),
-        rightTitles: AxisTitles(),
-        topTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
+        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        // 오른쪽 레이블 숨기기
+        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        // 상단 레이블 숨기기
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            getTitlesWidget: (value, meta) => Text(
-              '${value.toInt()}',
-              style: TextStyle(
-                  color: TColor.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15),
-            ),
+            getTitlesWidget: (value, meta) =>
+                Text(
+                  '${value.toInt()}',
+                  style: TextStyle(color: TColor.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
             reservedSize: 40,
           ),
         ),
       ),
       borderData: FlBorderData(show: false),
       minX: 0,
-      maxX: 6,
+      maxX: dates.length.toDouble() - 1,
       minY: 0,
       maxY: 500,
       lineBarsData: [
-        LineChartBarData(
-          spots: spots,
-          isCurved: true,
-          color: TColor.secondaryColor2,
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: FlDotData(show: true),
-          belowBarData: BarAreaData(show: true, color: Colors.transparent),
-        ),
+        LineChartBarData(spots: spots,
+            isCurved: true,
+            color: TColor.secondaryColor2,
+            barWidth: 5,
+            isStrokeCapRound: true,
+            dotData: FlDotData(show: true),
+            belowBarData: BarAreaData(show: true, color: Colors.transparent)),
       ],
     );
   }

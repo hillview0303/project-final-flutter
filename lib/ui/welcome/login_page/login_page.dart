@@ -45,27 +45,33 @@ class LoginPage extends ConsumerWidget {
                       Text(
                         '로그인',
                         style: textTheme().titleLarge?.copyWith(
-                          color: kAccentColor2, // kAccentColor2로 지정
+                          color: kAccentColor2,
                         ),
                       ),
                       const SizedBox(height: 40.0),
                       // ID 입력
                       TextFormField(
+                        cursorColor: TColor.grey,
                         //todo : 주석 해제
                         // validator: validateUsername(),
                         controller: _username,
                         decoration: InputDecoration(
-                          label: const Text('ID'),
+                          label: const Text('ID', style: TextStyle(color: Colors.grey)),
                           hintText: 'ID를 입력하세요',
                           hintStyle: const TextStyle(color: Colors.black26),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: TColor.grey),
+                          ),
+                          labelStyle: const TextStyle(color: Colors.grey),
                         ),
                       ),
                       const SizedBox(height: 25.0),
                       // PW 입력
                       TextFormField(
+                        cursorColor: TColor.grey,
                         //todo : 주석 해제
                         // validator: validatePassword(),
                         controller: _password,
@@ -77,6 +83,10 @@ class LoginPage extends ConsumerWidget {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: TColor.grey),
+                          ),
+                          labelStyle: const TextStyle(color: Colors.grey),
                         ),
                       ),
                       const SizedBox(height: 25.0),

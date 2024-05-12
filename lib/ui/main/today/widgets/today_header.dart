@@ -7,6 +7,7 @@ import 'package:project_app/ui/main/today/widgets/today_changes_detail.dart';
 import 'package:project_app/ui/main/today/widgets/today_user_data.dart';
 
 import '../../../../_core/constants/size.dart';
+import '../../../../_core/utils/date_format.dart';
 import '../../../../data/models/chartDummy.dart';
 import '../viewmodel/visibility_state_viewmodel.dart';
 import '../viewmodel/today_page_viewmodel.dart';
@@ -32,6 +33,7 @@ class TodayHeader extends ConsumerWidget {
       if (type == 'weight')
         ref.read(visibilityProvider.notifier).toggleWeightVisibility();
     }
+    String formattedDate = DateFormatter.format(model?.bodyData?.last.date);
 
 
     return Column(
@@ -60,7 +62,7 @@ class TodayHeader extends ConsumerWidget {
                 weightVisible: visibilityState.weightVisible,
               ),
               SizedBox(height: gap_s),
-              LastUpdate(lastUpdated: '${model?.bodyData?.last.date}'),
+              LastUpdate(lastUpdated: '${formattedDate}'),
               SizedBox(height: gap_l),
               MyChanges(),
             ],

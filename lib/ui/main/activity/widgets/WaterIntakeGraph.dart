@@ -12,14 +12,9 @@ class WaterIntakeGraph extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     DrinkWaterModel? model = ref.watch(DrinkWaterProvider);
 
-    // model에서 날짜 데이터 추출
-    List<DateTime>? dates = model?.weakWaterDTO?.map((e) => e.date).toList();
-
-    // 중앙 날짜 계산
-    DateTime? centralDate;
-    if (dates != null && dates.isNotEmpty) {
-      centralDate = dates[dates.length ~/ 2];
-    }
+    // 현재 일주일 날짜 생성
+    DateTime today = DateTime.now();
+    List<DateTime> thisWeekDates = List.generate(7, (index) => today.subtract(Duration(days: 6 - index)));
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -29,7 +24,7 @@ class WaterIntakeGraph extends ConsumerWidget {
           color: kAccentColor2,
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            centralDate != null ? DateFormat('yyyy년 MM월').format(centralDate) : '날짜 없음',
+            DateFormat('yyyy년 MM월').format(today),
             style: TextStyle(
               color: TColor.white,
               fontWeight: FontWeight.bold,
@@ -37,18 +32,15 @@ class WaterIntakeGraph extends ConsumerWidget {
             ),
             textAlign: TextAlign.center,
           ),
-
         ),
         AspectRatio(
           aspectRatio: 1.6,
           child: Container(
-            decoration: BoxDecoration(
-              color: kAccentColor2,
-            ),
+            decoration: BoxDecoration(color: kAccentColor2),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 18.0),
               child: LineChart(
-                mainData(model),
+                mainData(model, thisWeekDates), // `thisWeekDates` 리스트를 파라미터로 전달
               ),
             ),
           ),
@@ -57,67 +49,44 @@ class WaterIntakeGraph extends ConsumerWidget {
     );
   }
 
-  LineChartData mainData(DrinkWaterModel? model) {
-    List<FlSpot> spots = model?.weakWaterDTO?.asMap().entries.map((e) {
-      int index = e.key; // 인덱스 번호
-      double yValue = e.value.water.toDouble(); // y값을 double로 변환
-      return FlSpot(index.toDouble(), yValue); // FlSpot 객체 생성
-    })?.toList() ??
-        [];
+  LineChartData mainData(DrinkWaterModel? model, List<DateTime> dates) {
+    // 데이터 매핑
+    List<FlSpot> spots = model?.weakWaterDTO?.where((dto) => dates.contains(dto.date))
+        .map((dto) {
+      int index = dates.indexOf(dto.date);
+      double yValue = dto.water.toDouble();
+      return FlSpot(index.toDouble(), yValue);
+    }).toList() ?? [];
+
     return LineChartData(
-      gridData: FlGridData(
-        show: true,
-        drawVerticalLine: true,
-        getDrawingHorizontalLine: (value) => FlLine(
-          color: Colors.blueGrey[100],
-          strokeWidth: 1,
-        ),
-        getDrawingVerticalLine: (value) => FlLine(
-          color: Colors.blueGrey[100],
-          strokeWidth: 1,
-        ),
-      ),
+      gridData: FlGridData(show: true),
       titlesData: FlTitlesData(
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: 35,
             getTitlesWidget: (value, meta) {
-              List<DateTime> dates = [
-                DateTime(2024, 5, 5),
-                DateTime(2024, 5, 6),
-                DateTime(2024, 5, 7),
-                DateTime(2024, 5, 8),
-                DateTime(2024, 5, 9),
-                DateTime(2024, 5, 10),
-                DateTime(2024, 5, 11),
-              ];
-              return Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  DateFormat('dd').format(dates[value.toInt()]),
-                  style: TextStyle(
-                      color: TColor.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-              );
+              if (value.toInt() < dates.length) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    DateFormat('dd').format(dates[value.toInt()]),
+                    style: TextStyle(color: TColor.white, fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                );
+              }
+              return Text('');
             },
           ),
         ),
-        rightTitles: AxisTitles(),
-        topTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
+        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
             getTitlesWidget: (value, meta) => Text(
               '${value.toInt()}',
-              style: TextStyle(
-                  color: TColor.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15),
+              style: TextStyle(color: TColor.white, fontWeight: FontWeight.bold, fontSize: 15),
             ),
             reservedSize: 40,
           ),
@@ -125,19 +94,11 @@ class WaterIntakeGraph extends ConsumerWidget {
       ),
       borderData: FlBorderData(show: false),
       minX: 0,
-      maxX: 6,
+      maxX: dates.length.toDouble() - 1,
       minY: 0,
       maxY: 500,
       lineBarsData: [
-        LineChartBarData(
-          spots: spots,
-          isCurved: true,
-          color: TColor.secondaryColor2,
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: FlDotData(show: true),
-          belowBarData: BarAreaData(show: true, color: Colors.transparent),
-        ),
+        LineChartBarData(spots: spots, isCurved: true, color: TColor.secondaryColor2),
       ],
     );
   }

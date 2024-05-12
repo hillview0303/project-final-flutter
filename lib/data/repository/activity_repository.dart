@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
+import 'package:project_app/ui/main/activity/viewmodel/walking_detail.viewmodel.dart';
 
 import '../../_core/constants/http.dart';
 import '../dtos/activity/activity_response.dart';
@@ -36,14 +37,11 @@ class ActivityRepository {
   }
 
   Future<ResponseDTO> fetchActivityMain(String formattedDate) async {
-
     final response = await dio.get("/api/activities/date/${formattedDate}");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-
     if (responseDTO.status == 200) {
-
       ActivitiesDateDTO activitiesDateDTO =
           ActivitiesDateDTO.fromJson(responseDTO.body);
       // print("날짜 : ${activitiesDateDTO.createdAt}");
@@ -64,20 +62,34 @@ class ActivityRepository {
     final response = await dio.get("/api/activities/water/detail");
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-
-    if(responseDTO.status == 200){
+    if (responseDTO.status == 200) {
       List<dynamic> tempWater = responseDTO.body["weakWater"];
-      List<WeakWaterDTO> weakWaterDTO = tempWater.map((e) => WeakWaterDTO.fromJson(e)).toList();
+      List<WeakWaterDTO> weakWaterDTO =
+          tempWater.map((e) => WeakWaterDTO.fromJson(e)).toList();
       DrinkWaterDTO drinkWaterDTO = DrinkWaterDTO.fromJson(responseDTO.body);
       DrinkWaterModel model = DrinkWaterModel(drinkWaterDTO, weakWaterDTO);
       print("물 : ${drinkWaterDTO.dayWater}");
       print("날짜 : ${weakWaterDTO.last.date}");
-      responseDTO.body = model ;
+      responseDTO.body = model;
     }
 
+    return responseDTO;
+  }
 
-    return responseDTO ;
+  Future<ResponseDTO> fetchWalkingDetail() async {
+    final response = await dio.get("/api/activities/walking/detail");
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
+    if (responseDTO.status == 200) {
+      List<dynamic> tempWalking = responseDTO.body["weakWalkings"];
+      List<WeakWalkingDTO> weakWalkings =
+          tempWalking.map((e) => WeakWalkingDTO.fromJson(e)).toList();
+      WalkingDetailDTO walkingDetailDTO =
+          WalkingDetailDTO.fromJson(responseDTO.body);
+      WaterDetailModel model = WaterDetailModel(walkingDetailDTO, weakWalkings);
+      responseDTO.body = model;
+    }
 
+    return responseDTO;
   }
 }

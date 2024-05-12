@@ -32,8 +32,9 @@ class FatTimeLineDTO {
   FatTimeLineDTO.fromJson(Map<String, dynamic> json)
       : bodyDateId = json["bodyDateId"],
         fat = json["fat"].toDouble(),
-        fatTimeLine =
-            DateFormat("yyyy-MM-dd").parse(json["fatTimeLine"], true).toLocal();
+        fatTimeLine = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .parse(json["fatTimeLine"], true)
+            .toLocal();
 }
 
 class MuscleTimeLineDTO {
@@ -46,7 +47,7 @@ class MuscleTimeLineDTO {
   MuscleTimeLineDTO.fromJson(Map<String, dynamic> json)
       : bodyDateId = json["bodyDateId"],
         muscle = json["muscle"].toDouble(),
-        muscleTimeLine = DateFormat("yyyy-MM-dd")
+        muscleTimeLine = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
             .parse(json["muscleTimeLine"], true)
             .toLocal();
 }
@@ -63,7 +64,7 @@ class WeightTimeLineDTO {
   WeightTimeLineDTO.fromJson(Map<String, dynamic> json)
       : bodyDateId = json["bodyDateId"],
         weight = json["weight"].toDouble(),
-        weightTimeLine = DateFormat("yyyy-MM-dd")
+        weightTimeLine = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
             .parse(json["weightTimeLine"], true)
             .toLocal();
 }
@@ -78,18 +79,19 @@ class ActivitiesDateDTO {
 
   ActivitiesDateDTO(
       {required this.createdAt,
-      this.walking,
-      this.drinkWater,
-      this.kcal,
-      this.weight});
+        this.walking,
+        this.drinkWater,
+        this.kcal,
+        this.weight});
 
   ActivitiesDateDTO.fromJson(Map<String, dynamic> json)
-      : createdAt =
-            DateFormat("yyyy-MM-dd").parse(json["createdAt"], true).toLocal(),
+      : createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
+      .parse(json["createdAt"], true)
+      .toLocal(),
         walking = json["walking"],
         drinkWater = json["drinkWater"],
         kcal = json["kcal"],
-        weight = json["weight"].toDouble();
+        weight = json["weight"] != null ? json["weight"].toDouble() : null;
 }
 
 class DrinkWaterDTO {
@@ -109,14 +111,16 @@ class WeakWaterDTO {
   WeakWaterDTO(this.date, this.water);
 
   WeakWaterDTO.fromJson(Map<String, dynamic> json)
-      : date = DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal(),
+      : date = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
+      .parse(json["date"], true)
+      .toLocal(),
         water = json["water"];
 }
 
 class FoodContentListDTO {
   final int id;
   final String name;
-  final double carbo; //탄수화물
+  final double carbo; // 탄수화물
   final double protein; // 단백질
   final double fat; // 지방
   final int kcal; // 칼로리
@@ -124,23 +128,22 @@ class FoodContentListDTO {
 
   FoodContentListDTO(
       {required this.id,
-      required this.name,
-      required this.carbo,
-      required this.protein,
-      required this.fat,
-      required this.kcal,
-      required this.gram});
+        required this.name,
+        required this.carbo,
+        required this.protein,
+        required this.fat,
+        required this.kcal,
+        required this.gram});
 
   factory FoodContentListDTO.fromJson(Map<String, dynamic> json) {
     return FoodContentListDTO(
       id: json["id"],
       name: json["name"],
-      carbo: json["carbo"],
-      protein: json["protein"],
-      fat: json["fat"],
+      carbo: json["carbo"].toDouble(),
+      protein: json["protein"].toDouble(),
+      fat: json["fat"].toDouble(),
       kcal: json["kcal"],
       gram: json["gram"],
     );
   }
-// 먹은 그램양
 }

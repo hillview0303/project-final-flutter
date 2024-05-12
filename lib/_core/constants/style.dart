@@ -16,6 +16,10 @@ TextStyle h7({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: mColor);
 }
 
+TextStyle h8({Color mColor = Colors.black}) {
+  return TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: mColor);
+}
+
 TextStyle subtitle1({Color mColor = Colors.black, FontWeight? fontWeight}) {
   return TextStyle(fontSize: 16, color: mColor, fontWeight: fontWeight);
 }

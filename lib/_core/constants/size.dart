@@ -10,6 +10,7 @@ const double gap_m = 20;
 const double gap_sm = 15;
 const double gap_s = 10;
 const double gap_xs = 5;
+const double gap_xxs = 2;
 
 const double header_height = 620;
 

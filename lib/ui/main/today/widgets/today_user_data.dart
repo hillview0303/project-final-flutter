@@ -15,7 +15,6 @@ class TodayUserData extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      // color: kAccentColor1,
       width: double.infinity,
       height: 380,
       decoration: BoxDecoration(

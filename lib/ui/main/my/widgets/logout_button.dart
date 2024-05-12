@@ -11,7 +11,7 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.pushNamed(context, Move.loginPage);
+        Navigator.pushNamed(context, Move.welcomePage);
       },
       child: Container(
         padding: EdgeInsets.only(bottom: 1, top: 1, left: gap_s, right: gap_s),

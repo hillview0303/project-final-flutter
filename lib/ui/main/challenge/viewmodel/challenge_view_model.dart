@@ -20,7 +20,8 @@ class ChallengeListViewModel extends StateNotifier<ChallengeListModel?> {
 
   ChallengeListViewModel(super._state, this.ref);
 
-  Future<void> startChallenge(AttendChallenge attendChallenge) async {
+  // 통신 없이 챌린지 시작
+  void startChallenge(AttendChallenge attendChallenge) {
     ChallengeListModel prevModel = state!;
     List<ChallengeListDTO> upcomingChallenge =
         prevModel.upcomingChallengeDTOList!;

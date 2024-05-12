@@ -36,6 +36,28 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
 
   TodayPageViewModel(super.state, this.ref);
 
+  void updateName(String name) {
+    MainDTO prevDTO = state!.mainDTO;
+    MainDTO newDTO = MainDTO(
+        prevDTO.id,
+        name,
+        prevDTO.goalFat,
+        prevDTO.goalMuscle,
+        prevDTO.goalWeight,
+        prevDTO.fat,
+        prevDTO.muscle,
+        prevDTO.weight);
+
+    TodayPageModel model = TodayPageModel(
+        mainDTO: newDTO,
+        bodyData: state!.bodyData,
+        goalFatDTO: state!.goalFatDTO,
+        goalMuscleDTO: state!.goalMuscleDTO,
+        goalWeightDTO: state!.goalWeightDTO);
+
+    state = model;
+  }
+
   Future<void> notifyInit() async {
     ResponseDTO responseDTO = await TodayRepository().fetchMainPage();
 
@@ -75,7 +97,7 @@ class TodayPageViewModel extends StateNotifier<TodayPageModel?> {
           mainDTO: newMainDTO, bodyData: newBodyData, addBodyDTO: addBodyDTO);
 
       state = model;
-      await ref.read(myPageProvider.notifier).updateBodyData(addBodyDTO);
+      ref.read(myPageProvider.notifier).updateBodyData(addBodyDTO);
       Navigator.pop(mContext!);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

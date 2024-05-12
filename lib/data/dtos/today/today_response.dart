@@ -10,8 +10,8 @@ class MainDTO {
   final double muscle;
   final double weight;
 
-  MainDTO(this.id, this.name, this.goalFat, this.goalMuscle,this.goalWeight, this.fat,
-      this.muscle, this.weight);
+  MainDTO(this.id, this.name, this.goalFat, this.goalMuscle, this.goalWeight,
+      this.fat, this.muscle, this.weight);
 
   MainDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -23,59 +23,70 @@ class MainDTO {
         goalMuscle = json["goalMuscle"].toDouble(),
         goalFat = json["goalFat"].toDouble();
 }
-class BodyDataDTO {
-  final int id;
-  final double fat;
-  final double muscle;
-  final double weight;
-  final DateTime date;
 
-  BodyDataDTO(this.id, this.fat, this.muscle, this.weight, this.date);
+class BodyDataDTO {
+  final int? id;
+  final double? fat;
+  final double? muscle;
+  final double? weight;
+  final DateTime? date;
+
+  BodyDataDTO({this.id, this.fat, this.muscle, this.weight, this.date});
 
   BodyDataDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         fat = json["fat"].toDouble(),
         muscle = json["muscle"].toDouble(),
         weight = json["weight"].toDouble(),
-        date = DateFormat("yyyy-MM-dd")
-            .parse(json["date"], true)
-            .toLocal();
+        date = DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal();
 }
 
-class AddBodyDTO{
+class AddBodyDTO {
   final double fat;
   final double muscle;
   final double weight;
+  final DateTime date;
 
-  AddBodyDTO(this.fat, this.muscle, this.weight);
+  AddBodyDTO(
+      {required this.fat,
+      required this.muscle,
+      required this.weight,
+      required this.date});
 
-  AddBodyDTO.fromJson(Map<String, dynamic> json)
-      :fat = json["fat"].toDouble(),
-        muscle = json["muscle"].toDouble(),
-        weight = json["weight"].toDouble();
-
+  factory AddBodyDTO.fromJson(Map<String, dynamic> json) {
+    return AddBodyDTO(
+      fat: json["fat"],
+      muscle: json["muscle"],
+      weight: json["weight"],
+      date: DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal(),
+    );
+  }
+//
 }
 
-class GoalFatDTO{
+class GoalFatDTO {
   final double goalFat;
+
   GoalFatDTO(this.goalFat);
 
-  GoalFatDTO.fromJson(Map<String, dynamic> json):
-        goalFat =json["goalFat"].toDouble();
+  GoalFatDTO.fromJson(Map<String, dynamic> json)
+      : goalFat = json["goalFat"].toDouble();
 }
 
-class GoalMuscleDTO{
+class GoalMuscleDTO {
   final double goalMuscle;
+
   GoalMuscleDTO(this.goalMuscle);
 
-  GoalMuscleDTO.fromJson(Map<String, dynamic> json):
-        goalMuscle =json["goalMuscle"].toDouble();
+  GoalMuscleDTO.fromJson(Map<String, dynamic> json)
+      : goalMuscle = json["goalMuscle"].toDouble();
 }
 
-class GoalWeightDTO{
+class GoalWeightDTO {
   final double goalWeight;
+
   GoalWeightDTO(this.goalWeight);
 
-  GoalWeightDTO.fromJson(Map<String, dynamic> json):
-        goalWeight =json["goalWeight"].toDouble();
+  GoalWeightDTO.fromJson(Map<String, dynamic> json)
+      : goalWeight = json["goalWeight"].toDouble();
 }

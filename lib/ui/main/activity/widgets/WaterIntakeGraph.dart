@@ -50,13 +50,25 @@ class WaterIntakeGraph extends ConsumerWidget {
   }
 
   LineChartData mainData(DrinkWaterModel? model, List<DateTime> dates) {
-    // 데이터 매핑
-    List<FlSpot> spots = model?.weakWaterDTO?.where((dto) => dates.contains(dto.date))
-        .map((dto) {
-      int index = dates.indexOf(dto.date);
-      double yValue = dto.water.toDouble();
-      return FlSpot(index.toDouble(), yValue);
-    }).toList() ?? [];
+    // Ensure dates are at the start of the day for accurate comparison
+    List<DateTime> normalizedDates = dates.map((date) => DateTime(date.year, date.month, date.day)).toList();
+
+    // Map model data to FlSpot only if the date matches
+    List<FlSpot> spots = [];
+    if (model != null && model.weakWaterDTO != null) {
+      for (var dto in model.weakWaterDTO!) {
+        DateTime dtoDate = DateTime(dto.date.year, dto.date.month, dto.date.day);
+        int index = normalizedDates.indexOf(dtoDate);
+        if (index != -1) {
+          double yValue = dto.water.toDouble();
+          spots.add(FlSpot(index.toDouble(), yValue));
+          print("Adding spot: ${dtoDate.toString()} at index $index with value $yValue");
+        } else {
+          print("No matching date for DTO date: ${dto.date.toString()}");
+        }
+      }
+    }
+
 
     return LineChartData(
       gridData: FlGridData(show: true),

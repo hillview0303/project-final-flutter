@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
+import 'package:project_app/data/dtos/today/today_response.dart';
 import 'package:project_app/data/repository/user_repositiry.dart';
 import 'package:project_app/main.dart';
 
@@ -17,6 +18,21 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
   Ref ref;
 
   MyPageViewModel(super._state, this.ref);
+
+  Future<void> updateBodyData(AddBodyDTO addBodyDTO) async {
+    MyPageModel prevModel = state!;
+    MyPageDTO myPageDTO = prevModel.myPageDTO;
+
+    MyPageModel newModel = MyPageModel(MyPageDTO(
+        id: myPageDTO.id,
+        name: myPageDTO.name,
+        fat: addBodyDTO.fat,
+        muscle: addBodyDTO.muscle,
+        weight: addBodyDTO.weight,
+        userImg: myPageDTO.userImg));
+
+    state = newModel;
+  }
 
   Future<void> updateUserImg(String userImg) async {
     MyPageModel prevModel = state!;
@@ -48,9 +64,7 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
   }
 
   Future<void> notifyInit() async {
-
-    ResponseDTO responseDTO =
-        await UserRepository().fetchMyPage();
+    ResponseDTO responseDTO = await UserRepository().fetchMyPage();
 
     MyPageModel myPageModel = MyPageModel(MyPageDTO.fromJson(responseDTO.body));
     if (responseDTO.status == 200) {

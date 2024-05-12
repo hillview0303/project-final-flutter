@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../../_core/constants/constants.dart';
 import '../../../../data/dtos/today/today_request.dart';
-import '../../activity/viewmodel/change_weight_viewmodel.dart';
-import '../../my/viewmodel/my_page_view_model.dart';
 import '../viewmodel/today_page_viewmodel.dart';
 
 void showInputModal(
@@ -77,18 +76,19 @@ void showInputModal(
                   foregroundColor: Colors.white,
                 ),
                 child: Text('저장'),
-                onPressed: ()  async {
-                  double? fat = double.tryParse(_fat.text) ?? model?.bodyData.last.fat;
-                  double? muscle = double.tryParse(_muscle.text) ?? model?.bodyData.last.muscle;
-                  double? weight = double.tryParse(_weight.text) ?? model?.bodyData.last.weight;
+                onPressed: () async {
+                  double? fat =
+                      double.tryParse(_fat.text) ?? model?.bodyData.last.fat;
+                  double? muscle = double.tryParse(_muscle.text) ??
+                      model?.bodyData.last.muscle;
+                  double? weight = double.tryParse(_weight.text) ??
+                      model?.bodyData.last.weight;
 
                   AddBodyDataRequestDTO requestDTO =
-                  AddBodyDataRequestDTO(fat!, muscle!, weight!);
-                await ref.watch(TodayPageProvider.notifier).notifyAddBodyData(requestDTO);
-                  ref.watch(TodayPageProvider.notifier).notifyInit();
-                  ref.watch(myPageProvider.notifier).notifyInit();
-                  ref.watch(ChangeWeightProvider.notifier).notifyInit();
-
+                      AddBodyDataRequestDTO(fat!, muscle!, weight!);
+                  await ref
+                      .read(TodayPageProvider.notifier)
+                      .notifyAddBodyData(requestDTO);
                 },
               ),
             ],

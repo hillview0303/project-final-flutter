@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 
 import '../../ui/main/today/viewmodel/today_page_viewmodel.dart';
 
-
 List<FlSpot> FatDataFromModel(TodayPageModel? model) {
   if (model == null || model.bodyData!.isEmpty) {
     return [];
@@ -11,12 +10,10 @@ List<FlSpot> FatDataFromModel(TodayPageModel? model) {
   // FlSpot 리스트를 생성합니다.
   List<FlSpot> fatData = List.generate(points!.length, (index) {
     final bodyDataPoint = points[index];
-    return FlSpot(index.toDouble(), bodyDataPoint.fat);
+    return FlSpot(index.toDouble(), bodyDataPoint.fat!);
   });
   return fatData;
 }
-
-
 
 List<FlSpot> MuscleDataFromModel(TodayPageModel? model) {
   if (model == null || model.bodyData!.isEmpty) {
@@ -26,7 +23,7 @@ List<FlSpot> MuscleDataFromModel(TodayPageModel? model) {
 
   List<FlSpot> muscleData = List.generate(points!.length, (index) {
     final bodyDataPoint = points[index];
-    return FlSpot(index.toDouble(), bodyDataPoint.muscle);
+    return FlSpot(index.toDouble(), bodyDataPoint.muscle!);
   });
   return muscleData;
 }
@@ -39,11 +36,10 @@ List<FlSpot> WeightDataFromModel(TodayPageModel? model) {
 
   List<FlSpot> weightDataData = List.generate(points!.length, (index) {
     final bodyDataPoint = points[index];
-    return FlSpot(index.toDouble(), bodyDataPoint.weight);
+    return FlSpot(index.toDouble(), bodyDataPoint.weight!);
   });
   return weightDataData;
 }
-
 
 extension ListExtension<T> on List<T> {
   List<T> takeLast(int n) {
@@ -67,8 +63,6 @@ extension ListExtension<T> on List<T> {
 //   FlSpot(3, 76),
 //   FlSpot(4, 75),
 // ];
-
-
 
 double maxY(List<FlSpot> spots) {
   return spots.map((spot) => spot.y).reduce((max, y) => y > max ? y : max);

@@ -57,7 +57,7 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
         walking: challengeDetailDTO.walking,
       );
 
-      await challengeListViewModel.startChallenge(attendChallenge);
+      challengeListViewModel.startChallenge(attendChallenge);
 
       Navigator.pop(mContext!);
     } else {

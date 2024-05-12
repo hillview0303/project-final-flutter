@@ -4,8 +4,8 @@ import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/dtos/user/user_request.dart';
 import 'package:project_app/data/dtos/user/user_response.dart';
 import 'package:project_app/data/repository/user_repositiry.dart';
-import 'package:project_app/data/store/session_store.dart';
 import 'package:project_app/main.dart';
+import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 
 import '../../../../data/dtos/my/my_response.dart';
 import 'my_page_view_model.dart';
@@ -39,7 +39,7 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
           height: prevModel.profileUpdateFormDTO.height,
           userImg: updateDTO.userImg));
 
-      await ref
+      ref
           .read(myPageProvider.notifier)
           .updateUserImg(imgUpdateResponseDTO.userImg);
 
@@ -53,14 +53,15 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
   }
 
   Future<void> updateProfile(UserUpdateDTO updateDTO) async {
+    ResponseDTO responseDTO = await UserRepository().fetchUpdate(updateDTO);
 
-    ResponseDTO responseDTO = await UserRepository()
-        .fetchUpdate(updateDTO);
+    ProfileUpdateFormDTO updateFormDTO =
+        ProfileUpdateFormDTO.fromJson(responseDTO.body);
 
     if (responseDTO.status == 200) {
-      await ref
-          .read(myPageProvider.notifier)
-          .updatedUser(ProfileUpdateFormDTO.fromJson(responseDTO.body));
+      ref.read(myPageProvider.notifier).updatedUser(updateFormDTO);
+
+      ref.read(TodayPageProvider.notifier).updateName(updateFormDTO.name);
 
       Navigator.pop(mContext!);
     } else {
@@ -70,9 +71,7 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
   }
 
   Future<void> notifyInit() async {
-
-    ResponseDTO responseDTO =
-        await UserRepository().profileUpdateForm();
+    ResponseDTO responseDTO = await UserRepository().profileUpdateForm();
 
     ProfileEditModel myPageModel =
         ProfileEditModel(ProfileUpdateFormDTO.fromJson(responseDTO.body));

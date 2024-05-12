@@ -19,7 +19,7 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
 
   MyPageViewModel(super._state, this.ref);
 
-  Future<void> updateBodyData(AddBodyDTO addBodyDTO) async {
+  void updateBodyData(AddBodyDTO addBodyDTO) {
     MyPageModel prevModel = state!;
     MyPageDTO myPageDTO = prevModel.myPageDTO;
 
@@ -34,7 +34,8 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
     state = newModel;
   }
 
-  Future<void> updateUserImg(String userImg) async {
+  // 통신 없이 프로필 이미지 상태 변경
+  void updateUserImg(String userImg) {
     MyPageModel prevModel = state!;
 
     MyPageModel newModel = MyPageModel(MyPageDTO(
@@ -49,7 +50,8 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
     state = newModel;
   }
 
-  Future<void> updatedUser(ProfileUpdateFormDTO updateDTO) async {
+  // 통신 없이 유저정보 업데이트 후 상태변경
+  void updatedUser(ProfileUpdateFormDTO updateDTO) {
     MyPageModel prevModel = state!;
     MyPageDTO myPageDTO = MyPageDTO(
         id: updateDTO.id,

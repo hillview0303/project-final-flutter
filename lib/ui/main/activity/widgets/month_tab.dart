@@ -4,15 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:project_app/ui/main/activity/viewmodel/walking_detail.viewmodel.dart';
 
 import '../../../../_core/constants/constants.dart';
+import '../../../../_core/utils/date_format.dart';
 
 class MonthTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     WalkingDetailModel? model = ref.read(WalkingDetailProvider);
 
-    String formattedDate = model?.walkingDetailDTO.maxWalkingDay != null
-        ? DateFormat('yyyy-MM-dd').format(model!.walkingDetailDTO.maxWalkingDay!)
-        : "데이터가 없습니다.";
+    String formattedDate = DateFormatter.format(model?.walkingDetailDTO.maxWalkingDay);
 
     return Container(
       padding: EdgeInsets.all(20),

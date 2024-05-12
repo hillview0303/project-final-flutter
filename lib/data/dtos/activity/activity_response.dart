@@ -112,3 +112,35 @@ class WeakWaterDTO {
       : date = DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal(),
         water = json["water"];
 }
+
+class FoodContentListDTO {
+  final int id;
+  final String name;
+  final double carbo; //탄수화물
+  final double protein; // 단백질
+  final double fat; // 지방
+  final int kcal; // 칼로리
+  final int gram;
+
+  FoodContentListDTO(
+      {required this.id,
+      required this.name,
+      required this.carbo,
+      required this.protein,
+      required this.fat,
+      required this.kcal,
+      required this.gram});
+
+  factory FoodContentListDTO.fromJson(Map<String, dynamic> json) {
+    return FoodContentListDTO(
+      id: json["id"],
+      name: json["name"],
+      carbo: json["carbo"],
+      protein: json["protein"],
+      fat: json["fat"],
+      kcal: json["kcal"],
+      gram: json["gram"],
+    );
+  }
+// 먹은 그램양
+}

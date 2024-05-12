@@ -1,34 +1,32 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/ui/main/activity/viewmodel/walking_detail.viewmodel.dart';
+import 'package:fl_chart/fl_chart.dart';
 
-class WeeklyBarChart extends StatefulWidget {
-  @override
-  _WeeklyBarChartState createState() => _WeeklyBarChartState();
-}
-
-class _WeeklyBarChartState extends State<WeeklyBarChart> {
-  final List<double> weeklyData = [5, 6.5, 5, 7.5, 9, 11.5, 6.5];
-  int touchedIndex = -1;
+class WeeklyBarChart extends ConsumerWidget {
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    WalkingDetailModel? model = ref.read(WalkingDetailProvider);
+    List<double> weeklyData = model?.weakWalkings.map((e) => e.walking.toDouble()).toList() ?? [];
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20), // 차트 위쪽에 간격 추가
+            padding: const EdgeInsets.only(top: 20),
             child: Text(
               "주간 통계",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.blueGrey, // 제목 색상 설정
+                color: Colors.blueGrey,
               ),
             ),
           ),
-          SizedBox(height: 20), // 제목과 차트 사이의 간격 추가
+          SizedBox(height: 20),
           Expanded(
             child: AspectRatio(
               aspectRatio: 1.7,
@@ -37,7 +35,7 @@ class _WeeklyBarChartState extends State<WeeklyBarChart> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                 color: Colors.transparent,
                 child: BarChart(
-                  mainBarData(),
+                  mainBarData(weeklyData), // Null check 제거
                 ),
               ),
             ),
@@ -47,7 +45,7 @@ class _WeeklyBarChartState extends State<WeeklyBarChart> {
     );
   }
 
-  BarChartData mainBarData() {
+  BarChartData mainBarData(List<double> weeklyData) {
     return BarChartData(
       barTouchData: BarTouchData(
         enabled: true,
@@ -61,19 +59,6 @@ class _WeeklyBarChartState extends State<WeeklyBarChart> {
             );
           },
         ),
-        touchCallback: (FlTouchEvent event, barTouchResponse) {
-          if (!event.isInterestedForInteractions ||
-              barTouchResponse == null ||
-              barTouchResponse.spot == null) {
-            setState(() {
-              touchedIndex = -1;
-            });
-          } else {
-            setState(() {
-              touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
-            });
-          }
-        },
       ),
       titlesData: FlTitlesData(
         show: true,
@@ -81,40 +66,40 @@ class _WeeklyBarChartState extends State<WeeklyBarChart> {
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: 40,
-            getTitlesWidget: getWeekdayTitles,
+            getTitlesWidget: (value, meta) => getWeekdayTitles(value, meta),
           ),
         ),
         leftTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false), // y축 라벨 숨기기
+          sideTitles: SideTitles(showTitles: false),
         ),
         topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false), // 상단 라벨 숨기기
+          sideTitles: SideTitles(showTitles: false),
         ),
         rightTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false), // 오른쪽 라벨 숨기기
+          sideTitles: SideTitles(showTitles: false),
         ),
       ),
       borderData: FlBorderData(show: false),
-      barGroups: showingGroups(),
+      barGroups: showingGroups(weeklyData),
       gridData: FlGridData(show: false),
       backgroundColor: Colors.transparent,
     );
   }
 
-  List<BarChartGroupData> showingGroups() {
+  List<BarChartGroupData> showingGroups(List<double> weeklyData) {
     return List.generate(7, (index) {
-      return makeGroupData(index, weeklyData[index],
-          isTouched: index == touchedIndex);
+      double yValue = index < weeklyData.length ? weeklyData[index] : 0;
+      return makeGroupData(index, yValue);
     });
   }
 
-  BarChartGroupData makeGroupData(int x, double y, {bool isTouched = false}) {
+  BarChartGroupData makeGroupData(int x, double y) {
     return BarChartGroupData(
       x: x,
       barRods: [
         BarChartRodData(
           toY: y,
-          color: isTouched ? Colors.yellow : Colors.greenAccent,
+          color: Colors.greenAccent,
           width: 16,
         ),
       ],
@@ -123,13 +108,7 @@ class _WeeklyBarChartState extends State<WeeklyBarChart> {
 
   String getWeekDay(int index) {
     const weekDays = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday'
+      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
     ];
     return weekDays[index % weekDays.length];
   }

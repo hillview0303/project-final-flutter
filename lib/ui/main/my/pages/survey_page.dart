@@ -1,62 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
-import 'package:project_app/ui/main/my/pages/survey_form_page.dart';
+import 'package:project_app/_core/constants/size.dart';
+import '../../../../data/dtos/my/current_surveys.dart';
+import '../../../../data/dtos/my/past_surveys.dart';
+import '../widgets/survey_container.dart';
 
 class SurveyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('설문'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            color: kAccentColor2,
-            child: const Text(
-              '설문조사 목록',
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('설문조사'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: '참여 가능한 설문'),
+              Tab(text: '지난 설문'),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: const Text(
-              '설문조사',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kAccentColor2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
+        ),
+        body: TabBarView(
+          children: [
+            // 참여 가능한 설문 탭
+            ListView(
+              padding: const EdgeInsets.all(gap_ml),
+              children: [
+                SurveyContainer(
+                  title: '설문 1',
+                  questions: surveyQuestions1[0].answers,
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SurveyFormPage()),
-                );
-              },
-              child: const Text(
-                ' 제목, 참여가능여부, 총 문항수',
-                style: TextStyle(fontSize: 18),
-              ),
+                const SizedBox(height: gap_m),
+                SurveyContainer(
+                  title: '설문 2',
+                  questions: surveyQuestions2[0].answers,
+                ),
+                const SizedBox(height: gap_m),
+              ],
             ),
-          ),
-        ],
+            // 지난 설문 탭
+            ListView(
+              padding: const EdgeInsets.all(gap_ml),
+              children: [
+                SurveyContainer(
+                  title: '지난 설문 1',
+                  questions: surveyQuestions3[0].answers,
+                ),
+                const SizedBox(height: gap_m),
+                SurveyContainer(
+                  title: '지난 설문 2',
+                  questions: surveyQuestions4[0].answers,
+                ),
+                const SizedBox(height: gap_m),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-

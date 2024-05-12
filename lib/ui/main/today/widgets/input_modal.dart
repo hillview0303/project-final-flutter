@@ -25,7 +25,7 @@ void showInputModal(
               borderSide: BorderSide(color: kAccentColor2),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: kAccentColor2, width: 2.0),
+              borderSide: BorderSide(color: TColor.grey, width: 2.0),
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
@@ -44,6 +44,7 @@ void showInputModal(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextFormField(
+                cursorColor: TColor.grey,
                 controller: _fat,
                 decoration: InputDecoration(
                   labelText: '체지방 (kg)',

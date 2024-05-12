@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
@@ -10,6 +8,27 @@ import '../dtos/activity/activity_response.dart';
 import '../dtos/response_dto.dart';
 
 class ActivityRepository {
+  Future<ResponseDTO> fetchFoodList({String? keyword}) async {
+    final response;
+
+    if (keyword == null) {
+      response = await dio.get("/api/foods");
+    } else {
+      response = await dio.get("/api/foods?keyword=${keyword}");
+    }
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    if (responseDTO.status == 200) {
+      List<dynamic> foodContentList = responseDTO.body["foodContentList"];
+      List<FoodContentListDTO> listDTO =
+          foodContentList.map((e) => FoodContentListDTO.fromJson(e)).toList();
+      responseDTO.body = listDTO;
+    }
+
+    return responseDTO;
+  }
+
   Future<ResponseDTO> fetchChangeWeight() async {
     final response = await dio.get("/api/activities/body-date");
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

@@ -6,9 +6,17 @@ import '../pages/survey_form_page.dart';
 
 class SurveyContainer extends StatelessWidget {
   final String title;
-  final List<String> questions;  // 질문 목록을 저장하는 리스트
+  final int questionCount;
+  final String isAttend;
+  final String progress;
 
-  const SurveyContainer({Key? key, required this.title, required this.questions}) : super(key: key);
+  const SurveyContainer({
+    Key? key,
+    required this.title,
+    required this.questionCount,
+    required this.isAttend,
+    required this.progress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +57,9 @@ class SurveyContainer extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: gap_s),
-                    Text('총 문항수: ${questions.length}'),
+                    Text('총 문항수: $questionCount'),
+                    Text('참여 상태: $isAttend'),
+                    Text('진행 상태: $progress'),
                   ],
                 ),
               ),

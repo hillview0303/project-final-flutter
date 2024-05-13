@@ -1,0 +1,514 @@
+[33mcommit 037756bfdbbe5740ebe924d6461397c0d9ebd621[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: f85e606 5b6df45
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 17:04:47 2024 +0900
+
+    Merge pull request #88 from coderyu5523/jyj/all/design/1
+    
+    전체 디자인 수정
+
+[33mcommit 5b6df450fc16c0ea9e9b0c58d670aeaee799d2c1[m[33m ([m[1;31morigin/jyj/all/design/1[m[33m, [m[1;32mjyj/all/design/1[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Thu May 9 17:03:52 2024 +0900
+
+    전체 디자인 수정
+
+[33mcommit f85e6065f8b3593f9c9cdf32129bfa8a8460c690[m
+Merge: 8f8fc01 584a406
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 15:37:02 2024 +0900
+
+    Merge pull request #87 from coderyu5523/rjs/interceptor/2
+    
+    accessToken 제거
+
+[33mcommit 584a406c831704f50ead15b70412859c2521ffdb[m
+Merge: af5984d 8f8fc01
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 15:36:56 2024 +0900
+
+    Merge branch 'master' into rjs/interceptor/2
+
+[33mcommit af5984d6c6d671de95b35a9ed875291bf92ad782[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Thu May 9 15:33:30 2024 +0900
+
+    accessToken 제거
+
+[33mcommit 8f8fc012f2a0d4d83e739f48799063aaab1c8523[m
+Merge: cfd202d b09f2c5
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 15:17:22 2024 +0900
+
+    Merge pull request #86 from coderyu5523/kjs/my/imageUpdate/1
+    
+    프로필 이미지 수정하기 구현
+
+[33mcommit b09f2c5ace5f848039a4ec4e44a0a9c13ce681ab[m
+Merge: f8e64d1 cfd202d
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 15:17:17 2024 +0900
+
+    Merge branch 'master' into kjs/my/imageUpdate/1
+
+[33mcommit f8e64d1460442af3d756324ee79587dbf64de395[m
+Author: kjs <zeeq125@gmail.com>
+Date:   Thu May 9 15:13:49 2024 +0900
+
+    프로필 이미지 수정하기 구현
+
+[33mcommit cfd202d7556191a7a8861011459842fff190a8a0[m
+Merge: 4c87f2e 5b7f64b
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 14:43:55 2024 +0900
+
+    Merge pull request #85 from coderyu5523/rjs/activity/3
+    
+    changeweight 1차
+
+[33mcommit 5b7f64b7917572f721660658624aaeeb3d9eb6b3[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Thu May 9 13:59:13 2024 +0900
+
+    changeweight 1차
+
+[33mcommit 4c87f2eda29059690e2275e610d025cebfa1b44e[m
+Merge: c61a6d7 236c37b
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 12:17:36 2024 +0900
+
+    Merge pull request #84 from coderyu5523/jyj/challenge/design/3
+    
+    챌린지페이지 디자인 수정중
+
+[33mcommit 236c37b473e680849032d0142f9e23367ef166f2[m
+Merge: 91048f0 c61a6d7
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 12:17:31 2024 +0900
+
+    Merge branch 'master' into jyj/challenge/design/3
+
+[33mcommit 91048f0c80eeda485511a088d9b354a5dcd42bcc[m[33m ([m[1;31morigin/jyj/challenge/design/3[m[33m, [m[1;32mjyj/challenge/design/3[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Thu May 9 12:16:14 2024 +0900
+
+    챌린지페이지 디자인 수정중
+
+[33mcommit c61a6d730d03c698f39a260d1f5b0b37c20219e5[m
+Merge: 7f51a0c 8ba372b
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 12:03:10 2024 +0900
+
+    Merge pull request #83 from coderyu5523/rjs/challenge/ongoing
+    
+    ongoing challenge
+
+[33mcommit 8ba372bf5ea6382a445abe8f717e35e0d1aa641e[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Thu May 9 12:02:55 2024 +0900
+
+    ongoing challenge
+
+[33mcommit 7f51a0cc6d4f0c9d9f4b45410dcf605386a30ead[m
+Merge: 4fc7381 89e2c1e
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 10:40:22 2024 +0900
+
+    Merge pull request #82 from coderyu5523/rjs/inserceptor
+    
+    인터셉터 적용
+
+[33mcommit 89e2c1e8d2a8b36747b955037ba3159b97322b21[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Thu May 9 10:39:57 2024 +0900
+
+    dio header 삭제
+
+[33mcommit 752fa788803553c8c7a9db92fbf4d45b00bf475b[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Thu May 9 10:25:55 2024 +0900
+
+    insertceptor 적용
+
+[33mcommit 4fc7381c4d1ee8f45029b2db3cf8da22d0438130[m
+Merge: cf318ae a6d2178
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Thu May 9 09:03:22 2024 +0900
+
+    Merge pull request #81 from coderyu5523/jyj/challenge/design/2
+    
+    뱃지 진행중
+
+[33mcommit a6d2178ecf79e52931f22ba2c09133214f9c1a42[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Thu May 9 00:32:43 2024 +0900
+
+    뱃지 진행중
+
+[33mcommit cf318aeadc829784c7e1e50d3ea488c4e87b5ca2[m
+Merge: 2cd096b 5208c4b
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 23:18:17 2024 +0900
+
+    Merge pull request #80 from coderyu5523/rjs/activity/chart
+    
+    activity changeweight 진행중
+
+[33mcommit 5208c4be863a9c37633e31590e04833c80b48fa4[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Wed May 8 23:05:38 2024 +0900
+
+    activity changeweight 진행중
+
+[33mcommit 2cd096bc0435c26b3d112af5b3cd030f3fddd02e[m
+Merge: d1c62b8 8f29498
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 21:24:31 2024 +0900
+
+    Merge pull request #79 from coderyu5523/rjs/my/notifyinit
+    
+    bodydata 기록시 mypage 새로고침
+
+[33mcommit 8f29498fbf38b76af00c8c254ad9019cabdf916c[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Wed May 8 21:23:38 2024 +0900
+
+    bodydata 기록시 mypage 새로고침
+
+[33mcommit d1c62b8c44892a9cedae6be6098be8de913931f6[m
+Merge: c1ecb94 5895ba0
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 21:14:30 2024 +0900
+
+    Merge pull request #78 from coderyu5523/rjs/bodydatareset/1
+    
+    main goal data
+
+[33mcommit 5895ba0e5ba0ce756ac7df76f9598a77f8367780[m
+Merge: f11045d c1ecb94
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 21:14:24 2024 +0900
+
+    Merge branch 'master' into rjs/bodydatareset/1
+
+[33mcommit c1ecb9495831d608eaa659d3ec15863a034962a1[m
+Merge: 47ddfde 71731f5
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 21:12:28 2024 +0900
+
+    Merge pull request #77 from coderyu5523/kjs/editProfile/1
+    
+    유저정보 수정하기
+
+[33mcommit 71731f5685f03c596c0a30d27962a3b99463f07c[m
+Author: kjs <zeeq125@gmail.com>
+Date:   Wed May 8 21:02:34 2024 +0900
+
+    유저 정보 수정
+
+[33mcommit f11045dd683a094c351e8ba24160ce98c5504d15[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Wed May 8 20:11:29 2024 +0900
+
+    goal data reset
+
+[33mcommit e319c4ddd7c1b1bee1d0d07ad545faedbe51e649[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Wed May 8 19:31:06 2024 +0900
+
+    bodydata reset 완료
+
+[33mcommit 47ddfde18d828f004c3bad43eca4ffb8c4e689b7[m
+Merge: 63ffcd8 53f0b2b
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 17:59:33 2024 +0900
+
+    Merge pull request #76 from coderyu5523/jyj/challenge/ongoing/1
+    
+    지도 이미지 수정, 프로그레스바 수정
+
+[33mcommit 53f0b2b96c2494e8f00385d5b631d619076490e2[m[33m ([m[1;31morigin/jyj/challenge/ongoing/1[m[33m, [m[1;32mjyj/challenge/ongoing/1[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Wed May 8 17:57:56 2024 +0900
+
+    프로그레스바 수정
+
+[33mcommit c40855794eadf25a0878cb4253b0bb438bcc1e00[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Wed May 8 17:24:05 2024 +0900
+
+    지도 이미지 수정
+
+[33mcommit bb2d47ef042e5a1f55daa0099bf211272b5607a2[m
+Author: kimsjae <stwin755@gmail.com>
+Date:   Wed May 8 15:53:44 2024 +0900
+
+    프로필 수정하기(임시)
+
+[33mcommit 63ffcd83e9c16cb01f0e2f1709fc02ce74878a3b[m
+Merge: 544f980 a9bed27
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 15:23:55 2024 +0900
+
+    Merge pull request #75 from coderyu5523/jyj/activity/design/2
+    
+    activity 디자인 수정
+
+[33mcommit a9bed27306c3417e8f6a5ca78284db5a1f350c50[m[33m ([m[1;31morigin/jyj/activity/design/2[m[33m, [m[1;32mjyj/activity/design/2[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Wed May 8 15:22:05 2024 +0900
+
+    물마시기 그래프 디자인 수정 완료
+
+[33mcommit ef56a7b230e9fc3a29c35a631f4c03d31783161c[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Wed May 8 14:15:34 2024 +0900
+
+    bodydata 탭ë탭바 ì생ã성
+
+[33mcommit 92f845c2459bd792c4a0c6b26aa5e05d8272bfb4[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Wed May 8 12:00:58 2024 +0900
+
+    체중 타ì이틀 수정
+
+[33mcommit 544f980db211b04d11f7bb52fb97abb5273ae784[m
+Merge: bdfae1d 38c00bd
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Wed May 8 11:50:49 2024 +0900
+
+    Merge pull request #74 from coderyu5523/jyj/activity/main/1
+    
+    활동 카드 수정
+
+[33mcommit 38c00bdae2c7bc7e863742cd976cbd7bf2d18216[m[33m ([m[1;31morigin/jyj/activity/main/1[m[33m, [m[1;32mjyj/activity/main/1[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Wed May 8 11:49:39 2024 +0900
+
+    활동 카드 ë수정
+
+[33mcommit bdfae1d9b1344ba5d72f52e009b26e2447b2ff09[m
+Merge: e076d78 e6092ad
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 23:17:05 2024 +0900
+
+    Merge pull request #73 from coderyu5523/kjs/AttendChallengeInsert/1
+    
+    챌린지 시작하기(AttendChallenge) 구현
+
+[33mcommit e6092ad5101c30c291d807b99e5ac4236a6045bc[m
+Merge: d0bb137 e076d78
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 23:16:54 2024 +0900
+
+    Merge branch 'master' into kjs/AttendChallengeInsert/1
+
+[33mcommit e076d78a478463f24ccc29c19e9c4d667e737f5b[m
+Merge: 9a65424 0a7dbfc
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 23:14:50 2024 +0900
+
+    Merge pull request #72 from coderyu5523/rjs/main/bodydata/1
+    
+    main data insert
+
+[33mcommit d0bb13736a59b93cf3363dae42b41f9244203da0[m
+Author: kjs <zeeq125@gmail.com>
+Date:   Tue May 7 23:08:23 2024 +0900
+
+    챌린지 시작하기(AttendChallenge) 구현
+
+[33mcommit 0a7dbfc65812a6662c2aad43ced224e0ca194c98[m
+Merge: 300ab79 9a65424
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 23:01:42 2024 +0900
+
+    Merge branch 'master' into rjs/main/bodydata/1
+
+[33mcommit 300ab790c27edf2501493fd2e1e3c7cd7d893b06[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 22:50:01 2024 +0900
+
+    goaldata insert
+
+[33mcommit 4566c23a490bc1ed9000253989385cf4d4b4e3e6[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 22:33:27 2024 +0900
+
+    goal insert 중 테스트
+
+[33mcommit 9a6542422d4e9edaab754b7e2863d720ebde56f5[m
+Merge: 192085a 792093a
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 21:44:39 2024 +0900
+
+    Merge pull request #71 from coderyu5523/jyj/activity/addfood/1
+    
+    음식추가 상세
+
+[33mcommit 67904003da3fe0f41cd6996178da84d28f053a90[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 21:36:34 2024 +0900
+
+    [fix] 새로고침
+
+[33mcommit fa1d8b930eac3a98004bbe6e320cf1dab2f1ebf2[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 21:00:08 2024 +0900
+
+    today data reset
+
+[33mcommit 8cd8c7c8b6c4f2e11beeae5046103e47f432f804[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 20:35:41 2024 +0900
+
+    today bodydata insert
+
+[33mcommit 792093ac71713d36ea42f202a1450ff93916fb68[m[33m ([m[1;31morigin/jyj/activity/addfood/1[m[33m, [m[1;32mjyj/activity/addfood/1[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Tue May 7 20:26:32 2024 +0900
+
+    음식추가 진행중
+
+[33mcommit a5d47d4db7d72ea486d00605f013f1e93bbd8424[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Tue May 7 19:39:08 2024 +0900
+
+    음식 추가하기 검색  디자인 완료
+
+[33mcommit 45c97f0e60226c9cca88033da3e3bab8e482bf90[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 19:33:10 2024 +0900
+
+    dto 정리
+
+[33mcommit 192085a381cd6345a1dcb834d945928baf81d3cb[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 18:43:32 2024 +0900
+
+    mypage edit CircularProgressIndicator 적용
+
+[33mcommit c14db2a2ae34adeec28fca64a5d071df929b8c41[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 17:11:52 2024 +0900
+
+    [fix] today status
+
+[33mcommit e8512b9805c0c4e40c03dfc3a797f62405dcb79d[m
+Merge: fd3c49b b9c6fb4
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 17:04:04 2024 +0900
+
+    Merge pull request #70 from coderyu5523/rjs/main/goaldata
+    
+    tody bodydata insert 진행중
+
+[33mcommit b9c6fb4dfd4179f19ce81bc8c1df9a2ac33dd390[m
+Merge: 86bef86 fd3c49b
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 17:03:57 2024 +0900
+
+    Merge branch 'master' into rjs/main/goaldata
+
+[33mcommit 86bef86ce2d6b9a053bddcc48f40d18db982bf67[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 17:01:51 2024 +0900
+
+    today data 받는 중
+
+[33mcommit fd3c49bd6511ebe7c8c4dbd6901132ace0e0e13a[m
+Merge: f536c30 e0fc524
+Author: HaSenugJin <126733434+HaSenugJin@users.noreply.github.com>
+Date:   Tue May 7 17:01:29 2024 +0900
+
+    Merge pull request #69 from coderyu5523/hsj0507d
+    
+    프로필 수정 폼
+
+[33mcommit e0fc52466cdb66ab6bf97cc973bf422245ebcc25[m
+Author: HaSenugJin <egdg7777@gmail.com>
+Date:   Tue May 7 17:00:53 2024 +0900
+
+    프로필 수정 폼
+
+[33mcommit f536c3002728fa34766793ad49b250cf37aa9a27[m
+Merge: 353b2fa ab631f6
+Author: hillview0303 <161176345+hillview0303@users.noreply.github.com>
+Date:   Tue May 7 16:48:40 2024 +0900
+
+    Merge pull request #68 from coderyu5523/jyj/today/design/6
+    
+    목표카드수정
+
+[33mcommit ab631f624aefc6dadb7a45a7a6b13507f6841abd[m[33m ([m[1;31morigin/jyj/today/design/6[m[33m, [m[1;32mjyj/today/design/6[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Tue May 7 16:47:57 2024 +0900
+
+    목표카드 ã수정
+
+[33mcommit 353b2fafce40f5e73d83f691f5d8fb378e0fc23a[m
+Merge: 765d426 b365f73
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 16:39:31 2024 +0900
+
+    Merge pull request #67 from coderyu5523/jyj/today/design/5
+    
+    목표카드 수정
+
+[33mcommit b365f7339f4da7d9d504ff1bd6a854ed1fbbaa1f[m[33m ([m[1;31morigin/jyj/today/design/5[m[33m, [m[1;32mjyj/today/design/5[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Tue May 7 16:38:39 2024 +0900
+
+    목표카드 수정
+
+[33mcommit 765d426ceb421f19e8a394abe0920123abc56f91[m
+Merge: de83ff2 09c4bad
+Author: HaSenugJin <126733434+HaSenugJin@users.noreply.github.com>
+Date:   Tue May 7 16:30:00 2024 +0900
+
+    Merge pull request #66 from coderyu5523/hsj0507c
+    
+    마이페이지 챌린지 추가
+
+[33mcommit 09c4bada4fcc508ab01d4707d777c24a7e12d6cb[m
+Author: HaSenugJin <egdg7777@gmail.com>
+Date:   Tue May 7 16:26:54 2024 +0900
+
+    마이페이지 챌린지 추가
+
+[33mcommit b59a0a2a6480aaee94b2599ca3a8587fef315dc2[m
+Author: coderyu5523 <coderyu5523@naver.com>
+Date:   Tue May 7 16:18:01 2024 +0900
+
+    main gialdata
+
+[33mcommit de83ff2ce9c4666c6410e560799a62468fd03160[m
+Merge: eef055f ceec3f0
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 16:09:16 2024 +0900
+
+    Merge pull request #65 from coderyu5523/jyj/activity/design/1
+    
+    음식 추가하기 진행중
+
+[33mcommit ceec3f09ea4b2b5186ddaab97403a7644d008002[m
+Merge: c97071c eef055f
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 16:09:11 2024 +0900
+
+    Merge branch 'master' into jyj/activity/design/1
+
+[33mcommit c97071cd031c9248767f1356de118602ed3ec00f[m[33m ([m[1;31morigin/jyj/activity/design/1[m[33m, [m[1;32mjyj/activity/design/1[m[33m)[m
+Author: hillview0303 <ujin0105@gmail.com>
+Date:   Tue May 7 16:07:53 2024 +0900
+
+    음식 추가하기 ì진행중
+
+[33mcommit eef055f0fc9da5dd5f8766717d9dbe647392b3fb[m
+Merge: 3c99616 d46e491
+Author: coderyu5523 <153602328+coderyu5523@users.noreply.github.com>
+Date:   Tue May 7 15:43:34 2024 +0900
+
+    Merge pull request #64 from coderyu5523/rjs/main/chart/1
+    
+    main chart

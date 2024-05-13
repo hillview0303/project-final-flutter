@@ -1,9 +1,67 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/ui/main/my/pages/survey_completion_page.dart';
-import '../../../../data/dtos/my/current_surveys.dart';
+import '../../../../data/dtos/my/survey_response.dart';
 import '../widgets/radio_tile.dart';
+
+const String dummyJsonResponse = '''
+{
+  "surveyId": 1,
+  "title": "설문조사1",
+  "questionElements": [
+    {
+      "questionId": 1,
+      "question": "하루 평균 수면 시간은 얼마나 되십니까?",
+      "choices": [
+        {
+          "choiceId": 1,
+          "choiceItem": "6시간 미만",
+          "choiceNumber": 1
+        },
+        {
+          "choiceId": 2,
+          "choiceItem": "6시간 - 8시간",
+          "choiceNumber": 2
+        },
+        {
+          "choiceId": 3,
+          "choiceItem": "8시간 이상",
+          "choiceNumber": 3
+        },
+        {
+          "choiceId": 4,
+          "choiceItem": "불규칙",
+          "choiceNumber": 4
+        }
+      ]
+    },
+    {
+      "questionId": 2,
+      "question": "주로 언제 잠을 자십니까?",
+      "choices": [
+        {
+          "choiceId": 1,
+          "choiceItem": "밤에",
+          "choiceNumber": 1
+        },
+        {
+          "choiceId": 2,
+          "choiceItem": "낮에",
+          "choiceNumber": 2
+        },
+        {
+          "choiceId": 3,
+          "choiceItem": "불규칙",
+          "choiceNumber": 3
+        }
+      ]
+    }
+  ]
+}
+''';
 
 class SurveyFormPage extends StatefulWidget {
   @override
@@ -16,26 +74,36 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
   late int _totalQuestions;
   int _currentQuestionIndex = 0;
 
-  late List<CurrentServeys> _currentSurveyQuestions;
+  late SurveyResponse _surveyResponse;
 
   @override
   void initState() {
     super.initState();
-    _currentSurveyQuestions = surveyQuestions1;
-    _totalQuestions = _currentSurveyQuestions.length;
+    _initializeSurveyData();
   }
 
-  CurrentServeys get currentQuestion => _currentSurveyQuestions[_currentQuestionIndex];
+  void _initializeSurveyData() {
+    final surveyResponse =
+        SurveyResponse.fromJson(json.decode(dummyJsonResponse));
+    setState(() {
+      _surveyResponse = surveyResponse;
+      _totalQuestions = _surveyResponse.questionElements.length;
+    });
+  }
+
+  QuestionElement get currentQuestion =>
+      _surveyResponse.questionElements[_currentQuestionIndex];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('설문조사 제목'),
+        title: Text(_surveyResponse.title),
         actions: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Text('${_currentQuestionIndex + 1} of $_totalQuestions',
+            child: Text(
+              '${_currentQuestionIndex + 1} of $_totalQuestions',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           )
@@ -60,15 +128,15 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
               ),
             ),
             Text(
-              currentQuestion.questionText,
+              currentQuestion.question,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: gap_m),
-            for (var answer in currentQuestion.answers)
+            for (var choice in currentQuestion.choices)
               Column(
                 children: [
                   RadioTile(
-                    title: answer,
+                    title: choice.choiceItem,
                     groupValue: _chosenValue,
                     onChanged: (String? value) {
                       setState(() {
@@ -88,12 +156,14 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
                     backgroundColor: kAccentColor2,
                     minimumSize: Size(150, 36),
                   ),
-                  onPressed: _currentQuestionIndex > 0 ? () {
-                    setState(() {
-                      _currentQuestionIndex--;
-                      _updateProgress();
-                    });
-                  } : null,
+                  onPressed: _currentQuestionIndex > 0
+                      ? () {
+                          setState(() {
+                            _currentQuestionIndex--;
+                            _updateProgress();
+                          });
+                        }
+                      : null,
                   child: Text('이전'),
                 ),
                 ElevatedButton(
@@ -101,13 +171,17 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
                     backgroundColor: kAccentColor2,
                     minimumSize: Size(150, 36),
                   ),
-                  onPressed: _currentQuestionIndex < _totalQuestions - 1 ? () {
-                    setState(() {
-                      _currentQuestionIndex++;
-                      _updateProgress();
-                    });
-                  } : _completeSurvey,
-                  child: Text(_currentQuestionIndex < _totalQuestions - 1 ? '다음' : '설문 완료'),
+                  onPressed: _currentQuestionIndex < _totalQuestions - 1
+                      ? () {
+                          setState(() {
+                            _currentQuestionIndex++;
+                            _updateProgress();
+                          });
+                        }
+                      : _completeSurvey,
+                  child: Text(_currentQuestionIndex < _totalQuestions - 1
+                      ? '다음'
+                      : '설문 완료'),
                 ),
               ],
             ),

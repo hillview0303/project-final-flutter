@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../_core/constants/constants.dart'; // kAccentColor2가 정의된 경로를 임포트합니다.
+import '../../../../_core/constants/constants.dart';
 
 class ManualEntryTab extends StatefulWidget {
   final Color accentColor;
@@ -47,7 +47,7 @@ class _ManualEntryTabState extends State<ManualEntryTab> {
               unknowns[nutrientKey] = value ?? false;
             });
           },
-          activeColor: kAccentColor2,  // 체크박스의 활성 색상을 kAccentColor2로 설정합니다.
+          activeColor: kAccentColor2,
         ),
         const Text('잘 모름'),
       ],
@@ -70,7 +70,10 @@ class _ManualEntryTabState extends State<ManualEntryTab> {
           _buildNutrientField('지방 (g)', 'fat', TextInputType.number),
           const SizedBox(height: 18),
           ElevatedButton(
-            onPressed: () {}, // 여기에 등록 로직 추가
+            onPressed: () {
+              // 여기에 등록 로직 추가
+              Navigator.pop(context, null);
+            },
             style: ElevatedButton.styleFrom(backgroundColor: widget.accentColor),
             child: const Text('등록하기'),
           ),

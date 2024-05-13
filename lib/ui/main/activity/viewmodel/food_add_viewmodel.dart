@@ -10,28 +10,32 @@ class FoodAddModel {
   String? selectedDate;
   String? selectedImg;
   List<FoodContentListDTO> foodContentList;
+  FoodContentListDTO? selectedFood;
 
-  FoodAddModel(
-      {this.selectedMealType = "아침",
-      this.selectedDate,
-      this.selectedImg,
-      required this.foodContentList});
+  FoodAddModel({
+    this.selectedMealType = "아침",
+    this.selectedDate,
+    this.selectedImg,
+    required this.foodContentList,
+    this.selectedFood,
+  });
 
   FoodAddModel copyWith({
     String? selectedDate,
     String? selectedImg,
     String? selectedMealType,
     List<FoodContentListDTO>? foodContentList,
+    FoodContentListDTO? selectedFood,
   }) {
     return FoodAddModel(
       selectedDate: selectedDate ?? this.selectedDate,
       selectedImg: selectedImg ?? this.selectedImg,
       selectedMealType: selectedMealType ?? this.selectedMealType,
       foodContentList: foodContentList ?? this.foodContentList,
+      selectedFood: selectedFood ?? this.selectedFood,
     );
   }
 }
-
 class FoodAddViewModel extends StateNotifier<FoodAddModel?> {
   final mContext = navigatorKey.currentContext;
   final Ref ref;
@@ -50,9 +54,13 @@ class FoodAddViewModel extends StateNotifier<FoodAddModel?> {
     state = state!.copyWith(selectedDate: date);
   }
 
+  void selectFood(FoodContentListDTO food) {
+    state = state!.copyWith(selectedFood: food);
+  }
+
   Future<void> notifyInit({String? keyword}) async {
     ResponseDTO responseDTO =
-        await ActivityRepository().fetchFoodList(keyword: keyword);
+    await ActivityRepository().fetchFoodList(keyword: keyword);
     List<FoodContentListDTO> foodContentListDTO = responseDTO.body;
 
     state = FoodAddModel(foodContentList: foodContentListDTO);
@@ -60,6 +68,6 @@ class FoodAddViewModel extends StateNotifier<FoodAddModel?> {
 }
 
 final foodAddProvider =
-    StateNotifierProvider<FoodAddViewModel, FoodAddModel?>((ref) {
+StateNotifierProvider<FoodAddViewModel, FoodAddModel?>((ref) {
   return FoodAddViewModel(null, ref)..notifyInit();
 });

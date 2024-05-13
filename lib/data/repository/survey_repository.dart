@@ -10,8 +10,8 @@ class SurveyRepository {
 
     if (responseDTO.status == 200) {
       List<dynamic> prevList = responseDTO.body;
-      List<Survey> surveyList =
-          prevList.map((e) => Survey.fromJson(e)).toList();
+      List<SurveyResponseDTO> surveyList =
+          prevList.map((e) => SurveyResponseDTO.fromJson(e)).toList();
 
       responseDTO.body = surveyList;
     }

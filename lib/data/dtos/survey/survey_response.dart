@@ -1,11 +1,11 @@
-class Survey {
+class SurveyResponseDTO {
   final int? id;
   final String? title;
   final String? isAttend;
   final String? progress;
   final int? questionCount;
 
-  Survey({
+  SurveyResponseDTO({
     this.id,
     this.title,
     this.isAttend,
@@ -13,8 +13,8 @@ class Survey {
     this.questionCount,
   });
 
-  factory Survey.fromJson(Map<String, dynamic> json) {
-    return Survey(
+  factory SurveyResponseDTO.fromJson(Map<String, dynamic> json) {
+    return SurveyResponseDTO(
       id: json["id"],
       title: json["title"],
       isAttend: json["isAttend"],

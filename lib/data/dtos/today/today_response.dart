@@ -22,6 +22,10 @@ class MainDTO {
         goalWeight = json["goalWeight"].toDouble(),
         goalMuscle = json["goalMuscle"].toDouble(),
         goalFat = json["goalFat"].toDouble();
+
+  String getFormattedDate(DateTime date) {
+    return DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(date);
+  }
 }
 
 class BodyDataDTO {
@@ -35,10 +39,13 @@ class BodyDataDTO {
 
   BodyDataDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        fat = json["fat"].toDouble(),
-        muscle = json["muscle"].toDouble(),
-        weight = json["weight"].toDouble(),
-        date = DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal();
+        fat = json["fat"] != null ? json["fat"].toDouble() : null,
+        muscle = json["muscle"] != null ? json["muscle"].toDouble() : null,
+        weight = json["weight"] != null ? json["weight"].toDouble() : null,
+        date = json["date"] != null
+            ? DateFormat("yyyy-MM-dd'T'HH:mm").parse(json["date"], true).toUtc().add(Duration(hours: 9))
+            : null;
+  String get formattedDate => date != null ? DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(date!) : '날짜 없음';
 }
 
 class AddBodyDTO {
@@ -49,19 +56,19 @@ class AddBodyDTO {
 
   AddBodyDTO(
       {required this.fat,
-      required this.muscle,
-      required this.weight,
-      required this.date});
+        required this.muscle,
+        required this.weight,
+        required this.date});
 
   factory AddBodyDTO.fromJson(Map<String, dynamic> json) {
     return AddBodyDTO(
-      fat: json["fat"],
-      muscle: json["muscle"],
-      weight: json["weight"],
-      date: DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal(),
+      fat: json["fat"].toDouble(),
+      muscle: json["muscle"].toDouble(),
+      weight: json["weight"].toDouble(),
+      date: DateFormat("yyyy-MM-dd'T'HH:mm").parse(json["date"], true).toUtc().add(Duration(hours: 9)),
     );
   }
-//
+  String get formattedDate => DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(date);
 }
 
 class GoalFatDTO {

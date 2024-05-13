@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/constants.dart';
 
 TextTheme textTheme() {
   return TextTheme(
@@ -7,7 +8,7 @@ TextTheme textTheme() {
     bodyLarge: TextStyle(fontFamily: 'Poppins', fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.w300),
     bodyMedium: TextStyle(fontFamily: 'Poppins', fontSize: 14.0, color: Colors.grey, fontWeight: FontWeight.w300),
     titleMedium: TextStyle(fontFamily: 'Poppins', fontSize: 15.0, color: Colors.black, fontWeight: FontWeight.w500),
-    titleLarge: TextStyle(fontFamily: 'Poppins', fontSize: 30.0, color: Colors.teal, fontWeight: FontWeight.w700),
+    titleLarge: TextStyle(fontFamily: 'Poppins', fontSize: 30.0, color: kAccentColor2, fontWeight: FontWeight.w700),
   );
 }
 

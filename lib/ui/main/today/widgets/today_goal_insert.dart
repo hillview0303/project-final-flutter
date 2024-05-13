@@ -26,6 +26,7 @@ class TodayGoalInsert extends ConsumerWidget {
         children: [
           Expanded(
             child: TextFormField(
+              cursorColor: TColor.grey,
               controller: _bodydata,
               decoration: InputDecoration(
                   labelText: '목표량',
@@ -37,7 +38,7 @@ class TodayGoalInsert extends ConsumerWidget {
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: kAccentColor2))),
+                      borderSide: BorderSide(color: TColor.grey))),
             ),
           ),
           SizedBox(height: 10),
@@ -59,7 +60,7 @@ class TodayGoalInsert extends ConsumerWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: kAccentColor2,
-                foregroundColor: Colors.white,
+                foregroundColor: TColor.white,
                 elevation: 10,
               ),
               child: const Text(

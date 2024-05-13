@@ -32,8 +32,10 @@ class FatTimeLineDTO {
   FatTimeLineDTO.fromJson(Map<String, dynamic> json)
       : bodyDateId = json["bodyDateId"],
         fat = json["fat"].toDouble(),
-        fatTimeLine =
-            DateFormat("yyyy-MM-dd").parse(json["fatTimeLine"], true).toLocal();
+        fatTimeLine = DateFormat("yyyy-MM-dd'T'HH:mm").parse(json["fatTimeLine"], true).toUtc().add(Duration(hours: 9));
+
+  // 날짜 포맷 메서드
+  String get formattedDate => DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(fatTimeLine);
 }
 
 class MuscleTimeLineDTO {
@@ -46,16 +48,15 @@ class MuscleTimeLineDTO {
   MuscleTimeLineDTO.fromJson(Map<String, dynamic> json)
       : bodyDateId = json["bodyDateId"],
         muscle = json["muscle"].toDouble(),
-        muscleTimeLine = DateFormat("yyyy-MM-dd")
-            .parse(json["muscleTimeLine"], true)
-            .toLocal();
+        muscleTimeLine = DateFormat("yyyy-MM-dd'T'HH:mm").parse(json["muscleTimeLine"], true).toUtc().add(Duration(hours: 9));
+
+  // 날짜 포맷 메서드
+  String get formattedDate => DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(muscleTimeLine);
 }
 
 class WeightTimeLineDTO {
   int bodyDateId;
-
   double weight;
-
   DateTime weightTimeLine;
 
   WeightTimeLineDTO(this.bodyDateId, this.weight, this.weightTimeLine);
@@ -63,9 +64,10 @@ class WeightTimeLineDTO {
   WeightTimeLineDTO.fromJson(Map<String, dynamic> json)
       : bodyDateId = json["bodyDateId"],
         weight = json["weight"].toDouble(),
-        weightTimeLine = DateFormat("yyyy-MM-dd")
-            .parse(json["weightTimeLine"], true)
-            .toLocal();
+        weightTimeLine = DateFormat("yyyy-MM-dd'T'HH:mm").parse(json["weightTimeLine"], true).toUtc().add(Duration(hours: 9));
+
+  // 날짜 포맷 메서드
+  String get formattedDate => DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(weightTimeLine);
 }
 
 class ActivitiesDateDTO {
@@ -73,23 +75,24 @@ class ActivitiesDateDTO {
   final int? walking;
   final int? drinkWater;
   final int? kcal;
-
   final double? weight;
 
   ActivitiesDateDTO(
       {required this.createdAt,
-      this.walking,
-      this.drinkWater,
-      this.kcal,
-      this.weight});
+        this.walking,
+        this.drinkWater,
+        this.kcal,
+        this.weight});
 
   ActivitiesDateDTO.fromJson(Map<String, dynamic> json)
-      : createdAt =
-            DateFormat("yyyy-MM-dd").parse(json["createdAt"], true).toLocal(),
+      : createdAt = DateFormat("yyyy-MM-dd'T'HH:mm").parse(json["createdAt"], true).toUtc().add(Duration(hours: 9)),
         walking = json["walking"],
         drinkWater = json["drinkWater"],
         kcal = json["kcal"],
-        weight = json["weight"].toDouble();
+        weight = json["weight"]?.toDouble();
+
+  // 날짜 포맷 메서드
+  String get formattedDate => DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(createdAt);
 }
 
 class DrinkWaterDTO {
@@ -102,14 +105,16 @@ class DrinkWaterDTO {
 
 class WeakWaterDTO {
   final DateTime date;
-
   final int water;
 
   WeakWaterDTO(this.date, this.water);
 
   WeakWaterDTO.fromJson(Map<String, dynamic> json)
-      : date = DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal(),
+      : date = DateFormat("yyyy-MM-dd'T'HH:mm").parse(json["date"], true).toUtc().add(Duration(hours: 9)),
         water = json["water"];
+
+  // 날짜 포맷 메서드
+  String get formattedDate => DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(date);
 }
 
 class WalkingDetailDTO{
@@ -152,7 +157,7 @@ class WeakWalkingDTO {
 class FoodContentListDTO {
   final int id;
   final String name;
-  final double carbo; //탄수화물
+  final double carbo; // 탄수화물
   final double protein; // 단백질
   final double fat; // 지방
   final int kcal; // 칼로리
@@ -160,12 +165,12 @@ class FoodContentListDTO {
 
   FoodContentListDTO(
       {required this.id,
-      required this.name,
-      required this.carbo,
-      required this.protein,
-      required this.fat,
-      required this.kcal,
-      required this.gram});
+        required this.name,
+        required this.carbo,
+        required this.protein,
+        required this.fat,
+        required this.kcal,
+        required this.gram});
 
   factory FoodContentListDTO.fromJson(Map<String, dynamic> json) {
     return FoodContentListDTO(

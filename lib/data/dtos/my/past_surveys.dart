@@ -1,51 +1,20 @@
-class PastServeys {
-  final String questionText;
-  final List<String> answers;
+class Survey {
+  final int id;
+  final String title;
+  final String isAttend;
+  final String progress;
+  final int questionCount;
 
-  PastServeys({required this.questionText, required this.answers});
+  Survey({
+    required this.id,
+    required this.title,
+    required this.isAttend,
+    required this.progress,
+    required this.questionCount,
+  });
 }
 
-final List<PastServeys> surveyQuestions3 = [
-  PastServeys(questionText: "질문1", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문2", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문3", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문4", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문5", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문6", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문7", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문8", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문9", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문10", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문11", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문12", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문13", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문14", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문15", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문16", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문17", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문18", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문19", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문20", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-];
-final List<PastServeys> surveyQuestions4 = [
-  PastServeys(questionText: "질문1", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문2", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문3", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문4", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문5", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문6", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문7", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문8", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문9", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문10", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문11", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문12", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문13", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문14", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문15", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문16", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문17", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문18", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문19", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
-  PastServeys(questionText: "질문20", answers: ["대답1", "대답2", "대답3", "대답4", "대답5"]),
+final List<Survey> pastSurveys = [
+  Survey(id: 3, title: '지난 설문 1', isAttend: '참여불가', progress: '종료', questionCount: 10),
+  Survey(id: 4, title: '지난 설문 2', isAttend: '참여불가', progress: '종료', questionCount: 8),
 ];

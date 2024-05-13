@@ -7,61 +7,6 @@ import 'package:project_app/ui/main/my/pages/survey_completion_page.dart';
 import '../../../../data/dtos/my/survey_response.dart';
 import '../widgets/radio_tile.dart';
 
-const String dummyJsonResponse = '''
-{
-  "surveyId": 1,
-  "title": "설문조사1",
-  "questionElements": [
-    {
-      "questionId": 1,
-      "question": "하루 평균 수면 시간은 얼마나 되십니까?",
-      "choices": [
-        {
-          "choiceId": 1,
-          "choiceItem": "6시간 미만",
-          "choiceNumber": 1
-        },
-        {
-          "choiceId": 2,
-          "choiceItem": "6시간 - 8시간",
-          "choiceNumber": 2
-        },
-        {
-          "choiceId": 3,
-          "choiceItem": "8시간 이상",
-          "choiceNumber": 3
-        },
-        {
-          "choiceId": 4,
-          "choiceItem": "불규칙",
-          "choiceNumber": 4
-        }
-      ]
-    },
-    {
-      "questionId": 2,
-      "question": "주로 언제 잠을 자십니까?",
-      "choices": [
-        {
-          "choiceId": 1,
-          "choiceItem": "밤에",
-          "choiceNumber": 1
-        },
-        {
-          "choiceId": 2,
-          "choiceItem": "낮에",
-          "choiceNumber": 2
-        },
-        {
-          "choiceId": 3,
-          "choiceItem": "불규칙",
-          "choiceNumber": 3
-        }
-      ]
-    }
-  ]
-}
-''';
 
 class SurveyFormPage extends StatefulWidget {
   @override
@@ -83,16 +28,13 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
   }
 
   void _initializeSurveyData() {
-    final surveyResponse =
-        SurveyResponse.fromJson(json.decode(dummyJsonResponse));
     setState(() {
-      _surveyResponse = surveyResponse;
+      _surveyResponse = surveyResponses[0];
       _totalQuestions = _surveyResponse.questionElements.length;
     });
   }
 
-  QuestionElement get currentQuestion =>
-      _surveyResponse.questionElements[_currentQuestionIndex];
+  QuestionElement get currentQuestion => _surveyResponse.questionElements[_currentQuestionIndex];
 
   @override
   Widget build(BuildContext context) {
@@ -102,26 +44,15 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Text(
-              '${_currentQuestionIndex + 1} of $_totalQuestions',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            child: Text('${_currentQuestionIndex + 1} of $_totalQuestions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           )
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 6,
-              child: LinearProgressIndicator(
-                value: _progressValue,
-                backgroundColor: Colors.grey[300],
-                valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(gap_m),
+            children: <Widget>[
+            SizedBox(height: 6, child: LinearProgressIndicator(value: _progressValue, backgroundColor: Colors.grey[300], valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2))),
+        Padding(padding: const EdgeInsets.all(gap_m),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(gap_m),
                 child: Image.asset('assets/images/survey1.png'),
@@ -131,62 +62,60 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
               currentQuestion.question,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: gap_m),
-            for (var choice in currentQuestion.choices)
-              Column(
+              SizedBox(height: gap_m),
+              for (var choice in currentQuestion.choices)
+                Column(
+                  children: [
+                    RadioTile(
+                      title: choice.choiceItem,
+                      groupValue: _chosenValue,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _chosenValue = value;
+                        });
+                      },
+                    ),
+                    SizedBox(height: gap_s),
+                  ],
+                ),
+              SizedBox(height: gap_m),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RadioTile(
-                    title: choice.choiceItem,
-                    groupValue: _chosenValue,
-                    onChanged: (String? value) {
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kAccentColor2,
+                      minimumSize: Size(150, 36),
+                    ),
+                    onPressed: _currentQuestionIndex > 0
+                        ? () {
                       setState(() {
-                        _chosenValue = value;
+                        _currentQuestionIndex--;
+                        _updateProgress();
                       });
-                    },
+                    }
+                        : null,
+                    child: Text('이전'),
                   ),
-                  SizedBox(height: gap_s),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kAccentColor2,
+                      minimumSize: Size(150, 36),
+                    ),
+                    onPressed: _currentQuestionIndex < _totalQuestions - 1
+                        ? () {
+                      setState(() {
+                        _currentQuestionIndex++;
+                        _updateProgress();
+                      });
+                    }
+                        : _completeSurvey,
+                    child: Text(_currentQuestionIndex < _totalQuestions - 1 ? '다음' : '설문 완료'),
+                  ),
                 ],
               ),
-            SizedBox(height: gap_m),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kAccentColor2,
-                    minimumSize: Size(150, 36),
-                  ),
-                  onPressed: _currentQuestionIndex > 0
-                      ? () {
-                          setState(() {
-                            _currentQuestionIndex--;
-                            _updateProgress();
-                          });
-                        }
-                      : null,
-                  child: Text('이전'),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kAccentColor2,
-                    minimumSize: Size(150, 36),
-                  ),
-                  onPressed: _currentQuestionIndex < _totalQuestions - 1
-                      ? () {
-                          setState(() {
-                            _currentQuestionIndex++;
-                            _updateProgress();
-                          });
-                        }
-                      : _completeSurvey,
-                  child: Text(_currentQuestionIndex < _totalQuestions - 1
-                      ? '다음'
-                      : '설문 완료'),
-                ),
-              ],
-            ),
-            SizedBox(height: gap_l),
-          ],
+              SizedBox(height: gap_l),
+            ],
         ),
       ),
     );

@@ -107,7 +107,9 @@ class FoodAddPage extends ConsumerWidget {
             child: Row(
               children: [
                 Text(
-                  formattedDate,
+                  model.selectedDate == null
+                      ? formattedDate
+                      : model.selectedDate!,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
                 SizedBox(width: 8.0),

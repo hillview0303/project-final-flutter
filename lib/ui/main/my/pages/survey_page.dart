@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/_core/constants/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/size.dart';
-import '../../../../data/dtos/my/current_surveys.dart';
-import '../../../../data/dtos/my/past_surveys.dart';
+import 'package:project_app/ui/main/my/viewmodel/survey_page_viewmodel.dart';
+
 import '../widgets/survey_container.dart';
 
-class SurveyPage extends StatelessWidget {
-
+class SurveyPage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SurveyListModel? model = ref.watch(surveyListProvider);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -23,44 +24,59 @@ class SurveyPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            // 참여 가능한 설문 탭
-            ListView.builder(
-              padding: const EdgeInsets.all(gap_ml),
-              itemCount: currentSurveys.length,
-              itemBuilder: (context, index) {
-                final survey = currentSurveys[index];
-                return Column(
-                  children: [
-                    SurveyContainer(
-                      title: survey.title,
-                      questionCount: survey.questionCount,
-                      isAttend: survey.isAttend,
-                      progress: survey.progress,
+            model == null || model.joinableSurveyList!.length < 1
+                ? Center(
+                    child: Text(
+                      "참여 가능한 설문이 없습니다.",
+                      style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                     ),
-                    const SizedBox(height: gap_m),
-                  ],
-                );
-              },
-            ),
-            // 지난 설문 탭
-            ListView.builder(
-              padding: const EdgeInsets.all(gap_ml),
-              itemCount: pastSurveys.length,
-              itemBuilder: (context, index) {
-                final survey = pastSurveys[index];
-                return Column(
-                  children: [
-                    SurveyContainer(
-                      title: survey.title,
-                      questionCount: survey.questionCount,
-                      isAttend: survey.isAttend,
-                      progress: survey.progress,
+                  )
+                : // 참여 가능한 설문 탭
+                ListView.builder(
+                    padding: const EdgeInsets.all(gap_ml),
+                    itemCount: model!.joinableSurveyList!.length,
+                    itemBuilder: (context, index) {
+                      final survey = model!.joinableSurveyList![index];
+                      return Column(
+                        children: [
+                          SurveyContainer(
+                            title: survey.title!,
+                            questionCount: survey.questionCount!,
+                            isAttend: survey.isAttend!,
+                            progress: survey.progress!,
+                          ),
+                          const SizedBox(height: gap_m),
+                        ],
+                      );
+                    },
+                  ),
+            model == null || model.unjoinableSurveyList!.length < 1
+                ? Center(
+                    child: Text(
+                      "참여한 설문이 없습니다.",
+                      style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                     ),
-                    const SizedBox(height: gap_m),
-                  ],
-                );
-              },
-            ),
+                  )
+                :
+                // 지난 설문 탭
+                ListView.builder(
+                    padding: const EdgeInsets.all(gap_ml),
+                    itemCount: model!.unjoinableSurveyList!.length,
+                    itemBuilder: (context, index) {
+                      final survey = model!.unjoinableSurveyList![index];
+                      return Column(
+                        children: [
+                          SurveyContainer(
+                            title: survey.title!,
+                            questionCount: survey.questionCount!,
+                            isAttend: survey.isAttend!,
+                            progress: survey.progress!,
+                          ),
+                          const SizedBox(height: gap_m),
+                        ],
+                      );
+                    },
+                  ),
           ],
         ),
       ),

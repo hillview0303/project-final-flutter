@@ -36,6 +36,23 @@ class WalkingDetailViewModel extends StateNotifier<WalkingDetailModel?>{
           SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
     }
   }
+
+  Future<void> sendStepsToServer(int steps) async {
+    ResponseDTO responseDTO = await ActivityRepository().fetchSendWalking();
+
+    if(responseDTO.status == 200){
+
+      state = responseDTO.body;
+    }else{
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));
+    }
+
+  }
+
+
+
+
 }
 final WalkingDetailProvider = StateNotifierProvider<WalkingDetailViewModel,WalkingDetailModel?>((ref) {
   return WalkingDetailViewModel(null, ref)..notifyInit();

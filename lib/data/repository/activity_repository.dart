@@ -120,4 +120,13 @@ class ActivityRepository {
     print("14141414");
     return responseDTO;
   }
+
+  Future<ResponseDTO> fetchSendWalking() async {
+
+    final response = await dio.post("/api/");
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+
+    return responseDTO;
+  }
 }

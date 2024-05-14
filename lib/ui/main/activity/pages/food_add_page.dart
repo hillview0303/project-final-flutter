@@ -1,20 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/utils/image_parse_util.dart';
 import 'package:project_app/ui/main/activity/viewmodel/food_add_viewmodel.dart';
-
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../widgets/dashed_border_painter.dart';
 import '../widgets/date_selector.dart';
 import '../widgets/food_info_card.dart';
 import '../widgets/food_search_modal.dart';
 import '../widgets/image_source_dialog.dart';
-import '../widgets/manual_entry_tab.dart';
-import '../widgets/search_tab.dart';
 
 class FoodAddPage extends ConsumerWidget {
   String formattedDate = DateSelector.formatDate(DateTime.now());
@@ -39,17 +35,34 @@ class FoodAddPage extends ConsumerWidget {
                 children: [
                   _buildImagePicker(context, foodAddModel, foodAddViewModel),
                   SizedBox(width: 16.0),
-                  _buildMealAndDatePicker(
-                      context, foodAddViewModel, foodAddModel),
+                  _buildMealAndDatePicker(context, foodAddViewModel, foodAddModel),
                 ],
               ),
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
-                  final selectedFood = await FoodSearchModal.show(
+                  final result = await FoodSearchModal.show(
                       context, foodAddModel.foodContentList, kAccentColor2);
-                  if (selectedFood != null) {
-                    foodAddViewModel.selectFood(selectedFood);
+                  if (result != null) {
+                    if (result.containsKey('food')) {
+                      // 검색 탭에서 반환된 결과 처리
+                      final selectedFood = result['food'] as FoodContentListDTO;
+                      final portion = result['portion'] as int;
+                      foodAddViewModel.selectFood(selectedFood, portion);
+                    } else {
+                      // 수동 입력 탭에서 반환된 결과 처리
+                      final manualFood = FoodContentListDTO(
+                        id: result['id'] as int,
+                        name: result['name'] as String,
+                        kcal: result['calories'] as double,
+                        carbo: result['carbs'] as double,
+                        protein: result['protein'] as double,
+                        fat: result['fat'] as double,
+                        gram: result['gram'] as int,
+                      );
+                      final portion = result['portion'] as int; // 인분 수 처리
+                      foodAddViewModel.selectFood(manualFood, portion);
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: kAccentColor2),
@@ -57,13 +70,11 @@ class FoodAddPage extends ConsumerWidget {
               ),
               SizedBox(height: 16.0),
               // 선택한 음식 정보를 보여주는 부분
-              if (foodAddModel.selectedFood != null)
+              if (foodAddModel.selectedFoods.isNotEmpty)
                 FoodInfoCard(
-                  foodName: foodAddModel.selectedFood!.name,
-                  volume: '${foodAddModel.selectedFood!.gram}g',
-                  calorie: '${foodAddModel.selectedFood!.kcal}kcal',
-                  protein: '${foodAddModel.selectedFood!.protein}g',
-                  fat: '${foodAddModel.selectedFood!.fat}g',
+                  foods: foodAddModel.selectedFoods,
+                  servings: foodAddModel.selectedServings, // 인분 수 전달
+                  onRemove: (index) => foodAddViewModel.removeFood(index), // 삭제 콜백 함수 전달
                 ),
             ],
           ),
@@ -82,8 +93,7 @@ class FoodAddPage extends ConsumerWidget {
     }
   }
 
-  Widget _buildImagePicker(
-      BuildContext context, FoodAddModel model, FoodAddViewModel viewModel) {
+  Widget _buildImagePicker(BuildContext context, FoodAddModel model, FoodAddViewModel viewModel) {
     return Container(
       width: 100.0,
       height: 100.0,
@@ -93,8 +103,7 @@ class FoodAddPage extends ConsumerWidget {
           child: model.selectedImg == null
               ? IconButton(
             icon: Icon(Icons.add_a_photo),
-            onPressed: () =>
-                _showImageSourceSelection(context, viewModel),
+            onPressed: () => _showImageSourceSelection(context, viewModel),
           )
               : Image.memory(base64Decode(model.selectedImg!)),
         ),
@@ -102,8 +111,7 @@ class FoodAddPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildMealAndDatePicker(
-      BuildContext context, FoodAddViewModel viewModel, FoodAddModel model) {
+  Widget _buildMealAndDatePicker(BuildContext context, FoodAddViewModel viewModel, FoodAddModel model) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,9 +125,7 @@ class FoodAddPage extends ConsumerWidget {
             child: Row(
               children: [
                 Text(
-                  model.selectedDate == null
-                      ? formattedDate
-                      : model.selectedDate!,
+                  model.selectedDate == null ? formattedDate : model.selectedDate!,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
                 SizedBox(width: 8.0),
@@ -145,8 +151,7 @@ class FoodAddPage extends ConsumerWidget {
     );
   }
 
-  void _showImageSourceSelection(
-      BuildContext context, FoodAddViewModel viewModel) {
+  void _showImageSourceSelection(BuildContext context, FoodAddViewModel viewModel) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

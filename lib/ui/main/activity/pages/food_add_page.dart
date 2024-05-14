@@ -48,9 +48,25 @@ class FoodAddPage extends ConsumerWidget {
                   final result = await FoodSearchModal.show(
                       context, foodAddModel.foodContentList, kAccentColor2);
                   if (result != null) {
-                    final selectedFood = result['food'] as FoodContentListDTO;
-                    final portion = result['portion'] as int;
-                    foodAddViewModel.selectFood(selectedFood, portion);
+                    if (result.containsKey('food')) {
+                      // 검색 탭에서 반환된 결과 처리
+                      final selectedFood = result['food'] as FoodContentListDTO;
+                      final portion = result['portion'] as int;
+                      foodAddViewModel.selectFood(selectedFood, portion);
+                    } else {
+                      // 수동 입력 탭에서 반환된 결과 처리
+                      final manualFood = FoodContentListDTO(
+                        id: result['id'] as int,
+                        name: result['name'] as String,
+                        kcal: result['calories'] as double,
+                        carbo: result['carbs'] as double,
+                        protein: result['protein'] as double,
+                        fat: result['fat'] as double,
+                        gram: result['gram'] as int,
+                      );
+                      final portion = result['portion'] as int; // 인분 수 처리
+                      foodAddViewModel.selectFood(manualFood, portion);
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: kAccentColor2),
@@ -62,6 +78,7 @@ class FoodAddPage extends ConsumerWidget {
                 FoodInfoCard(
                   foods: foodAddModel.selectedFoods,
                   servings: foodAddModel.selectedServings, // 인분 수 전달
+                  onRemove: (index) => foodAddViewModel.removeFood(index), // 삭제 콜백 함수 전달
                 ),
             ],
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/data/dtos/activity/activity_response.dart';
-import 'package:project_app/ui/main/activity/widgets/search_tab.dart';
 import 'package:project_app/ui/main/activity/widgets/manual_entry_tab.dart';
+import 'package:project_app/ui/main/activity/widgets/search_tab.dart';
 
 class FoodSearchModal {
   static Future<Map<String, dynamic>?> show(
@@ -23,7 +23,12 @@ class FoodSearchModal {
             maxChildSize: 0.9,
             builder: (BuildContext context, ScrollController scrollController) {
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                  top: 16.0,
+                  left: 16.0,
+                  right: 16.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

@@ -11,7 +11,7 @@ class FoodAddModel {
   String? selectedImg;
   List<FoodContentListDTO> foodContentList;
   List<FoodContentListDTO> selectedFoods;
-  List<int> selectedServings; // 각 음식의 인분 수를 나타내는 리스트 추가
+  List<int> selectedServings; // 각 음식의 인분 수를 나타내는 리스트
 
   FoodAddModel({
     this.selectedMealType = "아침",
@@ -19,7 +19,7 @@ class FoodAddModel {
     this.selectedImg,
     required this.foodContentList,
     this.selectedFoods = const [],
-    this.selectedServings = const [], // 초기값 설정
+    this.selectedServings = const [],
   });
 
   FoodAddModel copyWith({
@@ -36,7 +36,7 @@ class FoodAddModel {
       selectedMealType: selectedMealType ?? this.selectedMealType,
       foodContentList: foodContentList ?? this.foodContentList,
       selectedFoods: selectedFoods ?? this.selectedFoods,
-      selectedServings: selectedServings ?? this.selectedServings, // 인분 수 복사
+      selectedServings: selectedServings ?? this.selectedServings,
     );
   }
 }
@@ -61,9 +61,21 @@ class FoodAddViewModel extends StateNotifier<FoodAddModel?> {
   }
 
   void selectFood(FoodContentListDTO food, int portion) {
-    final updatedSelectedFoods = List<FoodContentListDTO>.from(state!.selectedFoods)..add(food);
-    final updatedServings = List<int>.from(state!.selectedServings)..add(portion); // 인분 수 추가
-    state = state!.copyWith(selectedFoods: updatedSelectedFoods, selectedServings: updatedServings);
+    final updatedFoods = List<FoodContentListDTO>.from(state!.selectedFoods)..add(food);
+    final updatedServings = List<int>.from(state!.selectedServings)..add(portion);
+    state = state!.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
+  }
+
+  void updatePortion(int index, int portion) {
+    final updatedServings = List<int>.from(state!.selectedServings);
+    updatedServings[index] = portion;
+    state = state!.copyWith(selectedServings: updatedServings);
+  }
+
+  void removeFood(int index) {
+    final updatedFoods = List<FoodContentListDTO>.from(state!.selectedFoods)..removeAt(index);
+    final updatedServings = List<int>.from(state!.selectedServings)..removeAt(index);
+    state = state!.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
   }
 
   Future<void> notifyInit({String? keyword}) async {

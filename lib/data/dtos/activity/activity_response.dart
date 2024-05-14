@@ -160,7 +160,7 @@ class FoodContentListDTO {
   final double carbo; // 탄수화물
   final double protein; // 단백질
   final double fat; // 지방
-  final int kcal; // 칼로리
+  final double kcal; // 칼로리
   final int gram;
 
   FoodContentListDTO(

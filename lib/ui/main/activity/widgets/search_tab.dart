@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/data/dtos/activity/activity_response.dart';
-
 import '../../../../_core/constants/constants.dart';
 
 class SearchTab extends StatefulWidget {
@@ -32,6 +31,7 @@ class _SearchTabState extends State<SearchTab> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: widget.scrollController,
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom), // Adjust padding when keyboard appears
       child: Column(
         children: [
           if (selectedFood != null)

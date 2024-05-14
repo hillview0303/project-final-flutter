@@ -1,45 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/data/dtos/activity/activity_response.dart';
 
 class FoodInfoCard extends StatelessWidget {
   final List<FoodContentListDTO> foods;
-  final List<int> servings; // 각 음식의 인분 수를 나타내는 리스트
+  final List<int> servings;
+  final void Function(int) onRemove; // 삭제 콜백 함수
 
-  FoodInfoCard({required this.foods, required this.servings});
+  FoodInfoCard({required this.foods, required this.servings, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity, // 너비를 화면 전체로 늘리기
-      padding: EdgeInsets.all(16.0),
+      width: double.infinity,
+      padding: EdgeInsets.all(gap_m),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(foods.length, (index) {
-          final food = foods[index];
+        children: foods.asMap().entries.map((entry) {
+          final index = entry.key;
+          final food = entry.value;
           final portion = servings[index];
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: gap_xxs),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  food.name,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      food.name,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () => onRemove(index), // 삭제 콜백 호출
+                    ),
+                  ],
                 ),
-                SizedBox(height: 4.0),
+                SizedBox(height: gap_xxs),
                 Text('용량: ${(food.gram * portion).toStringAsFixed(2)}g'),
                 Text('칼로리: ${(food.kcal * portion).toStringAsFixed(2)}kcal'),
                 Text('단백질: ${(food.protein * portion).toStringAsFixed(2)}g'),
                 Text('지방: ${(food.fat * portion).toStringAsFixed(2)}g'),
-                Divider(), // 음식을 구분하기 위한 선
+                SizedBox(height: gap_s),
+                if (index < foods.length - 1) Divider(), // 음식 구분선 추가
               ],
             ),
           );
-        }),
+        }).toList(),
       ),
     );
   }

@@ -87,18 +87,17 @@ class _SearchTabState extends State<SearchTab> {
           const SizedBox(height: 16.0),
           ...filteredFoods
               .map((food) => ListTile(
-                    title: Text(food.name),
-                    onTap: () => setState(() => selectedFood = food),
-                  ))
+            title: Text(food.name),
+            onTap: () => setState(() => selectedFood = food),
+          ))
               .toList(),
           const SizedBox(height: 16.0),
           ElevatedButton(
             onPressed: selectedFood != null
                 ? () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${selectedFood!.name} 등록 완료')),
-                    );
-                  }
+              // 선택한 음식 정보를 반환
+              Navigator.pop(context, selectedFood);
+            }
                 : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: kAccentColor2,

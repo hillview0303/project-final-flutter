@@ -7,19 +7,22 @@ import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/utils/image_parse_util.dart';
 import 'package:project_app/ui/main/activity/viewmodel/food_add_viewmodel.dart';
 
+import '../../../../data/dtos/activity/activity_response.dart';
 import '../widgets/dashed_border_painter.dart';
 import '../widgets/date_selector.dart';
 import '../widgets/food_info_card.dart';
 import '../widgets/food_search_modal.dart';
 import '../widgets/image_source_dialog.dart';
+import '../widgets/manual_entry_tab.dart';
+import '../widgets/search_tab.dart';
 
 class FoodAddPage extends ConsumerWidget {
   String formattedDate = DateSelector.formatDate(DateTime.now());
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    FoodAddModel? foodAddModel = ref.watch(foodAddProvider);
-    FoodAddViewModel foodAddViewModel = ref.read(foodAddProvider.notifier);
+    final foodAddModel = ref.watch(foodAddProvider);
+    final foodAddViewModel = ref.read(foodAddProvider.notifier);
 
     if (foodAddModel == null) {
       return Center(child: CircularProgressIndicator());
@@ -34,22 +37,34 @@ class FoodAddPage extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildImagePicker(context, foodAddModel!, foodAddViewModel),
+                  _buildImagePicker(context, foodAddModel, foodAddViewModel),
                   SizedBox(width: 16.0),
                   _buildMealAndDatePicker(
-                      context, foodAddViewModel, foodAddModel!),
+                      context, foodAddViewModel, foodAddModel),
                 ],
               ),
               SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () {
-                  _showFoodSearchModal(context, foodAddModel);
+                onPressed: () async {
+                  final selectedFood = await FoodSearchModal.show(
+                      context, foodAddModel.foodContentList, kAccentColor2);
+                  if (selectedFood != null) {
+                    foodAddViewModel.selectFood(selectedFood);
+                  }
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: kAccentColor2),
                 child: Text('음식 추가하기'),
               ),
               SizedBox(height: 16.0),
-              FoodInfoCard(),
+              // 선택한 음식 정보를 보여주는 부분
+              if (foodAddModel.selectedFood != null)
+                FoodInfoCard(
+                  foodName: foodAddModel.selectedFood!.name,
+                  volume: '${foodAddModel.selectedFood!.gram}g',
+                  calorie: '${foodAddModel.selectedFood!.kcal}kcal',
+                  protein: '${foodAddModel.selectedFood!.protein}g',
+                  fat: '${foodAddModel.selectedFood!.fat}g',
+                ),
             ],
           ),
         ),
@@ -77,11 +92,10 @@ class FoodAddPage extends ConsumerWidget {
         child: Center(
           child: model.selectedImg == null
               ? IconButton(
-                  icon: Icon(Icons.add_a_photo),
-                  onPressed: () {
-                    _showImageSourceSelection(context, viewModel);
-                  },
-                )
+            icon: Icon(Icons.add_a_photo),
+            onPressed: () =>
+                _showImageSourceSelection(context, viewModel),
+          )
               : Image.memory(base64Decode(model.selectedImg!)),
         ),
       ),
@@ -95,15 +109,11 @@ class FoodAddPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () {
-              DateSelector.show(
-                context,
-                kAccentColor2,
-                (date) {
-                  viewModel.selectDate(DateSelector.formatDate(date));
-                },
-              );
-            },
+            onTap: () => DateSelector.show(
+              context,
+              kAccentColor2,
+                  (date) => viewModel.selectDate(DateSelector.formatDate(date)),
+            ),
             child: Row(
               children: [
                 Text(
@@ -133,10 +143,6 @@ class FoodAddPage extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  void _showFoodSearchModal(BuildContext context, FoodAddModel model) {
-    FoodSearchModal.show(context, model.foodContentList, kAccentColor2);
   }
 
   void _showImageSourceSelection(

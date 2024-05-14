@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
 
 class FoodInfoCard extends StatelessWidget {
+  final String foodName;
+  final String volume;
+  final String calorie;
+  final String protein;
+  final String fat;
+
+  FoodInfoCard({
+    required this.foodName,
+    required this.volume,
+    required this.calorie,
+    required this.protein,
+    required this.fat,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(20)
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '선택한 음식 이름',
+            foodName,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
           SizedBox(height: 8.0),
-          Text('용량:...'),
-          Text('칼로리: ...'),
-          Text('영양 성분 그래프'),
+          Text('용량: $volume'),
+          Text('칼로리: $calorie'),
+          Text('단백질: $protein'),
+          Text('지방: $fat'),
         ],
       ),
     );

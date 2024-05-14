@@ -84,6 +84,7 @@ class _ManualEntryTabState extends State<ManualEntryTab> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: widget.scrollController,
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom), // Adjust padding when keyboard appears
       child: Column(
         children: [
           Row(
@@ -133,11 +134,6 @@ class _ManualEntryTabState extends State<ManualEntryTab> {
                   'portion': portion, // 인분 수 추가
                 };
                 Navigator.pop(context, food);
-              } else {
-                // 음식 이름이 비어있는 경우 처리
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('음식 이름을 입력해주세요.')),
-                );
               }
             }
                 : null,
@@ -170,4 +166,3 @@ class _ManualEntryTabState extends State<ManualEntryTab> {
     );
   }
 }
-

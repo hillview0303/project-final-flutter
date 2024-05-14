@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/repository/activity_repository.dart';
-
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../../../../main.dart';
 

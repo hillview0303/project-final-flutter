@@ -24,10 +24,10 @@ class FoodSearchModal {
             builder: (BuildContext context, ScrollController scrollController) {
               return Padding(
                 padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
                   top: 16.0,
                   left: 16.0,
                   right: 16.0,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

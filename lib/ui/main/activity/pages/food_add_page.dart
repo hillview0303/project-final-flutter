@@ -1,20 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/utils/image_parse_util.dart';
 import 'package:project_app/ui/main/activity/viewmodel/food_add_viewmodel.dart';
-
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../widgets/dashed_border_painter.dart';
 import '../widgets/date_selector.dart';
 import '../widgets/food_info_card.dart';
 import '../widgets/food_search_modal.dart';
 import '../widgets/image_source_dialog.dart';
-import '../widgets/manual_entry_tab.dart';
-import '../widgets/search_tab.dart';
 
 class FoodAddPage extends ConsumerWidget {
   String formattedDate = DateSelector.formatDate(DateTime.now());

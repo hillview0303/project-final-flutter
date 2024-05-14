@@ -23,7 +23,7 @@ class TodayRepository {
   }
 
   Future<ResponseDTO> fetchUpdateBodyData(AddBodyDataRequestDTO requestDTO) async {
-    final response = await dio.post("/api/body-date/save",data: requestDTO.toJson());
+    final response = await dio.put("/api/body-date/update",data: requestDTO.toJson());
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
     return responseDTO ;
   }

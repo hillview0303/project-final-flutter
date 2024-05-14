@@ -4,9 +4,9 @@ import 'package:project_app/ui/main/activity/widgets/search_tab.dart';
 import 'package:project_app/ui/main/activity/widgets/manual_entry_tab.dart';
 
 class FoodSearchModal {
-  static Future<FoodContentListDTO?> show(
+  static Future<Map<String, dynamic>?> show(
       BuildContext context, List<FoodContentListDTO> foods, Color accentColor) {
-    return showModalBottomSheet<FoodContentListDTO>(
+    return showModalBottomSheet<Map<String, dynamic>>(
       context: context,
       isScrollControlled: true,
       useRootNavigator: true,

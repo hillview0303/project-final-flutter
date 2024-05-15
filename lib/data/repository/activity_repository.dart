@@ -1,3 +1,4 @@
+import 'package:project_app/data/dtos/activity/activity_request.dart';
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
@@ -121,9 +122,10 @@ class ActivityRepository {
     return responseDTO;
   }
 
-  Future<ResponseDTO> fetchSendWalking() async {
+  Future<ResponseDTO> fetchSendWalking(int steps) async {
 
-    final response = await dio.post("/api/");
+    StepDTO stepDTO = StepDTO(steps);
+    final response = await dio.put("/api/activities/walking-update",data:stepDTO);
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
 

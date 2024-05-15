@@ -38,7 +38,7 @@ class WalkingDetailViewModel extends StateNotifier<WalkingDetailModel?>{
   }
 
   Future<void> sendStepsToServer(int steps) async {
-    ResponseDTO responseDTO = await ActivityRepository().fetchSendWalking();
+    ResponseDTO responseDTO = await ActivityRepository().fetchSendWalking(steps);
 
     if(responseDTO.status == 200){
 

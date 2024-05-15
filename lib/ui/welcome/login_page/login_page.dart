@@ -45,8 +45,8 @@ class LoginPage extends ConsumerWidget {
                       Text(
                         '로그인',
                         style: textTheme().titleLarge?.copyWith(
-                          color: kAccentColor2,
-                        ),
+                              color: kAccentColor2,
+                            ),
                       ),
                       const SizedBox(height: 40.0),
                       // ID 입력
@@ -56,7 +56,8 @@ class LoginPage extends ConsumerWidget {
                         // validator: validateUsername(),
                         controller: _username,
                         decoration: InputDecoration(
-                          label: const Text('ID', style: TextStyle(color: Colors.grey)),
+                          label: const Text('ID',
+                              style: TextStyle(color: Colors.grey)),
                           hintText: 'ID를 입력하세요',
                           hintStyle: const TextStyle(color: Colors.black26),
                           border: OutlineInputBorder(
@@ -130,12 +131,12 @@ class LoginPage extends ConsumerWidget {
                               String password = _password.text.trim();
 
                               LoginRequestDTO loginRequestDTO =
-                              LoginRequestDTO(username, password);
+                                  LoginRequestDTO(username, password);
 
                               SessionStore store = ref.read(sessionProvider);
 
                               // todo : 추후 삭제
-                              store.login(LoginRequestDTO("ssar", "1234"));
+                              // store.login(LoginRequestDTO("ssar", "1234"));
                               store.login(loginRequestDTO);
 
                               //todo : 삭제 후 스토어 주석 해제

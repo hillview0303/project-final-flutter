@@ -18,4 +18,17 @@ class SurveyRepository {
 
     return responseDTO;
   }
+
+  Future<ResponseDTO> fetchSurveyDetail(int surveyId) async {
+    final response = await dio.get("/api/survey/${surveyId}");
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+    if (responseDTO.status == 200) {
+      SurveyResponseDTO surveyResponseDTO =
+          SurveyResponseDTO.fromJson(responseDTO.body);
+
+      responseDTO.body = surveyResponseDTO;
+    }
+
+    return responseDTO;
+  }
 }

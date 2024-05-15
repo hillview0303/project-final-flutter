@@ -63,7 +63,7 @@ class QuestionElementDTO {
   });
 
   factory QuestionElementDTO.fromJson(Map<String, dynamic> json) {
-    List<dynamic> prevChoiceDTO = json["questionElements"]["choices"];
+    List<dynamic> prevChoiceDTO = json["choices"];
     List<ChoiceDTO> choiceDTO =
         prevChoiceDTO.map((choice) => ChoiceDTO.fromJson(choice)).toList();
 

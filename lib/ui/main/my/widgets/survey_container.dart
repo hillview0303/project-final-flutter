@@ -77,7 +77,8 @@ class SurveyContainer extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SurveyFormPage()),
+                    MaterialPageRoute(
+                        builder: (context) => SurveyFormPage(surveyId)),
                   );
                 },
                 child: const Text(

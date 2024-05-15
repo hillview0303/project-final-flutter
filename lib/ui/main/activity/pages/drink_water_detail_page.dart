@@ -41,96 +41,85 @@ class DrinkWaterDetailPage extends ConsumerWidget {
             iconTheme: IconThemeData(color: Colors.white),
           ),
           body: SingleChildScrollView(
-            child: Column(
+            child: Column
               children: <Widget>[
                 WaterIntakeGraph(),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 26.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Consumer(
-                        builder: (context, ref, child) {
-                          final currentIntake =
-                              ref.watch(waterIntakeProvider.state).state;
-                          return Text(
-                            '오늘 물을 $currentIntake ml 마셨어요',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          );
-                        },
+                SizedBox(height: 30),
+
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Consumer(
+                      builder: (context, ref, child) {
+                        final currentIntake =
+                            ref.watch(waterIntakeProvider.state).state;
+                        return Text(
+                          '오늘 물을 $currentIntake ml 마셨어요',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        );
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '수분 충전하세요!',
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 30),
+                    _buildProgressIndicator(
+                        ref.watch(waterIntakeProvider.state).state),
+                    SizedBox(height: 20),
+                    _buildCupIcons(ref.watch(waterIntakeProvider.state).state,
+                        glassSize),
+                    SizedBox(height: 20),
+                    Text(
+                      '부족        좋아요        거의다왔어요        완벽해요',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 20),
+                    Container(
+                      width: MediaQuery.of(context).size.width,  // 전체 폭 사용
+                      // height: 180,  // 높이를 300픽셀로 설정
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        '수분 충전하세요!',
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 30),
-                      _buildProgressIndicator(
-                          ref.watch(waterIntakeProvider.state).state),
-                      SizedBox(height: 20),
-                      _buildCupIcons(ref.watch(waterIntakeProvider.state).state,
-                          glassSize),
-                      SizedBox(height: 20),
-                      Text(
-                        '부족        좋아요        거의다왔어요        완벽해요',
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(40)),
-                        ),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                        child: Column(
-                          children: <Widget>[
-                            Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                Image.asset('assets/images/water2.png',
-                                    width: 120),
-                                Positioned(
-                                  bottom: 0,
-                                  child: Text(
-                                    '${glassSize}ml',
-                                    // Display the dynamic glass size
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),  // 내부 패딩 추가
+                      child: Column(
+                        children: <Widget>[
+                          Stack(
+                            alignment: Alignment.center,
+                            children: <Widget>[
+                              Image.asset('assets/images/water2.png', width: 120),
+                              Positioned(
+                                bottom: 0,
+                                child: Text(
+                                  '${glassSize}ml',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,  // 아이콘들 간격 조정
+                                children: <Widget>[
+                                  IconButton(
+                                    icon: Icon(Icons.remove, color: kAccentColor2),
+                                    onPressed: () => _removeDrink(ref, glassSize),
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    IconButton(
-                                      icon: Icon(Icons.remove,
-                                          color: kAccentColor2),
-                                      onPressed: () => _removeDrink(ref,
-                                          glassSize), // Wrap inside anonymous function
-                                    ),
-                                    SizedBox(width: 120),
-                                    IconButton(
-                                      icon:
-                                          Icon(Icons.add, color: kAccentColor2),
-                                      onPressed: () => _addDrink(ref,
-                                          glassSize), // Wrap inside anonymous function
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.add, color: kAccentColor2),
+                                    onPressed: () => _addDrink(ref, glassSize),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),

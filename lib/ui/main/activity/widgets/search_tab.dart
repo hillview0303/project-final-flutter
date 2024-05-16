@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_app/data/dtos/activity/activity_response.dart';
-
 import '../../../../_core/constants/constants.dart';
 
 class SearchTab extends StatefulWidget {
@@ -32,6 +31,7 @@ class _SearchTabState extends State<SearchTab> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: widget.scrollController,
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom), // Adjust padding when keyboard appears
       child: Column(
         children: [
           if (selectedFood != null)
@@ -47,10 +47,10 @@ class _SearchTabState extends State<SearchTab> {
                 children: [
                   Text('선택한 음식: ${selectedFood!.name}',
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text('칼로리: ${selectedFood!.kcal} kcal'),
-                  Text('탄수화물: ${selectedFood!.carbo} g'),
-                  Text('단백질: ${selectedFood!.protein} g'),
-                  Text('지방: ${selectedFood!.fat} g'),
+                  Text('칼로리: ${(selectedFood!.kcal * portion).toStringAsFixed(2)} kcal'),
+                  Text('탄수화물: ${(selectedFood!.carbo * portion).toStringAsFixed(2)} g'),
+                  Text('단백질: ${(selectedFood!.protein * portion).toStringAsFixed(2)} g'),
+                  Text('지방: ${(selectedFood!.fat * portion).toStringAsFixed(2)} g'),
                 ],
               ),
             ),
@@ -95,8 +95,8 @@ class _SearchTabState extends State<SearchTab> {
           ElevatedButton(
             onPressed: selectedFood != null
                 ? () {
-              // 선택한 음식 정보를 반환
-              Navigator.pop(context, selectedFood);
+              // 선택한 음식과 인분 정보를 반환
+              Navigator.pop(context, {'food': selectedFood, 'portion': portion});
             }
                 : null,
             style: ElevatedButton.styleFrom(

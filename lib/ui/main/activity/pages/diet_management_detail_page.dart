@@ -1,89 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:calendar_agenda/calendar_agenda.dart';
 import '../../../../_core/constants/size.dart';
+import '../../../../data/models/activities/meal_detail.dart';
 import '../widgets/custom_calendar_Agenda.dart';
 import 'food_add_page.dart';
 
-class DietManagementDetailPage extends StatelessWidget {
+class DietManagementDetailPage extends ConsumerWidget {
   final CalendarAgendaController _controller = CalendarAgendaController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // 선택된 날짜에 따른 식사 필터링
+    final mealsForSelectedDate = ref.watch(mealsForSelectedDateProvider);
+
+    // 고정된 식사
+    final List<String> mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER', 'SNACK'];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('식단 관리', style: TextStyle(color: Colors.white)),
-        backgroundColor: kAccentColor2,
-        iconTheme: IconThemeData(color: Colors.white),
-      ),
+          title: Text('식단 관리', style: TextStyle(color: Colors.white)),
+          backgroundColor: kAccentColor2,
+          iconTheme: IconThemeData(color: Colors.white)),
       backgroundColor: kAccentColor2,
       body: Column(
         children: <Widget>[
           CustomCalendarAgenda(
             controller: _controller,
-            initialDate: DateTime.now(),
+            initialDate: ref.watch(dateProvider),
             onDateSelected: (date) {
-              // 날짜 선택 시 실행할 로직을 추가
+              ref.read(dateProvider.notifier).setDate(date);
             },
           ),
           SizedBox(height: gap_m),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: TColor.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: ListView(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: TColor.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3)),
+                  ]),
+              child: ListView.builder(
                 padding: EdgeInsets.only(top: 30),
-                children: <Widget>[
-                  foodCard(
+                itemCount: mealTypes.length,
+                itemBuilder: (context, index) {
+                  final mealType = mealTypes[index];
+                  final meal = mealsForSelectedDate.firstWhere(
+                        (meal) => meal.mealType == mealType,
+                    orElse: () => MealDetail(
+                        date: DateTime.now(),
+                        mealType: mealType,
+                        foodName: '식사를 추가해 주세요',
+                        gram: '',
+                        imagePath: '',
+                        calories: 0.0,
+                        targetCalories: 0.0,
+                        carbo: 0.0,
+                        protein: 0.0,
+                        fat: 0.0),
+                  );
+                  return foodCard(
                       context,
-                      'BREAKFAST',
-                      '고기와 야채',
-                      '200g 1인분',
-                      'assets/images/meal1.png',
-                      0.4,
-                      0.3,
-                      0.3),
-                  foodCard(
-                      context,
-                      'LUNCH',
-                      '버거',
-                      '500g 1인분',
-                      'assets/images/meal2.png',
-                      0.4,
-                      0.3,
-                      0.3),
-                  foodCard(
-                      context,
-                      'DINNER',
-                      '콘스프',
-                      '300g 1인분',
-                      'assets/images/meal3.png',
-                      0.4,
-                      0.3,
-                      0.3),
-                  foodCard(
-                      context,
-                      'SNACK',
-                      '비빔밥',
-                      '350g 1인분',
-                      'assets/images/meal4.png',
-                      0.4,
-                      0.3,
-                      0.3),
-                ],
+                      meal.mealType,
+                      meal.foodName,
+                      meal.gram,
+                      meal.imagePath,
+                      meal.calories,
+                      meal.targetCalories,
+                      meal.carbo,
+                      meal.protein,
+                      meal.fat,
+                      meal.date,
+                      ref);
+                },
               ),
             ),
           ),
@@ -92,7 +89,23 @@ class DietManagementDetailPage extends StatelessWidget {
     );
   }
 
-  Widget foodCard(BuildContext context, String mealType, String title, String calories, String imagePath, double carbs, double protein, double fats) {
+  Widget foodCard(
+      BuildContext context,
+      String mealType,
+      String foodName,
+      String gram,
+      String imagePath,
+      double calories,
+      double targetCalories,
+      double carbo,
+      double protein,
+      double fat,
+      DateTime date,
+      WidgetRef ref,
+      ) {
+    final bool isMealAdded = foodName != '식사를 추가해 주세요';
+    final double totalNutrients = carbo + protein + fat;
+
     return Card(
       margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
       color: TColor.white,
@@ -116,106 +129,108 @@ class DietManagementDetailPage extends StatelessWidget {
                 },
               ),
             ),
-
             Divider(),
-
-            // 제목 및 삭제 아이콘
             Row(
               children: [
                 Expanded(
-                  child: Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: Text(foodName, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
                 IconButton(
                   icon: Icon(Icons.delete, color: kAccentColor2),
                   onPressed: () {
-                    // 삭제 로직을 추가합니다.
+                    ref.read(mealProvider.notifier).deleteMeal(mealType, date);
                   },
                 ),
               ],
             ),
 
-            // 사진
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(imagePath, width: 60, height: 60, fit: BoxFit.cover),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            // 데이터가 있는 경우에만 사진 및 영양 비율 표시
+            if (isMealAdded)
+              Column(
+                children: [
+                  Row(
                     children: [
-                      Text(calories),
-                      Text("1074 / 1960 kcal", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset(imagePath, width: 60, height: 60, fit: BoxFit.cover),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(gram),
+                            Text("$calories / $targetCalories kcal", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
 
-            // 영양 비율 및 진행 바
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Row(
-                children: [
-                  Icon(Icons.square, color: Colors.deepOrange[200], size: 20),
-                  Text(" 탄수화물 75%", style: TextStyle(fontSize: 14)),
-                  SizedBox(width: 10),
-                  Icon(Icons.square, color: Colors.cyanAccent, size: 20),
-                  Text(" 단백질 12%", style: TextStyle(fontSize: 14)),
-                  SizedBox(width: 10),
-                  Icon(Icons.square, color: Colors.greenAccent, size: 20),
-                  Text(" 지방 13%", style: TextStyle(fontSize: 14)),
-                ],
-              ),
-            ),
+                  // 영양 비율 및 진행 바
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.square, color: Colors.deepOrange[200], size: 20),
+                        Text(" 탄수화물 ${carbo.toStringAsFixed(1)}g", style: TextStyle(fontSize: 14)),
+                        SizedBox(width: 10),
+                        Icon(Icons.square, color: Colors.cyanAccent, size: 20),
+                        Text(" 단백질 ${protein.toStringAsFixed(1)}g", style: TextStyle(fontSize: 14)),
+                        SizedBox(width: 10),
+                        Icon(Icons.square, color: Colors.greenAccent, size: 20),
+                        Text(" 지방 ${fat.toStringAsFixed(1)}g", style: TextStyle(fontSize: 14)),
+                      ],
+                    ),
+                  ),
 
-            // 영양 진행 바
-            Container(
-              height: 10,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 1,
-                    spreadRadius: 1,
-                    offset: Offset(0, 1),
+                  // 영양 진행 바
+                  Container(
+                    height: 10,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: (carbo * 100 / totalNutrients).toInt(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.deepOrange[200],
+                              borderRadius: BorderRadius.horizontal(left: Radius.circular(5)),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: (protein * 100 / totalNutrients).toInt(),
+                          child: Container(
+                            color: Colors.cyanAccent,
+                          ),
+                        ),
+                        Expanded(
+                          flex: (fat * 100 / totalNutrients).toInt(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.greenAccent,
+                              borderRadius: BorderRadius.horizontal(right: Radius.circular(5)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: (carbs * 100).toInt(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.deepOrange[200],
-                        borderRadius: BorderRadius.horizontal(left: Radius.circular(5)),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: (protein * 100).toInt(),
-                    child: Container(
-                      color: Colors.cyanAccent,
-                    ),
-                  ),
-                  Expanded(
-                    flex: (fats * 100).toInt(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.horizontal(right: Radius.circular(5)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

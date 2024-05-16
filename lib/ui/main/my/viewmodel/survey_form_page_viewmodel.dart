@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/dtos/survey/survey_response.dart';
 import 'package:project_app/data/repository/survey_repository.dart';
+import 'package:project_app/ui/main/my/viewmodel/survey_page_viewmodel.dart';
 
 import '../../../../data/dtos/survey/survey_request.dart';
 import '../../../../main.dart';
@@ -46,24 +47,29 @@ class SurveyFormViewModel extends StateNotifier<SurveyFormModel?> {
 
   Future<void> postSurveyResult() async {
     List<SurveyRequestDTO> surveyRequestList = state!.surveyRequestDTOList!;
-
-    surveyRequestList.add(SurveyRequestDTO(
-        questionId: state!
-            .surveyDetailDTO!.questionElements[state!.currentIndex].questionId,
-        choiceId: state!.chosenValue));
-
-    ResponseDTO responseDTO = await SurveyRepository()
-        .fetchSurveyResult(state!.surveyDetailDTO!.surveyId, surveyRequestList);
-
-    if (responseDTO.status == 200) {
-      Navigator.pushAndRemoveUntil(
-        mContext!,
-        MaterialPageRoute(builder: (context) => SurveyCompletionPage()),
-        (route) => true,
-      );
+    if (state!.chosenValue == null) {
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(SnackBar(content: Text("선택항목이 없습니다.")));
     } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-          SnackBar(content: Text("설문 참여 실패: ${responseDTO.msg}")));
+      surveyRequestList.add(SurveyRequestDTO(
+          questionId: state!.surveyDetailDTO!
+              .questionElements[state!.currentIndex].questionId,
+          choiceId: state!.chosenValue));
+      ResponseDTO responseDTO = await SurveyRepository().fetchSurveyResult(
+          state!.surveyDetailDTO!.surveyId, surveyRequestList);
+
+      if (responseDTO.status == 200) {
+        ref.read(surveyListProvider.notifier).notifyInit();
+
+        Navigator.pushAndRemoveUntil(
+          mContext!,
+          MaterialPageRoute(builder: (context) => SurveyCompletionPage()),
+          (route) => true,
+        );
+      } else {
+        ScaffoldMessenger.of(mContext!).showSnackBar(
+            SnackBar(content: Text("설문 참여 실패: ${responseDTO.msg}")));
+      }
     }
   }
 
@@ -107,8 +113,6 @@ class SurveyFormViewModel extends StateNotifier<SurveyFormModel?> {
               .questionElements[state!.currentIndex].questionId,
           choiceId: state!.chosenValue);
     }
-    print(
-        "currentIndex : ${state!.currentIndex + 1} length : ${state!.surveyRequestDTOList?.length}");
     state = state!.copyWith(
         surveyRequestDTOList: surveyRequestList,
         chosenValue: chosenValue,

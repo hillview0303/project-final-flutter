@@ -131,4 +131,11 @@ class ActivityRepository {
 
     return responseDTO;
   }
+
+  // Future<ResponseDTO> fetchUpdateWater(int water) async {
+
+
+
+
+  }
 }

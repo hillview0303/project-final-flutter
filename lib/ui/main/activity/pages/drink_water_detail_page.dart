@@ -111,11 +111,16 @@ class DrinkWaterDetailPage extends ConsumerWidget {
                                 children: <Widget>[
                                   IconButton(
                                     icon: Icon(Icons.remove, color: kAccentColor2),
-                                    onPressed: () => _removeDrink(ref, glassSize),
+                                    onPressed: () { _removeDrink(ref, glassSize);
+                                      },
                                   ),
                                   IconButton(
                                     icon: Icon(Icons.add, color: kAccentColor2),
-                                    onPressed: () => _addDrink(ref, glassSize),
+                                    onPressed: () async { _addDrink(ref, glassSize);
+                                    String? drinkWater = await secureStorage.read(key: 'current_steps');
+                                    // int ? Water = int.tryParse(drinkWater ?? '0') ?? 0;
+                                    // ref.read(DrinkWaterProvider.notifier).updateWater(drinkWater);
+                                    },
                                   ),
                                 ],
                               ),

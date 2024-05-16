@@ -34,6 +34,11 @@ class DrinkWaterViewModel extends StateNotifier<DrinkWaterModel?>{
     }
   }
 
+  // Future<void> updateWater(int? drinkWater) async {
+  //   ResponseDTO responseDTO = await ActivityRepository().fetchUpdateWater(water)
+  //
+  // }
+
 }
 
 final DrinkWaterProvider = StateNotifierProvider<DrinkWaterViewModel,DrinkWaterModel?>((ref) {

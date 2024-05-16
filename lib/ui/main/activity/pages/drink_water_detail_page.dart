@@ -67,11 +67,17 @@ class DrinkWaterDetailPage extends ConsumerWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 30),
-                    _buildProgressIndicator(
-                        ref.watch(waterIntakeProvider.state).state),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20,right: 20),
+                      child: _buildProgressIndicator(
+                          ref.watch(waterIntakeProvider.state).state),
+                    ),
                     SizedBox(height: 20),
-                    _buildCupIcons(ref.watch(waterIntakeProvider.state).state,
-                        glassSize),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20,right: 20),
+                      child: _buildCupIcons(ref.watch(waterIntakeProvider.state).state,
+                          glassSize),
+                    ),
                     SizedBox(height: 20),
                     Text(
                       '부족        좋아요        거의다왔어요        완벽해요',

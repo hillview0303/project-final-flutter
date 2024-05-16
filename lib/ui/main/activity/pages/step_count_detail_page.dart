@@ -18,6 +18,7 @@ class _StepCountDetailPageState extends ConsumerState<StepCountDetailPage> {
   int _currentSteps = 0;
   late StreamSubscription<StepCount> _stepCountStream;
   Timer? _timer;
+  int secondCount = 0; // 클래스 레벨에서 secondCount 선언
 
   @override
   void initState() {
@@ -26,7 +27,6 @@ class _StepCountDetailPageState extends ConsumerState<StepCountDetailPage> {
     _initializePedometer();
     _startTimer();
   }
-
 
   void _initializePedometer() {
     _stepCountStream = Pedometer.stepCountStream.listen(
@@ -39,7 +39,7 @@ class _StepCountDetailPageState extends ConsumerState<StepCountDetailPage> {
     setState(() {
       _currentSteps = event.steps;
     });
-    _saveSteps(_currentSteps); // 단계 수를 Secure Storage에 저장
+    _saveSteps(_currentSteps);
   }
 
   void _onStepCountError(dynamic error) {
@@ -48,7 +48,6 @@ class _StepCountDetailPageState extends ConsumerState<StepCountDetailPage> {
 
   void _saveSteps(int steps) async {
     await secureStorage.write(key: 'current_steps', value: steps.toString());
-
   }
 
   Future<void> _loadSteps() async {
@@ -63,14 +62,26 @@ class _StepCountDetailPageState extends ConsumerState<StepCountDetailPage> {
       setState(() {
         _currentSteps++;
       });
-      _saveSteps(_currentSteps); // 증가된 단계 수 저장
+      _saveSteps(_currentSteps);
+
+      secondCount++;  // 매 초마다 카운터 증가
+
+      if (secondCount % 10 == 0) {
+        _sendCurrentStepsToServer();
+      }
     });
+  }
+
+  void _sendCurrentStepsToServer() async {
+    String? stepsString = await secureStorage.read(key: 'current_steps');
+    int steps = int.tryParse(stepsString ?? '0') ?? 0;
+    ref.read(WalkingDetailProvider.notifier).sendStepsToServer(steps);
   }
 
   @override
   void dispose() {
     _stepCountStream.cancel();
-    _timer?.cancel(); // 타이머 취소
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -96,16 +107,12 @@ class _StepCountDetailPageState extends ConsumerState<StepCountDetailPage> {
             IconButton(
               icon: Icon(Icons.visibility),
               onPressed: () async {
-                String? stepsString = await secureStorage.read(key: 'current_steps');
-                int steps = int.tryParse(stepsString ?? '0') ?? 0; // 기본 값으로 0을 사용
-
-                ref.read(WalkingDetailProvider.notifier).sendStepsToServer(steps);
                 showDialog(
                   context: context,
                   builder: (context) =>
                       AlertDialog(
                         title: Text('저장된 걸음 수'),
-                        content: Text('현재 걸음 수: $steps'),
+                        content: Text('현재 걸음 수: $_currentSteps'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(),
@@ -123,6 +130,7 @@ class _StepCountDetailPageState extends ConsumerState<StepCountDetailPage> {
     );
   }
 }
+
 
 // 테스트 이전 코드
 

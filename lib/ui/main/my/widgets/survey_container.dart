@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../../_core/constants/constants.dart';
 import '../../../../_core/constants/size.dart';
-import '../../../../data/dtos/my/current_surveys.dart';
 import '../pages/survey_form_page.dart';
 
 class SurveyContainer extends StatelessWidget {
@@ -9,6 +9,7 @@ class SurveyContainer extends StatelessWidget {
   final int questionCount;
   final String isAttend;
   final String progress;
+  final int surveyId;
 
   const SurveyContainer({
     Key? key,
@@ -16,6 +17,7 @@ class SurveyContainer extends StatelessWidget {
     required this.questionCount,
     required this.isAttend,
     required this.progress,
+    required this.surveyId,
   }) : super(key: key);
 
   @override
@@ -66,7 +68,8 @@ class SurveyContainer extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kAccentColor2,
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                   ),
@@ -74,7 +77,8 @@ class SurveyContainer extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SurveyFormPage()),
+                    MaterialPageRoute(
+                        builder: (context) => SurveyFormPage(surveyId)),
                   );
                 },
                 child: const Text(

@@ -1,78 +1,74 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/size.dart';
-import 'package:project_app/ui/main/my/pages/survey_completion_page.dart';
-import '../../../../data/dtos/my/survey_response.dart';
+import 'package:project_app/ui/main/my/viewmodel/survey_form_page_viewmodel.dart';
+
 import '../widgets/radio_tile.dart';
 
+class SurveyFormPage extends ConsumerWidget {
+  final surveyId;
 
-class SurveyFormPage extends StatefulWidget {
-  @override
-  _SurveyFormPageState createState() => _SurveyFormPageState();
-}
-
-class _SurveyFormPageState extends State<SurveyFormPage> {
-  String? _chosenValue;
-  double _progressValue = 0.0;
-  late int _totalQuestions;
-  int _currentQuestionIndex = 0;
-
-  late SurveyResponse _surveyResponse;
+  SurveyFormPage(this.surveyId);
 
   @override
-  void initState() {
-    super.initState();
-    _initializeSurveyData();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    SurveyFormModel? model = ref.watch(surveyFormProvider(surveyId));
+    SurveyFormViewModel viewModel =
+        ref.read(surveyFormProvider(surveyId).notifier);
 
-  void _initializeSurveyData() {
-    setState(() {
-      _surveyResponse = surveyResponses[0];
-      _totalQuestions = _surveyResponse.questionElements.length;
-    });
-  }
-
-  QuestionElement get currentQuestion => _surveyResponse.questionElements[_currentQuestionIndex];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_surveyResponse.title),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text('${_currentQuestionIndex + 1} of $_totalQuestions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+    if (model == null) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(model!.surveyDetailDTO!.title!),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                  '${model.currentIndex + 1} of ${model!.surveyDetailDTO!.questionElements.length}',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            )
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
             children: <Widget>[
-            SizedBox(height: 6, child: LinearProgressIndicator(value: _progressValue, backgroundColor: Colors.grey[300], valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2))),
-        Padding(padding: const EdgeInsets.all(gap_m),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(gap_m),
-                child: Image.asset('assets/images/survey1.png'),
+              SizedBox(
+                  height: 6,
+                  child: LinearProgressIndicator(
+                      value: model.progressValue,
+                      backgroundColor: Colors.grey[300],
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(kAccentColor2))),
+              Padding(
+                padding: const EdgeInsets.all(gap_m),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(gap_m),
+                  child: Image.asset('assets/images/survey1.png'),
+                ),
               ),
-            ),
-            Text(
-              currentQuestion.question,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+              Text(
+                model.surveyDetailDTO!.questionElements[model.currentIndex]
+                    .question,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: gap_m),
-              for (var choice in currentQuestion.choices)
+              for (var choice in model.surveyDetailDTO!
+                  .questionElements[model.currentIndex].choices)
                 Column(
                   children: [
                     RadioTile(
-                      title: choice.choiceItem,
-                      groupValue: _chosenValue,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _chosenValue = value;
-                        });
+                      choice: choice,
+                      groupValue: model.chosenValue,
+                      onChanged: (int? value) {
+                        viewModel.updateChosenValue(value!);
                       },
                     ),
                     SizedBox(height: gap_s),
@@ -87,13 +83,10 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
                       backgroundColor: kAccentColor2,
                       minimumSize: Size(150, 36),
                     ),
-                    onPressed: _currentQuestionIndex > 0
+                    onPressed: model.currentIndex > 0
                         ? () {
-                      setState(() {
-                        _currentQuestionIndex--;
-                        _updateProgress();
-                      });
-                    }
+                            viewModel.moveToPrev();
+                          }
                         : null,
                     child: Text('이전'),
                   ),
@@ -102,35 +95,31 @@ class _SurveyFormPageState extends State<SurveyFormPage> {
                       backgroundColor: kAccentColor2,
                       minimumSize: Size(150, 36),
                     ),
-                    onPressed: _currentQuestionIndex < _totalQuestions - 1
+                    onPressed: model.currentIndex <
+                            model.surveyDetailDTO!.questionElements.length - 1
                         ? () {
-                      setState(() {
-                        _currentQuestionIndex++;
-                        _updateProgress();
-                      });
-                    }
-                        : _completeSurvey,
-                    child: Text(_currentQuestionIndex < _totalQuestions - 1 ? '다음' : '설문 완료'),
+                            if (model.chosenValue == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("선택된 항목이 없습니다.")));
+                            } else {
+                              viewModel.moveToNext();
+                            }
+                          }
+                        : () {
+                            viewModel.postSurveyResult();
+                          },
+                    child: Text(model.currentIndex <
+                            model!.surveyDetailDTO!.questionElements.length - 1
+                        ? '다음'
+                        : '설문 완료'),
                   ),
                 ],
               ),
               SizedBox(height: gap_l),
             ],
+          ),
         ),
-      ),
-    );
-  }
-
-  void _updateProgress() {
-    setState(() {
-      _progressValue = (_currentQuestionIndex + 1) / _totalQuestions;
-    });
-  }
-
-  void _completeSurvey() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SurveyCompletionPage()),
-    );
+      );
+    }
   }
 }

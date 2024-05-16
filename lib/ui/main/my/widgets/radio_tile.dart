@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 
 import '../../../../_core/constants/size.dart';
+import '../../../../data/dtos/survey/survey_response.dart';
 
 class RadioTile extends StatelessWidget {
-  final String title;
-  final String? groupValue;
-  final Function(String?) onChanged;
+  final ChoiceDTO choice;
+  final int? groupValue;
+  final Function(int?) onChanged;
 
   RadioTile({
-    required this.title,
+    required this.choice,
     required this.groupValue,
     required this.onChanged,
   });
@@ -22,14 +23,14 @@ class RadioTile extends StatelessWidget {
         color: Colors.white,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: groupValue == title ? kAccentColor2 : TColor.white,
+            color: groupValue == choice.choiceId ? kAccentColor2 : TColor.white,
             width: 0.8,
           ),
           borderRadius: BorderRadius.circular(gap_m),
         ),
-        child: RadioListTile<String>(
-          title: Text(title),
-          value: title,
+        child: RadioListTile<int>(
+          title: Text(choice.choiceItem),
+          value: choice.choiceId,
           groupValue: groupValue,
           onChanged: onChanged,
           activeColor: kAccentColor2,

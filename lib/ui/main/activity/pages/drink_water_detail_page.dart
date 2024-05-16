@@ -41,11 +41,10 @@ class DrinkWaterDetailPage extends ConsumerWidget {
             iconTheme: IconThemeData(color: Colors.white),
           ),
           body: SingleChildScrollView(
-            child: Column
+            child: Column(
               children: <Widget>[
                 WaterIntakeGraph(),
                 SizedBox(height: 30),
-
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -82,7 +81,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
                     SizedBox(height: 20),
                     Container(
                       width: MediaQuery.of(context).size.width,  // 전체 폭 사용
-                      // height: 180,  // 높이를 300픽셀로 설정
+                      height: 180,  // 높이를 300픽셀로 설정
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
@@ -142,7 +141,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
         ),
         FractionallySizedBox(
           widthFactor:
-              currentIntake >= totalIntake ? 1.0 : currentIntake / totalIntake,
+          currentIntake >= totalIntake ? 1.0 : currentIntake / totalIntake,
           child: Container(
             height: 40,
             decoration: BoxDecoration(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/ui/callback_dispatcher.dart';
+import 'package:workmanager/workmanager.dart';
 
 import '_core/constants/http.dart';
 import '_core/constants/move.dart';
@@ -8,7 +10,14 @@ import '_core/constants/theme.dart';
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
-  dio.interceptors.add(interceptor);
+  WidgetsFlutterBinding.ensureInitialized();
+  Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  Workmanager().registerPeriodicTask(
+      "1",
+      fetchBackground,
+      frequency: Duration(minutes: 15),);
+
+      dio.interceptors.add(interceptor);
   runApp(ProviderScope(child: const MyApp()));
 }
 

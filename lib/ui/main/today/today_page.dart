@@ -15,9 +15,9 @@ class TodayPage extends ConsumerWidget {
     final visibilityState = ref.watch(visibilityProvider);
     TodayPageModel? model = ref.watch(TodayPageProvider);
     //todo : 1초당 1씩 올라가는 vm
-    // ref.watch(StepTimerProvider);
+    ref.watch(StepTimerProvider);
     //todo : 만보기 vm
-    ref.watch(StepCountProvider);
+    // ref.watch(StepCountProvider);
 
 
     if (model == null) {

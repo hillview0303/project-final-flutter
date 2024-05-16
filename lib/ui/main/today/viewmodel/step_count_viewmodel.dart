@@ -65,13 +65,7 @@ class StepCountViewModel extends StateNotifier<int> {
   }
 }
 
-// Provider 정의
-final stepCountProvider = StateNotifierProvider<StepCountViewModel, int>((ref) {
-  return StepCountViewModel(ref.read);
-});
-
-
-// Provider 정의
 final StepCountProvider = StateNotifierProvider<StepCountViewModel, int>((ref) {
   return StepCountViewModel(ref.read);
 });
+

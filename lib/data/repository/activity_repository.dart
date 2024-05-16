@@ -97,38 +97,42 @@ class ActivityRepository {
   }
 
   Future<ResponseDTO> fetchWalkingDetail() async {
-    print("555555555");
     final response = await dio.get("/api/activities/walking/detail");
-    print("6666666");
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-    print("77777");
 
     if (responseDTO.status == 200) {
-      print("88888");
       List<dynamic> tempWalking = responseDTO.body["weakWalkings"];
-      print("999999");
       List<WeakWalkingDTO> weakWalkings =
           tempWalking.map((e) => WeakWalkingDTO.fromJson(e)).toList();
-      print("101010");
-      print("테스트 : ${weakWalkings}");
       WalkingDetailDTO walkingDetailDTO =
           WalkingDetailDTO.fromJson(responseDTO.body);
-      print("12121212");
       WalkingDetailModel model = WalkingDetailModel(walkingDetailDTO, weakWalkings);
-      print("13131313");
       responseDTO.body = model;
     }
-    print("14141414");
     return responseDTO;
   }
 
   Future<ResponseDTO> fetchSendWalking(int steps) async {
 
+    print("걸음수확인: ${steps}");
     StepDTO stepDTO = StepDTO(steps);
     final response = await dio.put("/api/activities/walking-update",data:stepDTO);
+    print("응답 확인 : ${stepDTO.walking}");
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
+    if(responseDTO.status==200){
+      print("통신성공");
+    }else{
+      print("통신실패");
+    }
 
     return responseDTO;
   }
-}
+
+  // Future<ResponseDTO> fetchUpdateWater(int water) async {
+
+
+
+
+  }
+

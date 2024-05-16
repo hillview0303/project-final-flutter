@@ -4,13 +4,13 @@ import 'package:pedometer/pedometer.dart';
 import '../../../../_core/constants/http.dart';
 import '../../activity/viewmodel/walking_detail.viewmodel.dart';
 
-class StepCountManager extends StateNotifier<int> {
+class StepTimerViewModel extends StateNotifier<int> {
   late StreamSubscription<StepCount> _stepCountStream;
   Timer? _timer;
   int secondCount = 0;
   final read;
 
-  StepCountManager(this.read) : super(0) {
+  StepTimerViewModel(this.read) : super(0) {
     initialize();
   }
 
@@ -73,6 +73,6 @@ class StepCountManager extends StateNotifier<int> {
 }
 
 // Provider 정의
-final stepCountProvider = StateNotifierProvider<StepCountManager, int>((ref) {
-  return StepCountManager(ref.read);
+final StepTimerProvider = StateNotifierProvider<StepTimerViewModel, int>((ref) {
+  return StepTimerViewModel(ref.read);
 });

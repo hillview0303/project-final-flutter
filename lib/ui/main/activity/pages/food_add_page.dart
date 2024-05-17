@@ -12,11 +12,33 @@ import '../widgets/food_info_card.dart';
 import '../widgets/food_search_modal.dart';
 import '../widgets/image_source_dialog.dart';
 
-class FoodAddPage extends ConsumerWidget {
-  String formattedDate = DateSelector.formatDate(DateTime.now());
+class FoodAddPage extends ConsumerStatefulWidget {
+  final String selectedMealType;
+
+  FoodAddPage({required this.selectedMealType});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _FoodAddPageState createState() => _FoodAddPageState();
+}
+
+class _FoodAddPageState extends ConsumerState<FoodAddPage> {
+  late String formattedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    formattedDate = DateSelector.formatDate(DateTime.now());
+    // 위젯이 빌드된 후에 상태를 업데이트하도록 Future.microtask를 사용
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(foodAddProvider.notifier)
+          .selectMealType(widget.selectedMealType);
+      ref.read(foodAddProvider.notifier).loadFoodList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final foodAddModel = ref.watch(foodAddProvider);
     final foodAddViewModel = ref.read(foodAddProvider.notifier);
 
@@ -35,7 +57,8 @@ class FoodAddPage extends ConsumerWidget {
                 children: [
                   _buildImagePicker(context, foodAddModel, foodAddViewModel),
                   SizedBox(width: 16.0),
-                  _buildMealAndDatePicker(context, foodAddViewModel, foodAddModel),
+                  _buildMealAndDatePicker(
+                      context, foodAddViewModel, foodAddModel),
                 ],
               ),
               SizedBox(height: 16.0),
@@ -74,7 +97,8 @@ class FoodAddPage extends ConsumerWidget {
                 FoodInfoCard(
                   foods: foodAddModel.selectedFoods,
                   servings: foodAddModel.selectedServings, // 인분 수 전달
-                  onRemove: (index) => foodAddViewModel.removeFood(index), // 삭제 콜백 함수 전달
+                  onRemove: (index) =>
+                      foodAddViewModel.removeFood(index), // 삭제 콜백 함수 전달
                 ),
             ],
           ),
@@ -83,8 +107,17 @@ class FoodAddPage extends ConsumerWidget {
           padding: EdgeInsets.all(16.0),
           color: Colors.white,
           child: ElevatedButton(
-            onPressed: () => ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text('등록되었습니다!'))),
+            onPressed: () {
+              if (foodAddViewModel.canAddMeal()) {
+                foodAddViewModel.addMeal(ref);
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('등록되었습니다!')));
+                Navigator.pop(context); // 등록 후 이전 화면으로 돌아가기
+              } else {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('식사 종류를 선택하세요')));
+              }
+            },
             style: ElevatedButton.styleFrom(backgroundColor: kAccentColor2),
             child: Text('등록하기'),
           ),
@@ -93,7 +126,8 @@ class FoodAddPage extends ConsumerWidget {
     }
   }
 
-  Widget _buildImagePicker(BuildContext context, FoodAddModel model, FoodAddViewModel viewModel) {
+  Widget _buildImagePicker(
+      BuildContext context, FoodAddModel model, FoodAddViewModel viewModel) {
     return Container(
       width: 100.0,
       height: 100.0,
@@ -102,16 +136,24 @@ class FoodAddPage extends ConsumerWidget {
         child: Center(
           child: model.selectedImg == null
               ? IconButton(
-            icon: Icon(Icons.add_a_photo),
-            onPressed: () => _showImageSourceSelection(context, viewModel),
-          )
-              : Image.memory(base64Decode(model.selectedImg!)),
+                  icon: Icon(Icons.add_a_photo),
+                  onPressed: () =>
+                      _showImageSourceSelection(context, viewModel),
+                )
+              : Image.memory(base64Decode(model.selectedImg!),
+                  width: 60, height: 60, fit: BoxFit.cover),
         ),
+      ),
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(color: Colors.grey),
       ),
     );
   }
 
-  Widget _buildMealAndDatePicker(BuildContext context, FoodAddViewModel viewModel, FoodAddModel model) {
+  Widget _buildMealAndDatePicker(
+      BuildContext context, FoodAddViewModel viewModel, FoodAddModel model) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,12 +162,14 @@ class FoodAddPage extends ConsumerWidget {
             onTap: () => DateSelector.show(
               context,
               kAccentColor2,
-                  (date) => viewModel.selectDate(DateSelector.formatDate(date)),
+              (date) => viewModel.selectDate(date),
             ),
             child: Row(
               children: [
                 Text(
-                  model.selectedDate == null ? formattedDate : model.selectedDate!,
+                  model.selectedDate == null
+                      ? formattedDate
+                      : DateSelector.formatDate(model.selectedDate!),
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
                 SizedBox(width: 8.0),
@@ -136,7 +180,9 @@ class FoodAddPage extends ConsumerWidget {
           SizedBox(height: 8.0),
           DropdownButton<String>(
             value: model.selectedMealType,
-            items: ['아침', '점심', '저녁', '간식'].map((String mealType) {
+            hint: Text("식사 종류를 선택하세요"),
+            items: ['BREAKFAST', 'LUNCH', 'DINNER', 'SNACK']
+                .map((String mealType) {
               return DropdownMenuItem<String>(
                 value: mealType,
                 child: Text(mealType),
@@ -151,7 +197,8 @@ class FoodAddPage extends ConsumerWidget {
     );
   }
 
-  void _showImageSourceSelection(BuildContext context, FoodAddViewModel viewModel) {
+  void _showImageSourceSelection(
+      BuildContext context, FoodAddViewModel viewModel) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

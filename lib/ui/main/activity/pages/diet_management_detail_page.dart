@@ -28,7 +28,7 @@ class DietManagementDetailPage extends ConsumerWidget {
     final double targetProtein = 150;
     final double targetFat = 70;
 
-    // 고정
+    // 고정된 식사 카드
     final List<String> mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER', 'SNACK'];
 
     return Scaffold(
@@ -72,7 +72,7 @@ class DietManagementDetailPage extends ConsumerWidget {
                 ),
                 child: ListView.builder(
                   padding: EdgeInsets.only(top: 30),
-                  itemCount: mealTypes.length + 1, // +1 to include the nutrition container
+                  itemCount: mealTypes.length + 1,
                   itemBuilder: (context, index) {
                     if (index == 0) {
                       return TodayNutritionInfo(
@@ -107,17 +107,16 @@ class DietManagementDetailPage extends ConsumerWidget {
                         meal.mealType,
                         meal.foodName,
                         meal.gram,
-                        meal.imagePath,
+                        meal.imagePath.isNotEmpty ? meal.imagePath : 'assets/images/1.png',
                         meal.calories,
-                        meal.targetCalories,
                         meal.carbo,
                         meal.protein,
                         meal.fat,
                         meal.date,
                         ref,
-                        Colors.deepOrange[200]!, // 탄수화물 색상
-                        Colors.cyanAccent, // 단백질 색상
-                        Colors.greenAccent, // 지방 색상
+                        Colors.deepOrange[200]!,
+                        Colors.cyanAccent,
+                        Colors.greenAccent,
                       );
                     }
                   },

@@ -45,6 +45,7 @@ class FoodInfoCard extends StatelessWidget {
                 SizedBox(height: gap_xxs),
                 Text('용량: ${(food.gram * portion).toStringAsFixed(2)}g'),
                 Text('칼로리: ${(food.kcal * portion).toStringAsFixed(2)}kcal'),
+                Text('탄수화물: ${(food.carbo * portion).toStringAsFixed(2)}g'),
                 Text('단백질: ${(food.protein * portion).toStringAsFixed(2)}g'),
                 Text('지방: ${(food.fat * portion).toStringAsFixed(2)}g'),
                 SizedBox(height: gap_s),

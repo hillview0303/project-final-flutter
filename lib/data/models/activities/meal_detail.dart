@@ -121,6 +121,10 @@ class MealNotifier extends StateNotifier<List<MealDetail>> {
         if (meal.mealType != mealType || !isSameDate(meal.date, date)) meal,
     ];
   }
+
+  void addMeals(List<MealDetail> newMeals) {
+    state = [...state, ...newMeals];
+  }
 }
 
 // Provider 정의

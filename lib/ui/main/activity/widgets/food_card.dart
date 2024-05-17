@@ -5,23 +5,23 @@ import '../pages/food_add_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Widget foodCard(
-    BuildContext context,
-    String mealType,
-    String foodName,
-    String gram,
-    String imagePath,
-    double calories,
-    double carbo,
-    double protein,
-    double fat,
-    DateTime date,
-    WidgetRef ref,
-    Color carboColor,
-    Color proteinColor,
-    Color fatColor,
-    ) {
-  final bool isMealAdded = foodName != '식사를 추가해 주세요';
-  final double totalNutrients = carbo + protein + fat;
+  BuildContext context,
+  String mealType,
+  List<MealDetail> meals,
+  String imagePath,
+  DateTime date,
+  WidgetRef ref,
+  Color carboColor,
+  Color proteinColor,
+  Color fatColor,
+) {
+  final bool isMealAdded = meals.isNotEmpty;
+  final double totalCalories =
+      meals.fold(0, (sum, meal) => sum + meal.calories);
+  final double totalCarbo = meals.fold(0, (sum, meal) => sum + meal.carbo);
+  final double totalProtein = meals.fold(0, (sum, meal) => sum + meal.protein);
+  final double totalFat = meals.fold(0, (sum, meal) => sum + meal.fat);
+  final double totalNutrients = totalCarbo + totalProtein + totalFat;
 
   return Card(
     margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
@@ -42,7 +42,8 @@ Widget foodCard(
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FoodAddPage(selectedMealType: mealType),
+                    builder: (context) =>
+                        FoodAddPage(selectedMealType: mealType),
                   ),
                 );
               },
@@ -52,7 +53,10 @@ Widget foodCard(
           Row(
             children: [
               Expanded(
-                child: Text(foodName, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                child: Text(
+                  isMealAdded ? '총 영양소' : '식사를 추가해 주세요',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
               if (isMealAdded)
                 IconButton(
@@ -74,20 +78,28 @@ Widget foodCard(
                       borderRadius: BorderRadius.circular(10.0),
                       child: imagePath.isEmpty
                           ? Container(
-                        color: Colors.grey[300],
-                        width: 60,
-                        height: 60,
-                        child: Center(child: Icon(Icons.add, color: Colors.grey)),
-                      )
-                          : Image.asset(imagePath, width: 60, height: 60, fit: BoxFit.cover),
+                              color: Colors.grey[300],
+                              width: 60,
+                              height: 60,
+                              child: Center(
+                                  child: Icon(Icons.add, color: Colors.grey)),
+                            )
+                          : Image.asset(imagePath,
+                              width: 60, height: 60, fit: BoxFit.cover),
                     ),
                     SizedBox(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(gram),
-                          Text("$calories kcal", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          Text(
+                            "칼로리: ${totalCalories} kcal",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text("탄수화물: ${totalCarbo.toStringAsFixed(1)}g, 단백질: ${totalProtein.toStringAsFixed(1)}g, 지방: ${totalFat.toStringAsFixed(1)}g"),
                         ],
                       ),
                     ),
@@ -100,13 +112,16 @@ Widget foodCard(
                   child: Row(
                     children: [
                       Icon(Icons.square, color: carboColor, size: 20),
-                      Text(" 탄수화물 ${carbo.toStringAsFixed(1)}g", style: TextStyle(fontSize: 12)),
+                      Text(" 탄수화물 ${totalCarbo.toStringAsFixed(1)}g",
+                          style: TextStyle(fontSize: 12)),
                       SizedBox(width: 10),
                       Icon(Icons.square, color: proteinColor, size: 20),
-                      Text(" 단백질 ${protein.toStringAsFixed(1)}g", style: TextStyle(fontSize: 12)),
+                      Text(" 단백질 ${totalProtein.toStringAsFixed(1)}g",
+                          style: TextStyle(fontSize: 12)),
                       SizedBox(width: 10),
                       Icon(Icons.square, color: fatColor, size: 20),
-                      Text(" 지방 ${fat.toStringAsFixed(1)}g", style: TextStyle(fontSize: 12)),
+                      Text(" 지방 ${totalFat.toStringAsFixed(1)}g",
+                          style: TextStyle(fontSize: 12)),
                     ],
                   ),
                 ),
@@ -130,31 +145,51 @@ Widget foodCard(
                   child: Row(
                     children: [
                       Expanded(
-                        flex: (carbo * 100 / totalNutrients).toInt(),
+                        flex: (totalCarbo * 100 / totalNutrients).toInt(),
                         child: Container(
                           decoration: BoxDecoration(
                             color: carboColor,
-                            borderRadius: BorderRadius.horizontal(left: Radius.circular(5)),
+                            borderRadius: BorderRadius.horizontal(
+                                left: Radius.circular(5)),
                           ),
                         ),
                       ),
                       Expanded(
-                        flex: (protein * 100 / totalNutrients).toInt(),
+                        flex: (totalProtein * 100 / totalNutrients).toInt(),
                         child: Container(
                           color: proteinColor,
                         ),
                       ),
                       Expanded(
-                        flex: (fat * 100 / totalNutrients).toInt(),
+                        flex: (totalFat * 100 / totalNutrients).toInt(),
                         child: Container(
                           decoration: BoxDecoration(
                             color: fatColor,
-                            borderRadius: BorderRadius.horizontal(right: Radius.circular(5)),
+                            borderRadius: BorderRadius.horizontal(
+                                right: Radius.circular(5)),
                           ),
                         ),
                       ),
                     ],
                   ),
+                ),
+
+                // 개별 음식 정보 표시
+                Column(
+                  children: meals.map((meal) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Divider(),
+                        Text(meal.foodName,
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.bold)),
+                        Text("${meal.gram}g, ${meal.calories} kcal"),
+                        Text(
+                            "탄수화물: ${meal.carbo}g, 단백질: ${meal.protein}g, 지방: ${meal.fat}g"),
+                      ],
+                    );
+                  }).toList(),
                 ),
               ],
             ),

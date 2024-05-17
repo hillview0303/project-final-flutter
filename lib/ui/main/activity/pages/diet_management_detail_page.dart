@@ -87,32 +87,13 @@ class DietManagementDetailPage extends ConsumerWidget {
                       );
                     } else {
                       final mealType = mealTypes[index - 1];
-                      final meal = mealsForSelectedDate.firstWhere(
-                            (meal) => meal.mealType == mealType,
-                        orElse: () => MealDetail(
-                          date: DateTime.now(),
-                          mealType: mealType,
-                          foodName: '식사를 추가해 주세요',
-                          gram: '',
-                          imagePath: '',
-                          calories: 0.0,
-                          targetCalories: 0.0,
-                          carbo: 0.0,
-                          protein: 0.0,
-                          fat: 0.0,
-                        ),
-                      );
+                      final meals = mealsForSelectedDate.where((meal) => meal.mealType == mealType).toList();
                       return foodCard(
                         context,
-                        meal.mealType,
-                        meal.foodName,
-                        meal.gram,
-                        meal.imagePath.isNotEmpty ? meal.imagePath : 'assets/images/1.png',
-                        meal.calories,
-                        meal.carbo,
-                        meal.protein,
-                        meal.fat,
-                        meal.date,
+                        mealType,
+                        meals,
+                        meals.isNotEmpty && meals[0].imagePath.isNotEmpty ? meals[0].imagePath : 'assets/images/1.png',
+                        meals.isNotEmpty ? meals[0].date : DateTime.now(),
                         ref,
                         Colors.deepOrange[200]!,
                         Colors.cyanAccent,

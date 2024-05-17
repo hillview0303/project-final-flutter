@@ -18,6 +18,17 @@ class SurveyListViewModel extends StateNotifier<SurveyListModel?> {
 
   SurveyListViewModel(super._state, this.ref);
 
+  void surveyResultUpdate(int surveyId) {
+    List<SurveyResponseDTO> newJoinableSurveyList = state!.joinableSurveyList!
+      ..removeWhere((element) => element.id == surveyId);
+    List<SurveyResponseDTO> newUnjoinableSurveyList = state!
+        .unjoinableSurveyList!
+      ..add(state!.joinableSurveyList!
+          .firstWhere((element) => element.id == surveyId));
+
+    state = SurveyListModel(newJoinableSurveyList, newUnjoinableSurveyList);
+  }
+
   Future<void> notifyInit() async {
     ResponseDTO responseDTO = await SurveyRepository().fetchSurvey();
     if (responseDTO.status == 200) {

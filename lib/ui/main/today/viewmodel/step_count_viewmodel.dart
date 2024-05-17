@@ -4,11 +4,11 @@ import 'package:pedometer/pedometer.dart';
 import '../../../../_core/constants/http.dart';
 import '../../activity/viewmodel/walking_detail.viewmodel.dart';
 
-
 class StepCountViewModel extends StateNotifier<int> {
   late StreamSubscription<StepCount> _stepCountStream;
   Timer? _timer;
-  final  read;
+  Timer? _midnightTimer;
+  final read;
 
   StepCountViewModel(this.read) : super(0) {
     initialize();
@@ -18,6 +18,7 @@ class StepCountViewModel extends StateNotifier<int> {
     _loadSteps();
     _initializePedometer();
     _startTimer();
+    _resetStepsAtMidnight(); // 자정에 리셋 타이머 시작
   }
 
   void _initializePedometer() {
@@ -57,10 +58,25 @@ class StepCountViewModel extends StateNotifier<int> {
     read(WalkingDetailProvider.notifier).sendStepsToServer(steps);
   }
 
+  Duration _timeUntilMidnight() {
+    final now = DateTime.now();
+    final tomorrow = DateTime(now.year, now.month, now.day + 1);
+    return tomorrow.difference(now);
+  }
+
+  void _resetStepsAtMidnight() {
+    _midnightTimer = Timer(_timeUntilMidnight(), () {
+      state = 0;
+      _saveSteps(0);
+      _resetStepsAtMidnight(); // 다음 자정을 위한 타이머 재설정
+    });
+  }
+
   @override
   void dispose() {
     _stepCountStream.cancel();
     _timer?.cancel();
+    _midnightTimer?.cancel();
     super.dispose();
   }
 }
@@ -68,4 +84,3 @@ class StepCountViewModel extends StateNotifier<int> {
 final StepCountProvider = StateNotifierProvider<StepCountViewModel, int>((ref) {
   return StepCountViewModel(ref.read);
 });
-

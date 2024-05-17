@@ -114,35 +114,20 @@ class ActivityRepository {
   }
 
   Future<ResponseDTO> fetchSendWalking(int steps) async {
-    print("걸음수확인: ${steps}");
     StepDTO stepDTO = StepDTO(steps);
     final response =
         await dio.put("/api/activities/walking-update", data: stepDTO);
-    print("응답 확인 : ${stepDTO.walking}");
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.status == 200) {
-      print("통신성공");
-    } else {
-      print("통신실패");
-    }
 
     return responseDTO;
   }
 
   Future<ResponseDTO> fetchUpdateWater(int water) async {
-    print("물 확인: ${water}");
     WaterDTO waterDTO = WaterDTO(water);
     final response =
         await dio.put("/api/activities/water-update", data: waterDTO);
-    print("물 응답 확인 : ${waterDTO.water}");
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
-    if (responseDTO.status == 200) {
-      print("통신성공");
-    } else {
-      print("통신실패");
-    }
 
     return responseDTO;
   }

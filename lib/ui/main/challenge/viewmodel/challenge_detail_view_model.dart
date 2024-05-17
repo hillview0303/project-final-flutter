@@ -27,20 +27,15 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
         ref.read(challengeListProvider.notifier);
 
     Challenge challenge = Challenge(
-        id: challengeId,
-        name: "",
-        badgeImg: "",
-        subtitle: "",
-        distance: "",
-        coin: 0);
+      id: challengeId,
+    );
 
     ChallengeSaveDTO saveDTO = ChallengeSaveDTO(null, challenge);
 
     ResponseDTO responseDTO =
         await ChallengeRepository().insertAttendChallenge(saveDTO);
 
-    ChallengeStartDTO challengeStartDTO =
-        ChallengeStartDTO.fromJson(responseDTO.body);
+    ChallengeStartDTO challengeStartDTO = responseDTO.body;
 
     if (responseDTO.status == 200) {
       ChallengeDetailModel challengeDetailModel = state!;
@@ -53,7 +48,7 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
         closingTime: challengeStartDTO.closingTime,
         totalWalking: 0,
         coin: challengeDetailDTO.coin,
-        subtitle: challengeDetailDTO.subTitle,
+        subtitle: challengeDetailDTO.subtitle,
         walking: challengeDetailDTO.walking,
       );
 
@@ -70,11 +65,8 @@ class ChallengeDetailViewModel extends StateNotifier<ChallengeDetailModel?> {
   Future<void> notifyInit(int challengeId) async {
     ResponseDTO responseDTO =
         await ChallengeRepository().getChallengeDetail(challengeId);
-
-    ChallengeDetailModel challengeDetailModel =
-        ChallengeDetailModel(ChallengeDetailDTO.fromJson(responseDTO.body));
     if (responseDTO.status == 200) {
-      state = challengeDetailModel;
+      state = ChallengeDetailModel(responseDTO.body);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("챌린지 정보 불러오기 실패 : ${responseDTO.msg}")));

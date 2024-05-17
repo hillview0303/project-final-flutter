@@ -10,8 +10,24 @@ class ChallengeListModel {
   List<ChallengeListDTO>? upcomingChallengeDTOList;
   List<ChallengeListDTO>? pastChallengesDTOList;
 
-  ChallengeListModel(this.attendChallenge, this.upcomingChallengeDTOList,
-      this.pastChallengesDTOList);
+  ChallengeListModel(
+      {this.attendChallenge,
+      this.upcomingChallengeDTOList,
+      this.pastChallengesDTOList});
+
+  ChallengeListModel copyWith({
+    AttendChallenge? attendChallenge,
+    List<ChallengeListDTO>? upcomingChallengeDTOList,
+    List<ChallengeListDTO>? pastChallengesDTOList,
+  }) {
+    return ChallengeListModel(
+      attendChallenge: attendChallenge ?? this.attendChallenge,
+      upcomingChallengeDTOList:
+          upcomingChallengeDTOList ?? this.upcomingChallengeDTOList,
+      pastChallengesDTOList:
+          pastChallengesDTOList ?? this.pastChallengesDTOList,
+    );
+  }
 }
 
 class ChallengeListViewModel extends StateNotifier<ChallengeListModel?> {
@@ -22,56 +38,38 @@ class ChallengeListViewModel extends StateNotifier<ChallengeListModel?> {
 
   // 통신 없이 챌린지 시작
   void startChallenge(AttendChallenge attendChallenge) {
-    ChallengeListModel prevModel = state!;
-    List<ChallengeListDTO> upcomingChallenge =
-        prevModel.upcomingChallengeDTOList!;
+    List<ChallengeListDTO> upcomingChallenge = state!.upcomingChallengeDTOList!
+      ..removeWhere((challenge) => challenge.id == attendChallenge.id);
 
-    upcomingChallenge
-        .removeWhere((challenge) => challenge.id == attendChallenge.id);
-
-    ChallengeListModel newModel = ChallengeListModel(
-        attendChallenge, upcomingChallenge, prevModel.pastChallengesDTOList);
-
-    state = newModel;
+    state = state!.copyWith(
+        attendChallenge: attendChallenge,
+        upcomingChallengeDTOList: upcomingChallenge);
   }
 
   Future<void> notifyInit() async {
     ResponseDTO responseDTO = await ChallengeRepository().getChallengeList();
 
-    ChallengeResponseDTO challengeResponseDTO =
-        ChallengeResponseDTO.fromJson(responseDTO.body);
-    List<ChallengeListDTO> upcomingChallengeList = [];
-    List<ChallengeListDTO> pastChallengeList = [];
-
-    if (challengeResponseDTO.upcomingChallenges != null) {
-      upcomingChallengeList = challengeResponseDTO.upcomingChallenges!
-          .map((e) => ChallengeListDTO.fromJson(e))
-          .toList();
-    }
-    if (challengeResponseDTO.pastchallenges != null) {
-      pastChallengeList = challengeResponseDTO.pastchallenges!
-          .map((e) => ChallengeListDTO.fromJson(e))
-          .toList();
-    }
-
-    AttendChallenge? challenge;
-
-    if (challengeResponseDTO.id != null) {
-      challenge = AttendChallenge(
-          id: challengeResponseDTO.id,
-          challengeName: challengeResponseDTO.challengeName,
-          subtitle: challengeResponseDTO.subtitle,
-          closingTime: challengeResponseDTO.closingTime,
-          coin: challengeResponseDTO.coin,
-          walking: challengeResponseDTO.walking,
-          totalWalking: challengeResponseDTO.totalWalking,
-          backImg: challengeResponseDTO.backImg);
-    }
-
-    ChallengeListModel challengeListModel =
-        ChallengeListModel(challenge, upcomingChallengeList, pastChallengeList);
+    ChallengeResponseDTO challengeResponseDTO = responseDTO.body;
 
     if (responseDTO.status == 200) {
+      AttendChallenge? challenge;
+
+      if (challengeResponseDTO.id != null) {
+        challenge = AttendChallenge(
+            id: challengeResponseDTO.id,
+            challengeName: challengeResponseDTO.challengeName,
+            subtitle: challengeResponseDTO.subtitle,
+            closingTime: challengeResponseDTO.closingTime,
+            coin: challengeResponseDTO.coin,
+            walking: challengeResponseDTO.walking,
+            totalWalking: challengeResponseDTO.totalWalking,
+            backImg: challengeResponseDTO.backImg);
+      }
+
+      ChallengeListModel challengeListModel = ChallengeListModel().copyWith(
+          attendChallenge: challenge,
+          upcomingChallengeDTOList: challengeResponseDTO.upcomingChallenges,
+          pastChallengesDTOList: challengeResponseDTO.pastchallenges);
       state = challengeListModel;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

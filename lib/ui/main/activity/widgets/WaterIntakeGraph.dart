@@ -60,7 +60,7 @@ class WaterIntakeGraph extends ConsumerWidget {
         DateTime dtoDate = DateTime(dto.date.year, dto.date.month, dto.date.day);
         int index = normalizedDates.indexOf(dtoDate);
         if (index != -1) {
-          double yValue = dto.water.toDouble();
+          double yValue = (dto.water.toDouble())/250;
           spots.add(FlSpot(index.toDouble(), yValue));
           print("Adding spot: ${dtoDate.toString()} at index $index with value $yValue");
         } else {
@@ -108,7 +108,7 @@ class WaterIntakeGraph extends ConsumerWidget {
       minX: 0,
       maxX: dates.length.toDouble() - 1,
       minY: 0,
-      maxY: 500,
+      maxY: 8,
       lineBarsData: [
         LineChartBarData(spots: spots, isCurved: true, color: TColor.secondaryColor2),
       ],

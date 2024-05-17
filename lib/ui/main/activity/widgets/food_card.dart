@@ -11,7 +11,6 @@ Widget foodCard(
     String gram,
     String imagePath,
     double calories,
-    double targetCalories,
     double carbo,
     double protein,
     double fat,
@@ -42,7 +41,9 @@ Widget foodCard(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FoodAddPage()),
+                  MaterialPageRoute(
+                    builder: (context) => FoodAddPage(selectedMealType: mealType),
+                  ),
                 );
               },
             ),
@@ -71,7 +72,14 @@ Widget foodCard(
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
-                      child: Image.asset(imagePath, width: 60, height: 60, fit: BoxFit.cover),
+                      child: imagePath.isEmpty
+                          ? Container(
+                        color: Colors.grey[300],
+                        width: 60,
+                        height: 60,
+                        child: Center(child: Icon(Icons.add, color: Colors.grey)),
+                      )
+                          : Image.asset(imagePath, width: 60, height: 60, fit: BoxFit.cover),
                     ),
                     SizedBox(width: 10),
                     Expanded(

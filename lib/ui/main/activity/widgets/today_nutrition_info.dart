@@ -51,103 +51,129 @@ class TodayNutritionInfo extends StatelessWidget {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
-                child: SizedBox(
-                  width: 130,
-                  height: 130,
-                  child: SfRadialGauge(
-                    axes: <RadialAxis>[
-                      RadialAxis(
-                        showLabels: false,
-                        showTicks: false,
-                        minimum: 0,
-                        maximum: 100,
-                        startAngle: 270,
-                        endAngle: 270,
-                        radiusFactor: 0.9,
-                        axisLineStyle: AxisLineStyle(
-                          thickness: 0.15,
-                          color: const Color.fromARGB(30, 0, 169, 181),
-                          thicknessUnit: GaugeSizeUnit.factor,
-                          cornerStyle: CornerStyle.bothCurve,
-                        ),
-                        pointers: <GaugePointer>[
-                          RangePointer(
-                            value: totalCarbo / targetCarbo * 100,
-                            width: 0.15,
-                            sizeUnit: GaugeSizeUnit.factor,
-                            color: Colors.deepOrange[200]!,
-                            enableAnimation: true,
-                            animationDuration: 1500,
-                            animationType: AnimationType.linear,
-                            cornerStyle: CornerStyle.bothCurve,
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: 170,
+                      height: 170,
+                      child: SfRadialGauge(
+                        axes: <RadialAxis>[
+                          RadialAxis(
+                            showLabels: false,
+                            showTicks: false,
+                            minimum: 0,
+                            maximum: 100,
+                            startAngle: 270,
+                            endAngle: 270,
+                            radiusFactor: 0.9,
+                            axisLineStyle: AxisLineStyle(
+                              thickness: 0.15,
+                              color: const Color.fromARGB(30, 0, 169, 181),
+                              thicknessUnit: GaugeSizeUnit.factor,
+                              cornerStyle: CornerStyle.bothCurve,
+                            ),
+                            pointers: <GaugePointer>[
+                              RangePointer(
+                                value: totalCarbo / targetCarbo * 100,
+                                width: 0.15,
+                                sizeUnit: GaugeSizeUnit.factor,
+                                color: Colors.deepOrange[200]!,
+                                enableAnimation: true,
+                                animationDuration: 1500,
+                                animationType: AnimationType.linear,
+                                cornerStyle: CornerStyle.bothCurve,
+                              ),
+                            ],
+                          ),
+                          RadialAxis(
+                            showLabels: false,
+                            showTicks: false,
+                            minimum: 0,
+                            maximum: 100,
+                            startAngle: 270,
+                            endAngle: 270,
+                            radiusFactor: 0.75,
+                            axisLineStyle: AxisLineStyle(
+                              thickness: 0.2,
+                              color: const Color.fromARGB(30, 0, 169, 181),
+                              thicknessUnit: GaugeSizeUnit.factor,
+                              cornerStyle: CornerStyle.bothCurve,
+                            ),
+                            pointers: <GaugePointer>[
+                              RangePointer(
+                                value: totalProtein / targetProtein * 100,
+                                width: 0.2,
+                                sizeUnit: GaugeSizeUnit.factor,
+                                color: Colors.cyanAccent,
+                                enableAnimation: true,
+                                animationDuration: 1500,
+                                animationType: AnimationType.linear,
+                                cornerStyle: CornerStyle.bothCurve,
+                              ),
+                            ],
+                          ),
+                          RadialAxis(
+                            showLabels: false,
+                            showTicks: false,
+                            minimum: 0,
+                            maximum: 100,
+                            startAngle: 270,
+                            endAngle: 270,
+                            radiusFactor: 0.58,
+                            axisLineStyle: AxisLineStyle(
+                              thickness: 0.27,
+                              color: const Color.fromARGB(30, 0, 169, 181),
+                              thicknessUnit: GaugeSizeUnit.factor,
+                              cornerStyle: CornerStyle.bothCurve,
+                            ),
+                            pointers: <GaugePointer>[
+                              RangePointer(
+                                value: totalFat / targetFat * 100,
+                                width: 0.27,
+                                sizeUnit: GaugeSizeUnit.factor,
+                                color: Colors.greenAccent,
+                                enableAnimation: true,
+                                animationDuration: 1500,
+                                animationType: AnimationType.linear,
+                                cornerStyle: CornerStyle.bothCurve,
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      RadialAxis(
-                        showLabels: false,
-                        showTicks: false,
-                        minimum: 0,
-                        maximum: 100,
-                        startAngle: 270,
-                        endAngle: 270,
-                        radiusFactor: 0.7,
-                        axisLineStyle: AxisLineStyle(
-                          thickness: 0.17,
-                          color: const Color.fromARGB(30, 0, 169, 181),
-                          thicknessUnit: GaugeSizeUnit.factor,
-                          cornerStyle: CornerStyle.bothCurve,
-                        ),
-                        pointers: <GaugePointer>[
-                          RangePointer(
-                            value: totalProtein / targetProtein * 100,
-                            width: 0.17,
-                            sizeUnit: GaugeSizeUnit.factor,
-                            color: Colors.cyanAccent, // 단백질 색상
-                            enableAnimation: true,
-                            animationDuration: 1500,
-                            animationType: AnimationType.linear,
-                            cornerStyle: CornerStyle.bothCurve,
+                    ),
+                    Positioned(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '${totalCalories.toStringAsFixed(0)}' ,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Text(
+                            '/${targetCalories.toStringAsFixed(0)} kcal',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
                           ),
                         ],
                       ),
-                      RadialAxis(
-                        showLabels: false,
-                        showTicks: false,
-                        minimum: 0,
-                        maximum: 100,
-                        startAngle: 270,
-                        endAngle: 270,
-                        radiusFactor: 0.5,
-                        axisLineStyle: AxisLineStyle(
-                          thickness: 0.25,
-                          color: const Color.fromARGB(30, 0, 169, 181),
-                          thicknessUnit: GaugeSizeUnit.factor,
-                          cornerStyle: CornerStyle.bothCurve,
-                        ),
-                        pointers: <GaugePointer>[
-                          RangePointer(
-                            value: totalFat / targetFat * 100,
-                            width: 0.25,
-                            sizeUnit: GaugeSizeUnit.factor,
-                            color: Colors.greenAccent,
-                            enableAnimation: true,
-                            animationDuration: 1500,
-                            animationType: AnimationType.linear,
-                            cornerStyle: CornerStyle.bothCurve,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildNutrientInfo('칼로리', totalCalories, targetCalories, 'kcal'),
-                  SizedBox(height: 5),
                   _buildNutrientInfo('탄수화물', totalCarbo, targetCarbo, 'g'),
                   SizedBox(height: 5),
                   _buildNutrientInfo('단백질', totalProtein, targetProtein, 'g'),
@@ -168,9 +194,7 @@ class TodayNutritionInfo extends StatelessWidget {
         Container(
           width: 16,
           height: 16,
-          color: nutrient == '칼로리'
-              ? Colors.red
-              : nutrient == '탄수화물'
+          color: nutrient == '탄수화물'
               ? Colors.deepOrange[200]
               : nutrient == '단백질'
               ? Colors.cyanAccent

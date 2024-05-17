@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:project_app/_core/constants/constants.dart';
+import '../../../../_core/constants/constants.dart';
 import '../../../../_core/constants/http.dart';
 import '../viewmodel/drink_water_viewmoddel..dart';
 import '../widgets/WaterIntakeGraph.dart';
 
-// 상태 관리를 위한 Provider 선언
 final waterIntakeProvider = StateProvider<int>((ref) => 0);
 
 class DrinkWaterDetailPage extends ConsumerWidget {
@@ -26,6 +25,15 @@ class DrinkWaterDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(DrinkWaterProvider.notifier)..notifyInit();
+    DrinkWaterModel? model = ref.watch(DrinkWaterProvider);
+
+    if (model == null) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     return FutureBuilder<int>(
       future: loadGlassSize(),
@@ -42,7 +50,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                WaterIntakeGraph(),
+                WaterIntakeGraph(model),
                 SizedBox(height: 30),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +60,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
                         final currentIntake =
                             ref.watch(waterIntakeProvider.state).state;
                         return Text(
-                          '오늘 물을 $currentIntake ml 마셨어요',
+                          '오늘 물을 ${model?.drinkWaterDTO.dayWater} ml 마셨어요',
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
@@ -69,13 +77,13 @@ class DrinkWaterDetailPage extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20),
                       child: _buildProgressIndicator(
-                          ref.watch(waterIntakeProvider.state).state),
+                          ref.watch(waterIntakeProvider.state).state,model),
                     ),
                     SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20),
                       child: _buildCupIcons(ref.watch(waterIntakeProvider.state).state,
-                          glassSize),
+                          glassSize,model),
                     ),
                     SizedBox(height: 20),
                     Text(
@@ -111,14 +119,15 @@ class DrinkWaterDetailPage extends ConsumerWidget {
                                   IconButton(
                                     icon: Icon(Icons.remove, color: kAccentColor2),
                                     onPressed: () { _removeDrink(ref, glassSize);
-                                      },
+                                    final currentIntake = ref.watch(waterIntakeProvider.state).state;
+                                    ref.read(DrinkWaterProvider.notifier).updateWater(currentIntake);
+                                    },
                                   ),
                                   IconButton(
                                     icon: Icon(Icons.add, color: kAccentColor2),
                                     onPressed: () async { _addDrink(ref, glassSize);
-                                    String? drinkWater = await secureStorage.read(key: 'glassSize');
-                                    int ? Water = int.tryParse(drinkWater ?? '0') ?? 0;
-                                    ref.read(DrinkWaterProvider.notifier).updateWater(Water);
+                                    final currentIntake = ref.watch(waterIntakeProvider.state).state;
+                                    ref.read(DrinkWaterProvider.notifier).updateWater(currentIntake);
                                     },
                                   ),
                                 ],
@@ -138,7 +147,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildProgressIndicator(int currentIntake) {
+  Widget _buildProgressIndicator(int currentIntake,DrinkWaterModel? model) {
     final int totalIntake = 2000;
     return Stack(
       children: <Widget>[
@@ -151,7 +160,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
         ),
         FractionallySizedBox(
           widthFactor:
-          currentIntake >= totalIntake ? 1.0 : currentIntake / totalIntake,
+          model!.drinkWaterDTO.dayWater >= totalIntake ? 1.0 : model!.drinkWaterDTO.dayWater / totalIntake,
           child: Container(
             height: 40,
             decoration: BoxDecoration(
@@ -171,7 +180,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('0', style: TextStyle(color: Colors.white)),
-                Text('$currentIntake ml',
+                Text('${model!.drinkWaterDTO.dayWater} ml',
                     style: TextStyle(color: Colors.white)),
               ],
             ),
@@ -181,11 +190,11 @@ class DrinkWaterDetailPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildCupIcons(int currentIntake, int glassSize) {
+  Widget _buildCupIcons(int currentIntake, int glassSize,DrinkWaterModel? model) {
     final int totalIntake = 2000;
     List<Widget> cups = [];
     for (int i = 0; i < totalIntake / glassSize; i++) {
-      String cupImagePath = (i * glassSize < currentIntake)
+      String cupImagePath = (i * glassSize < model!.drinkWaterDTO.dayWater)
           ? 'assets/images/water2.png'
           : 'assets/images/greywater.png';
       cups.add(

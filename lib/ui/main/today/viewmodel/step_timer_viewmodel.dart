@@ -18,6 +18,7 @@ class StepTimerViewModel extends StateNotifier<int> {
     _loadSteps();
     _initializePedometer();
     _startTimer();
+    _resetStepsAtMidnight(); // 자정에 리셋 타이머 시작
   }
 
   void _initializePedometer() {
@@ -62,6 +63,20 @@ class StepTimerViewModel extends StateNotifier<int> {
     String? stepsString = await secureStorage.read(key: 'current_steps');
     int steps = int.tryParse(stepsString ?? '0') ?? 0;
     read(WalkingDetailProvider.notifier).sendStepsToServer(steps);
+  }
+
+  Duration _timeUntilMidnight() {
+    final now = DateTime.now();
+    final tomorrow = DateTime(now.year, now.month, now.day + 1);
+    return tomorrow.difference(now);
+  }
+
+  void _resetStepsAtMidnight() {
+    Timer(_timeUntilMidnight(), () {
+      state = 0;
+      _saveSteps(0);
+      _resetStepsAtMidnight(); // 다음 자정을 위한 타이머 재설정
+    });
   }
 
   @override

@@ -50,7 +50,7 @@ class MetricGrid extends StatelessWidget {
         cards.add(buildCard(
           context: context,
           title: 'WATER',
-          subtitle: '${data.drinkWater} cups',
+          subtitle: '${(data.drinkWater! ~/ 250)} cups',
           activity: data,
           hasData: true,
         ));

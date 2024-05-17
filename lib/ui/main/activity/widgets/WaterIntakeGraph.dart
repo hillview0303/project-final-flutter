@@ -7,10 +7,14 @@ import 'package:intl/intl.dart';
 import '../viewmodel/drink_water_viewmoddel..dart';
 
 
-class WaterIntakeGraph extends ConsumerWidget {
+class WaterIntakeGraph extends StatelessWidget {
+
+  DrinkWaterModel? model;
+
+  WaterIntakeGraph(this.model);
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    DrinkWaterModel? model = ref.watch(DrinkWaterProvider);
+  Widget build(BuildContext context) {
 
     // 현재 일주일 날짜 생성
     DateTime today = DateTime.now();
@@ -50,17 +54,15 @@ class WaterIntakeGraph extends ConsumerWidget {
   }
 
   LineChartData mainData(DrinkWaterModel? model, List<DateTime> dates) {
-    // Ensure dates are at the start of the day for accurate comparison
     List<DateTime> normalizedDates = dates.map((date) => DateTime(date.year, date.month, date.day)).toList();
 
-    // Map model data to FlSpot only if the date matches
     List<FlSpot> spots = [];
     if (model != null && model.weakWaterDTO != null) {
       for (var dto in model.weakWaterDTO!) {
         DateTime dtoDate = DateTime(dto.date.year, dto.date.month, dto.date.day);
         int index = normalizedDates.indexOf(dtoDate);
         if (index != -1) {
-          double yValue = dto.water.toDouble();
+          double yValue = (dto.water.toDouble())/250;
           spots.add(FlSpot(index.toDouble(), yValue));
           print("Adding spot: ${dtoDate.toString()} at index $index with value $yValue");
         } else {
@@ -108,7 +110,7 @@ class WaterIntakeGraph extends ConsumerWidget {
       minX: 0,
       maxX: dates.length.toDouble() - 1,
       minY: 0,
-      maxY: 500,
+      maxY: 8,
       lineBarsData: [
         LineChartBarData(spots: spots, isCurved: true, color: TColor.secondaryColor2),
       ],

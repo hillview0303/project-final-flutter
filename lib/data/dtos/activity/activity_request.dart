@@ -7,3 +7,13 @@ class StepDTO {
     return {"walking": this.walking};
   }
 }
+
+class WaterDTO {
+  int water;
+
+  WaterDTO(this.water);
+
+  Map<String, dynamic> toJson() {
+    return {"water": this.water};
+  }
+}

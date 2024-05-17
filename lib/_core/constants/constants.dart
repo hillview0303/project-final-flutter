@@ -7,6 +7,7 @@ const kAccentColor2 = Color(0xff296e48);
 // 물 색
 const kAccentColor3 = Color(0xFFFFFDE7);
 
+const kAccentColor4 = Color(0xFFFFAB91);
 
 class TColor {
   static Color get primaryColor1 => const Color(0xFF69F0AE);

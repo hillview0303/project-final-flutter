@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/ui/main/my/viewmodel/survey_page_viewmodel.dart';
-
+import '../../../../_core/constants/constants.dart';
 import '../widgets/survey_container.dart';
 
 class SurveyPage extends ConsumerWidget {
@@ -10,12 +10,17 @@ class SurveyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     SurveyListModel? model = ref.watch(surveyListProvider);
 
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('설문조사'),
+          backgroundColor: Colors.white,
           bottom: const TabBar(
+            labelColor: kAccentColor2,
+            unselectedLabelColor: Colors.black,
+            indicatorColor: kAccentColor2,
             tabs: [
               Tab(text: '참여 가능한 설문'),
               Tab(text: '지난 설문'),

@@ -14,8 +14,7 @@ class SurveyFormPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SurveyFormModel? model = ref.watch(surveyFormProvider(surveyId));
-    SurveyFormViewModel viewModel =
-        ref.read(surveyFormProvider(surveyId).notifier);
+    SurveyFormViewModel viewModel = ref.read(surveyFormProvider(surveyId).notifier);
 
     if (model == null) {
       return Scaffold(
@@ -25,15 +24,21 @@ class SurveyFormPage extends ConsumerWidget {
         ),
       );
     } else {
+      // 총 질문 수와 현재 인덱스를 기반으로 진행률을 계산
+      final totalQuestions = model.surveyDetailDTO!.questionElements.length;
+      final currentIndex = model.currentIndex;
+      final progressValue = (currentIndex + 1) / totalQuestions;
+
       return Scaffold(
         appBar: AppBar(
-          title: Text(model!.surveyDetailDTO!.title!),
+          title: Text(model.surveyDetailDTO!.title!),
           actions: [
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                  '${model.currentIndex + 1} of ${model!.surveyDetailDTO!.questionElements.length}',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                '${currentIndex + 1} of $totalQuestions',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             )
           ],
         ),
@@ -41,12 +46,15 @@ class SurveyFormPage extends ConsumerWidget {
           child: Column(
             children: <Widget>[
               SizedBox(
-                  height: 6,
-                  child: LinearProgressIndicator(
-                      value: model.progressValue,
-                      backgroundColor: Colors.grey[300],
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(kAccentColor2))),
+                height: 6,
+                child: LinearProgressIndicator(
+                  value: model.currentIndex < totalQuestions
+                      ? progressValue
+                      : 1.0, // 설문이 끝났을 때 100%로 설정
+                  backgroundColor: Colors.grey[300],
+                  valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(gap_m),
                 child: ClipRRect(
@@ -54,14 +62,15 @@ class SurveyFormPage extends ConsumerWidget {
                   child: Image.asset('assets/images/survey1.png'),
                 ),
               ),
-              Text(
-                model.surveyDetailDTO!.questionElements[model.currentIndex]
-                    .question,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  model.surveyDetailDTO!.questionElements[currentIndex].question,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
               SizedBox(height: gap_m),
-              for (var choice in model.surveyDetailDTO!
-                  .questionElements[model.currentIndex].choices)
+              for (var choice in model.surveyDetailDTO!.questionElements[currentIndex].choices)
                 Column(
                   children: [
                     RadioTile(
@@ -85,8 +94,8 @@ class SurveyFormPage extends ConsumerWidget {
                     ),
                     onPressed: model.currentIndex > 0
                         ? () {
-                            viewModel.moveToPrev();
-                          }
+                      viewModel.moveToPrev();
+                    }
                         : null,
                     child: Text('이전'),
                   ),
@@ -95,23 +104,20 @@ class SurveyFormPage extends ConsumerWidget {
                       backgroundColor: kAccentColor2,
                       minimumSize: Size(150, 36),
                     ),
-                    onPressed: model.currentIndex <
-                            model.surveyDetailDTO!.questionElements.length - 1
+                    onPressed: model.currentIndex < totalQuestions - 1
                         ? () {
-                            if (model.chosenValue == null) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("선택된 항목이 없습니다.")));
-                            } else {
-                              viewModel.moveToNext();
-                            }
-                          }
+                      if (model.chosenValue == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("선택된 항목이 없습니다.")),
+                        );
+                      } else {
+                        viewModel.moveToNext();
+                      }
+                    }
                         : () {
-                            viewModel.postSurveyResult();
-                          },
-                    child: Text(model.currentIndex <
-                            model!.surveyDetailDTO!.questionElements.length - 1
-                        ? '다음'
-                        : '설문 완료'),
+                      viewModel.postSurveyResult();
+                    },
+                    child: Text(model.currentIndex < totalQuestions - 1 ? '다음' : '설문 완료'),
                   ),
                 ],
               ),

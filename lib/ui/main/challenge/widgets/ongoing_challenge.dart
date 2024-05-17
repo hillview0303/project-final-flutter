@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/challenge/challenge_response.dart';
+import 'package:project_app/ui/main/challenge/viewmodel/ongoing_challenge_viewmodel.dart';
 
 import '../../../../../_core/constants/constants.dart';
 import '../../../../../_core/constants/size.dart';
 import '../../../../../_core/constants/style.dart';
 import 'ongoing_challenge_container.dart';
 
-class OngoingChallenge extends StatelessWidget {
+class OngoingChallenge extends ConsumerWidget {
   final String title;
   final AttendChallenge? challenge;
 
@@ -15,7 +17,9 @@ class OngoingChallenge extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    ref.read(OngoingChallengeProvider.notifier).notifyInit();
+
     return Container(
       color: kAccentColor2,
       width: double.infinity,

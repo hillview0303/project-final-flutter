@@ -111,14 +111,15 @@ class DrinkWaterDetailPage extends ConsumerWidget {
                                   IconButton(
                                     icon: Icon(Icons.remove, color: kAccentColor2),
                                     onPressed: () { _removeDrink(ref, glassSize);
-                                      },
+                                    final currentIntake = ref.watch(waterIntakeProvider.state).state;
+                                    ref.read(DrinkWaterProvider.notifier).updateWater(currentIntake);
+                                    },
                                   ),
                                   IconButton(
                                     icon: Icon(Icons.add, color: kAccentColor2),
                                     onPressed: () async { _addDrink(ref, glassSize);
-                                    String? drinkWater = await secureStorage.read(key: 'glassSize');
-                                    int ? Water = int.tryParse(drinkWater ?? '0') ?? 0;
-                                    ref.read(DrinkWaterProvider.notifier).updateWater(Water);
+                                    final currentIntake = ref.watch(waterIntakeProvider.state).state;
+                                    ref.read(DrinkWaterProvider.notifier).updateWater(currentIntake);
                                     },
                                   ),
                                 ],

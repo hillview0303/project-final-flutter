@@ -6,7 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 class WeeklyBarChart extends ConsumerWidget {
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     WalkingDetailModel? model = ref.read(WalkingDetailProvider);
     List<double> weeklyData = model?.weakWalkings.map((e) => e.walking.toDouble()).toList() ?? [];
 
@@ -28,14 +28,19 @@ class WeeklyBarChart extends ConsumerWidget {
           ),
           SizedBox(height: 20),
           Expanded(
-            child: AspectRatio(
-              aspectRatio: 1.7,
-              child: Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                color: Colors.transparent,
-                child: BarChart(
-                  mainBarData(weeklyData), // Null check 제거
+            child: Center( // Center widget to center the BarChart
+              child: AspectRatio(
+                aspectRatio: 1.7,
+                child: Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  color: Colors.transparent,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding to prevent overflow
+                    child: BarChart(
+                      mainBarData(weeklyData),
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -7,8 +7,8 @@ class ChallengeResponseDTO {
   final int? walking;
   final int? totalWalking;
   final String? backImg;
-  final List<dynamic>? upcomingChallenges;
-  final List<dynamic>? pastchallenges;
+  final List<ChallengeListDTO>? upcomingChallenges;
+  final List<ChallengeListDTO>? pastchallenges;
 
   ChallengeResponseDTO(
       {this.id,
@@ -23,6 +23,15 @@ class ChallengeResponseDTO {
       this.pastchallenges});
 
   factory ChallengeResponseDTO.fromJson(Map<String, dynamic> json) {
+    List<dynamic> prevUpcomingChallengeList = json["upcomingChallenges"];
+    List<dynamic> prevPastChallenge = json["pastChallenges"];
+
+    List<ChallengeListDTO> newUpcomingChallengeList = prevUpcomingChallengeList
+        .map((e) => ChallengeListDTO.fromJson(e))
+        .toList();
+    List<ChallengeListDTO> newPastChallengeList =
+        prevPastChallenge.map((e) => ChallengeListDTO.fromJson(e)).toList();
+
     return ChallengeResponseDTO(
       id: json["id"],
       challengeName: json["challengeName"],
@@ -34,8 +43,8 @@ class ChallengeResponseDTO {
       backImg: json["backImg"],
       totalWalking: json["totalWalking"],
       walking: json["walking"],
-      upcomingChallenges: json["upcomingChallenges"],
-      pastchallenges: json["pastChallenges"],
+      upcomingChallenges: newUpcomingChallengeList,
+      pastchallenges: newPastChallengeList,
     );
   }
 }
@@ -89,7 +98,7 @@ class ChallengeListDTO {
 class ChallengeDetailDTO {
   int id;
   String challengeName; // 챌린지명
-  String subTitle; // 부 제목
+  String subtitle; // 부 제목
   int walking; // 걸어야할 걸음수
   String content; // 챌린지 내용
   int coin;
@@ -99,7 +108,7 @@ class ChallengeDetailDTO {
   ChallengeDetailDTO(
       {required this.id,
       required this.challengeName,
-      required this.subTitle,
+      required this.subtitle,
       required this.walking,
       required this.content,
       this.state,
@@ -110,7 +119,7 @@ class ChallengeDetailDTO {
     return ChallengeDetailDTO(
       id: json["id"],
       challengeName: json["challengeName"],
-      subTitle: json["subTitle"],
+      subtitle: json["subTitle"],
       walking: json["walking"],
       content: json["content"],
       coin: json["coin"],

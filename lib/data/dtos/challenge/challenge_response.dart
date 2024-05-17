@@ -155,3 +155,22 @@ class ChallengeStartDTO {
   }
 //
 }
+
+class OngoingChallengeDTO {
+  final int id;
+  final String challengeName;
+  final String subtitle;
+  final int total_walking;
+  final int walking;
+
+  OngoingChallengeDTO({required this.id,required this.challengeName,required this.subtitle,
+    required this.total_walking,required this.walking});
+
+  OngoingChallengeDTO.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        challengeName = json["challengeName"],
+        subtitle = json["subtitle"],
+        total_walking = json["total_walking"],
+        walking = json["walking"];
+
+}

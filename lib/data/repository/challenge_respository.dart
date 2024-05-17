@@ -52,4 +52,15 @@ class ChallengeRepository {
 
     return responseDTO;
   }
+
+  Future<ResponseDTO>  fetchOngoingPage() async {
+    final response = await dio.get("/api/challenges/ongoingChallenge");
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    if(responseDTO.status == 200){
+      OngoingChallengeDTO ongoingChallengeDTO = OngoingChallengeDTO.fromJson(responseDTO.body);
+      responseDTO.body = ongoingChallengeDTO;
+    }
+    return responseDTO ;
+  }
 }

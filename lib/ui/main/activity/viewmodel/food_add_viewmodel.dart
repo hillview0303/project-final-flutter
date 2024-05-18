@@ -42,64 +42,63 @@ class FoodAddModel {
   }
 }
 
-class FoodAddViewModel extends StateNotifier<FoodAddModel?> {
-  final mContext = navigatorKey.currentContext;
+class FoodAddViewModel extends StateNotifier<FoodAddModel> {
   final Ref ref;
 
-  FoodAddViewModel(super._state, this.ref);
+  FoodAddViewModel(FoodAddModel state, this.ref) : super(state);
 
   void selectMealType(String mealType) {
-    state = state!.copyWith(selectedMealType: mealType);
+    state = state.copyWith(selectedMealType: mealType);
   }
 
   void selectImg(String img) {
-    state = state!.copyWith(selectedImg: img);
+    state = state.copyWith(selectedImg: img);
   }
 
   void selectDate(DateTime date) {
-    state = state!.copyWith(selectedDate: date);
+    state = state.copyWith(selectedDate: date);
   }
 
   void selectFood(FoodContentListDTO food, int portion) {
-    final updatedFoods = List<FoodContentListDTO>.from(state!.selectedFoods)..add(food);
-    final updatedServings = List<int>.from(state!.selectedServings)..add(portion);
-    state = state!.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
+    final updatedFoods = List<FoodContentListDTO>.from(state.selectedFoods)..add(food);
+    final updatedServings = List<int>.from(state.selectedServings)..add(portion);
+    state = state.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
   }
 
   void updatePortion(int index, int portion) {
-    final updatedServings = List<int>.from(state!.selectedServings);
+    final updatedServings = List<int>.from(state.selectedServings);
     updatedServings[index] = portion;
-    state = state!.copyWith(selectedServings: updatedServings);
+    state = state.copyWith(selectedServings: updatedServings);
   }
 
   void removeFood(int index) {
-    final updatedFoods = List<FoodContentListDTO>.from(state!.selectedFoods)..removeAt(index);
-    final updatedServings = List<int>.from(state!.selectedServings)..removeAt(index);
-    state = state!.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
+    final updatedFoods = List<FoodContentListDTO>.from(state.selectedFoods)..removeAt(index);
+    final updatedServings = List<int>.from(state.selectedServings)..removeAt(index);
+    state = state.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
   }
 
   bool canAddMeal() {
-    return state!.selectedMealType != null && state!.selectedMealType!.isNotEmpty;
+    return state.selectedMealType != null && state.selectedMealType!.isNotEmpty;
   }
 
-  void addMeal(WidgetRef ref) {
+  void addMeal() {
     if (!canAddMeal()) {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
+      ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
         SnackBar(content: Text('식사 종류를 선택하세요')),
       );
       return;
     }
 
-    final newMeals = state!.selectedFoods.map((food) {
-      final index = state!.selectedFoods.indexOf(food);
-      final portion = state!.selectedServings[index];
+    final newMeals = state.selectedFoods.map((food) {
+      final index = state.selectedFoods.indexOf(food);
+      final portion = state.selectedServings[index];
 
       return MealDetail(
-        date: state!.selectedDate ?? DateTime.now(),
-        mealType: state!.selectedMealType!,
+        date: state.selectedDate ?? DateTime.now(),
+        mealType: state.selectedMealType!,
         foodName: food.name,
         gram: '${food.gram * portion}g',
-        imagePath: state!.selectedImg ?? 'assets/images/workout.gif',
+        imagePath: state.selectedImg ?? 'assets/images/workout.gif',
         calories: food.kcal * portion,
         targetCalories: 2000,
         carbo: food.carbo * portion,
@@ -115,11 +114,11 @@ class FoodAddViewModel extends StateNotifier<FoodAddModel?> {
     ResponseDTO responseDTO = await ActivityRepository().fetchFoodList(keyword: keyword);
     List<FoodContentListDTO> foodContentListDTO = responseDTO.body;
 
-    state = state!.copyWith(foodContentList: foodContentListDTO);
+    state = state.copyWith(foodContentList: foodContentListDTO);
   }
 }
 
-final foodAddProvider = StateNotifierProvider<FoodAddViewModel, FoodAddModel?>((ref) {
+final foodAddProvider = StateNotifierProvider<FoodAddViewModel, FoodAddModel>((ref) {
   return FoodAddViewModel(
     FoodAddModel(
       foodContentList: [],

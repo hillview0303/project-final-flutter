@@ -15,7 +15,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
   Future<int> loadGlassSize() async {
     String? sizeString = await secureStorage.read(key: 'glassSize');
     return int.tryParse(sizeString ?? '250') ??
-        250; // Default to 250ml if not set
+        250;
   }
 
   Future<void> saveGlassSize(int glassSize) async {

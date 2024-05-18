@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/repository/activity_repository.dart';
-import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
+import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmodel.dart';
 
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../../../../main.dart';

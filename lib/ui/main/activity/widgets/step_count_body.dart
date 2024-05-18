@@ -13,7 +13,7 @@ class StepCountBody extends ConsumerWidget {
   StepCountBody({required this.currentSteps});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     ref.read(WalkingDetailProvider.notifier)..notifyInit();
 
     return Column(
@@ -25,7 +25,7 @@ class StepCountBody extends ConsumerWidget {
           flex: 3,
           child: TabBarView(
             children: [
-              DayTab(),
+              DayTab(currentSteps: currentSteps),
               WeekTab(),
               MonthTab(),
             ],

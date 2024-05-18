@@ -28,7 +28,7 @@ class WeeklyBarChart extends ConsumerWidget {
           ),
           SizedBox(height: 20),
           Expanded(
-            child: Center( // Center widget to center the BarChart
+            child: Center(
               child: AspectRatio(
                 aspectRatio: 1.7,
                 child: Card(
@@ -36,7 +36,7 @@ class WeeklyBarChart extends ConsumerWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                   color: Colors.transparent,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding to prevent overflow
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: BarChart(
                       mainBarData(weeklyData),
                     ),

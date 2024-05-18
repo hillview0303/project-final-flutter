@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,35 +13,21 @@ import '../widgets/food_info_card.dart';
 import '../widgets/food_search_modal.dart';
 import '../widgets/image_source_dialog.dart';
 
-class FoodAddPage extends ConsumerStatefulWidget {
+class FoodAddPage extends ConsumerWidget {
   final String selectedMealType;
 
   FoodAddPage({required this.selectedMealType});
 
   @override
-  _FoodAddPageState createState() => _FoodAddPageState();
-}
-
-class _FoodAddPageState extends ConsumerState<FoodAddPage> {
-  late String formattedDate;
-
-  @override
-  void initState() {
-    super.initState();
-    formattedDate = DateSelector.formatDate(DateTime.now());
-    // 위젯이 빌드된 후에 상태를 업데이트하도록 Future.microtask를 사용
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(foodAddProvider.notifier)
-          .selectMealType(widget.selectedMealType);
-      ref.read(foodAddProvider.notifier).loadFoodList();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final foodAddModel = ref.watch(foodAddProvider);
     final foodAddViewModel = ref.read(foodAddProvider.notifier);
+
+    // 위젯이 빌드된 후에 상태를 업데이트하도록 Future.microtask를 사용
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      foodAddViewModel.selectMealType(selectedMealType);
+      foodAddViewModel.loadFoodList();
+    });
 
     if (foodAddModel == null) {
       return Center(child: CircularProgressIndicator());
@@ -109,7 +96,7 @@ class _FoodAddPageState extends ConsumerState<FoodAddPage> {
           child: ElevatedButton(
             onPressed: () {
               if (foodAddViewModel.canAddMeal()) {
-                foodAddViewModel.addMeal(ref);
+                foodAddViewModel.addMeal();
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text('등록되었습니다!')));
                 Navigator.pop(context); // 등록 후 이전 화면으로 돌아가기
@@ -136,12 +123,12 @@ class _FoodAddPageState extends ConsumerState<FoodAddPage> {
         child: Center(
           child: model.selectedImg == null
               ? IconButton(
-                  icon: Icon(Icons.add_a_photo),
-                  onPressed: () =>
-                      _showImageSourceSelection(context, viewModel),
-                )
+            icon: Icon(Icons.add_a_photo),
+            onPressed: () =>
+                _showImageSourceSelection(context, viewModel),
+          )
               : Image.memory(base64Decode(model.selectedImg!),
-                  width: 60, height: 60, fit: BoxFit.cover),
+              width: 60, height: 60, fit: BoxFit.cover),
         ),
       ),
       decoration: BoxDecoration(
@@ -162,13 +149,13 @@ class _FoodAddPageState extends ConsumerState<FoodAddPage> {
             onTap: () => DateSelector.show(
               context,
               kAccentColor2,
-              (date) => viewModel.selectDate(date),
+                  (date) => viewModel.selectDate(date),
             ),
             child: Row(
               children: [
                 Text(
                   model.selectedDate == null
-                      ? formattedDate
+                      ? DateSelector.formatDate(DateTime.now())
                       : DateSelector.formatDate(model.selectedDate!),
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),

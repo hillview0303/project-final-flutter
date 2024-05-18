@@ -145,20 +145,14 @@ class MetricGrid extends StatelessWidget {
   String formatTimeAgo(DateTime time) {
     final DateTime now = DateTime.now();
     final Duration difference = now.difference(time);
-    print("time 테스트 : ${time}");
-    print("difference 테스트 : ${difference}");
 
     if (difference.inDays > 0) {
-      print('경과 시간: ${difference.inDays}일 전');
       return '${difference.inDays}일 전';
     } else if (difference.inHours > 0) {
-      print('경과 시간: ${difference.inHours}시간 전');
       return '${difference.inHours}시간 전';
     } else if (difference.inMinutes > 0) {
-      print('경과 시간: ${difference.inMinutes}분 전');
       return '${difference.inMinutes}분 전';
     } else {
-      print('경과 시간: 방금 전');
       return '방금 전';
     }
   }

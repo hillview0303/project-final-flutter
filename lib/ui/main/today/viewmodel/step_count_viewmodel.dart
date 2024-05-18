@@ -16,7 +16,7 @@ class StepCountViewModel extends StateNotifier<StepCountState> {
   late StreamSubscription<StepCount> _stepCountStream;
   Timer? _timer;
   Timer? _midnightTimer;
-  final  read;
+  final read;
 
   StepCountViewModel(this.read)
       : super(StepCountState(currentSteps: 0, calories: '0 kcal', totalSteps: '0')) {
@@ -76,10 +76,10 @@ class StepCountViewModel extends StateNotifier<StepCountState> {
   }
 
   void _resetStepsAtMidnight() {
-    _midnightTimer = Timer(_timeUntilMidnight(), () {
+    _midnightTimer = Timer(_timeUntilMidnight(), () async {
       state = StepCountState(currentSteps: 0, calories: '0 kcal', totalSteps: '0');
-      _saveSteps(0);
-      _resetStepsAtMidnight(); // 다음 자정을 위한 타이머 재설정
+      await secureStorage.delete(key: 'current_steps');
+      _resetStepsAtMidnight();
     });
   }
 

@@ -9,7 +9,7 @@ import '../viewmodel/activity_main_viewmodel.dart';
 import 'metric_card.dart';
 
 class MetricGrid extends StatelessWidget {
-  ActivityMainModel? model;
+  final ActivityMainModel? model;
 
   MetricGrid({this.model});
 
@@ -36,6 +36,7 @@ class MetricGrid extends StatelessWidget {
           context: context,
           title: 'STEPS',
           subtitle: '${data.walking} steps',
+          trailing: formatTimeAgo(data.createdAt),
           activity: data,
           hasData: true,
         ));
@@ -51,6 +52,7 @@ class MetricGrid extends StatelessWidget {
           context: context,
           title: 'WATER',
           subtitle: '${(data.drinkWater! ~/ 250)} cups',
+          trailing: formatTimeAgo(data.createdAt),
           activity: data,
           hasData: true,
         ));
@@ -66,16 +68,18 @@ class MetricGrid extends StatelessWidget {
           context: context,
           title: 'CALORIES',
           subtitle: '${data.kcal} kcal',
+          trailing: formatTimeAgo(data.createdAt),
           activity: data,
           hasData: true,
         ));
       } else {
         cards.add(buildCard(
-            context: context,
-            title: 'CALORIES',
-            subtitle: '0 kcal',
-            activity: data,
-            hasData: true,
+          context: context,
+          title: 'CALORIES',
+          subtitle: '0 kcal',
+          trailing: formatTimeAgo(data.createdAt),
+          activity: data,
+          hasData: true,
         ));
       }
       // 체중
@@ -84,6 +88,7 @@ class MetricGrid extends StatelessWidget {
           context: context,
           title: 'BODYDATA',
           subtitle: '${data.weight} kg',
+          trailing: formatTimeAgo(data.createdAt),
           activity: data,
           hasData: true,
         ));
@@ -109,30 +114,16 @@ class MetricGrid extends StatelessWidget {
     );
   }
 
-  Widget buildCard({required BuildContext context, required String title, required String subtitle, required ActivitiesDateDTO activity, required bool hasData}) {
+  Widget buildCard({required BuildContext context, required String title, required String subtitle, required String trailing, required ActivitiesDateDTO activity, required bool hasData}) {
     return MetricCard(
       title: title,
       subtitle: subtitle,
-      trailing: formatTimeAgo(activity.createdAt),
+      trailing: trailing, // 올바르게 전달된 trailing 사용
       percentage: 40, // 예시로 40%를 넣었지만, 실제로는 활동에 따라 다른 비율을 계산하여 설정해야 합니다.
       onTap: () => navigateToDetailPageForMissingData(context, title),
-      hasData: true,
+      hasData: hasData,
     );
   }
-
-  // void navigateToDetailPage(BuildContext context, ActivitiesDateDTO activity) {
-  //   // ActivitiesDateDTO 객체를 이용하여 상세 페이지로 네비게이션, 액티비티 타입에 따라 분기 처리
-  //   if (activity.walking != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
-  //   } else if (activity.drinkWater != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
-  //   } else if (activity.kcal != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
-  //   } else if (activity.weight != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
-  //   }
-  // }
-
 
   void navigateToDetailPageForMissingData(BuildContext context, String title) {
     switch (title) {
@@ -151,19 +142,23 @@ class MetricGrid extends StatelessWidget {
     }
   }
 
-
-
   String formatTimeAgo(DateTime time) {
     final DateTime now = DateTime.now();
     final Duration difference = now.difference(time);
+    print("time 테스트 : ${time}");
+    print("difference 테스트 : ${difference}");
 
     if (difference.inDays > 0) {
+      print('경과 시간: ${difference.inDays}일 전');
       return '${difference.inDays}일 전';
     } else if (difference.inHours > 0) {
+      print('경과 시간: ${difference.inHours}시간 전');
       return '${difference.inHours}시간 전';
     } else if (difference.inMinutes > 0) {
+      print('경과 시간: ${difference.inMinutes}분 전');
       return '${difference.inMinutes}분 전';
     } else {
+      print('경과 시간: 방금 전');
       return '방금 전';
     }
   }

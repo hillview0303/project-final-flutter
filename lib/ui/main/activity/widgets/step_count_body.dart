@@ -9,23 +9,25 @@ import 'step_count_progress.dart';
 
 class StepCountBody extends ConsumerWidget {
   final int currentSteps;
+  final String calories;
+  final String totalSteps;
 
-  StepCountBody({required this.currentSteps});
+  StepCountBody({required this.currentSteps, required this.calories, required this.totalSteps});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     ref.read(WalkingDetailProvider.notifier)..notifyInit();
 
     return Column(
       children: <Widget>[
         SizedBox(height: 20),
         StepCountProgress(currentSteps: currentSteps),
-        ActivityStatsRow(),
+        ActivityStatsRow(calories: calories, totalSteps: totalSteps),
         Expanded(
           flex: 3,
           child: TabBarView(
             children: [
-              DayTab(),
+              DayTab(currentSteps: currentSteps),
               WeekTab(),
               MonthTab(),
             ],

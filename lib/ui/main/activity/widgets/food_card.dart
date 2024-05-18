@@ -5,19 +5,19 @@ import '../pages/food_add_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Widget foodCard(
-  BuildContext context,
-  String mealType,
-  List<MealDetail> meals,
-  String imagePath,
-  DateTime date,
-  WidgetRef ref,
-  Color carboColor,
-  Color proteinColor,
-  Color fatColor,
-) {
+    BuildContext context,
+    String mealType,
+    List<MealDetail> meals,
+    String imagePath,
+    DateTime date,
+    WidgetRef ref,
+    Color carboColor,
+    Color proteinColor,
+    Color fatColor,
+    ) {
   final bool isMealAdded = meals.isNotEmpty;
   final double totalCalories =
-      meals.fold(0, (sum, meal) => sum + meal.calories);
+  meals.fold(0, (sum, meal) => sum + meal.calories);
   final double totalCarbo = meals.fold(0, (sum, meal) => sum + meal.carbo);
   final double totalProtein = meals.fold(0, (sum, meal) => sum + meal.protein);
   final double totalFat = meals.fold(0, (sum, meal) => sum + meal.fat);
@@ -78,14 +78,14 @@ Widget foodCard(
                       borderRadius: BorderRadius.circular(10.0),
                       child: imagePath.isEmpty
                           ? Container(
-                              color: Colors.grey[300],
-                              width: 60,
-                              height: 60,
-                              child: Center(
-                                  child: Icon(Icons.add, color: Colors.grey)),
-                            )
+                        color: Colors.grey[300],
+                        width: 60,
+                        height: 60,
+                        child: Center(
+                            child: Icon(Icons.add, color: Colors.grey)),
+                      )
                           : Image.asset(imagePath,
-                              width: 60, height: 60, fit: BoxFit.cover),
+                          width: 60, height: 60, fit: BoxFit.cover),
                     ),
                     SizedBox(width: 10),
                     Expanded(
@@ -175,7 +175,11 @@ Widget foodCard(
                 ),
 
                 // 개별 음식 정보 표시
-                Column(
+                ExpansionTile(
+                  title: Text(
+                    '개별 음식 정보',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                   children: meals.map((meal) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +188,7 @@ Widget foodCard(
                         Text(meal.foodName,
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold)),
-                        Text("${meal.gram}g, ${meal.calories} kcal"),
+                        Text("${meal.gram}, ${meal.calories} kcal"),
                         Text(
                             "탄수화물: ${meal.carbo}g, 단백질: ${meal.protein}g, 지방: ${meal.fat}g"),
                       ],

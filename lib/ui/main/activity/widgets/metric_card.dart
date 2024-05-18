@@ -159,10 +159,10 @@ class MetricCard extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        // Text(
-        //   trailing,
-        //   style: TextStyle(fontSize: 12, color: Colors.grey[200]),
-        // ),
+        Text(
+          trailing,
+          style: TextStyle(fontSize: 12, color: Colors.grey[200]),
+        ),
       ],
     );
   }

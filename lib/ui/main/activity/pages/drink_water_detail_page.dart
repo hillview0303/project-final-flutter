@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../../_core/constants/constants.dart';
-import '../../../../_core/constants/http.dart';
 import '../viewmodel/drink_water_viewmodel.dart';
 import '../widgets/WaterIntakeGraph.dart';
 

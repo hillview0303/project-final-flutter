@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_app/ui/main/today/viewmodel/step_timer_viewmodel.dart';
+import 'package:project_app/ui/main/today/viewmodel/step_count_viewmodel.dart';
 import '../../../../_core/constants/constants.dart';
-import '../../today/viewmodel/step_count_viewmodel.dart';
 import '../widgets/step_count_body.dart';
-
 
 class StepCountDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    //todo : 1초에 1씩 올라가는 vm
-    final currentSteps = ref.watch(StepTimerProvider);
-
-    //todo : 만보기 실행시
-    // final currentSteps = ref.watch(StepCountProvider);
+    final stepCountState = ref.watch(StepCountProvider);
+    final int currentSteps = stepCountState.currentSteps;
+    final String calories = stepCountState.calories;
+    final String totalSteps = stepCountState.totalSteps;
 
     return DefaultTabController(
       length: 3,
@@ -33,9 +29,12 @@ class StepCountDetailPage extends ConsumerWidget {
             labelColor: Colors.white,
           ),
         ),
-        body: StepCountBody(currentSteps: currentSteps),
+        body: StepCountBody(
+          currentSteps: currentSteps,
+          calories: calories,
+          totalSteps: totalSteps,
+        ),
       ),
     );
   }
 }
-

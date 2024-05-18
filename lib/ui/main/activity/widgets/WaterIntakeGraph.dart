@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:intl/intl.dart';
 
-import '../viewmodel/drink_water_viewmoddel..dart';
+import '../viewmodel/drink_water_viewmodel.dart';
 
 
 class WaterIntakeGraph extends StatelessWidget {

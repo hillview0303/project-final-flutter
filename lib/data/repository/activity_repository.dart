@@ -1,7 +1,7 @@
 import 'package:project_app/data/dtos/activity/activity_request.dart';
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
-import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmoddel..dart';
+import 'package:project_app/ui/main/activity/viewmodel/drink_water_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/walking_detail.viewmodel.dart';
 
 import '../../_core/constants/http.dart';

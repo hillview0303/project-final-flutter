@@ -4,13 +4,22 @@ import 'package:pedometer/pedometer.dart';
 import '../../../../_core/constants/http.dart';
 import '../../activity/viewmodel/walking_detail.viewmodel.dart';
 
-class StepTimerViewModel extends StateNotifier<int> {
+class StepTimerState {
+  final int currentSteps;
+  final String calories;
+  final String totalSteps;
+
+  StepTimerState({required this.currentSteps, required this.calories, required this.totalSteps});
+}
+
+class StepTimerViewModel extends StateNotifier<StepTimerState> {
   late StreamSubscription<StepCount> _stepCountStream;
   Timer? _timer;
   int secondCount = 0;
   final read;
 
-  StepTimerViewModel(this.read) : super(0) {
+  StepTimerViewModel(this.read)
+      : super(StepTimerState(currentSteps: 0, calories: '0 kcal', totalSteps: '0')) {
     initialize();
   }
 
@@ -29,8 +38,8 @@ class StepTimerViewModel extends StateNotifier<int> {
   }
 
   void _onStepCount(StepCount event) {
-    state = event.steps;
-    _saveSteps(state);
+    _updateState(event.steps);
+    _saveSteps(event.steps);
   }
 
   void _onStepCountError(dynamic error) {
@@ -43,13 +52,14 @@ class StepTimerViewModel extends StateNotifier<int> {
 
   Future<void> _loadSteps() async {
     String? storedSteps = await secureStorage.read(key: 'current_steps');
-    state = int.tryParse(storedSteps ?? '0') ?? 0;
+    int steps = int.tryParse(storedSteps ?? '0') ?? 0;
+    _updateState(steps);
   }
 
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
-      state++;
-      _saveSteps(state);
+      _updateState(state.currentSteps + 1);
+      _saveSteps(state.currentSteps);
 
       secondCount++;
 
@@ -73,10 +83,18 @@ class StepTimerViewModel extends StateNotifier<int> {
 
   void _resetStepsAtMidnight() {
     Timer(_timeUntilMidnight(), () {
-      state = 0;
+      state = StepTimerState(currentSteps: 0, calories: '0 kcal', totalSteps: '0');
       _saveSteps(0);
       _resetStepsAtMidnight(); // 다음 자정을 위한 타이머 재설정
     });
+  }
+
+  void _updateState(int steps) {
+    state = StepTimerState(
+      currentSteps: steps,
+      calories: (steps * 0.04).toStringAsFixed(0) + ' kcal', // 칼로리 계산 임의로 함
+      totalSteps: steps.toString(),
+    );
   }
 
   @override
@@ -88,6 +106,6 @@ class StepTimerViewModel extends StateNotifier<int> {
 }
 
 // Provider 정의
-final StepTimerProvider = StateNotifierProvider<StepTimerViewModel, int>((ref) {
+final StepTimerProvider = StateNotifierProvider<StepTimerViewModel, StepTimerState>((ref) {
   return StepTimerViewModel(ref.read);
 });

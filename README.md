@@ -74,7 +74,7 @@ https://github.com/coderyu5523/project-final-spring
 - 진행중인 챌린지 상세 페이지 view
 - 설문조사 페이지 view
 - 만보기 라이브러리 앱 적용
-
+- 차트 라이브러리 적용
 
 
 # 4. 개발 환경

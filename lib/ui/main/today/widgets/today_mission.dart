@@ -81,11 +81,11 @@ class TodayMission extends StatelessWidget {
                   Icon(
                     icons,
                     size: 50,
-                    color: kAccentColor2, // 아이콘 색상 변경
+                    color: kAccentColor2,
                   ),
                 ],
               ),
-              SizedBox(height: 8), // 프로그레스 바와 텍스트 사이 간격 추가
+              SizedBox(height: 8),
               LinearProgressIndicator(
                 value: progress,
                 backgroundColor: Colors.grey[300],

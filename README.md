@@ -1,6 +1,6 @@
 # 바디키(건강 습관 관리 플랫폼)
-[![2024-03-11 12 13 52](https://github.com/9oj0e/project-job-plan/assets/126438339/f0b0e1f1-e70d-462f-bf9f-c3fdc937c9d3)
-](https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US)
+
+https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 # 시연
 ## PPT
 

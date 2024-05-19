@@ -44,7 +44,7 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 ## 프로젝트 아키텍쳐 : MVC(SSR + Service) 설계
 
 ## 테이블 설계
-![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/57b51fef-7a03-4419-b278-02e0bbd0e687)
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/ce6cf877-3b30-4e3b-84f4-0303ee579d16)
 
 
 ## 협업 전략

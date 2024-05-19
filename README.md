@@ -10,6 +10,14 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 
 
 
+# 앱소개
+
+## 1. 오늘의 나
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/38ebef6a-f4ce-4bc1-88da-b1d592fedcb2)
+
+
+
+
 # 진행상황
 
 

@@ -67,18 +67,21 @@ https://github.com/coderyu5523/project-final-spring
 
 ## 장유진
 - 테이블 설계
-- 시작 페이지 view 
-- 활동 메인 페이지 view
-- 활동 걸음수 페이지 view
-- 활동 물마시기 페이지 view
-- 활동 식단 페이지 view
-- 활동 식단 업로드 페이지 view
-- 챌린지페이지 view
-- 챌린지 상세 페이지 view
-- 진행중인 챌린지 상세 페이지 view
-- 설문조사 페이지 view
-- 만보기 라이브러리 앱 적용
-- 차트 라이브러리 적용
+- 시작 페이지 view
+- 로그인, 회원가입 페이지 view
+- 활동 메인 페이지, 걸음수 상세페이지, 물 마시기 상세페이지 view
+- 활동 식단 페이지, 식단 업로드 페이지 view
+- 활동 나의 변화 페이지 view
+- 챌린지 페이지 view
+- 챌린지 상세 페이지, 진행중인 챌린지 상세 페이지 view
+- 설문조사, 설문조사 상세 페이지 view
+- 문의 view
+- 전화걸기, 이메일보내기 적용(url_launcher)
+- 만보기 적용(pedometer)
+- 차트(fl_chart) 적용
+- 프로그레스바(syncfusion_flutter_gauges) 적용
+- 달력(calendar_agenda) 적용
+- 활동 권한 설정(permission_handler)
 
 
 # 4. 개발 환경

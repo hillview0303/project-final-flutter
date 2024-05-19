@@ -10,12 +10,8 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 
 
 
-# 진행상황 확인
-(이미지를 클릭하시면 링크로 이동합니다.)
-## [![v1 진행상황](https://github.com/9oj0e/project-job-plan/assets/126438339/f0b0e1f1-e70d-462f-bf9f-c3fdc937c9d3)](https://j0jh96.notion.site/v1-9ae1b6a3045d4d6cad3f35c540a660f0?pvs=74)
-- v1 진행 상황 (완료)
-## [![v2 진행상황](https://github.com/9oj0e/project-job-plan/assets/126438339/f0b0e1f1-e70d-462f-bf9f-c3fdc937c9d3)](https://j0jh96.notion.site/v2-264b24171b3848efa0279038d7a18528?pvs=25)
-- v2 진행 상황
+# 진행상황
+
 
 # 개발 환경
 <span>
@@ -48,9 +44,12 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 ## 프로젝트 아키텍쳐 : MVC(SSR + Service) 설계
 
 ## 테이블 설계
-![Screenshot_6](https://github.com/9oj0e/project-job-plan/assets/153602328/09a3287a-b0d2-48da-960a-96ddb952d411)
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/57b51fef-7a03-4419-b278-02e0bbd0e687)
+
 
 ## 협업 전략
+
+
 ### GitHub
 - Branch : 이름 이니셜 날짜 시간
 - commit : 작업 내용에 대한 요약 담기

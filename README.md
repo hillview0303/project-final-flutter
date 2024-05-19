@@ -14,7 +14,20 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 
 ## 1. 오늘의 나
 ![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/38ebef6a-f4ce-4bc1-88da-b1d592fedcb2)
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/e9cbdd7c-a10c-417f-8330-19d815b214e6)
 
+## 2. 나의 활동
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/a1876b9e-6f79-42fe-8bba-c557a742a404)
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/ca766228-06c4-4ce2-9aa4-bb958ed03013)
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/bff9c22f-98b6-402e-b370-93308ca28fe7)
+
+## 3. 챌린지
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/60fdbe3f-4ee9-4f43-aa6c-a0a94aa978d4)
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/f19f5b61-30f2-4b28-b6d0-2b9cac137674)
+
+## 4. 설문조사
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/66e93046-60db-48e5-a3e7-22d6a381acd8)
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/a72a6ff6-8a05-4628-8349-e18c416ad10c)
 
 
 

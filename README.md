@@ -48,7 +48,11 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 
 
 ## 협업 전략
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/f1be670c-8d1f-4375-a846-87a405a5b7f5)
 
+- 매일 오전 15~30분 회의
+- 카톡, 슬랙 메신저 활용
+- 진행 상황 확인을 위해 google meet 활용
 
 ### GitHub
 - Branch : 이름 이니셜 날짜 시간

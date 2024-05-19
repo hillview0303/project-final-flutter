@@ -10,6 +10,19 @@ import '../dtos/activity/activity_response.dart';
 import '../dtos/response_dto.dart';
 
 class ActivityRepository {
+  Future<ResponseDTO> postMeal(DateTime date, SaveMealDTO saveMealDTO) async {
+    final response = await dio.post("/api/meal/${DateFormatter.format(date)}",
+        data: saveMealDTO.toJson());
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    if (responseDTO.status == 200) {
+      responseDTO.body = MealSaveResponseDTO.fromJson(responseDTO.body);
+    }
+
+    return responseDTO;
+  }
+
   Future<ResponseDTO> fetchDeleteMeal(DateTime date, int mealId) async {
     final response =
         await dio.delete("/api/meal/${DateFormatter.format(date)}/${mealId}");
@@ -20,9 +33,8 @@ class ActivityRepository {
   }
 
   Future<ResponseDTO> fetchMealListByDate(DateTime selectedDate) async {
-    String formattedDate = DateFormatter.format(selectedDate);
-
-    final response = await dio.get("/api/meal/${formattedDate}");
+    final response =
+        await dio.get("/api/meal/${DateFormatter.format(selectedDate)}");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 

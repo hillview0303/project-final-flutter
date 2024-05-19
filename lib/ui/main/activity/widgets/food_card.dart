@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/activity/activity_response.dart';
 import 'package:project_app/ui/main/activity/viewmodel/diet_management_detail_viewmodel.dart';
+import 'package:project_app/ui/main/activity/viewmodel/food_add_viewmodel.dart';
 
 import '../pages/food_add_page.dart';
 
@@ -41,6 +42,7 @@ Widget foodCard(
             trailing: IconButton(
               icon: Icon(Icons.add, color: kAccentColor2),
               onPressed: () {
+                ref.read(foodAddProvider.notifier).selectDate(date);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

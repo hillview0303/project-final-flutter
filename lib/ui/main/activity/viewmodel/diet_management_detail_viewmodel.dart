@@ -47,6 +47,23 @@ class DietManagementDetailViewModel
 
   DietManagementDetailViewModel(super.state, this.ref);
 
+  void addMeal(
+      List<FoodsDTO> foodsDTO, String mealType, int mealId, String? mealImg) {
+    MealListDTO mealListDTO = MealListDTO(
+        foods: foodsDTO, mealImg: mealImg, eatTime: mealType, mealId: mealId);
+
+    List<MealListDTO> newMealListDTO = state!.mealMainDTO!.mealList!
+      ..add(mealListDTO);
+
+    state = state!.copyWith(
+        mealMainDTO: MealMainDTO(
+            recommendCarbon: state!.mealMainDTO!.recommendCarbon,
+            recommendProtein: state!.mealMainDTO!.recommendProtein,
+            recommendFat: state!.mealMainDTO!.recommendFat,
+            recommendCal: state!.mealMainDTO!.recommendCal,
+            mealList: newMealListDTO));
+  }
+
   Future<void> deleteMeal(int mealId) async {
     ResponseDTO responseDTO = await ActivityRepository()
         .fetchDeleteMeal(state!.selectedDateTime!, mealId);

@@ -6,7 +6,6 @@ import 'package:project_app/ui/main/activity/viewmodel/diet_management_detail_vi
 import 'package:project_app/ui/main/activity/widgets/today_nutrition_info.dart';
 
 import '../../../../_core/constants/size.dart';
-import '../../../../data/models/activities/meal_detail.dart';
 import '../widgets/custom_calendar_Agenda.dart';
 import '../widgets/food_card.dart';
 
@@ -18,19 +17,6 @@ class DietManagementDetailPage extends ConsumerWidget {
     DietManageMentDetailModel? model = ref.watch(dietManagementDetailProvider);
     DietManagementDetailViewModel? viewModel =
         ref.read(dietManagementDetailProvider.notifier);
-
-    // 선택된 날짜에 따른 식사 필터링
-    final mealsForSelectedDate = ref.watch(mealsForSelectedDateProvider);
-
-    // 오늘의 영양소 총합 계산
-    final double totalCalories =
-        mealsForSelectedDate.fold(0, (sum, meal) => sum + meal.calories);
-    final double totalCarbo =
-        mealsForSelectedDate.fold(0, (sum, meal) => sum + meal.carbo);
-    final double totalProtein =
-        mealsForSelectedDate.fold(0, (sum, meal) => sum + meal.protein);
-    final double totalFat =
-        mealsForSelectedDate.fold(0, (sum, meal) => sum + meal.fat);
 
     // 목표 값 설정
     final double targetCalories = 2000;

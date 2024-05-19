@@ -9,7 +9,7 @@ import '../viewmodel/activity_main_viewmodel.dart';
 import 'metric_card.dart';
 
 class MetricGrid extends StatelessWidget {
-  ActivityMainModel? model;
+  final ActivityMainModel? model;
 
   MetricGrid({this.model});
 
@@ -31,66 +31,83 @@ class MetricGrid extends StatelessWidget {
     if (model != null && model!.activitiesDateDTO != null) {
       var data = model!.activitiesDateDTO;
       // 걸음
-      if (data.walking != null) {
+      if (data.walking != 0) {
         cards.add(buildCard(
           context: context,
           title: 'STEPS',
           subtitle: '${data.walking} steps',
+          trailing: formatTimeAgo(model),
           activity: data,
           hasData: true,
         ));
       } else {
-        cards.add(buildEmptyCard(
+        cards.add(buildCard(
           context: context,
           title: 'STEPS',
+          subtitle: '${data.walking} steps',
+          trailing: "기록이 없습니다",
+          activity: data,
+          hasData: true,
         ));
       }
       // 물 마시기
-      if (data.drinkWater != null) {
+      if (data.drinkWater != 0) {
         cards.add(buildCard(
           context: context,
           title: 'WATER',
           subtitle: '${(data.drinkWater! ~/ 250)} cups',
+          trailing: formatTimeAgo(model),
           activity: data,
           hasData: true,
         ));
       } else {
-        cards.add(buildEmptyCard(
+        cards.add(buildCard(
           context: context,
           title: 'WATER',
+          subtitle: '${(data.drinkWater! ~/ 250)} cups',
+          trailing: "기록이 없습니다",
+          activity: data,
+          hasData: true,
         ));
       }
       // 칼로리
-      if (data.kcal != null) {
+      if (data.kcal != 0) {
         cards.add(buildCard(
           context: context,
           title: 'CALORIES',
           subtitle: '${data.kcal} kcal',
+          trailing: formatTimeAgo(model),
           activity: data,
           hasData: true,
         ));
       } else {
         cards.add(buildCard(
-            context: context,
-            title: 'CALORIES',
-            subtitle: '0 kcal',
-            activity: data,
-            hasData: true,
+          context: context,
+          title: 'CALORIES',
+          subtitle: '${data.kcal} kcal',
+          trailing: "기록이 없습니다",
+          activity: data,
+          hasData: true,
         ));
       }
       // 체중
-      if (data.weight != null) {
+      if (data.weight != 0) {
         cards.add(buildCard(
           context: context,
           title: 'BODYDATA',
           subtitle: '${data.weight} kg',
+          trailing: formatTimeAgo(model),
           activity: data,
           hasData: true,
         ));
       } else {
-        cards.add(buildEmptyCard(
+        cards.add(buildCard(
           context: context,
           title: 'BODYDATA',
+          subtitle: '${data.weight} kg',
+          trailing: "기록이 없습니다",
+          activity: data,
+          hasData: true,
         ));
       }
     }
@@ -98,64 +115,66 @@ class MetricGrid extends StatelessWidget {
     return cards;
   }
 
-  Widget buildEmptyCard({required BuildContext context, required String title}) {
+  Widget buildEmptyCard(
+      {required BuildContext context, required String title}) {
     return MetricCard(
       title: title,
       subtitle: 'No data',
       trailing: '',
-      percentage: 0, // 데이터가 없으므로 진행률 0으로 설정
+      percentage: 0,
+      // 데이터가 없으므로 진행률 0으로 설정
       onTap: () => navigateToDetailPageForMissingData(context, title),
       hasData: false, // 데이터가 없음을 나타냄
     );
   }
 
-  Widget buildCard({required BuildContext context, required String title, required String subtitle, required ActivitiesDateDTO activity, required bool hasData}) {
+  Widget buildCard(
+      {required BuildContext context,
+      required String title,
+      required String subtitle,
+      required String trailing,
+      required ActivitiesDateDTO activity,
+      required bool hasData}) {
     return MetricCard(
       title: title,
       subtitle: subtitle,
-      trailing: formatTimeAgo(activity.createdAt),
-      percentage: 40, // 예시로 40%를 넣었지만, 실제로는 활동에 따라 다른 비율을 계산하여 설정해야 합니다.
+      trailing: trailing,
+      // 올바르게 전달된 trailing 사용
+      percentage: 40,
+      // 예시로 40%를 넣었지만, 실제로는 활동에 따라 다른 비율을 계산하여 설정해야 합니다.
       onTap: () => navigateToDetailPageForMissingData(context, title),
-      hasData: true,
+      hasData: hasData,
     );
   }
-
-  // void navigateToDetailPage(BuildContext context, ActivitiesDateDTO activity) {
-  //   // ActivitiesDateDTO 객체를 이용하여 상세 페이지로 네비게이션, 액티비티 타입에 따라 분기 처리
-  //   if (activity.walking != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
-  //   } else if (activity.drinkWater != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
-  //   } else if (activity.kcal != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
-  //   } else if (activity.weight != null) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
-  //   }
-  // }
-
 
   void navigateToDetailPageForMissingData(BuildContext context, String title) {
     switch (title) {
       case 'STEPS':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => StepCountDetailPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => StepCountDetailPage()));
         break;
       case 'WATER':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DrinkWaterDetailPage()));
         break;
       case 'CALORIES':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DietManagementDetailPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DietManagementDetailPage()));
         break;
       case 'BODYDATA':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ChangeWeightDetailPage()));
         break;
     }
   }
 
-
-
-  String formatTimeAgo(DateTime time) {
+  String formatTimeAgo(ActivityMainModel? model) {
     final DateTime now = DateTime.now();
-    final Duration difference = now.difference(time);
+    final Duration difference =
+        now.difference(model!.activitiesDateDTO.createdAt);
+
 
     if (difference.inDays > 0) {
       return '${difference.inDays}일 전';
@@ -166,5 +185,7 @@ class MetricGrid extends StatelessWidget {
     } else {
       return '방금 전';
     }
+
+
   }
 }

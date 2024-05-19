@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/ui/main/activity/viewmodel/walking_detail.viewmodel.dart';
+import 'package:project_app/ui/main/today/viewmodel/step_timer_viewmodel.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
+
+import '../../../../data/dtos/activity/activity_response.dart';
 
 class WeeklyBarChart extends ConsumerWidget {
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WalkingDetailModel? model = ref.read(WalkingDetailProvider);
-    List<double> weeklyData = model?.weakWalkings.map((e) => e.walking.toDouble()).toList() ?? [];
+    final model = ref.watch(WalkingDetailProvider);
+    final stepTimerState = ref.watch(StepTimerProvider);
+    final int currentSteps = stepTimerState.currentSteps;
+
+    List<WeakWalkingDTO> weakWalkings = model?.weakWalkings ?? [];
+    List<double> weeklyData = List.filled(7, 0.0);
+
+    // 현재 요일을 기준으로 데이터를 맞춤
+    DateTime now = DateTime.now();
+    for (var walking in weakWalkings) {
+      int dayDiff = now.difference(walking.date).inDays;
+      if (dayDiff >= 0 && dayDiff < 7) {
+        weeklyData[6 - dayDiff] = walking.walking.toDouble();
+      }
+    }
+
+    // 오늘의 걸음 수를 현재 요일에 맞게 업데이트
+    int todayIndex = (now.weekday % 7);  // 0은 일요일 6은 토요일
+    weeklyData[todayIndex] = currentSteps.toDouble();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -28,7 +48,7 @@ class WeeklyBarChart extends ConsumerWidget {
           ),
           SizedBox(height: 20),
           Expanded(
-            child: Center( // Center widget to center the BarChart
+            child: Center(
               child: AspectRatio(
                 aspectRatio: 1.7,
                 child: Card(
@@ -36,7 +56,7 @@ class WeeklyBarChart extends ConsumerWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                   color: Colors.transparent,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding to prevent overflow
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: BarChart(
                       mainBarData(weeklyData),
                     ),
@@ -113,7 +133,7 @@ class WeeklyBarChart extends ConsumerWidget {
 
   String getWeekDay(int index) {
     const weekDays = [
-      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
     ];
     return weekDays[index % weekDays.length];
   }
@@ -121,7 +141,7 @@ class WeeklyBarChart extends ConsumerWidget {
   Widget getWeekdayTitles(double value, TitleMeta meta) {
     final styles = TextStyle(
         color: Color(0xff7589a2), fontWeight: FontWeight.bold, fontSize: 14);
-    final days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    final days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 16,

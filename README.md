@@ -55,10 +55,11 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 - 진행 상황 확인을 위해 google meet 활용
 
 ### GitHub
-- Branch : 이름 이니셜 날짜 시간
+- Branch : 이니셜/패키지명/기능명 ex) rjs/welcome/login
 - commit : 작업 내용에 대한 요약 담기
 - comment : 문제를 겪은 부분 정리
 - issue : 버그나 해결사항 올리기
+- 
 ### naming conventions [코드 컨밴션]
 - 패키지 : lowerCase, domain별 패키지 만들기
 - 파일 : camelCase

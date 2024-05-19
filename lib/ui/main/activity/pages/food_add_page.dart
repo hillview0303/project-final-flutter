@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/utils/image_parse_util.dart';
 import 'package:project_app/ui/main/activity/viewmodel/food_add_viewmodel.dart';
+
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../widgets/dashed_border_painter.dart';
 import '../widgets/date_selector.dart';
@@ -96,10 +97,7 @@ class FoodAddPage extends ConsumerWidget {
           child: ElevatedButton(
             onPressed: () {
               if (foodAddViewModel.canAddMeal()) {
-                foodAddViewModel.addMeal();
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text('등록되었습니다!')));
-                Navigator.pop(context); // 등록 후 이전 화면으로 돌아가기
+                foodAddViewModel.postMeal();
               } else {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text('식사 종류를 선택하세요')));
@@ -123,12 +121,12 @@ class FoodAddPage extends ConsumerWidget {
         child: Center(
           child: model.selectedImg == null
               ? IconButton(
-            icon: Icon(Icons.add_a_photo),
-            onPressed: () =>
-                _showImageSourceSelection(context, viewModel),
-          )
+                  icon: Icon(Icons.add_a_photo),
+                  onPressed: () =>
+                      _showImageSourceSelection(context, viewModel),
+                )
               : Image.memory(base64Decode(model.selectedImg!),
-              width: 60, height: 60, fit: BoxFit.cover),
+                  width: 60, height: 60, fit: BoxFit.cover),
         ),
       ),
       decoration: BoxDecoration(
@@ -149,7 +147,7 @@ class FoodAddPage extends ConsumerWidget {
             onTap: () => DateSelector.show(
               context,
               kAccentColor2,
-                  (date) => viewModel.selectDate(date),
+              (date) => viewModel.selectDate(date),
             ),
             child: Row(
               children: [
@@ -168,8 +166,7 @@ class FoodAddPage extends ConsumerWidget {
           DropdownButton<String>(
             value: model.selectedMealType,
             hint: Text("식사 종류를 선택하세요"),
-            items: ['BREAKFAST', 'LUNCH', 'DINNER', 'SNACK']
-                .map((String mealType) {
+            items: ['아침', '점심', '저녁', '간식'].map((String mealType) {
               return DropdownMenuItem<String>(
                 value: mealType,
                 child: Text(mealType),

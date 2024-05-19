@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/data/dtos/activity/activity_request.dart';
 import 'package:project_app/data/dtos/response_dto.dart';
 import 'package:project_app/data/repository/activity_repository.dart';
+import 'package:project_app/ui/main/activity/viewmodel/diet_management_detail_viewmodel.dart';
+
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../../../../data/models/activities/meal_detail.dart';
 import '../../../../main.dart';
@@ -44,8 +47,51 @@ class FoodAddModel {
 
 class FoodAddViewModel extends StateNotifier<FoodAddModel> {
   final Ref ref;
+  final mContext = navigatorKey.currentContext;
 
   FoodAddViewModel(FoodAddModel state, this.ref) : super(state);
+
+  Future<void> postMeal() async {
+    List<Food> foods = List.generate(
+        state!.selectedFoods.length,
+        (index) => Food(
+            state!.selectedFoods[index].id, state!.selectedServings[index]));
+
+    ResponseDTO responseDTO = await ActivityRepository().postMeal(
+        state!.selectedDate!,
+        SaveMealDTO(
+            eatTime: state!.selectedMealType!,
+            mealImg: state!.selectedImg,
+            foods: foods));
+
+    MealSaveResponseDTO saveResponseDTO = responseDTO.body;
+
+    if (responseDTO.status == 200) {
+      List<FoodsDTO> foodsDTO = List.generate(
+          foods.length,
+          (index) => FoodsDTO(
+                fat: state!.selectedFoods[index].fat,
+                kcal: state!.selectedFoods[index].kcal,
+                foodName: state!.selectedFoods[index].name,
+                carbo: state!.selectedFoods[index].carbo,
+                protein: state!.selectedFoods[index].protein,
+                foodId: state!.selectedFoods[index].id,
+                gram: state!.selectedFoods[index].gram,
+              )).toList();
+      ref.read(dietManagementDetailProvider.notifier).addMeal(
+          foodsDTO,
+          state!.selectedMealType!,
+          saveResponseDTO.mealId,
+          saveResponseDTO.mealImg);
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(SnackBar(content: Text('등록되었습니다!')));
+      Navigator.pop(mContext!);
+    } else {
+      ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
+        SnackBar(content: Text('식단 추가 실패 : ${responseDTO.msg}')),
+      );
+    }
+  }
 
   void selectMealType(String mealType) {
     state = state.copyWith(selectedMealType: mealType);
@@ -60,9 +106,12 @@ class FoodAddViewModel extends StateNotifier<FoodAddModel> {
   }
 
   void selectFood(FoodContentListDTO food, int portion) {
-    final updatedFoods = List<FoodContentListDTO>.from(state.selectedFoods)..add(food);
-    final updatedServings = List<int>.from(state.selectedServings)..add(portion);
-    state = state.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
+    final updatedFoods = List<FoodContentListDTO>.from(state.selectedFoods)
+      ..add(food);
+    final updatedServings = List<int>.from(state.selectedServings)
+      ..add(portion);
+    state = state.copyWith(
+        selectedFoods: updatedFoods, selectedServings: updatedServings);
   }
 
   void updatePortion(int index, int portion) {
@@ -72,9 +121,12 @@ class FoodAddViewModel extends StateNotifier<FoodAddModel> {
   }
 
   void removeFood(int index) {
-    final updatedFoods = List<FoodContentListDTO>.from(state.selectedFoods)..removeAt(index);
-    final updatedServings = List<int>.from(state.selectedServings)..removeAt(index);
-    state = state.copyWith(selectedFoods: updatedFoods, selectedServings: updatedServings);
+    final updatedFoods = List<FoodContentListDTO>.from(state.selectedFoods)
+      ..removeAt(index);
+    final updatedServings = List<int>.from(state.selectedServings)
+      ..removeAt(index);
+    state = state.copyWith(
+        selectedFoods: updatedFoods, selectedServings: updatedServings);
   }
 
   bool canAddMeal() {
@@ -111,14 +163,16 @@ class FoodAddViewModel extends StateNotifier<FoodAddModel> {
   }
 
   Future<void> loadFoodList({String? keyword}) async {
-    ResponseDTO responseDTO = await ActivityRepository().fetchFoodList(keyword: keyword);
+    ResponseDTO responseDTO =
+        await ActivityRepository().fetchFoodList(keyword: keyword);
     List<FoodContentListDTO> foodContentListDTO = responseDTO.body;
 
     state = state.copyWith(foodContentList: foodContentListDTO);
   }
 }
 
-final foodAddProvider = StateNotifierProvider<FoodAddViewModel, FoodAddModel>((ref) {
+final foodAddProvider =
+    StateNotifierProvider<FoodAddViewModel, FoodAddModel>((ref) {
   return FoodAddViewModel(
     FoodAddModel(
       foodContentList: [],

@@ -230,6 +230,20 @@ class MealListDTO {
       foods: newFoods,
     );
   }
+
+  MealListDTO copyWith({
+    int? mealId,
+    String? mealImg,
+    String? eatTime,
+    List<FoodsDTO>? foods,
+  }) {
+    return MealListDTO(
+      mealId: mealId ?? this.mealId,
+      mealImg: mealImg ?? this.mealImg,
+      eatTime: eatTime ?? this.eatTime,
+      foods: foods ?? this.foods,
+    );
+  }
 //
 }
 
@@ -260,6 +274,26 @@ class FoodsDTO {
       fat: json["fat"],
       kcal: json["kcal"],
       gram: json["gram"],
+    );
+  }
+
+  FoodsDTO copyWith({
+    int? foodId,
+    String? foodName,
+    double? carbo,
+    double? protein,
+    double? fat,
+    double? kcal,
+    int? gram,
+  }) {
+    return FoodsDTO(
+      foodId: foodId ?? this.foodId,
+      foodName: foodName ?? this.foodName,
+      carbo: carbo ?? this.carbo,
+      protein: protein ?? this.protein,
+      fat: fat ?? this.fat,
+      kcal: kcal ?? this.kcal,
+      gram: gram ?? this.gram,
     );
   }
 //
@@ -295,4 +329,38 @@ class FoodContentListDTO {
     );
   }
 // 먹은 그램양
+}
+
+class MealSaveResponseDTO {
+  int mealId;
+  String? mealImg;
+  List<EatDTO> foods;
+
+  MealSaveResponseDTO(
+      {required this.mealId, this.mealImg, required this.foods});
+
+  factory MealSaveResponseDTO.fromJson(Map<String, dynamic> json) {
+    List<dynamic> prevEatDTOList = json["foods"];
+    List<EatDTO> eatDTOList =
+        prevEatDTOList.map((eat) => EatDTO.fromJson(eat)).toList();
+
+    return MealSaveResponseDTO(
+        mealId: json["mealId"], mealImg: json["mealImg"], foods: eatDTOList);
+  }
+//
+}
+
+class EatDTO {
+  int foodId;
+  int foodQuantity;
+
+  EatDTO({required this.foodId, required this.foodQuantity});
+
+  factory EatDTO.fromJson(Map<String, dynamic> json) {
+    return EatDTO(
+      foodId: json["foodId"],
+      foodQuantity: json["foodQuantity"],
+    );
+  }
+//
 }

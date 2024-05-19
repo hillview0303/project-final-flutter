@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
+import 'package:intl/intl.dart';
 
 class TodayChangesChart extends StatelessWidget {
   const TodayChangesChart({
@@ -8,11 +9,13 @@ class TodayChangesChart extends StatelessWidget {
     required this.fatData,
     required this.muscleData,
     required this.weightData,
+    required this.startDate,
   });
 
   final List<FlSpot> fatData;
   final List<FlSpot> muscleData;
   final List<FlSpot> weightData;
+  final DateTime startDate;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,9 @@ class TodayChangesChart extends StatelessWidget {
                 reservedSize: 40,
                 interval: 1,
                 getTitlesWidget: (value, meta) {
-                  return Text('Day ${value.toInt() + 1}',
+                  DateTime date = startDate.add(Duration(days: value.toInt()));
+                  String formattedDate = DateFormat('MM/dd').format(date);
+                  return Text(formattedDate,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 11));
                 },

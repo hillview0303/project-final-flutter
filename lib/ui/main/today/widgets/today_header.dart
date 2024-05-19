@@ -38,6 +38,9 @@ class TodayHeader extends ConsumerWidget {
       return DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(date);
     }
 
+    // 5일
+    DateTime startDate = DateTime.now().subtract(Duration(days: 5));
+
     return Column(
       children: [
         TodayUserData(model!),
@@ -53,6 +56,7 @@ class TodayHeader extends ConsumerWidget {
                   fatData: visibilityState.fatVisible ? FatDataFromModel(model) : [],
                   muscleData: visibilityState.muscleVisible ? MuscleDataFromModel(model) : [],
                   weightData: visibilityState.weightVisible ? WeightDataFromModel(model) : [],
+                  startDate: startDate, // startDate 전달
                 ),
               ),
               SizedBox(height: gap_m),

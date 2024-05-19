@@ -64,7 +64,12 @@ https://github.com/coderyu5523/project-final-spring
 
 
 
-## 프로젝트 아키텍쳐 : MVC(SSR + Service) 설계
+## 프로젝트 아키텍쳐 : MVVM 패턴
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/6f986f0b-4df9-4f2b-9707-37fa255f8796)
+- 뷰(View) : 사용자와 상호작용하고, ViewModel에 데이터 바인딩을 설정한다.
+- 뷰모델(ViewModel) : 뷰의 요구사항을 받아서 모델과 상호작용한다.. 모델에서 데이터를 가져와 뷰에 제공하고, 뷰의 입력을 모델에 전달한다.
+- 모델(Model) :  데이터와 비즈니스 로직을 관리하며, ViewModel의 요청에 따라 데이터를 제공하거나 업데이트한다.
+
 
 ## 테이블 설계
 ![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/ce6cf877-3b30-4e3b-84f4-0303ee579d16)

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/activity/activity_response.dart';
+import 'package:project_app/ui/main/activity/viewmodel/diet_management_detail_viewmodel.dart';
 
 import '../pages/food_add_page.dart';
 
 Widget foodCard(
+  int? mealId,
   BuildContext context,
   String mealType,
   List<FoodsDTO> meals,
@@ -62,8 +64,9 @@ Widget foodCard(
                 IconButton(
                   icon: Icon(Icons.delete, color: kAccentColor2),
                   onPressed: () {
-                    // todo : 서버에서 MealId 추가시 구현
-                    // ref.read(mealProvider.notifier).deleteMeal(mealType, date);
+                    ref
+                        .read(dietManagementDetailProvider.notifier)
+                        .deleteMeal(mealId!);
                   },
                 ),
             ],

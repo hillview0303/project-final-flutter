@@ -211,11 +211,12 @@ class MealMainDTO {
 }
 
 class MealListDTO {
+  final int? mealId;
   final String? mealImg;
   final String? eatTime;
   final List<FoodsDTO>? foods;
 
-  MealListDTO({this.mealImg, this.eatTime, this.foods});
+  MealListDTO({this.mealId, this.mealImg, this.eatTime, this.foods});
 
   factory MealListDTO.fromJson(Map<String, dynamic> json) {
     List<dynamic> prevFoods = json["foods"];
@@ -223,6 +224,7 @@ class MealListDTO {
         prevFoods.map((food) => FoodsDTO.fromJson(food)).toList();
 
     return MealListDTO(
+      mealId: json["mealId"],
       mealImg: json["mealImg"],
       eatTime: json["eatTime"],
       foods: newFoods,

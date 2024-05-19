@@ -47,6 +47,28 @@ class DietManagementDetailViewModel
 
   DietManagementDetailViewModel(super.state, this.ref);
 
+  Future<void> deleteMeal(int mealId) async {
+    ResponseDTO responseDTO = await ActivityRepository()
+        .fetchDeleteMeal(state!.selectedDateTime!, mealId);
+    if (responseDTO.status == 200) {
+      List<MealListDTO> mealListDTO = state!.mealMainDTO!.mealList!
+        ..removeWhere((meal) => meal.mealId == mealId);
+
+      MealMainDTO mealMainDTO = MealMainDTO(
+        mealList: mealListDTO,
+        recommendCal: state!.mealMainDTO!.recommendCal,
+        recommendCarbon: state!.mealMainDTO!.recommendCarbon,
+        recommendFat: state!.mealMainDTO!.recommendFat,
+        recommendProtein: state!.mealMainDTO!.recommendProtein,
+      );
+
+      state = state!.copyWith(mealMainDTO: mealMainDTO);
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("식단 삭제 실패 : ${responseDTO.msg}")));
+    }
+  }
+
   Future<void> notifyInit(DateTime selectedDate) async {
     ResponseDTO responseDTO =
         await ActivityRepository().fetchMealListByDate(selectedDate);

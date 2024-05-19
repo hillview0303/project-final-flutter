@@ -100,11 +100,16 @@ class DietManagementDetailPage extends ConsumerWidget {
                         );
                       } else {
                         final mealType = mealTypes[index - 1];
+                        final mealId = index >
+                                model.mealMainDTO!.mealList!.length
+                            ? null
+                            : model.mealMainDTO!.mealList![index - 1].mealId;
                         final meals = model.mealMainDTO!.mealList!
                             .where((meal) => meal.eatTime == mealType)
                             .expand((meal) => meal.foods!)
                             .toList();
                         return foodCard(
+                          mealId,
                           context,
                           mealType,
                           meals,

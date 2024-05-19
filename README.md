@@ -1,5 +1,7 @@
 # 바디키(건강 습관 관리 플랫폼)
 
+![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/6fbea44c-14c2-4ef8-b1c7-e4bc60dab0d3)
+
 https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 # 시연
 ## PPT

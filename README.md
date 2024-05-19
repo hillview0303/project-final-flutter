@@ -95,7 +95,6 @@ https://github.com/coderyu5523/project-final-spring
    
   <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> 사용기술</h3>
 <img src="https://img.shields.io/badge/Riverpod-42a5f5.svg?style=for-the-badge&logo=riverpod&logoColor=white"/>
-<img src="https://img.shields.io/badge/Chart.js-FF6384.svg?style=for-the-badge&logo=chartdotjs&logoColor=white"/>
 
 
   <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> 언어</h3>
@@ -118,7 +117,9 @@ https://github.com/coderyu5523/project-final-spring
 ![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/ce6cf877-3b30-4e3b-84f4-0303ee579d16)
 
 
-## 협업 전략
+# 5. 협업 전략
+
+## 회의
 ![image](https://github.com/coderyu5523/project-final-flutter/assets/153602328/f1be670c-8d1f-4375-a846-87a405a5b7f5)
 
 - 매일 오전 15~30분 회의
@@ -130,23 +131,9 @@ https://github.com/coderyu5523/project-final-spring
 - commit : 작업 내용에 대한 요약 담기
 - comment : 문제를 겪은 부분 정리
 - issue : 버그나 해결사항 올리기
-- 
+  
 ### naming conventions [코드 컨밴션]
-- 패키지 : lowerCase, domain별 패키지 만들기
-- 파일 : camelCase
-- 클래스/메서드/필드값 : pascalCase
-- 일반 테이블 (단수 명사) : `user`, `board`, `resume`, `rating`, `skill`
-- 행위 테이블 (원형 부정사) : `apply`, `subscribe`
-- DTO : Request/Response + 목적지 정보 (ServiceName/ControllerName) + 기타(전치사+명사)
-  - e.g. Request : `CreateDTO`, `UpdateDTO`, Response : `EmployerDTO`, `DetailDTO`...
-- Controller : `post`/`detail`&`listings`/`update`/`delete`
-- Service : `createEntity`/`getEntity`/`setEntity`/`removeEntity`
-- Repository : `save`/`find`/`update`/`delete` + By/With + Entity&Record
-- css : ?
-### 회의
-- 매일 회의록 작성
-  - 진행 상황 보고
-  - 문제점 발견 및 피드백
-  - 건의사항
-- 해결 과제
-  - 할 일 목록 작성
+- 패키지 : 소문자, 도메인별 패키지 만들기
+- 파일 : 소문자, 언더바(_) 사용
+- 클래스/메서드/필드값 : 파스칼 표기법
+- viewmodel : 각 페이지 별 viewmodel 작성성

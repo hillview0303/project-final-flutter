@@ -1,3 +1,4 @@
+import 'package:project_app/_core/utils/date_format.dart';
 import 'package:project_app/data/dtos/activity/activity_request.dart';
 import 'package:project_app/ui/main/activity/viewmodel/activity_main_viewmodel.dart';
 import 'package:project_app/ui/main/activity/viewmodel/change_weight_viewmodel.dart';
@@ -9,6 +10,23 @@ import '../dtos/activity/activity_response.dart';
 import '../dtos/response_dto.dart';
 
 class ActivityRepository {
+  Future<ResponseDTO> fetchMealListByDate(DateTime selectedDate) async {
+    String formattedDate = DateFormatter.format(selectedDate);
+
+    final response = await dio.get("/api/meal/${formattedDate}");
+
+    print("response : ${response.data}");
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    if (responseDTO.status == 200) {
+      MealMainDTO mealMainDTO = MealMainDTO.fromJson(responseDTO.body);
+      responseDTO.body = mealMainDTO;
+    }
+
+    return responseDTO;
+  }
+
   Future<ResponseDTO> fetchFoodList({String? keyword}) async {
     final response;
 
@@ -118,7 +136,6 @@ class ActivityRepository {
     final response =
         await dio.put("/api/activities/walking-update", data: stepDTO);
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
 
     return responseDTO;
   }

@@ -88,10 +88,11 @@ class EditProfileForm extends ConsumerWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    if (_passwordController.text.trim() ==
-                        _confirmPasswordController.text.trim()) {
+                    if (_passwordController.text ==
+                        _confirmPasswordController.text) {
                       UserUpdateDTO updateDTO = UserUpdateDTO(
                           id: reqDTO.id,
+                          password: _passwordController.text.trim(),
                           name: _nameController.text.trim(),
                           phone: _phoneController.text.trim(),
                           height: double.parse(_heightController.text.trim()));

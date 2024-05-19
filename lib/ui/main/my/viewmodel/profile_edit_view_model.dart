@@ -55,10 +55,11 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
   Future<void> updateProfile(UserUpdateDTO updateDTO) async {
     ResponseDTO responseDTO = await UserRepository().fetchUpdate(updateDTO);
 
-    ProfileUpdateFormDTO updateFormDTO =
-        ProfileUpdateFormDTO.fromJson(responseDTO.body);
 
     if (responseDTO.status == 200) {
+      ProfileUpdateFormDTO updateFormDTO =
+      ProfileUpdateFormDTO.fromJson(responseDTO.body);
+
       ref.read(myPageProvider.notifier).updatedUser(updateFormDTO);
 
       ref.read(TodayPageProvider.notifier).updateName(updateFormDTO.name);

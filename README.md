@@ -41,6 +41,8 @@ https://github.com/coderyu5523/project-final-spring
 - 테이블 설계
 - 회원정보 수정 view
 - 메인페이지 통신
+- 목표 체중,체지방, 근육량 insert
+- 현재 체중,체지방,근육량 insert
 - 활동 메인 통신
 - 활동 걸음 페이지 통신
 - 활동 물마시기 페이지 통신
@@ -59,7 +61,9 @@ https://github.com/coderyu5523/project-final-spring
 - 식단 페이지 통신
 - 식단 업로드
 - 식단 삭제
+- 식단 검색
 - 상태 관리
+
 
 ## 장유진
 - 테이블 설계

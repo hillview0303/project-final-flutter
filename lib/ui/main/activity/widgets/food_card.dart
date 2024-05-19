@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:project_app/_core/constants/constants.dart';
-import '../../../../data/models/activities/meal_detail.dart';
-import '../pages/food_add_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/_core/constants/constants.dart';
+import 'package:project_app/data/dtos/activity/activity_response.dart';
+
+import '../pages/food_add_page.dart';
 
 Widget foodCard(
-    BuildContext context,
-    String mealType,
-    List<MealDetail> meals,
-    String imagePath,
-    DateTime date,
-    WidgetRef ref,
-    Color carboColor,
-    Color proteinColor,
-    Color fatColor,
-    ) {
+  BuildContext context,
+  String mealType,
+  List<FoodsDTO> meals,
+  String imagePath,
+  DateTime date,
+  WidgetRef ref,
+  Color carboColor,
+  Color proteinColor,
+  Color fatColor,
+) {
   final bool isMealAdded = meals.isNotEmpty;
-  final double totalCalories =
-  meals.fold(0, (sum, meal) => sum + meal.calories);
-  final double totalCarbo = meals.fold(0, (sum, meal) => sum + meal.carbo);
-  final double totalProtein = meals.fold(0, (sum, meal) => sum + meal.protein);
-  final double totalFat = meals.fold(0, (sum, meal) => sum + meal.fat);
+  final double totalCalories = meals.fold(0, (sum, meal) => sum + meal.kcal!);
+  final double totalCarbo = meals.fold(0, (sum, meal) => sum + meal.carbo!);
+  final double totalProtein = meals.fold(0, (sum, meal) => sum + meal.protein!);
+  final double totalFat = meals.fold(0, (sum, meal) => sum + meal.fat!);
   final double totalNutrients = totalCarbo + totalProtein + totalFat;
 
   return Card(
@@ -62,7 +62,8 @@ Widget foodCard(
                 IconButton(
                   icon: Icon(Icons.delete, color: kAccentColor2),
                   onPressed: () {
-                    ref.read(mealProvider.notifier).deleteMeal(mealType, date);
+                    // todo : 서버에서 MealId 추가시 구현
+                    // ref.read(mealProvider.notifier).deleteMeal(mealType, date);
                   },
                 ),
             ],
@@ -78,14 +79,14 @@ Widget foodCard(
                       borderRadius: BorderRadius.circular(10.0),
                       child: imagePath.isEmpty
                           ? Container(
-                        color: Colors.grey[300],
-                        width: 60,
-                        height: 60,
-                        child: Center(
-                            child: Icon(Icons.add, color: Colors.grey)),
-                      )
+                              color: Colors.grey[300],
+                              width: 60,
+                              height: 60,
+                              child: Center(
+                                  child: Icon(Icons.add, color: Colors.grey)),
+                            )
                           : Image.asset(imagePath,
-                          width: 60, height: 60, fit: BoxFit.cover),
+                              width: 60, height: 60, fit: BoxFit.cover),
                     ),
                     SizedBox(width: 10),
                     Expanded(
@@ -99,7 +100,8 @@ Widget foodCard(
                               fontSize: 16,
                             ),
                           ),
-                          Text("탄수화물: ${totalCarbo.toStringAsFixed(1)}g, 단백질: ${totalProtein.toStringAsFixed(1)}g, 지방: ${totalFat.toStringAsFixed(1)}g"),
+                          Text(
+                              "탄수화물: ${totalCarbo.toStringAsFixed(1)}g, 단백질: ${totalProtein.toStringAsFixed(1)}g, 지방: ${totalFat.toStringAsFixed(1)}g"),
                         ],
                       ),
                     ),
@@ -185,10 +187,10 @@ Widget foodCard(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Divider(),
-                        Text(meal.foodName,
+                        Text(meal.foodName!,
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold)),
-                        Text("${meal.gram}, ${meal.calories} kcal"),
+                        Text("${meal.gram}, ${meal.kcal} kcal"),
                         Text(
                             "탄수화물: ${meal.carbo}g, 단백질: ${meal.protein}g, 지방: ${meal.fat}g"),
                       ],

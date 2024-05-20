@@ -1,5 +1,6 @@
-import 'dart:convert';
 import 'dart:math' as math;
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:project_app/data/dtos/challenge/challenge_response.dart';
 
@@ -37,7 +38,9 @@ class ChallengeContainer extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChallengeDetailPage(challengeId: challenge.id)),
+          MaterialPageRoute(
+              builder: (context) =>
+                  ChallengeDetailPage(challengeId: challenge.id)),
         );
       },
       child: Container(
@@ -88,8 +91,8 @@ class ChallengeContainer extends StatelessWidget {
                     clipper: HexagonClipper(radius: 40),
                     child: Transform.rotate(
                       angle: -math.pi / 2,
-                      child: Image.memory(
-                        base64Decode(challenge.badgeImg),
+                      child: CachedNetworkImage(
+                        imageUrl: challenge.badgeImg,
                         fit: BoxFit.cover,
                         height: imageHeight,
                         width: imageWidth,

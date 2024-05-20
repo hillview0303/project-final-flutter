@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/ui/main/challenge/viewmodel/challenge_detail_view_model.dart';
@@ -20,7 +19,9 @@ class ChallengeDetailPage extends ConsumerWidget {
         ref.watch(challengeDetailProvider(challengeId));
 
     if (challenge == null) {
-      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
+      return Center(
+          child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
     } else {
       return Scaffold(
         appBar: AppBar(
@@ -34,9 +35,10 @@ class ChallengeDetailPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Image.memory(
-                  base64Decode(challenge!.challengeDetailDTO.backgroundImg),
-                  fit: BoxFit.cover),
+              CachedNetworkImage(
+                imageUrl: challenge!.challengeDetailDTO.backgroundImg,
+                fit: BoxFit.cover,
+              ),
               Padding(
                 padding: EdgeInsets.all(16.0),
                 child: ChallengeContent(

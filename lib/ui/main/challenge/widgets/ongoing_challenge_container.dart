@@ -1,8 +1,10 @@
-import 'dart:convert';
 import 'dart:math' as math;
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/data/dtos/challenge/challenge_response.dart';
+
 import '../../../_common/components/hexagon_clipper.dart';
 import '../pages/ongoing_challenge_detail_page.dart';
 import 'no_challenge_text.dart';
@@ -95,14 +97,13 @@ class OngoingChallengeContainer extends StatelessWidget {
                         child: ClipPath(
                           clipper: HexagonClipper(radius: imageWidth / 2),
                           child: Transform.rotate(
-                            angle: -math.pi / 2,
-                            child: Image.memory(
-                              base64Decode(challenge!.backImg!),
-                              fit: BoxFit.cover,
-                              height: imageHeight,
-                              width: imageWidth,
-                            ),
-                          ),
+                              angle: -math.pi / 2,
+                              child: CachedNetworkImage(
+                                imageUrl: challenge!.backImg!,
+                                fit: BoxFit.cover,
+                                height: imageHeight,
+                                width: imageWidth,
+                              )),
                         ),
                       ),
                     ],

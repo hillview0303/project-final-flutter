@@ -1,3 +1,5 @@
+import 'package:project_app/_core/constants/http.dart';
+
 class ChallengeResponseDTO {
   final int? id;
   final String? challengeName; // 챌린지명
@@ -40,7 +42,7 @@ class ChallengeResponseDTO {
           ? DateTime.parse(json["closingTime"])
           : null,
       coin: json["coin"],
-      backImg: json["backImg"],
+      backImg: serverAddress + json["backImg"],
       totalWalking: json["totalWalking"],
       walking: json["walking"],
       upcomingChallenges: newUpcomingChallengeList,
@@ -89,7 +91,7 @@ class ChallengeListDTO {
       id: json["id"],
       challengeName: json["challengeName"],
       distance: json["distance"],
-      badgeImg: json["badgeImg"],
+      badgeImg: serverAddress + json["badgeImg"],
       status: json["status"],
     );
   }
@@ -124,7 +126,7 @@ class ChallengeDetailDTO {
       content: json["content"],
       coin: json["coin"],
       state: json["state"] ?? null,
-      backgroundImg: json["backgroundImg"],
+      backgroundImg: serverAddress + json["backgroundImg"],
     );
   }
 // 챌린지 내용
@@ -163,8 +165,12 @@ class OngoingChallengeDTO {
   final int total_walking;
   final int walking;
 
-  OngoingChallengeDTO({required this.id,required this.challengeName,required this.subtitle,
-    required this.total_walking,required this.walking});
+  OngoingChallengeDTO(
+      {required this.id,
+      required this.challengeName,
+      required this.subtitle,
+      required this.total_walking,
+      required this.walking});
 
   OngoingChallengeDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -172,5 +178,4 @@ class OngoingChallengeDTO {
         subtitle = json["subtitle"],
         total_walking = json["total_walking"],
         walking = json["walking"];
-
 }

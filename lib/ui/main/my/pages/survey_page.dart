@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/_core/constants/move.dart';
 import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/ui/main/my/viewmodel/survey_page_viewmodel.dart';
+
 import '../../../../_core/constants/constants.dart';
 import '../widgets/survey_container.dart';
 
@@ -10,11 +12,23 @@ class SurveyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     SurveyListModel? model = ref.watch(surveyListProvider);
 
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                } else {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Move.myPage,
+                    (route) => false,
+                  );
+                }
+              }),
           title: const Text('설문조사'),
           backgroundColor: Colors.white,
           bottom: const TabBar(

@@ -21,10 +21,10 @@ class SurveyCompletionPage extends StatelessWidget {
             SizedBox(height: gap_m),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SurveyPage()),
-                );
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => SurveyPage()),
+                    (route) => false);
               },
               child: Text('돌아가기'),
               style: ElevatedButton.styleFrom(

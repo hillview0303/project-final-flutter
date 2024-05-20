@@ -13,6 +13,7 @@ class Move {
   static String mainPage = "/main";
   static String todayPage = "/today"; // 주소는 아직 미확정
   static String challengePage = "/challenge";
+  static String myPage = "/my";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -23,5 +24,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.mainPage: (context) => MainPage(0),
     Move.todayPage: (context) => const TodayPage(),
     Move.challengePage: (context) => MainPage(2),
+    Move.myPage: (context) => MainPage(3),
   };
 }

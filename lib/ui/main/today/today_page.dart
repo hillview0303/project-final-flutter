@@ -5,6 +5,7 @@ import 'package:project_app/ui/main/today/viewmodel/step_timer_viewmodel.dart';
 import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 import 'package:project_app/ui/main/today/widgets/today_body.dart';
 import 'package:project_app/ui/main/today/widgets/today_header.dart';
+import '../../../_core/constants/constants.dart';
 import 'viewmodel/visibility_state_viewmodel.dart';
 
 class TodayPage extends ConsumerWidget {
@@ -21,7 +22,7 @@ class TodayPage extends ConsumerWidget {
 
 
     if (model == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2),));
     } else {
       return Scaffold(
         body: ListView(

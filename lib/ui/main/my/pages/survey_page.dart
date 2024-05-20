@@ -43,19 +43,18 @@ class SurveyPage extends ConsumerWidget {
         ),
         body: TabBarView(
           children: [
-            model == null || model.joinableSurveyList!.length < 1
+            model == null || model.joinableSurveyList!.isEmpty
                 ? Center(
                     child: Text(
                       "참여 가능한 설문이 없습니다.",
                       style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                     ),
                   )
-                : // 참여 가능한 설문 탭
-                ListView.builder(
+                : ListView.builder(
                     padding: const EdgeInsets.all(gap_ml),
-                    itemCount: model!.joinableSurveyList!.length,
+                    itemCount: model.joinableSurveyList!.length,
                     itemBuilder: (context, index) {
-                      final survey = model!.joinableSurveyList![index];
+                      final survey = model.joinableSurveyList![index];
                       return Column(
                         children: [
                           SurveyContainer(
@@ -64,26 +63,25 @@ class SurveyPage extends ConsumerWidget {
                             isAttend: survey.isAttend!,
                             progress: survey.progress!,
                             surveyId: survey.id!,
+                            isJoinable: true, // 참여 가능한 설문
                           ),
                           const SizedBox(height: gap_m),
                         ],
                       );
                     },
                   ),
-            model == null || model.unjoinableSurveyList!.length < 1
+            model == null || model.unjoinableSurveyList!.isEmpty
                 ? Center(
                     child: Text(
                       "참여한 설문이 없습니다.",
                       style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                     ),
                   )
-                :
-                // 지난 설문 탭
-                ListView.builder(
+                : ListView.builder(
                     padding: const EdgeInsets.all(gap_ml),
-                    itemCount: model!.unjoinableSurveyList!.length,
+                    itemCount: model.unjoinableSurveyList!.length,
                     itemBuilder: (context, index) {
-                      final survey = model!.unjoinableSurveyList![index];
+                      final survey = model.unjoinableSurveyList![index];
                       return Column(
                         children: [
                           SurveyContainer(
@@ -92,6 +90,7 @@ class SurveyPage extends ConsumerWidget {
                             isAttend: survey.isAttend!,
                             progress: survey.progress!,
                             surveyId: survey.id!,
+                            isJoinable: false, // 지난 설문
                           ),
                           const SizedBox(height: gap_m),
                         ],

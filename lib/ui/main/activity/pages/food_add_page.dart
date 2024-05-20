@@ -31,7 +31,7 @@ class FoodAddPage extends ConsumerWidget {
     });
 
     if (foodAddModel == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
     } else {
       return Scaffold(
         appBar: AppBar(title: Text('음식 추가하기')),

@@ -20,7 +20,7 @@ class SurveyFormPage extends ConsumerWidget {
       return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2),),
         ),
       );
     } else {

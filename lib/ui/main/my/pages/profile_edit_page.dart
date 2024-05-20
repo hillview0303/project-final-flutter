@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/ui/main/my/viewmodel/profile_edit_view_model.dart';
 
+import '../../../../_core/constants/constants.dart';
 import '../widgets/edit_image.dart';
 import '../widgets/edit_profile_form.dart';
 
@@ -16,7 +17,7 @@ class ProfileEditPage extends ConsumerWidget {
       return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)),
         ),
       );
     } else {

@@ -30,7 +30,7 @@ class DrinkWaterDetailPage extends ConsumerWidget {
     if (model == null) {
       return Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)),
         ),
       );
     }

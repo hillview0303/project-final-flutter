@@ -1,3 +1,4 @@
+import '../../../_core/constants/http.dart';
 import '../challenge/challenge_response.dart';
 
 class MyPageDTO {
@@ -29,7 +30,8 @@ class MyPageDTO {
                 .map((e) => ChallengeListDTO.fromJson(e))
                 .toList()
             : null,
-        userImg = json["userImg"] ?? null;
+        userImg =
+            json["userImg"] != null ? serverAddress + json["userImg"] : "";
 }
 
 class ProfileUpdateFormDTO {
@@ -51,5 +53,6 @@ class ProfileUpdateFormDTO {
         name = json["name"],
         phone = json["phone"],
         height = json["height"],
-        userImg = json["userImg"] ?? "";
+        userImg =
+            json["userImg"] != null ? serverAddress + json["userImg"] : null;
 }

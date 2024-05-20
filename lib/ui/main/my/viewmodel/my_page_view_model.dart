@@ -69,6 +69,7 @@ class MyPageViewModel extends StateNotifier<MyPageModel?> {
     ResponseDTO responseDTO = await UserRepository().fetchMyPage();
 
     MyPageModel myPageModel = MyPageModel(MyPageDTO.fromJson(responseDTO.body));
+
     if (responseDTO.status == 200) {
       state = myPageModel;
     } else {

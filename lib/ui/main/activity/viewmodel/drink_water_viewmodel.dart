@@ -8,9 +8,9 @@ import '../../../../main.dart';
 
 class DrinkWaterModel{
   DrinkWaterDTO drinkWaterDTO ;
-  List<WeakWaterDTO> weakWaterDTO;
+  List<WeekWaterDTO> weekWaterDTO;
 
-  DrinkWaterModel(this.drinkWaterDTO, this.weakWaterDTO);
+  DrinkWaterModel(this.drinkWaterDTO, this.weekWaterDTO);
 }
 
 
@@ -27,7 +27,7 @@ class DrinkWaterViewModel extends StateNotifier<DrinkWaterModel?>{
 
     if(responseDTO.status == 200){
       state = responseDTO.body;
-      print("state : ${state?.weakWaterDTO.last.water}");
+      print("state : ${state?.weekWaterDTO.last.water}");
     }else{
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("불러오기 실패 : ${responseDTO.msg}")));

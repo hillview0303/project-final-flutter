@@ -120,13 +120,13 @@ class ActivityRepository {
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200) {
-      List<dynamic> tempWater = responseDTO.body["weakWater"];
-      List<WeakWaterDTO> weakWaterDTO =
-          tempWater.map((e) => WeakWaterDTO.fromJson(e)).toList();
+      List<dynamic> tempWater = responseDTO.body["weekWater"];
+      List<WeekWaterDTO> weekWaterDTO =
+          tempWater.map((e) => WeekWaterDTO.fromJson(e)).toList();
       DrinkWaterDTO drinkWaterDTO = DrinkWaterDTO.fromJson(responseDTO.body);
-      DrinkWaterModel model = DrinkWaterModel(drinkWaterDTO, weakWaterDTO);
+      DrinkWaterModel model = DrinkWaterModel(drinkWaterDTO, weekWaterDTO);
       print("물 : ${drinkWaterDTO.dayWater}");
-      print("날짜 : ${weakWaterDTO.last.date}");
+      print("날짜 : ${weekWaterDTO.last.date}");
       responseDTO.body = model;
     }
 
@@ -138,13 +138,13 @@ class ActivityRepository {
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200) {
-      List<dynamic> tempWalking = responseDTO.body["weakWalkings"];
-      List<WeakWalkingDTO> weakWalkings =
-          tempWalking.map((e) => WeakWalkingDTO.fromJson(e)).toList();
+      List<dynamic> tempWalking = responseDTO.body["weekWalkings"];
+      List<WeekWalkingDTO> weekWalkings =
+          tempWalking.map((e) => WeekWalkingDTO.fromJson(e)).toList();
       WalkingDetailDTO walkingDetailDTO =
           WalkingDetailDTO.fromJson(responseDTO.body);
       WalkingDetailModel model =
-          WalkingDetailModel(walkingDetailDTO, weakWalkings);
+          WalkingDetailModel(walkingDetailDTO, weekWalkings);
       responseDTO.body = model;
     }
     return responseDTO;

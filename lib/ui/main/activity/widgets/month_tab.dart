@@ -16,7 +16,7 @@ class MonthTab extends ConsumerWidget {
     String formattedDate = DateFormatter.format(model.walkingDetailDTO.maxWalkingDay);
 
     // weakWalkings 리스트에서 하루 10000걸음을 달성한날 계산
-    int daysAchieved = model.weakWalkings
+    int daysAchieved = model.weekWalkings
         .where((day) => day.walking >= 10000)
         .length;
 

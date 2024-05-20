@@ -53,7 +53,7 @@ class SurveyFormViewModel extends StateNotifier<SurveyFormModel?> {
     } else {
       surveyRequestList.add(SurveyRequestDTO(
           questionId: state!.surveyDetailDTO!
-              .questionElements[state!.currentIndex].questionId,
+              .questions[state!.currentIndex].questionId,
           choiceId: state!.chosenValue));
       ResponseDTO responseDTO = await SurveyRepository().fetchSurveyResult(
           state!.surveyDetailDTO!.surveyId, surveyRequestList);
@@ -81,7 +81,7 @@ class SurveyFormViewModel extends StateNotifier<SurveyFormModel?> {
     state = state!.copyWith(
         currentIndex: state!.currentIndex - 1,
         progressValue: state!.currentIndex -
-            1 / state!.surveyDetailDTO!.questionElements.length,
+            1 / state!.surveyDetailDTO!.questions.length,
         chosenValue:
             state!.surveyRequestDTOList![state!.currentIndex - 1].choiceId);
   }
@@ -98,7 +98,7 @@ class SurveyFormViewModel extends StateNotifier<SurveyFormModel?> {
         state!.currentIndex + 1 > state!.surveyRequestDTOList!.length) {
       surveyRequestList.add(SurveyRequestDTO(
           questionId: state!.surveyDetailDTO!
-              .questionElements[state!.currentIndex].questionId,
+              .questions[state!.currentIndex].questionId,
           choiceId: state!.chosenValue));
       chosenValue = null;
     } else {
@@ -110,7 +110,7 @@ class SurveyFormViewModel extends StateNotifier<SurveyFormModel?> {
       }
       surveyRequestList[state!.currentIndex] = SurveyRequestDTO(
           questionId: state!.surveyDetailDTO!
-              .questionElements[state!.currentIndex].questionId,
+              .questions[state!.currentIndex].questionId,
           choiceId: state!.chosenValue);
     }
     state = state!.copyWith(
@@ -118,7 +118,7 @@ class SurveyFormViewModel extends StateNotifier<SurveyFormModel?> {
         chosenValue: chosenValue,
         currentIndex: state!.currentIndex + 1,
         progressValue: state!.currentIndex +
-            1 / state!.surveyDetailDTO!.questionElements.length);
+            1 / state!.surveyDetailDTO!.questions.length);
   }
 
   Future<void> notifyInit(int surveyId) async {

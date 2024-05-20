@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_app/_core/constants/size.dart';
 import '../../../../../data/models/activities/activity.dart';
 import '../../../../data/dtos/activity/activity_response.dart';
+import '../../today/viewmodel/step_timer_viewmodel.dart';
 import '../pages/change_weight_detail_page.dart';
 import '../pages/diet_management_detail_page.dart';
 import '../pages/drink_water_detail_page.dart';
@@ -9,24 +11,27 @@ import '../pages/step_count_detail_page.dart';
 import '../viewmodel/activity_main_viewmodel.dart';
 import 'metric_card.dart';
 
-class MetricGrid extends StatelessWidget {
+class MetricGrid extends ConsumerWidget {
   final ActivityMainModel? model;
 
   MetricGrid({this.model});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return GridView.count(
       crossAxisCount: 2,
       childAspectRatio: (1 / 1.5),
       crossAxisSpacing: 7,
       mainAxisSpacing: 10,
       padding: EdgeInsets.all(gap_s),
-      children: buildActivityCards(context),
+      children: buildActivityCards(context,ref),
     );
   }
 
-  List<Widget> buildActivityCards(BuildContext context) {
+  List<Widget> buildActivityCards(BuildContext context,WidgetRef ref) {
+    final stepTimerState = ref.watch(StepTimerProvider);
+    final int currentSteps = stepTimerState.currentSteps;
+
     List<Widget> cards = [];
 
     if (model != null && model!.activitiesDateDTO != null) {
@@ -36,7 +41,7 @@ class MetricGrid extends StatelessWidget {
         cards.add(buildCard(
           context: context,
           title: 'STEPS',
-          subtitle: '${data.walking} steps',
+          subtitle: '${currentSteps} steps',
           trailing: formatTimeAgo(model),
           activity: data,
           hasData: true,

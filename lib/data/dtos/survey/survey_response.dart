@@ -37,7 +37,7 @@ class SurveyDetailDTO {
   });
 
   factory SurveyDetailDTO.fromJson(Map<String, dynamic> json) {
-    List<dynamic> prevQuestionElementList = json["questionElements"];
+    List<dynamic> prevQuestionElementList = json["questions"];
     List<QuestionElementDTO> questionElementList = prevQuestionElementList
         .map((question) => QuestionElementDTO.fromJson(question))
         .toList();

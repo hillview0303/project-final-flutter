@@ -1,12 +1,12 @@
 class SurveyResponse {
   final int surveyId;
   final String title;
-  final List<QuestionElement> questionElements;
+  final List<QuestionElement> questions;
 
   SurveyResponse({
     required this.surveyId,
     required this.title,
-    required this.questionElements,
+    required this.questions,
   });
 }
 
@@ -39,7 +39,7 @@ final List<SurveyResponse> surveyResponses = [
   SurveyResponse(
     surveyId: 1,
     title: '설문조사 1',
-    questionElements: [
+    questions: [
       QuestionElement(
         questionId: 1,
         question: '하루 평균 수면 시간은 얼마나 되십니까?',
@@ -64,7 +64,7 @@ final List<SurveyResponse> surveyResponses = [
   SurveyResponse(
     surveyId: 2,
     title: '설문조사 2',
-    questionElements: [
+    questions: [
       QuestionElement(
         questionId: 1,
         question: '하루에 커피를 얼마나 마시나요?',

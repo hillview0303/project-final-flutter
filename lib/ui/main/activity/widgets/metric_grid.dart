@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_app/_core/constants/size.dart';
 import '../../../../../data/models/activities/activity.dart';
 import '../../../../data/dtos/activity/activity_response.dart';
 import '../pages/change_weight_detail_page.dart';
@@ -18,9 +19,9 @@ class MetricGrid extends StatelessWidget {
     return GridView.count(
       crossAxisCount: 2,
       childAspectRatio: (1 / 1.5),
-      crossAxisSpacing: 10,
+      crossAxisSpacing: 7,
       mainAxisSpacing: 10,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(gap_s),
       children: buildActivityCards(context),
     );
   }

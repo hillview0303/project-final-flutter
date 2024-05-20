@@ -36,7 +36,7 @@ class MetricCard extends StatelessWidget {
         ),
         color: backgroundColor,
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           child: hasData ? buildCardContent(isCaloriesCard, isWeightCard, isWaterCard, isStepsCard) : buildEmptyCardContent(),
         ),
       ),

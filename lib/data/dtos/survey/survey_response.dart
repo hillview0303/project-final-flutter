@@ -27,13 +27,13 @@ class SurveyResponseDTO {
 
 class SurveyDetailDTO {
   final int surveyId;
-  final String title;
-  final List<QuestionElementDTO> questionElements;
+  final String surveyTitle;
+  final List<QuestionElementDTO> questions;
 
   SurveyDetailDTO({
     required this.surveyId,
-    required this.title,
-    required this.questionElements,
+    required this.surveyTitle,
+    required this.questions,
   });
 
   factory SurveyDetailDTO.fromJson(Map<String, dynamic> json) {
@@ -44,8 +44,8 @@ class SurveyDetailDTO {
 
     return SurveyDetailDTO(
       surveyId: json["surveyId"],
-      title: json["title"],
-      questionElements: questionElementList,
+      surveyTitle: json["surveyTitle"],
+      questions: questionElementList,
     );
   }
 //
@@ -53,12 +53,12 @@ class SurveyDetailDTO {
 
 class QuestionElementDTO {
   final int questionId;
-  final String question;
+  final String questionTitle;
   final List<ChoiceDTO> choices;
 
   QuestionElementDTO({
     required this.questionId,
-    required this.question,
+    required this.questionTitle,
     required this.choices,
   });
 
@@ -69,7 +69,7 @@ class QuestionElementDTO {
 
     return QuestionElementDTO(
       questionId: json["questionId"],
-      question: json["question"],
+      questionTitle: json["questionTitle"],
       choices: choiceDTO,
     );
   }
@@ -78,19 +78,19 @@ class QuestionElementDTO {
 
 class ChoiceDTO {
   final int choiceId;
-  final String choiceItem;
+  final String choiceTitle;
   final int choiceNumber;
 
   ChoiceDTO({
     required this.choiceId,
-    required this.choiceItem,
+    required this.choiceTitle,
     required this.choiceNumber,
   });
 
   factory ChoiceDTO.fromJson(Map<String, dynamic> json) {
     return ChoiceDTO(
       choiceId: json["choiceId"],
-      choiceItem: json["choiceItem"],
+      choiceTitle: json["choiceTitle"],
       choiceNumber: json["choiceNumber"],
     );
   }

@@ -25,13 +25,13 @@ class SurveyFormPage extends ConsumerWidget {
       );
     } else {
       // 총 질문 수와 현재 인덱스를 기반으로 진행률을 계산
-      final totalQuestions = model.surveyDetailDTO!.questionElements.length;
+      final totalQuestions = model.surveyDetailDTO!.questions.length;
       final currentIndex = model.currentIndex;
       final progressValue = (currentIndex + 1) / totalQuestions;
 
       return Scaffold(
         appBar: AppBar(
-          title: Text(model.surveyDetailDTO!.title!),
+          title: Text(model.surveyDetailDTO!.surveyTitle!),
           actions: [
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -65,12 +65,12 @@ class SurveyFormPage extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
-                  model.surveyDetailDTO!.questionElements[currentIndex].question,
+                  model.surveyDetailDTO!.questions[currentIndex].questionTitle,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(height: gap_m),
-              for (var choice in model.surveyDetailDTO!.questionElements[currentIndex].choices)
+              for (var choice in model.surveyDetailDTO!.questions[currentIndex].choices)
                 Column(
                   children: [
                     RadioTile(

@@ -120,13 +120,13 @@ class DrinkWaterDTO {
       : dayWater = json["dayWater"];
 }
 
-class WeakWaterDTO {
+class WeekWaterDTO {
   final DateTime date;
   final int water;
 
-  WeakWaterDTO(this.date, this.water);
+  WeekWaterDTO(this.date, this.water);
 
-  WeakWaterDTO.fromJson(Map<String, dynamic> json)
+  WeekWaterDTO.fromJson(Map<String, dynamic> json)
       : date = DateFormat("yyyy-MM-dd'T'HH:mm")
             .parse(json["date"], true)
             .toUtc()
@@ -165,14 +165,14 @@ class WalkingDetailDTO {
             .toLocal();
 }
 
-class WeakWalkingDTO {
+class WeekWalkingDTO {
   final DateTime date;
 
   final int walking;
 
-  WeakWalkingDTO(this.date, this.walking);
+  WeekWalkingDTO(this.date, this.walking);
 
-  WeakWalkingDTO.fromJson(Map<String, dynamic> json)
+  WeekWalkingDTO.fromJson(Map<String, dynamic> json)
       : date = DateFormat("yyyy-MM-dd").parse(json["date"], true).toLocal(),
         walking = json["walking"];
 }

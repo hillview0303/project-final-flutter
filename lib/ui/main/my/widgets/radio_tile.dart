@@ -29,7 +29,7 @@ class RadioTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(gap_m),
         ),
         child: RadioListTile<int>(
-          title: Text(choice.choiceItem),
+          title: Text(choice.choiceTitle),
           value: choice.choiceId,
           groupValue: groupValue,
           onChanged: onChanged,

@@ -56,8 +56,8 @@ class WaterIntakeGraph extends StatelessWidget {
     List<FlSpot> spots = [];
     double maxYValue = 8; // 기본 maxY 값
 
-    if (model != null && model.weakWaterDTO != null) {
-      for (var dto in model.weakWaterDTO!) {
+    if (model != null && model.weekWaterDTO != null) {
+      for (var dto in model.weekWaterDTO!) {
         DateTime dtoDate = DateTime(dto.date.year, dto.date.month, dto.date.day);
         int index = normalizedDates.indexOf(dtoDate);
         if (index != -1) {

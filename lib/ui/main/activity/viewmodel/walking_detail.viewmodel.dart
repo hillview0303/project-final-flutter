@@ -9,9 +9,9 @@ import '../../../../main.dart';
 
 class WalkingDetailModel{
   WalkingDetailDTO walkingDetailDTO ;
-  List<WeakWalkingDTO> weakWalkings ;
+  List<WeekWalkingDTO> weekWalkings ;
 
-  WalkingDetailModel(this.walkingDetailDTO, this.weakWalkings);
+  WalkingDetailModel(this.walkingDetailDTO, this.weekWalkings);
 
 }
 

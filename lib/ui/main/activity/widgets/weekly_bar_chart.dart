@@ -14,12 +14,12 @@ class WeeklyBarChart extends ConsumerWidget {
     final stepTimerState = ref.watch(StepTimerProvider);
     final int currentSteps = stepTimerState.currentSteps;
 
-    List<WeakWalkingDTO> weakWalkings = model?.weakWalkings ?? [];
+    List<WeekWalkingDTO> weekWalkings = model?.weekWalkings ?? [];
     List<double> weeklyData = List.filled(7, 0.0);
 
     // 현재 요일을 기준으로 데이터를 맞춤
     DateTime now = DateTime.now();
-    for (var walking in weakWalkings) {
+    for (var walking in weekWalkings) {
       int dayDiff = now.difference(walking.date).inDays;
       if (dayDiff >= 0 && dayDiff < 7) {
         weeklyData[6 - dayDiff] = walking.walking.toDouble();

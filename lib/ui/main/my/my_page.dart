@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_app/_core/constants/constants.dart';
 import 'package:project_app/_core/constants/line.dart';
 import 'package:project_app/_core/constants/size.dart';
 import 'package:project_app/ui/main/my/viewmodel/my_page_view_model.dart';
@@ -17,7 +18,9 @@ class MyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     MyPageModel? myPageModel = ref.watch(myPageProvider);
     if(myPageModel == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2),
+      ));
     } else {
       return ListView(
         children: [

@@ -9,6 +9,7 @@ class SurveyContainer extends StatelessWidget {
   final String isAttend;
   final String progress;
   final int surveyId;
+  final bool isJoinable;  // 새로운 매개변수 추가
 
   const SurveyContainer({
     Key? key,
@@ -17,16 +18,21 @@ class SurveyContainer extends StatelessWidget {
     required this.isAttend,
     required this.progress,
     required this.surveyId,
+    required this.isJoinable,  // 새로운 매개변수 초기화
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SurveyFormPage(surveyId)),
-        );
+        if (isJoinable) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SurveyFormPage(surveyId)),
+          );
+        } else {
+          // 지난 설문일 경우 눌러지지 않음
+        }
       },
       child: Container(
         padding: const EdgeInsets.all(16.0),

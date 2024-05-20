@@ -5,13 +5,15 @@ import 'package:project_app/ui/main/challenge/widgets/available_challenge.dart';
 import 'package:project_app/ui/main/challenge/widgets/completed_challenge.dart';
 import 'package:project_app/ui/main/challenge/widgets/ongoing_challenge.dart';
 
+import '../../../_core/constants/constants.dart';
+
 class ChallengePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ChallengeListModel? challengeListModel = ref.watch(challengeListProvider);
 
     if (challengeListModel == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
     } else {
       return ListView(
         children: <Widget>[

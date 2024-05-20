@@ -28,7 +28,7 @@ class DietManagementDetailPage extends ConsumerWidget {
     final List<String> mealTypes = ['아침', '점심', '저녁', '간식'];
 
     if (model == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
     } else {
       return Scaffold(
         appBar: AppBar(

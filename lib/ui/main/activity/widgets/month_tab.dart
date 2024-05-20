@@ -10,7 +10,7 @@ class MonthTab extends ConsumerWidget {
     final model = ref.watch(WalkingDetailProvider);
 
     if (model == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
     }
 
     String formattedDate = DateFormatter.format(model.walkingDetailDTO.maxWalkingDay);

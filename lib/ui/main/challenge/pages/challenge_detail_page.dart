@@ -6,6 +6,8 @@ import 'package:project_app/ui/main/challenge/viewmodel/challenge_detail_view_mo
 import 'package:project_app/ui/main/challenge/widgets/challenge_action_button.dart';
 import 'package:project_app/ui/main/challenge/widgets/challenge_content.dart';
 
+import '../../../../_core/constants/constants.dart';
+
 class ChallengeDetailPage extends ConsumerWidget {
   final challengeId;
 
@@ -18,7 +20,7 @@ class ChallengeDetailPage extends ConsumerWidget {
         ref.watch(challengeDetailProvider(challengeId));
 
     if (challenge == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
     } else {
       return Scaffold(
         appBar: AppBar(

@@ -12,7 +12,7 @@ class ChangeWeightDetailPage extends ConsumerWidget {
     ChangeWeightModel? model = ref.watch(ChangeWeightProvider);
 
     if (model == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kAccentColor2)));
     } else {
       return DefaultTabController(
         length: 3,

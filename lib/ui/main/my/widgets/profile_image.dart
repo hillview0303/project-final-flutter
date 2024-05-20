@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ProfileImage extends StatelessWidget {
@@ -29,7 +28,8 @@ class ProfileImage extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: MemoryImage(base64Decode(userImage!)),
+            image: CachedNetworkImageProvider(userImage!),
+            // MemoryImage(base64Decode(userImage!))
             fit: BoxFit.cover,
           ),
           border: Border.all(color: Colors.white, width: 4),

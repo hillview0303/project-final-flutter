@@ -7,6 +7,7 @@ import 'package:project_app/data/repository/user_repositiry.dart';
 import 'package:project_app/main.dart';
 import 'package:project_app/ui/main/today/viewmodel/today_page_viewmodel.dart';
 
+import '../../../../_core/constants/http.dart';
 import '../../../../data/dtos/my/my_response.dart';
 import 'my_page_view_model.dart';
 
@@ -37,11 +38,11 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
           name: prevModel.profileUpdateFormDTO.name,
           phone: prevModel.profileUpdateFormDTO.phone,
           height: prevModel.profileUpdateFormDTO.height,
-          userImg: updateDTO.userImg));
+          userImg: serverAddress + imgUpdateResponseDTO.userImg));
 
       ref
           .read(myPageProvider.notifier)
-          .updateUserImg(imgUpdateResponseDTO.userImg);
+          .updateUserImg(serverAddress + imgUpdateResponseDTO.userImg);
 
       state = newModel;
 
@@ -55,10 +56,9 @@ class ProfileEditViewModel extends StateNotifier<ProfileEditModel?> {
   Future<void> updateProfile(UserUpdateDTO updateDTO) async {
     ResponseDTO responseDTO = await UserRepository().fetchUpdate(updateDTO);
 
-
     if (responseDTO.status == 200) {
       ProfileUpdateFormDTO updateFormDTO =
-      ProfileUpdateFormDTO.fromJson(responseDTO.body);
+          ProfileUpdateFormDTO.fromJson(responseDTO.body);
 
       ref.read(myPageProvider.notifier).updatedUser(updateFormDTO);
 

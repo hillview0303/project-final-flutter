@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,7 +50,8 @@ class EditImage extends ConsumerWidget {
             radius: 75,
             backgroundColor: Colors.grey[300],
             backgroundImage:
-                _profileImage ?? MemoryImage(base64Decode(userImage)),
+                _profileImage ?? CachedNetworkImageProvider(userImage),
+            //MemoryImage(base64Decode(userImage))
           ),
           Positioned(
             top: 105,

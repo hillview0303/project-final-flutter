@@ -8,10 +8,11 @@ https://play.google.com/store/apps/details?id=com.amway.bodykeykorea&hl=ko&gl=US
 ## 백엔드 github
 https://github.com/coderyu5523/project-final-spring
 
+## 시연
+https://www.youtube.com/watch?v=ngoAZXk4fdQ
 
-## 시연 
 ## PPT
-
+https://www.canva.com/design/DAGFF304a9o/AhSri-vuag2lqnmwNfhI_Q/view?utm_content=DAGFF304a9o&utm_campaign=designshare&utm_medium=link&utm_source=editor
 
 
 # 2.앱소개
